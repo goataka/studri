@@ -1,51 +1,51 @@
 ---
 name: studri-app-creator
-description: Create or extend a child-friendly Studri learning app when asked to make a Studri app or a themed edition such as “スタドリアプリの〇〇編”. Apply the shared product, learning-cycle, input, and review requirements below.
+description: 「スタドリアプリを作成して」や「スタドリアプリの〇〇編を作って」など、スタドリ学習アプリの作成を依頼されたときに、共通の要件に沿ってアプリを作成・拡張します。
 ---
 
-# Studri App Creator
+# スタドリアプリ作成スキル
 
-Create a learning app for the user's requested theme using the shared Studri requirements in this skill. A request for a specific edition (for example, “スタドリアプリの〇〇編”) supplies the theme. If no theme is given, ask one concise clarifying question before building.
+このスキルの共通要件に従い、ユーザーが指定したテーマの学習アプリを作成します。「スタドリアプリの〇〇編」のように編が指定されていれば、それをテーマとして扱います。テーマが指定されていない場合は、実装を始める前に簡潔な確認を1つだけ行います。
 
-## Before implementation
+## 実装前の確認
 
-- Inspect the repository to understand its existing app, framework, assets, and available validation commands. Extend the existing project and conventions; do not replace unrelated work.
-- Use `studri.jpeg` from this repository as the visual reference for the characters, tone, and world. Keep the design cute and polished for elementary and middle-school students, with a simple, game-like interface and no redundant features.
-- Make the app responsive for tablets and, where practical, phones.
-- Use the requested theme in the title in the form **「スタドリ - [指定テーマ]編」**.
-- Show the app generation date and time as a version in a footer fixed to the bottom of the screen. Generate the timestamp when creating the app; do not substitute the current runtime time.
-- The app is intended to run on an external site. Do not use Gemini, generative AI services, or other external services for app functionality. Keep all learning progress and history in browser local storage. Provide a data-reset control and ask for confirmation before deleting saved data.
+- リポジトリを確認し、既存アプリ、フレームワーク、素材、利用可能な検証コマンドを把握します。既存のプロジェクトや規約を活用し、無関係な成果物を置き換えないでください。
+- リポジトリ内の `studri.jpeg` を、キャラクター、雰囲気、世界観の参考にします。小中学生向けのかわいく洗練されたデザインにし、シンプルでゲームらしいUIにまとめ、冗長な機能は設けません。
+- タブレットに対応し、可能な範囲でスマートフォンでも使いやすいレスポンシブデザインにします。
+- 指定されたテーマを、タイトル **「スタドリ - [指定テーマ]編」** に反映します。
+- 画面最下部に固定したフッターに、アプリのバージョンとして生成日時を表示します。日時はアプリ作成時に設定し、実行時の現在時刻で代用しないでください。
+- アプリは外部サイトでの利用を想定します。Gemini、生成AI、その他の外部サービスをアプリ機能に使用しません。学習状況と履歴はすべてブラウザーのローカルストレージに保存します。保存データを初期化する機能を設け、削除前に確認を求めてください。
 
-## Courses and learning cycle
+## コースと学習サイクル
 
-- Offer distinct, sufficiently fine-grained courses by school grade within the applicable curriculum, plus separate courses grouped by middle-school entrance-exam difficulty. Keep content and difficulty appropriate to each course and the requested theme.
-- Each course attempt has 10 questions. Unless the user specifies otherwise, select questions randomly and increase difficulty progressively within an attempt.
-- Require three consecutive perfect (no-mistake) attempts to pass a course. A mistake resets the consecutive-perfect count; show progress toward passing clearly.
-- Track and display the number of attempts, including replay and challenge modes. Persist course progress and records locally.
-- Once a course is passed, unlock time attack and consecutive-correct streak challenges. Save and display the best records for each mode.
-- Keep the question statement free of the answer, including in hints, labels, or surrounding instructions.
+- 対象となる指導要領の範囲で学年別コースを十分細かく分け、中学受験向けには難易度別のコースも用意します。各コースの内容と難易度は、対象学年と指定テーマに適したものにします。
+- 1回のコース挑戦は10問です。ユーザーから指定がなければ問題をランダムに選び、挑戦中に段階的に難しくします。
+- コース合格には、ミスなしの挑戦を3回連続で達成する必要があります。ミスをしたら連続合格回数をリセットし、合格までの進捗を分かりやすく表示します。
+- 再挑戦やチャレンジモードを含めた挑戦回数を記録・表示します。コースの進捗と記録はローカルに保存します。
+- コース合格後にタイムアタックと連続正解チャレンジを解放し、各モードの最高記録を保存・表示します。
+- ヒント、ラベル、周辺の案内も含め、問題文に答えが含まれないようにします。
 
-## Question experience
+## 問題画面
 
-- Provide a large, clear question and answer area. Support both a handwriting canvas suitable for a tablet and a keypad input; allow both to be used without accidental duplicate submissions or ambiguous answers.
-- Make the judgment flow explicit: show the currently selected/submitted answer before judging when needed, prevent double submission, and provide immediate, understandable feedback within three seconds. Use reliable local logic for answer checking; never claim that handwriting was recognized unless the app actually implements that recognition. Keep the handwriting strokes available for review and validation.
-- Provide a separate notes/work area, beside the pen area or below it, for calculations and reasoning. Keep notes distinct from the answer canvas.
-- Include an interruptible Back button. If a learner leaves partway through, save the attempt and its history locally.
-- On a correct answer, automatically advance after three seconds and let the learner advance immediately by clicking/tapping.
-- On an incorrect answer, show the correct answer with an explanation and offer **「再回答」** and **「次へ」**. When retrying, show the previous response faintly and allow another judgment.
-- Add restrained, context-appropriate sound effects. Respect browser audio interaction restrictions and provide a way to mute sounds.
-- After all 10 questions, show the complete answer review and a brief, encouraging performance comment without excessive celebration.
+- 問題と回答欄を大きく見やすく表示します。タブレット向けの手書きキャンバスとテンキー入力の両方に対応し、二重送信や回答の混同を防ぎます。
+- 判定の流れを明確にします。必要に応じて判定前に選択・入力した答えを表示し、二重判定を防いだうえで、3秒以内にすぐ理解できるフィードバックを表示します。回答は信頼できるローカル処理で判定し、実際に手書き認識を実装していない場合は、認識できたかのように表示しないでください。手書きの筆跡は見直しと検証に使えるよう保存します。
+- 計算や考えを書き込めるメモ・途中式エリアを手書き入力欄の横または下に設け、回答用キャンバスとは分けます。
+- 中断できる「戻る」ボタンを設置します。学習者が途中で離脱した場合は、挑戦と履歴をローカルに保存します。
+- 正解時は3秒後に自動で次の問題へ進み、クリックまたはタップでもすぐに進めるようにします。
+- 不正解時は解説付きの正解を表示し、**「再回答」** と **「次へ」** を提示します。再回答時は前回の回答を薄く表示し、もう一度判定できるようにします。
+- 状況に合った控えめな効果音を加えます。ブラウザーの音声再生制限を考慮し、消音できるようにします。
+- 10問終了後に全問の解答を見直せるようにし、過度な演出を避けながら、意欲につながる短い評価コメントを表示します。
 
-## Review, history, and validation
+## 振り返り・履歴・検証
 
-- Persist missed questions with their question text, learner response, correct answer, and explanation. Provide an accessible list for later review.
-- Save handwriting-canvas data for review locally for the most recent two days only; automatically remove older pen data. Keep other learning history according to the app's local-history needs.
-- Let learners inspect saved handwriting one question at a time and start a redo from that review. Mark a redo complete when the learner answers correctly.
-- Save the answer input and associated handwriting data needed to verify judgment accuracy. Keep this verification data local and make it available in an understandable review/debug view without exposing it to an external service.
+- 不正解だった問題は、問題文、学習者の回答、正解、解説を保存し、後から確認しやすい一覧で表示します。
+- 見直し用の手書きキャンバスデータは直近2日分のみローカルに保存し、古い筆跡データは自動で削除します。その他の学習履歴はアプリ内で必要な範囲に応じて保存します。
+- 保存した手書きデータを1問ずつ確認できるようにし、その画面から解き直しを始められるようにします。正解したら解き直し完了とします。
+- 判定精度を検証できるよう、入力内容と関連する手書きデータを保存します。この検証データもローカルに保持し、外部サービスに送信せず、分かりやすい見直し・デバッグ画面で確認できるようにします。
 
-## Implementation and completion
+## 実装と完了
 
-- Keep the experience focused and usable with keyboard, touch, and tablet input. Ensure controls have clear labels, feedback is readable, and the layout works at narrow viewport sizes.
-- Use the repository's existing stack and dependencies. Avoid adding dependencies or external network requirements unless the user explicitly requests them and they are essential.
-- When the theme or its curriculum coverage is underspecified, choose sensible, age-appropriate content and make the course scope clear in the UI; ask only when a missing detail prevents implementation.
-- After changes, run the existing relevant tests, build, and lint commands, if present. Report what was implemented and any validation that could not be run.
+- キーボード、タッチ、タブレット入力に対応し、操作に明確なラベルを付け、フィードバックを読みやすく表示します。狭い画面幅でも適切に表示されることを確認します。
+- リポジトリで既に使われている技術スタックと依存関係を利用します。ユーザーから明示的に求められ、かつ不可欠な場合を除き、新しい依存関係や外部ネットワークへの依存を追加しません。
+- テーマや指導要領上の範囲が明確でない場合は、年齢に適した内容を選び、UI上でコースの範囲を明示します。不足情報が実装を妨げる場合に限り、ユーザーに確認します。
+- 変更後、既存の関連テスト、ビルド、Lintコマンドがあれば実行します。実装内容と実行できなかった検証があれば、その旨を報告します。
