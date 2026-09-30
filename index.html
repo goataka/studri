@@ -4,8 +4,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="theme-color" content="#f5f7f2">
-    <meta name="description" content="Studri の GitHub Pages">
-    <title>Studri</title>
+    <meta name="description" content="スタドリの学習アプリ一覧">
+    <title>スタドリ 学習アプリ</title>
     <style>
       :root {
         color-scheme: light;
@@ -51,7 +51,7 @@
 
       h1 {
         margin: 0;
-        font-size: clamp(3.5rem, 12vw, 6rem);
+        font-size: clamp(2.8rem, 10vw, 5rem);
         line-height: 1;
         letter-spacing: -0.075em;
       }
@@ -93,16 +93,54 @@
         font-size: 1.1rem;
         line-height: 1;
       }
+
+      .apps {
+        display: grid;
+        gap: 14px;
+        margin-top: 34px;
+      }
+
+      .app-link {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        padding: 18px 20px;
+        border: 1px solid #dce5db;
+        border-radius: 18px;
+        color: #19352d;
+        text-decoration: none;
+        background: #fff;
+        transition: transform 160ms ease, box-shadow 160ms ease;
+      }
+
+      .app-link:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 22px rgb(37 68 54 / 10%);
+      }
+
+      .app-link strong {
+        display: block;
+        margin-bottom: 4px;
+        font-size: 1.05rem;
+      }
+
+      .app-link small {
+        color: #698076;
+      }
     </style>
   </head>
   <body>
     <main>
-      <p class="eyebrow">GitHub Pages</p>
-      <h1>Studri</h1>
-      <p class="intro">Studri のプロジェクトページへようこそ。ここからプロジェクトの情報をご覧いただけます。</p>
-      <a class="link" href="https://github.com/goataka/studri">
-        GitHub リポジトリを見る <span class="arrow" aria-hidden="true">↗</span>
-      </a>
+      <p class="eyebrow">Learning playground</p>
+      <h1>スタドリ</h1>
+      <p class="intro">遊びながら、毎日の「できた！」を増やそう。学びたいアプリを選んでね。</p>
+      <div class="apps">
+        <a class="app-link" href="apps/division/">
+          <span><strong>算数・わり算編</strong><small>わり算のきほんから受験チャレンジまで</small></span>
+          <span class="arrow" aria-hidden="true">→</span>
+        </a>
+      </div>
     </main>
   </body>
 </html>
