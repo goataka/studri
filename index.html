@@ -3,15 +3,18 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="theme-color" content="#f5f7f2">
-    <meta name="description" content="Studri の GitHub Pages">
-    <title>Studri</title>
+    <meta name="theme-color" content="#f7f7ef">
+    <meta name="description" content="スタドリ — 学ぶ時間を、もっと楽しく。">
+    <title>スタドリ</title>
     <style>
       :root {
         color-scheme: light;
-        font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-        color: #19352d;
-        background: #f5f7f2;
+        font-family: "Hiragino Kaku Gothic ProN", "Noto Sans JP", ui-sans-serif, system-ui, sans-serif;
+        color: #263c32;
+        background: #f7f7ef;
+        font-synthesis: none;
+        text-rendering: optimizeLegibility;
+        -webkit-font-smoothing: antialiased;
       }
 
       * {
@@ -21,88 +24,386 @@
       body {
         min-width: 320px;
         min-height: 100vh;
+        min-height: 100svh;
         margin: 0;
-        display: grid;
-        place-items: center;
-        padding: 32px 20px;
+        display: flex;
+        flex-direction: column;
+        overflow-x: hidden;
         background:
-          radial-gradient(ellipse at 15% 10%, #dcebdd 0, transparent 34%),
-          radial-gradient(ellipse at 90% 90%, #e9e5d5 0, transparent 38%),
-          #f5f7f2;
+          radial-gradient(ellipse at 4% 8%, rgb(222 237 216 / 76%), transparent 34rem),
+          radial-gradient(ellipse at 94% 86%, rgb(255 226 195 / 54%), transparent 31rem),
+          #f7f7ef;
+      }
+
+      .site-header,
+      main,
+      .site-footer {
+        width: min(100% - 48px, 1080px);
+        margin-inline: auto;
+      }
+
+      .site-header {
+        display: flex;
+        align-items: center;
+        padding-block: 24px;
+      }
+
+      .brand {
+        display: inline-flex;
+        align-items: center;
+        gap: 9px;
+        color: #294c3b;
+        font-size: 1.1rem;
+        font-weight: 800;
+        letter-spacing: 0.02em;
+        text-decoration: none;
+      }
+
+      .brand-mark {
+        display: grid;
+        width: 34px;
+        aspect-ratio: 1;
+        place-items: center;
+        border-radius: 12px;
+        background: #dcebd8;
+        color: #426d4f;
+        font-size: 1.1rem;
       }
 
       main {
-        width: min(100%, 720px);
-        padding: clamp(36px, 8vw, 76px);
-        border: 1px solid #dce5db;
-        border-radius: 28px;
-        background: rgb(255 255 255 / 82%);
-        box-shadow: 0 24px 70px rgb(37 68 54 / 9%);
+        flex: 1;
+        display: grid;
+        grid-template-columns: 1.05fr 0.95fr;
+        align-items: center;
+        gap: clamp(28px, 6vw, 76px);
+        padding-block: 28px 64px;
+      }
+
+      .copy {
+        position: relative;
+        z-index: 1;
+        padding-block: 18px;
       }
 
       .eyebrow {
-        margin: 0 0 18px;
-        color: #4c8064;
-        font-size: 0.8rem;
-        font-weight: 700;
-        letter-spacing: 0.14em;
-        text-transform: uppercase;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        margin: 0 0 20px;
+        color: #53795d;
+        font-size: 0.83rem;
+        font-weight: 750;
+        letter-spacing: 0.08em;
+      }
+
+      .eyebrow::before {
+        width: 22px;
+        height: 2px;
+        border-radius: 2px;
+        background: #92b67e;
+        content: "";
       }
 
       h1 {
         margin: 0;
-        font-size: clamp(3.5rem, 12vw, 6rem);
-        line-height: 1;
-        letter-spacing: -0.075em;
+        color: #294c3b;
+        font-size: clamp(3.4rem, 8vw, 6.2rem);
+        font-weight: 850;
+        letter-spacing: -0.08em;
+        line-height: 1.12;
+      }
+
+      h1 span {
+        color: #e49a65;
       }
 
       .intro {
-        max-width: 34rem;
+        max-width: 29rem;
+        margin: 22px 0 0;
+        color: #596960;
+        font-size: clamp(1rem, 2vw, 1.16rem);
+        font-weight: 500;
+        line-height: 1.95;
+      }
+
+      .tagline {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 9px;
         margin: 26px 0 0;
-        color: #53665c;
-        font-size: clamp(1rem, 2.5vw, 1.15rem);
-        line-height: 1.9;
+        padding: 0;
+        list-style: none;
+      }
+
+      .tagline li {
+        padding: 8px 13px;
+        border: 1px solid #e2e8da;
+        border-radius: 999px;
+        background: rgb(255 255 255 / 70%);
+        color: #57715c;
+        font-size: 0.84rem;
+        font-weight: 650;
       }
 
       .link {
         display: inline-flex;
         align-items: center;
-        gap: 10px;
+        gap: 11px;
         margin-top: 34px;
-        padding: 13px 18px;
+        padding: 14px 21px;
+        border: 2px solid #315c43;
         border-radius: 999px;
-        background: #244f3e;
+        background: #315c43;
+        box-shadow: 0 7px 0 #d7e4d1;
         color: #fff;
-        font-size: 0.95rem;
-        font-weight: 650;
+        font-size: 0.96rem;
+        font-weight: 750;
         text-decoration: none;
-        transition: background-color 160ms ease, transform 160ms ease;
+        transition: transform 160ms ease, box-shadow 160ms ease, background-color 160ms ease;
       }
 
       .link:hover {
-        transform: translateY(-2px);
-        background: #173d2e;
+        transform: translateY(2px);
+        box-shadow: 0 4px 0 #d7e4d1;
+        background: #264d37;
       }
 
-      .link:focus-visible {
-        outline: 3px solid #85b899;
-        outline-offset: 4px;
+      .link:focus-visible,
+      .brand:focus-visible {
+        outline: 3px solid #e49a65;
+        outline-offset: 5px;
       }
 
       .arrow {
-        font-size: 1.1rem;
+        font-size: 1.15rem;
         line-height: 1;
+      }
+
+      .mascot-wrap {
+        position: relative;
+        display: grid;
+        min-height: 390px;
+        place-items: center;
+      }
+
+      .mascot-card {
+        position: relative;
+        width: min(100%, 410px);
+        aspect-ratio: 1;
+        display: grid;
+        place-items: center;
+        border: 1px solid rgb(221 231 214 / 80%);
+        border-radius: 46% 54% 55% 45% / 50% 43% 57% 50%;
+        background:
+          radial-gradient(circle at 50% 43%, #fff 0 39%, transparent 39.5%),
+          #e8efdf;
+        box-shadow: 0 22px 64px rgb(55 77 52 / 11%);
+        transform: rotate(2deg);
+      }
+
+      .mascot-card::before,
+      .mascot-card::after {
+        position: absolute;
+        z-index: -1;
+        border-radius: 50%;
+        content: "";
+      }
+
+      .mascot-card::before {
+        inset: -15px 17px 18px -12px;
+        border: 1px dashed #a9c392;
+      }
+
+      .mascot-card::after {
+        top: 8%;
+        right: 5%;
+        width: 66px;
+        aspect-ratio: 1;
+        background: #f5c779;
+      }
+
+      .mascot {
+        width: 77%;
+        height: 77%;
+        border-radius: 42%;
+        object-fit: contain;
+        mix-blend-mode: multiply;
+        transform: rotate(-2deg);
+      }
+
+      .sparkle {
+        position: absolute;
+        color: #df9a5f;
+        font-size: 2rem;
+      }
+
+      .sparkle-one {
+        top: 12%;
+        left: 5%;
+      }
+
+      .sparkle-two {
+        right: 4%;
+        bottom: 14%;
+        color: #78986a;
+        font-size: 1.6rem;
+      }
+
+      .mascot-note {
+        position: absolute;
+        right: 2%;
+        bottom: 4%;
+        padding: 10px 16px;
+        border: 1px solid #f0e6d3;
+        border-radius: 18px 18px 4px 18px;
+        background: #fffdf8;
+        box-shadow: 0 8px 22px rgb(69 76 55 / 8%);
+        color: #627257;
+        font-size: 0.84rem;
+        font-weight: 700;
+        transform: rotate(-4deg);
+      }
+
+      .site-footer {
+        display: flex;
+        justify-content: center;
+        padding-block: 18px 22px;
+        border-top: 1px solid rgb(82 111 81 / 15%);
+        color: #788278;
+        font-size: 0.76rem;
+      }
+
+      .version {
+        display: inline-flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 7px;
+        text-align: center;
+      }
+
+      .version-label {
+        color: #617260;
+        font-weight: 700;
+      }
+
+      @media (min-width: 1200px) {
+        main {
+          padding-bottom: 80px;
+        }
+      }
+
+      @media (max-width: 700px) {
+        .site-header,
+        main,
+        .site-footer {
+          width: min(100% - 36px, 520px);
+        }
+
+        .site-header {
+          padding-block: 18px;
+        }
+
+        main {
+          grid-template-columns: 1fr;
+          gap: 8px;
+          padding-block: 14px 40px;
+        }
+
+        .copy {
+          padding-block: 10px 0;
+        }
+
+        .eyebrow {
+          margin-bottom: 12px;
+        }
+
+        .intro {
+          margin-top: 14px;
+        }
+
+        .tagline {
+          margin-top: 18px;
+        }
+
+        .link {
+          margin-top: 24px;
+        }
+
+        .mascot-wrap {
+          min-height: 0;
+          padding: 18px 12px 22px;
+        }
+
+        .mascot-card {
+          width: min(82vw, 340px);
+        }
+
+        .site-footer {
+          padding-bottom: 16px;
+        }
+      }
+
+      @media (max-width: 380px) {
+        .site-header,
+        main,
+        .site-footer {
+          width: min(100% - 28px, 520px);
+        }
+
+        h1 {
+          font-size: 3.25rem;
+        }
+
+        .mascot-card {
+          width: min(78vw, 300px);
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        *,
+        *::before,
+        *::after {
+          scroll-behavior: auto !important;
+          transition-duration: 0.01ms !important;
+        }
       }
     </style>
   </head>
   <body>
-    <main>
-      <p class="eyebrow">GitHub Pages</p>
-      <h1>Studri</h1>
-      <p class="intro">Studri のプロジェクトページへようこそ。ここからプロジェクトの情報をご覧いただけます。</p>
-      <a class="link" href="https://github.com/goataka/studri">
-        GitHub リポジトリを見る <span class="arrow" aria-hidden="true">↗</span>
+    <header class="site-header">
+      <a class="brand" href="./" aria-label="スタドリ ホーム">
+        <span class="brand-mark" aria-hidden="true">✳</span>
+        スタドリ
       </a>
+    </header>
+    <main>
+      <section class="copy" aria-labelledby="page-title">
+        <p class="eyebrow">まなぶって、ちょっと楽しい。</p>
+        <h1 id="page-title">スタ<span>ドリ</span></h1>
+        <p class="intro">毎日の「できた！」を、ひとつずつ。自分のペースで学ぶみんなを応援する場所です。</p>
+        <ul class="tagline" aria-label="スタドリのテーマ">
+          <li>自分のペースで</li>
+          <li>毎日ちょっとずつ</li>
+        </ul>
+        <a class="link" href="https://github.com/goataka/studri">
+          プロジェクトを見る <span class="arrow" aria-hidden="true">↗</span>
+        </a>
+      </section>
+      <div class="mascot-wrap" aria-label="スタドリのキャラクター">
+        <span class="sparkle sparkle-one" aria-hidden="true">✳</span>
+        <div class="mascot-card">
+          <img class="mascot" src="studri.jpeg" alt="スタドリのキャラクター">
+        </div>
+        <span class="sparkle sparkle-two" aria-hidden="true">✦</span>
+        <span class="mascot-note" aria-hidden="true">いっしょに、やってみよう！</span>
+      </div>
     </main>
+    <footer class="site-footer">
+      <div class="version">
+        <span class="version-label">VERSION</span>
+        <span>アプリ生成時刻：</span>
+        <time datetime="__BUILD_TIME__">__BUILD_TIME__</time>
+      </div>
+    </footer>
   </body>
 </html>
