@@ -39,6 +39,11 @@ Then("結果に10問正解と表示される", async ({ page }) => {
   await expect(page.locator("#score")).toHaveText("10 / 10 問 正解");
 });
 
+Then("ミスがあったことを結果に表示する", async ({ page }) => {
+  await expect(page.locator("#resultTitle")).toHaveText("ぜんもん正解！");
+  await expect(page.locator("#resultMessage")).toContainText("挑戦中にミスがあった");
+});
+
 When("コース選択に戻る", async ({ page }) => {
   await page.locator("#homeButton").click();
 });
