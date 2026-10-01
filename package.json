@@ -5,13 +5,17 @@
   "private": true,
   "scripts": {
     "test": "npm run test:e2e",
-    "test:e2e": "bddgen && playwright test",
+    "test:e2e": "npm run typecheck && bddgen && playwright test",
+    "typecheck": "tsc --noEmit",
     "test:e2e:ui": "bddgen && playwright test --ui"
   },
   "keywords": [],
   "author": "",
   "devDependencies": {
     "@playwright/test": "^1.63.0",
-    "playwright-bdd": "^9.2.1"
+    "@types/node": "^26.6.3",
+    "playwright-bdd": "^9.2.1",
+    "tsx": "^4.23.15",
+    "typescript": "^7.0.2"
   }
 }

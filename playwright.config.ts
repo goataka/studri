@@ -1,9 +1,9 @@
-const { defineBddConfig } = require("playwright-bdd");
+import { defineBddConfig } from "playwright-bdd";
 
-module.exports = {
+export default {
   testDir: defineBddConfig({
     features: "apps/**/e2e/*.feature",
-    steps: "apps/**/e2e/steps/*.js",
+    steps: "apps/**/e2e/steps/*.ts",
     language: "ja",
   }),
   reporter: "list",
@@ -13,7 +13,7 @@ module.exports = {
     headless: true,
   },
   webServer: {
-    command: "node tests/e2e/server.cjs",
+    command: "tsx tests/e2e/server.ts",
     url: "http://127.0.0.1:4173/apps/division/",
     reuseExistingServer: !process.env.CI,
     timeout: 10_000,

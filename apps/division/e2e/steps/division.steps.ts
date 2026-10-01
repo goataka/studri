@@ -1,5 +1,5 @@
-const { expect } = require("@playwright/test");
-const { createBdd } = require("playwright-bdd");
+import { expect, Page } from "@playwright/test";
+import { createBdd } from "playwright-bdd";
 
 const { Given, When, Then } = createBdd();
 
@@ -77,7 +77,7 @@ Then("誤答を記録し連続合格を0回にする", async ({ page }) => {
   await expect(page.locator("#streak")).toHaveText("0");
 });
 
-async function answerQuestions(page, start, end) {
+async function answerQuestions(page: Page, start: number, end: number) {
   for (let question = start; question < end; question += 1) {
     await expect(page.locator("#questionNo")).toHaveText(`${question + 1} / 10`);
     const answer = await currentAnswer(page);
@@ -88,8 +88,9 @@ async function answerQuestions(page, start, end) {
   }
 }
 
-async function currentAnswer(page) {
+async function currentAnswer(page: Page) {
   const problem = await page.locator("#problem").textContent();
+  if (!problem) throw new Error("Division problem is missing");
   const match = problem.match(/(\d+)\s*÷\s*(\d+)/);
   if (!match) throw new Error(`Unexpected division problem: ${problem}`);
   return String(Number(match[1]) / Number(match[2]));
