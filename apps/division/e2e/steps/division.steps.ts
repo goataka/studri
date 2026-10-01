@@ -23,11 +23,12 @@ When("最初の問題で誤答して再回答する", async ({ page }) => {
   await page.getByRole("button", { name: "答え合わせ" }).click();
   await expect(page.locator("#feedback")).toContainText("おしい！");
   await expect(page.locator("#feedback")).toContainText(`正解は「${correctAnswer}」です。`);
-  await page.getByRole("button", { name: "再回答" }).click();
+  await page.keyboard.press("Enter");
+  await expect(page.locator("#feedback")).not.toBeVisible();
   await page.locator("#answer").fill(correctAnswer);
   await page.getByRole("button", { name: "答え合わせ" }).click();
   await expect(page.locator("#feedback")).toHaveClass(/ok/);
-  await page.locator("#feedback").click();
+  await page.keyboard.press("Enter");
 });
 
 When("残りの問題に正解して挑戦を終える", async ({ page }) => {
@@ -71,21 +72,33 @@ Then("挑戦回数が0になる", async ({ page }) => {
   await expect(page.locator("#attempts")).toHaveText("0");
 });
 
-Then("すごろくから問題画面へ進みスクロールしない", async ({ page }) => {
+Then("すごろくから問題文の下に計算エリアが表示される", async ({ page }) => {
   await page.setViewportSize({ width: 1440, height: 900 });
   await expect(page.locator("#courses .course")).toHaveCount(12);
   await expect(page.locator("#questionNo")).toHaveText("1 / 10");
   const columns = await page.locator(".quiz-board").evaluate((element) =>
     getComputedStyle(element).gridTemplateColumns.split(" ").length,
   );
-  expect(columns).toBe(2);
-  expect(await page.evaluate(() => document.documentElement.scrollHeight <= window.innerHeight)).toBe(true);
+  expect(columns).toBe(1);
+  const problem = await page.locator("#problem").boundingBox();
+  const answer = await page.locator("#answer").boundingBox();
+  expect(problem).not.toBeNull();
+  expect(answer).not.toBeNull();
+  expect(problem!.y + problem!.height).toBeLessThan(answer!.y);
 });
 
 Then("誤答を記録し連続合格を0回にする", async ({ page }) => {
   await expect(page.locator("#wrongCount")).toHaveText("1問");
   await expect(page.locator("#reviewList .review-item")).toHaveCount(1);
   await expect(page.locator("#streak")).toHaveText("0");
+});
+
+Then("コースは小学3年生のみで音とバージョンが表示される", async ({ page }) => {
+  await expect(page.locator("#courses .course")).toHaveCount(12);
+  await expect(page.locator("#courses .grade")).toHaveText(Array(12).fill("小学3年生"));
+  await expect(page.locator("#sound")).toHaveAttribute("aria-pressed", "true");
+  await expect(page.locator(".site-footer")).toHaveText(/^Ver\. \d{8}\.\d{6}\.\d{3}$/);
+  await expect(page.locator("textarea")).toHaveCount(0);
 });
 
 async function answerQuestions(page: Page, start: number, end: number) {
@@ -95,7 +108,7 @@ async function answerQuestions(page: Page, start: number, end: number) {
     await page.locator("#answer").fill(answer);
     await page.getByRole("button", { name: "答え合わせ" }).click();
     await expect(page.locator("#feedback")).toHaveClass(/ok/);
-    await page.locator("#feedback").click();
+    await page.keyboard.press("Enter");
   }
 }
 

@@ -529,6 +529,10 @@ main {
   background: #f5e2bc;
 }
 
+.keypad button:last-child {
+  grid-column: 2 / span 2;
+}
+
 .check,
 .start {
   border-radius: 99px;
@@ -562,7 +566,7 @@ main {
   border-radius: 14px;
 }
 
-.canvas-box label {
+.canvas-label {
   display: block;
   margin-bottom: 6px;
   color: var(--muted);
