@@ -4,8 +4,8 @@
   "description": "スタドリ学習アプリの共有Playwright E2Eテスト",
   "private": true,
   "scripts": {
-    "test": "npm run test:e2e",
-    "test:e2e": "npm run typecheck && bddgen && playwright test",
+    "test": "pnpm run test:e2e",
+    "test:e2e": "pnpm run typecheck && bddgen && playwright test",
     "typecheck": "tsc --noEmit",
     "test:e2e:ui": "bddgen && playwright test --ui"
   },
@@ -17,5 +17,6 @@
     "playwright-bdd": "^9.2.1",
     "tsx": "^4.23.15",
     "typescript": "^7.0.2"
-  }
+  },
+  "packageManager": "pnpm@12.8.1"
 }
