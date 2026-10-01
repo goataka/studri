@@ -7,12 +7,12 @@ Given("算数アプリを開く", async ({ page }) => {
   await page.goto("/apps/division/");
 });
 
-When("選択中のコースで挑戦を始める", async ({ page }) => {
-  await page.getByRole("button", { name: "このコースで挑戦する" }).click();
+When("コースを選んで挑戦を始める", async ({ page }) => {
+  await page.locator('#courses [data-course="g3-table"]').click();
+  await expect(page.locator("#quiz")).toBeVisible();
 });
 
 When("10問すべて正解して挑戦を終える", async ({ page }) => {
-  await page.getByRole("button", { name: "このコースで挑戦する" }).click();
   await answerQuestions(page, 0, 10);
 });
 
@@ -69,6 +69,17 @@ When("学習記録の初期化を確定する", async ({ page }) => {
 
 Then("挑戦回数が0になる", async ({ page }) => {
   await expect(page.locator("#attempts")).toHaveText("0");
+});
+
+Then("すごろくから問題画面へ進みスクロールしない", async ({ page }) => {
+  await page.setViewportSize({ width: 1440, height: 900 });
+  await expect(page.locator("#courses .course")).toHaveCount(12);
+  await expect(page.locator("#questionNo")).toHaveText("1 / 10");
+  const columns = await page.locator(".quiz-board").evaluate((element) =>
+    getComputedStyle(element).gridTemplateColumns.split(" ").length,
+  );
+  expect(columns).toBe(2);
+  expect(await page.evaluate(() => document.documentElement.scrollHeight <= window.innerHeight)).toBe(true);
 });
 
 Then("誤答を記録し連続合格を0回にする", async ({ page }) => {
