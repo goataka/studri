@@ -1,71 +1,138 @@
 <!doctype html>
 <html lang="ja">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#f7f7ef">
-<meta name="description" content="スタドリ - 算数・わり算編。わり算を自分のペースで楽しく学ぼう。">
-<title>スタドリ - 算数・わり算編</title>
-<style>
-:root{color-scheme:light;font-family:"Hiragino Kaku Gothic ProN","Noto Sans JP",ui-sans-serif,system-ui,sans-serif;color:#294c3b;background:#f7f7ef;font-synthesis:none;text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased;--green:#315c43;--ink:#294c3b;--muted:#596960;--orange:#e49a65;--sage:#e8efdf;--line:#e2e8da}
-*{box-sizing:border-box}body{margin:0;min-width:320px;min-height:100vh;background:radial-gradient(ellipse at 4% 8%,rgb(222 237 216 / 76%),transparent 34rem),radial-gradient(ellipse at 94% 86%,rgb(255 226 195 / 54%),transparent 31rem),#f7f7ef;padding-bottom:60px}button{font:inherit;cursor:pointer;border:0;color:inherit}button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible{outline:3px solid var(--orange);outline-offset:3px}
-header,main{max-width:1080px;margin:auto;padding-inline:24px}header{padding-top:22px;display:flex;align-items:center;justify-content:space-between;gap:12px}.brand{display:flex;align-items:center;gap:10px;color:var(--ink);text-decoration:none;font-weight:800}.brand-mark{display:grid;place-items:center;width:38px;height:38px;border-radius:13px;background:#dcebd8;color:#426d4f;font-size:1.25rem}.sound{border:1px solid var(--line);background:#fffdf8;border-radius:99px;padding:9px 13px;font-size:.86rem}.sound[aria-pressed=true]{background:#dcebd8}
-main{padding-top:18px;padding-bottom:76px}.hero{display:grid;grid-template-columns:1fr 260px;gap:34px;align-items:center;padding:28px 0 32px}.eyebrow{color:#53795d;font-weight:750;letter-spacing:.08em;font-size:.83rem;margin:0 0 12px}.hero h1{color:var(--ink);font-size:clamp(2.4rem,6vw,4.25rem);line-height:1.12;margin:0 0 12px;letter-spacing:-.06em}.hero p{color:var(--muted);line-height:1.8;margin:0;max-width:600px}.mascot{width:220px;aspect-ratio:1;justify-self:center;position:relative;border:1px solid rgb(221 231 214 / 80%);border-radius:46% 54% 55% 45% / 50% 43% 57% 50%;background:radial-gradient(circle at 50% 43%,#fff 0 39%,transparent 39.5%),var(--sage);box-shadow:0 18px 50px rgb(55 77 52 / 10%);display:grid;place-items:center;transform:rotate(2deg)}.mascot img{width:78%;height:78%;object-fit:contain;mix-blend-mode:multiply;transform:rotate(-2deg)}.mascot:after{content:"÷";position:absolute;right:-6px;top:-8px;display:grid;place-items:center;width:48px;aspect-ratio:1;border-radius:50%;background:#f5c779;color:var(--ink);font-size:1.8rem;font-weight:900}
-.panel{background:#fffdf8;border:1px solid var(--line);border-radius:24px;padding:clamp(18px,4vw,30px);box-shadow:0 14px 38px rgb(55 77 52 / 7%)}.panel+.panel{margin-top:20px}.panel-title{display:flex;justify-content:space-between;align-items:center;gap:12px;margin:0 0 18px}.panel-title h2{font-size:1.25rem;margin:0;color:var(--ink)}.badge{background:#e8efdf;color:#426d4f;padding:6px 10px;border-radius:99px;font-size:.75rem;font-weight:800}
-.courses{display:grid;grid-template-columns:repeat(3,1fr);gap:13px}.course{position:relative;text-align:left;padding:17px;border:1px solid var(--line);border-radius:17px;background:#fff;transition:transform .18s,border-color .18s}.course:hover{transform:translateY(-2px);border-color:#92b67e}.course.selected{border:2px solid #53795d;background:#f4f7ef;box-shadow:0 4px 0 #dce8d4}.course strong{display:block;margin-bottom:6px}.course small{display:block;color:var(--muted);line-height:1.5}.course .grade{display:inline-block;color:#53795d;font-size:.72rem;font-weight:800;margin-bottom:9px}.start{width:100%;margin-top:20px;padding:15px 22px;border-radius:14px;background:var(--green);color:white;font-weight:800;box-shadow:0 5px 0 #d7e4d1}.start:active{transform:translateY(3px);box-shadow:0 2px 0 #d7e4d1}.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.stat{padding:14px;border-radius:16px;background:#f4f7ef;text-align:center}.stat b{display:block;color:#426d4f;font-size:1.7rem}.stat small{color:var(--muted)}
-.hidden{display:none!important}.quiz-head{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:18px}.progress{height:10px;border-radius:99px;background:#e8efdf;overflow:hidden;flex:1}.progress span{display:block;height:100%;border-radius:inherit;background:#6f986e;transition:width .3s}.question-label{color:var(--muted);font-size:.9rem}.question{padding:18px 8px;text-align:center}.question h2{font-size:clamp(2rem,8vw,4rem);margin:8px 0 22px;letter-spacing:.04em;color:var(--ink)}.answer{display:flex;justify-content:center;align-items:center;gap:10px}.answer input{width:150px;border:2px solid #cbdac3;border-radius:14px;padding:12px;text-align:center;font-size:1.8rem;background:#fff}.answer input:disabled{opacity:.65}.answer span{font-size:1.8rem}.keypad{display:grid;grid-template-columns:repeat(3,70px);gap:8px;justify-content:center;margin:17px auto}.keypad button{padding:12px;border-radius:12px;background:#e8efdf;font-size:1.15rem;font-weight:750}.keypad button:last-child{background:#f5e2bc}.check{display:block;margin:0 auto;padding:13px 36px;border-radius:99px;background:var(--orange);color:#fff;font-weight:850}.feedback{margin-top:18px;padding:15px;border-radius:15px;text-align:center;line-height:1.6}.feedback.ok{background:#e3f0df;color:#376649}.feedback.no{background:#f9e9df;color:#925637}.feedback strong{display:block;font-size:1.12rem}.feedback-actions{display:flex;justify-content:center;gap:10px;margin-top:11px}.feedback-actions button{padding:9px 16px;border-radius:99px;background:#fff;font-weight:800}.canvas-wrap{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:22px}.canvas-box{padding:10px;border:1px dashed #bfd0b8;border-radius:14px}.canvas-box label{display:block;color:var(--muted);font-size:.78rem;margin-bottom:6px}.draw{width:100%;height:100px;display:block;background:#fff;border-radius:9px;touch-action:none}.clear{margin-top:7px;color:#53795d;background:none;font-size:.8rem}.review-list{display:grid;gap:10px}.review-item{padding:13px;border-radius:14px;background:#f9e9df}.review-item b{color:#925637}.review-item small{display:block;color:var(--muted);margin-top:5px}.back{background:none;color:#426d4f;font-weight:800}.result{text-align:center}.result .score{font-size:3rem;color:#426d4f;font-weight:900;margin:8px}.result p{color:var(--muted)}.challenge-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.challenge{padding:16px;border-radius:16px;background:#f4f7ef}.challenge button{margin-top:10px;padding:9px 13px;border-radius:99px;background:var(--green);color:white;font-weight:800}.challenge button:disabled{background:#aab8a6}.note{width:100%;margin-top:12px;padding:11px;border:1px solid var(--line);border-radius:11px;resize:vertical;font:inherit}.history-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}.outline{padding:10px 14px;border:1px solid #cbdac3;border-radius:99px;background:#fff;color:#426d4f;font-weight:800}
-footer{position:fixed;z-index:5;bottom:0;left:0;right:0;background:rgb(247 247 239 / 94%);border-top:1px solid rgb(82 111 81 / 15%);text-align:center;padding:11px;color:#788278;font-size:.75rem;backdrop-filter:blur(8px)}
-.courses{position:relative;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px 24px;padding:8px 2px}.course{min-height:122px;padding:14px 12px 12px 43px;border:2px solid #dfe8d8;border-radius:19px;background:#fffdf9;box-shadow:0 4px 0 #e8eddf}.course::before{content:attr(data-step);position:absolute;left:11px;top:13px;display:grid;width:25px;height:25px;place-items:center;border-radius:50%;background:#e8efdf;color:#53795d;font-size:.78rem;font-weight:900}.course::after{content:"→";position:absolute;right:-23px;top:42%;z-index:1;color:#9ab18c;font-size:1.2rem;font-weight:900}.course:nth-child(4)::after,.course:nth-child(8)::after{content:"↓";top:auto;right:calc(50% - 8px);bottom:-23px}.course:nth-child(4){grid-column:4;grid-row:1}.course:nth-child(5){grid-column:4;grid-row:2}.course:nth-child(6){grid-column:3;grid-row:2}.course:nth-child(7){grid-column:2;grid-row:2}.course:nth-child(8){grid-column:1;grid-row:2}.course:nth-child(9){grid-column:1;grid-row:3}.course:nth-child(10){grid-column:2;grid-row:3}.course:nth-child(11){grid-column:3;grid-row:3}.course:nth-child(12){grid-column:4;grid-row:3}.course:nth-child(n+5):nth-child(-n+7)::after{content:"←"}.course.selected{border-color:#53795d;background:#f4f7ef}.course .grade{margin-bottom:6px}.course strong{font-size:.94rem}.course small{font-size:.78rem}
-.quiz-active main{padding-top:8px;padding-bottom:52px}.quiz-panel{display:grid;grid-template-rows:auto 8px 1fr;gap:12px;min-height:calc(100svh - 230px);padding:18px 22px}.quiz-head{margin:0}.quiz-board{display:grid;grid-template-columns:.9fr 1.1fr;gap:24px;min-height:0}.quiz-question{display:grid;align-content:center;justify-items:center;padding:12px 20px;border-right:1px solid var(--line)}.quiz-question .eyebrow{margin-bottom:8px}.quiz-question h2{margin:10px 0;font-size:clamp(2.2rem,5vw,4rem)}.quiz-work{display:grid;grid-template-columns:1fr;align-content:center;justify-items:center;gap:8px;min-width:0}.quiz-work .answer{margin-top:4px}.quiz-work .keypad{grid-template-columns:repeat(4,minmax(48px,64px));gap:6px;margin:4px auto}.quiz-work .keypad button{padding:8px 5px}.quiz-work .check{padding:10px 30px}.quiz-work .feedback{margin-top:2px;padding:10px}.quiz-work .feedback-actions{margin-top:6px}.quiz-work .canvas-wrap{width:100%;gap:8px;margin-top:4px}.quiz-work .canvas-box{padding:7px}.quiz-work .draw{height:76px}.quiz-work .text-note{margin-top:0;resize:none}
-@media(max-width:700px){header{padding-top:14px}.hero{grid-template-columns:1fr;padding-top:10px;gap:16px}.mascot{width:150px;justify-self:end;margin-top:-8px}.mascot:after{width:38px;font-size:1.4rem}.courses{grid-template-columns:1fr}.canvas-wrap,.challenge-grid{grid-template-columns:1fr}.question h2{margin-bottom:15px}}
-@media(max-width:700px){.courses{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;padding:4px 0}.course{grid-column:auto!important;grid-row:auto!important;min-height:126px;padding-left:39px}.course::after{content:"→"!important;right:-17px!important;top:45%!important;bottom:auto!important}.course:nth-child(even)::after{content:"↓"!important;right:calc(50% - 8px)!important;top:auto!important;bottom:-18px!important}.course:last-child::after{content:none!important}.quiz-active main{padding:8px 12px 56px}.quiz-panel{min-height:0;padding:14px;gap:10px}.quiz-board{grid-template-columns:1fr;gap:10px}.quiz-question{padding:4px 8px 10px;border-right:0;border-bottom:1px solid var(--line)}.quiz-question h2{font-size:clamp(2rem,9vw,3.2rem);margin:6px 0}.quiz-work{gap:6px}.quiz-work .keypad{grid-template-columns:repeat(4,minmax(44px,60px))}.quiz-work .canvas-wrap{grid-template-columns:1fr 1fr}.quiz-work .draw{height:65px}.quiz-work .text-note{height:42px}.quiz-work .answer input{width:128px}}
-@media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;transition-duration:.01ms!important}}
-</style>
-</head>
-<body>
-<header><a class="brand" href="../../"><span class="brand-mark" aria-hidden="true">✳</span>スタドリ - 算数・わり算編</a><button class="sound" id="sound" aria-pressed="false">🔔 音あり</button></header>
-<main>
-<section id="home">
-<div class="hero"><div><p class="eyebrow">まなぶって、ちょっと楽しい。</p><h1>わけるって、<br>おもしろい！</h1><p>ぴったり分けるわり算から、あまりのある計算まで。<br>10問ずつ、じぶんのペースでレベルアップしよう。</p></div><div class="mascot"><img src="../../studri.jpeg" alt="スタドリのキャラクター"></div></div>
-<div class="panel"><div class="panel-title"><h2>コースをえらぼう</h2><span class="badge">全10問・コースを選ぶとスタート</span></div><div class="courses" id="courses" aria-label="すごろくコース"></div></div>
-<div class="panel"><div class="panel-title"><h2>きろく</h2><span class="badge" id="passBadge">合格まであと3回</span></div><div class="stats"><div class="stat"><b id="streak">0</b><small>連続合格</small></div><div class="stat"><b id="attempts">0</b><small>挑戦回数</small></div><div class="stat"><b id="best">—</b><small>ベストタイム</small></div></div><div class="history-actions"><button class="outline" id="resetData">学習記録を初期化</button></div></div>
-<div class="panel"><div class="panel-title"><h2>まちがいノート</h2><span class="badge" id="wrongCount">0問</span></div><div id="reviewList" class="review-list"><p style="color:var(--muted)">まだまちがいはありません。挑戦してみよう！</p></div></div>
-</section>
-<section id="quiz" class="hidden"><div class="panel quiz-panel"><div class="quiz-head"><button class="back" id="quit">← コース選択へ</button><span class="question-label" id="questionNo"></span></div><div class="progress"><span id="progress"></span></div><div class="quiz-board"><div class="quiz-question"><p class="eyebrow" id="difficulty"></p><h2 id="problem"></h2><span>式を考えて、右の計算エリアに答えよう</span></div><div class="quiz-work"><div class="answer"><input id="answer" inputmode="text" autocomplete="off" aria-label="答え（あまりがある問題は「あまり」も入力）"><span id="unit">こ</span></div><div class="keypad" id="keypad"></div><button class="check" id="check">答え合わせ</button><div id="feedback" class="feedback hidden"></div><div class="canvas-wrap"><div class="canvas-box"><label>✍️ 答えのかき方（答え欄に入力してね）</label><canvas class="draw" id="answerCanvas"></canvas><button class="clear" data-canvas="answerCanvas">消す</button></div><div class="canvas-box"><label>📝 途中式・メモ（入力補助）</label><canvas class="draw" id="noteCanvas"></canvas><button class="clear" data-canvas="noteCanvas">消す</button></div></div><textarea class="note text-note" id="textNote" rows="2" placeholder="気づいたことをメモしよう（任意）"></textarea></div></div></div></section>
-<section id="result" class="hidden"><div class="panel result"><p class="eyebrow">CHALLENGE COMPLETE</p><h1 id="resultTitle">おつかれさま！</h1><div class="score" id="score"></div><p id="resultMessage"></p><div class="challenge-grid"><div class="challenge"><b>⏱ タイムアタック</b><br><small>合格すると解放されます</small><br><button id="timeAttack">挑戦する</button></div><div class="challenge"><b>🔥 連続正解チャレンジ</b><br><small>最高記録：<span id="chainBest">0</span>問</small><br><button id="chainAttack">挑戦する</button></div></div><div class="history-actions"><button class="start" id="again">もう一度挑戦する</button><button class="outline" id="homeButton">コース選択へ</button></div></div></section>
-</main><footer>スタドリ - 算数・わり算編　<span>アプリ生成時刻：2026-09-30 23:05 UTC</span></footer>
-<script>
-const VERSION="2026-09-30T23:05:00Z",KEY="studri-division-v1",courses=[
-{id:"g3-table",grade:"小学3年・1",name:"九九のわり算",desc:"九九を使って、ぴったり分けよう",divisor:9,quotient:9},
-{id:"g3-two",grade:"小学3年・2",name:"2けた÷1けた",desc:"九九の答えを広げて計算しよう",divisor:9,quotient:11},
-{id:"g3-three",grade:"小学3年・3",name:"3けた÷1けた",desc:"大きな数も正確に分けよう",divisor:9,quotient:111},
-{id:"g4-remainder",grade:"小学4年・1",name:"あまりのあるわり算",desc:"商とあまりをセットで答えよう",divisor:9,quotient:15,remainder:true},
-{id:"g4-relation",grade:"小学4年・2",name:"商とあまりの関係",desc:"あまりがわる数より小さいことを確認",divisor:9,quotient:25,remainder:true},
-{id:"g4-two-digit",grade:"小学4年・3",name:"2けたでわる計算",desc:"2けたのわる数で商を見つけよう",divisor:49,quotient:9},
-{id:"g5-large",grade:"小学5年・1",name:"大きな数のわり算",desc:"けた数の多い整数を計算しよう",divisor:50,quotient:40},
-{id:"g5-estimate",grade:"小学5年・2",name:"商の見当をつける",desc:"わる数と商を考えて計算しよう",divisor:90,quotient:70},
-{id:"g6-fluency",grade:"小学6年・1",name:"わり算の計算力",desc:"大きな数をすばやく正確に",divisor:99,quotient:85},
-{id:"g6-review",grade:"小学6年・2",name:"わり算の総仕上げ",desc:"これまでの計算をまとめて練習",divisor:99,quotient:99,remainder:true},
-{id:"exam-basic",grade:"中学受験・基礎",name:"計算の基礎力",desc:"正確な商とあまりを身につけよう",divisor:35,quotient:50,remainder:true},
-{id:"exam-advanced",grade:"中学受験・応用",name:"計算チャレンジ",desc:"大きな数のわり算に挑戦",divisor:99,quotient:120,remainder:true}
-];
-let data=JSON.parse(localStorage.getItem(KEY)||"null")||{course:"g3-table",stats:{},wrong:[],strokes:[]};
-const oldCourseIds={g3:"g3-table",g4:"g4-remainder",g5:"g5-large",g6:"g6-review",exam:"exam-basic"};
-if(oldCourseIds[data.course])data.course=oldCourseIds[data.course];
-Object.entries(oldCourseIds).forEach(([oldId,newId])=>{if(data.stats?.[oldId]&&!data.stats[newId])data.stats[newId]=data.stats[oldId];if(oldId!==newId)delete data.stats?.[oldId]});
-let selected=data.course,quiz=null,locked=false,advanceTimer=null,canvasResizers=[];
-const resizeCanvases=()=>canvasResizers.forEach(resize=>resize());
-const $=id=>document.getElementById(id),save=()=>localStorage.setItem(KEY,JSON.stringify(data));
-function renderCourses(){$("courses").innerHTML=courses.map((c,i)=>`<button class="course ${selected===c.id?"selected":""}" data-course="${c.id}" data-step="${i+1}" aria-label="${c.grade}、${c.name}。${c.desc}"><span class="grade">${c.grade}</span><strong>${c.name}</strong><small>${c.desc}</small></button>`).join("");document.querySelectorAll(".course").forEach(b=>b.onclick=()=>{selected=b.dataset.course;data.course=selected;save();renderCourses();renderStats();setupQuiz()})}
-function renderStats(){let s=data.stats[selected]||{streak:0,attempts:0,best:null};$("streak").textContent=s.streak;$("attempts").textContent=s.attempts;$("best").textContent=s.best?s.best+"秒":"—";$("passBadge").textContent=s.streak>=3?"合格！チャレンジ解放":"合格まであと "+Math.max(0,3-s.streak)+"回";$("wrongCount").textContent=data.wrong.length+"問";$("reviewList").innerHTML=data.wrong.length?data.wrong.slice(-8).reverse().map(w=>`<div class="review-item"><b>${w.problem}</b> → あなたの答え：${w.answer||"未入力"} / 正解：${w.correct}<small>${w.explain}</small></div>`).join(""):'<p style="color:var(--muted)">まだまちがいはありません。挑戦してみよう！</p>'}
-function makeProblem(i){let c=courses.find(x=>x.id===selected),level=Math.min(i,9),b=2+Math.floor(Math.random()*Math.max(1,Math.min(c.divisor-1,4+level*10))),ans=2+Math.floor(Math.random()*Math.max(1,Math.min(c.quotient-1,5+level*13))),rem=c.remainder?1+Math.floor(Math.random()*(b-1)):0,a=b*ans+rem,explain=`${b}×${ans}=${b*ans}、${a}-${b*ans}=${rem}。${rem?`答えは${ans}あまり${rem}です。`:`答えは${ans}です。`}`;return{text:`${a} ÷ ${b} =`,answer:rem?`${ans}あまり${rem}`:String(ans),unit:rem?"こ（あまりも入力）":"こ",explain}}
-function setupQuiz(mode="normal"){quiz={mode,index:0,correct:0,missed:false,started:Date.now(),problems:[]};document.body.classList.add("quiz-active");$("home").classList.add("hidden");$("result").classList.add("hidden");$("quiz").classList.remove("hidden");requestAnimationFrame(resizeCanvases);nextProblem()}
-function nextProblem(){clearTimeout(advanceTimer);if(quiz.index>=10)return finish();let p=makeProblem(quiz.index);quiz.problems[quiz.index]=p;$("questionNo").textContent=`${quiz.index+1} / 10`;$("progress").style.width=(quiz.index*10)+"%";$("difficulty").textContent=quiz.index<3?"LEVEL 1・じゅんび":quiz.index<7?"LEVEL 2・ステップアップ":"LEVEL 3・チャレンジ";$("problem").textContent=p.text;$("unit").textContent=p.unit;$("answer").value="";$("answer").disabled=false;$("feedback").className="feedback hidden";$("feedback").onclick=null;$("check").disabled=false;$("answer").focus()}
-function judge(){if(locked)return;let p=quiz.problems[quiz.index],raw=$("answer").value.trim();if(!raw)return;$("check").disabled=true;locked=true;let ok=p.answer===raw.replace(/\s/g,""),f=$("feedback");if(ok){quiz.correct++;f.className="feedback ok";f.innerHTML="<strong>せいかい！ 🎉</strong>すばらしい！";let advance=()=>{clearTimeout(advanceTimer);locked=false;quiz.index++;nextProblem()};f.onclick=advance;advanceTimer=setTimeout(advance,3000)}else{quiz.missed=true;f.className="feedback no";f.innerHTML=`<strong>おしい！</strong>正解は「${p.answer}」です。<br>${p.explain}<div class="feedback-actions"><button id="retry">再回答</button><button id="next">次へ</button></div>`;data.wrong.push({problem:p.text,answer:raw,correct:p.answer,explain:p.explain});data.wrong=data.wrong.slice(-30);save();$("answer").disabled=true;document.getElementById("retry").onclick=()=>{$("answer").disabled=false;$("answer").value="";$("check").disabled=false;locked=false;$("answer").focus()};document.getElementById("next").onclick=()=>{locked=false;quiz.index++;nextProblem()}}}
-function finish(){let s=data.stats[selected]||{streak:0,attempts:0,best:null};s.attempts++;if(quiz.correct===10&&!quiz.missed)s.streak++;else s.streak=0;let sec=Math.round((Date.now()-quiz.started)/1000);if(quiz.correct===10&&!quiz.missed&&(!s.best||sec<s.best))s.best=sec;data.stats[selected]=s;save();document.body.classList.remove("quiz-active");$("quiz").classList.add("hidden");$("result").classList.remove("hidden");$("score").textContent=`${quiz.correct} / 10 問 正解`;$("resultTitle").textContent=quiz.correct===10?(quiz.missed?"ぜんもん正解！":"パーフェクト！"):"よくがんばったね！";$("resultMessage").textContent=quiz.correct===10?(quiz.missed?"再回答して全問正解！ただし挑戦中にミスがあったので、連続合格は0回からだよ。":`ミスなし合格 ${s.streak}/3回。${s.streak>=3?"チャレンジモードが解放されたよ！":"あと少しで合格だよ！"}`):"まちがいはノートに保存したよ。もう一度やってみよう。";$("chainBest").textContent=Number(localStorage.getItem(KEY+"-chain")||0);$("timeAttack").disabled=s.streak<3;$("chainAttack").disabled=s.streak<3}
-function keypad(){let keys=["1","2","3","4","5","6","7","8","9","⌫","0","あまり","クリア"];$("keypad").innerHTML=keys.map(k=>`<button type="button">${k}</button>`).join("");document.querySelectorAll("#keypad button").forEach(b=>b.onclick=()=>{let v=$("answer").value;if(b.textContent==="⌫")$("answer").value=v.slice(0,-1);else if(b.textContent==="クリア")$("answer").value="";else if(b.textContent==="あまり")$("answer").value+=v.includes("あまり")?"":"あまり";else $("answer").value+=b.textContent})}
-function canvasSetup(id){let c=$(id),ctx=c.getContext("2d"),drawing=false;function resize(){let r=c.getBoundingClientRect(),d=devicePixelRatio||1;c.width=r.width*d;c.height=r.height*d;ctx.setTransform(d,0,0,d,0,0);ctx.lineWidth=3;ctx.lineCap="round";ctx.strokeStyle="#6854b8"}resize();canvasResizers.push(resize);["pointerdown","pointermove","pointerup","pointerleave"].forEach(ev=>c.addEventListener(ev,e=>{if(ev==="pointerdown"){drawing=true;ctx.beginPath();ctx.moveTo(e.offsetX,e.offsetY)}else if(ev==="pointermove"&&drawing){ctx.lineTo(e.offsetX,e.offsetY);ctx.stroke()}else drawing=false}));return()=>ctx.clearRect(0,0,c.width,c.height)}
-renderCourses();renderStats();keypad();let clearAnswer=canvasSetup("answerCanvas"),clearNote=canvasSetup("noteCanvas");window.addEventListener("resize",resizeCanvases);$("check").onclick=judge;$("answer").onkeydown=e=>{if(e.key==="Enter")judge()};$("quit").onclick=()=>{if(confirm("挑戦を中断してコース選択へ戻りますか？")){document.body.classList.remove("quiz-active");$("quiz").classList.add("hidden");$("home").classList.remove("hidden");renderStats()}};$("again").onclick=()=>setupQuiz();$("homeButton").onclick=()=>{$("result").classList.add("hidden");$("home").classList.remove("hidden");renderStats()};$("resetData").onclick=()=>{if(confirm("学習記録とまちがいノートをすべて削除しますか？")){localStorage.removeItem(KEY);localStorage.removeItem(KEY+"-chain");data={course:"g3-table",stats:{},wrong:[],strokes:[]};selected="g3-table";renderCourses();renderStats()}};$("sound").onclick=e=>{let on=e.currentTarget.getAttribute("aria-pressed")!=="true";e.currentTarget.setAttribute("aria-pressed",on);e.currentTarget.textContent=on?"🔔 音あり":"🔕 消音"};document.querySelectorAll(".clear").forEach(b=>b.onclick=()=>b.dataset.canvas==="answerCanvas"?clearAnswer():clearNote);
-</script>
-</body>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#f7f7ef">
+    <meta name="description" content="スタドリ - 算数・わり算編。小学3年生のわり算を楽しく学ぼう。">
+    <title>スタドリ - 算数・わり算編</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="app.js" defer></script>
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="../../">
+        <span class="brand-mark" aria-hidden="true">✳</span>
+        スタドリ - 算数・わり算編
+      </a>
+      <button class="sound" id="sound" type="button" aria-pressed="true">🔔 音あり</button>
+    </header>
+
+    <main>
+      <section id="home">
+        <div class="hero">
+          <div class="hero-copy">
+            <p class="eyebrow">小学3年生の算数</p>
+            <h1>わけるって、<br>おもしろい！</h1>
+            <p>九九をつかったわり算や、あまりのある計算に挑戦しよう。<br>10問ずつ、すごろくを進んでレベルアップ！</p>
+          </div>
+          <div class="mascot">
+            <img src="../../studri.jpeg" alt="スタドリのキャラクター">
+          </div>
+        </div>
+
+        <section class="panel" aria-labelledby="coursesTitle">
+          <div class="panel-title">
+            <h2 id="coursesTitle">コースをえらぼう</h2>
+            <span class="badge">小学3年生・全10問</span>
+          </div>
+          <div class="courses" id="courses" aria-label="小学3年生のすごろくコース"></div>
+        </section>
+
+        <section class="panel" aria-labelledby="statsTitle">
+          <div class="panel-title">
+            <h2 id="statsTitle">きろく</h2>
+            <span class="badge" id="passBadge">合格まであと3回</span>
+          </div>
+          <div class="stats">
+            <div class="stat"><b id="streak">0</b><small>連続合格</small></div>
+            <div class="stat"><b id="attempts">0</b><small>挑戦回数</small></div>
+            <div class="stat"><b id="best">—</b><small>ベストタイム</small></div>
+          </div>
+          <div class="history-actions">
+            <button class="outline" id="resetData" type="button">学習記録を初期化</button>
+          </div>
+        </section>
+
+        <section class="panel" aria-labelledby="reviewTitle">
+          <div class="panel-title">
+            <h2 id="reviewTitle">まちがいノート</h2>
+            <span class="badge" id="wrongCount">0問</span>
+          </div>
+          <div id="reviewList" class="review-list">
+            <p>まだまちがいはありません。挑戦してみよう！</p>
+          </div>
+        </section>
+      </section>
+
+      <section id="quiz" class="hidden" aria-label="わり算の問題">
+        <div class="panel quiz-panel">
+          <div class="quiz-head">
+            <button class="back" id="quit" type="button">← コース選択へ</button>
+            <span class="question-label" id="questionNo"></span>
+          </div>
+          <div class="progress" aria-label="挑戦の進み具合"><span id="progress"></span></div>
+          <div class="quiz-board">
+            <div class="quiz-question">
+              <p class="eyebrow" id="difficulty"></p>
+              <h2 id="problem"></h2>
+            </div>
+            <div class="quiz-work" aria-label="計算機エリア">
+              <p class="work-instruction">答えを入力して「答え合わせ」をしよう</p>
+              <div class="answer">
+                <input id="answer" inputmode="text" autocomplete="off" aria-label="答え（あまりがある問題は「あまり」も入力）">
+                <span id="unit">こ</span>
+              </div>
+              <div class="keypad" id="keypad" aria-label="計算機"></div>
+              <button class="check" id="check" type="button">答え合わせ</button>
+              <div class="canvas-wrap">
+                <div class="canvas-box">
+                  <label for="answerCanvas">✍️ 答えのかき方（認識機能はありません）</label>
+                  <canvas class="draw" id="answerCanvas"></canvas>
+                  <button class="clear" data-canvas="answerCanvas" type="button">消す</button>
+                </div>
+                <div class="canvas-box">
+                  <label for="noteCanvas">📝 途中式を書く</label>
+                  <canvas class="draw" id="noteCanvas"></canvas>
+                  <button class="clear" data-canvas="noteCanvas" type="button">消す</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="result" class="hidden" aria-label="挑戦結果">
+        <div class="panel result">
+          <p class="eyebrow">CHALLENGE COMPLETE</p>
+          <h1 id="resultTitle">おつかれさま！</h1>
+          <div class="score" id="score"></div>
+          <p id="resultMessage"></p>
+          <div class="challenge-grid">
+            <div class="challenge">
+              <b>⏱ タイムアタック</b><br>
+              <small>合格すると解放されます</small><br>
+              <button id="timeAttack" type="button">挑戦する</button>
+            </div>
+            <div class="challenge">
+              <b>🔥 連続正解チャレンジ</b><br>
+              <small>最高記録：<span id="chainBest">0</span>問</small><br>
+              <button id="chainAttack" type="button">挑戦する</button>
+            </div>
+          </div>
+          <div class="history-actions">
+            <button class="start" id="again" type="button">もう一度挑戦する</button>
+            <button class="outline" id="homeButton" type="button">コース選択へ</button>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <dialog class="feedback-dialog" id="feedback" aria-labelledby="feedbackTitle">
+      <div id="feedbackContent"></div>
+      <div class="feedback-actions" id="feedbackActions"></div>
+    </dialog>
+
+    <footer class="site-footer">Ver. 20261001.234449.373</footer>
+  </body>
 </html>
