@@ -4,7 +4,9 @@ import path from "node:path";
 
 const root = path.resolve(__dirname, "../..");
 const contentTypes: Record<string, string> = {
+  ".css": "text/css; charset=utf-8",
   ".html": "text/html; charset=utf-8",
+  ".js": "text/javascript; charset=utf-8",
   ".jpeg": "image/jpeg",
 };
 
