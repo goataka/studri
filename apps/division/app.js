@@ -26,7 +26,7 @@ const courses = [
   { id: "g3-two-digit-mental", name: "2桁 ÷ 1桁（九九を超える暗算）", desc: "商が10以上になる計算を暗算しよう", type: "two-digit-mental" },
 ];
 
-const defaultData = () => ({ course: "g3-table", stats: {}, wrong: [] });
+const defaultData = () => ({ course: "g3-meaning-story", stats: {}, wrong: [] });
 const loadData = () => {
   try {
     const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || "null");
@@ -534,7 +534,7 @@ get("resetData").addEventListener("click", () => {
   localStorage.removeItem(STORAGE_KEY);
   localStorage.removeItem(`${STORAGE_KEY}-chain`);
   data = defaultData();
-  selectedCourse = "g3-table";
+  selectedCourse = "g3-meaning-story";
   renderCourses();
   renderStats();
 });
