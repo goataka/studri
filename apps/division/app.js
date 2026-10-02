@@ -3,33 +3,27 @@
 const STORAGE_KEY = "studri-division-v1";
 const SOUND_KEY = `${STORAGE_KEY}-sound`;
 const COURSE_IDS = new Set([
-  "g3-table",
-  "g3-two",
-  "g3-three",
-  "g3-exact",
-  "g3-remainder",
-  "g3-fact-family",
-  "g3-dividend",
-  "g3-quotient",
-  "g3-remainder-review",
-  "g3-fluency",
-  "g3-mix",
-  "g3-finish",
+  "g3-meaning-story",
+  "g3-one-digit-exact",
+  "g3-two-digit-exact",
+  "g3-exact-story",
+  "g3-one-digit-remainder",
+  "g3-two-digit-remainder",
+  "g3-remainder-story",
+  "g3-zero-one",
+  "g3-two-digit-mental",
 ]);
 
 const courses = [
-  { id: "g3-table", name: "九九のわり算", desc: "九九を使って、ぴったり分けよう", divisor: 9, quotient: 9 },
-  { id: "g3-two", name: "2けた÷1けた", desc: "九九の答えを広げて計算しよう", divisor: 9, quotient: 12 },
-  { id: "g3-three", name: "3けた÷1けた", desc: "大きな数も正確に分けよう", divisor: 9, quotient: 32 },
-  { id: "g3-exact", name: "あまりなしの計算", desc: "商を考えて、ぴったり分けよう", divisor: 9, quotient: 45 },
-  { id: "g3-remainder", name: "あまりのあるわり算", desc: "商とあまりをセットで答えよう", divisor: 9, quotient: 20, remainder: true },
-  { id: "g3-fact-family", name: "かけ算から考えよう", desc: "九九のきまりを使ってみよう", divisor: 9, quotient: 30 },
-  { id: "g3-dividend", name: "大きな数を分けよう", desc: "3けたの数にも挑戦しよう", divisor: 9, quotient: 60 },
-  { id: "g3-quotient", name: "商を見つけよう", desc: "わる数と商の組み合わせに注目", divisor: 9, quotient: 80 },
-  { id: "g3-remainder-review", name: "あまりをたしかめよう", desc: "あまりのある計算を練習しよう", divisor: 9, quotient: 50, remainder: true },
-  { id: "g3-fluency", name: "わり算スピードアップ", desc: "いろいろな数をすばやく計算", divisor: 9, quotient: 70, remainder: true },
-  { id: "g3-mix", name: "わり算ミックス", desc: "ぴったり？あまりあり？見きわめよう", divisor: 9, quotient: 80, remainder: true },
-  { id: "g3-finish", name: "わり算名人コース", desc: "小学3年生のわり算をまとめて練習", divisor: 9, quotient: 80, remainder: true },
+  { id: "g3-meaning-story", name: "文章題（割り算の意味）", desc: "分ける・いくつ分の場面を考えよう", type: "meaning" },
+  { id: "g3-one-digit-exact", name: "1桁 ÷ 1桁（九九の範囲・あまりなし）", desc: "九九を使って、ぴったり分けよう", type: "one-digit-exact" },
+  { id: "g3-two-digit-exact", name: "2桁 ÷ 1桁（九九の範囲・あまりなし）", desc: "2桁の数を九九でぴったり分けよう", type: "two-digit-exact" },
+  { id: "g3-exact-story", name: "文章題（九九の範囲・あまりなし）", desc: "文章題を読んで、ぴったり分けよう", type: "exact-story" },
+  { id: "g3-one-digit-remainder", name: "1桁 ÷ 1桁（九九の範囲・あまりあり）", desc: "1桁のわり算で、商とあまりを答えよう", type: "one-digit-remainder" },
+  { id: "g3-two-digit-remainder", name: "2桁 ÷ 1桁（九九の範囲・あまりあり）", desc: "九九を使って、商とあまりを見つけよう", type: "two-digit-remainder" },
+  { id: "g3-remainder-story", name: "文章題（九九の範囲・あまりあり）", desc: "文章題で、商とあまりを考えよう", type: "remainder-story" },
+  { id: "g3-zero-one", name: "０や１のわり算", desc: "0をわる数や、1でわる計算に挑戦", type: "zero-one" },
+  { id: "g3-two-digit-mental", name: "2桁 ÷ 1桁（九九を超える暗算）", desc: "商が10以上になる計算を暗算しよう", type: "two-digit-mental" },
 ];
 
 const defaultData = () => ({ course: "g3-table", stats: {}, wrong: [] });
@@ -45,7 +39,7 @@ const loadData = () => {
       ? saved.wrong.filter((entry) => entry && entry.grade === 3).slice(-30)
       : [];
     return {
-      course: COURSE_IDS.has(saved.course) ? saved.course : "g3-table",
+      course: COURSE_IDS.has(saved.course) ? saved.course : "g3-meaning-story",
       stats,
       wrong,
     };
