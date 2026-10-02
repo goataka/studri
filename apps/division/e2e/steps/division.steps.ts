@@ -158,6 +158,10 @@ Then("9つのコースが指定順に並び問題が範囲内で出る", async (
       expect(divisor).toBeLessThan(10);
       expect(Math.floor(dividend / divisor)).toBeGreaterThan(9);
     }
+
+    page.once("dialog", (dialog) => dialog.accept());
+    await page.locator("#quit").click();
+    await expect(page.locator("#home")).toBeVisible();
   }
 });
 
