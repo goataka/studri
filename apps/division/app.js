@@ -134,20 +134,116 @@ function randomInteger(min, max) {
 function makeProblem(index) {
   const course = courses.find((item) => item.id === selectedCourse);
   const level = Math.min(index, 9);
-  const divisor = randomInteger(2, Math.min(course.divisor, 3 + level));
-  const quotient = randomInteger(2, Math.min(course.quotient, 5 + level * 9));
-  const remainder = course.remainder ? randomInteger(1, divisor - 1) : 0;
-  const dividend = divisor * quotient + remainder;
+  let dividend;
+  let divisor;
+  let remainder = 0;
+
+  switch (course.type) {
+    case "meaning": {
+      divisor = randomInteger(2, Math.min(5, 2 + Math.floor(level / 2)));
+      const quotient = randomInteger(2, 3 + level);
+      dividend = divisor * quotient;
+      return makeStoryProblem(dividend, divisor, 0, Math.random() < 0.5);
+    }
+    case "one-digit-exact": {
+      const pairs = [];
+      for (let candidateDivisor = 2; candidateDivisor <= Math.min(9, 3 + level); candidateDivisor += 1) {
+        for (let quotient = 1; quotient <= 9; quotient += 1) {
+          if (candidateDivisor * quotient <= 9) pairs.push([candidateDivisor * quotient, candidateDivisor]);
+        }
+      }
+      [dividend, divisor] = choose(pairs);
+      break;
+    }
+    case "two-digit-exact":
+    case "exact-story": {
+      const pairs = [];
+      for (let candidateDivisor = 2; candidateDivisor <= Math.min(9, 3 + level); candidateDivisor += 1) {
+        for (let quotient = 2; quotient <= Math.min(9, 4 + level); quotient += 1) {
+          const product = candidateDivisor * quotient;
+          if (product >= 10 && product <= 99) pairs.push([product, candidateDivisor]);
+        }
+      }
+      [dividend, divisor] = choose(pairs);
+      if (course.type === "exact-story") return makeStoryProblem(dividend, divisor, 0, Math.random() < 0.5);
+      break;
+    }
+    case "one-digit-remainder":
+    case "two-digit-remainder":
+    case "remainder-story": {
+      const singleDigit = course.type === "one-digit-remainder";
+      const pairs = [];
+      for (let candidateDivisor = 2; candidateDivisor <= Math.min(9, 3 + level); candidateDivisor += 1) {
+        for (let quotient = 1; quotient <= 9; quotient += 1) {
+          for (let candidateRemainder = 1; candidateRemainder < candidateDivisor; candidateRemainder += 1) {
+            const number = candidateDivisor * quotient + candidateRemainder;
+            if ((singleDigit && number <= 9) || (!singleDigit && number >= 10 && number <= 99)) {
+              pairs.push([number, candidateDivisor, candidateRemainder]);
+            }
+          }
+        }
+      }
+      [dividend, divisor, remainder] = choose(pairs);
+      if (course.type === "remainder-story") return makeStoryProblem(dividend, divisor, remainder, Math.random() < 0.5);
+      break;
+    }
+    case "zero-one":
+      if (Math.random() < 0.5) {
+        dividend = 0;
+        divisor = randomInteger(2, 9);
+      } else {
+        dividend = randomInteger(0, 10 + level * 9);
+        divisor = 1;
+      }
+      break;
+    case "two-digit-mental": {
+      const pairs = [];
+      for (let candidateDivisor = 2; candidateDivisor <= 9; candidateDivisor += 1) {
+        for (let quotient = 10; quotient <= Math.min(Math.floor(99 / candidateDivisor), 12 + level * 2); quotient += 1) {
+          for (let candidateRemainder = 0; candidateRemainder < candidateDivisor; candidateRemainder += 1) {
+            const number = candidateDivisor * quotient + candidateRemainder;
+            if (number <= 99) pairs.push([number, candidateDivisor, candidateRemainder]);
+          }
+        }
+      }
+      [dividend, divisor, remainder] = choose(pairs);
+      break;
+    }
+    default:
+      throw new Error(`Unknown division course type: ${course.type}`);
+  }
+
+  return makeDivisionProblem(dividend, divisor, remainder);
+}
+
+function choose(items) {
+  return items[randomInteger(0, items.length - 1)];
+}
+
+function makeDivisionProblem(dividend, divisor, remainder, text = `${dividend} ÷ ${divisor} =`) {
+  const quotient = Math.floor(dividend / divisor);
+  const answer = remainder ? `${quotient}あまり${remainder}` : String(quotient);
   const explanation = remainder
-    ? `${divisor}×${quotient}=${divisor * quotient}、${dividend}-${divisor * quotient}=${remainder}。答えは${quotient}あまり${remainder}です。`
+    ? `${divisor}×${quotient}=${divisor * quotient}、${dividend}-${divisor * quotient}=${remainder}。答えは${answer}です。`
     : `${divisor}×${quotient}=${dividend}。答えは${quotient}です。`;
 
   return {
-    text: `${dividend} ÷ ${divisor} =`,
-    answer: remainder ? `${quotient}あまり${remainder}` : String(quotient),
+    text,
+    answer,
     unit: remainder ? "こ（あまりも入力）" : "こ",
     explanation,
   };
+}
+
+function makeStoryProblem(dividend, divisor, remainder, sharing) {
+  const text = sharing
+    ? remainder
+      ? `${dividend}このりんごを${divisor}人で同じ数ずつ分けると、1人分は何こで、何こあまる？`
+      : `${dividend}このりんごを${divisor}人で同じ数ずつ分けると、1人分は何こ？`
+    : remainder
+      ? `${dividend}このりんごを${divisor}こずつふくろに入れると、何ふくろできて、何こあまる？`
+      : `${dividend}このりんごを${divisor}こずつふくろに入れると、何ふくろできる？`;
+  return makeDivisionProblem(dividend, divisor, remainder, text);
 }
 
 function setupQuiz() {
