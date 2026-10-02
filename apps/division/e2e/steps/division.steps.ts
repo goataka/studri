@@ -102,6 +102,7 @@ Then("コースは小学3年生のみで音とバージョンが表示される"
 });
 
 Then("9つのコースが指定順に並び問題が範囲内で出る", async ({ page }) => {
+  await page.setViewportSize({ width: 1440, height: 1000 });
   const courses = [
     ["g3-meaning-story", "文章題（割り算の意味）", "meaning"],
     ["g3-one-digit-exact", "1桁 ÷ 1桁（九九の範囲・あまりなし）", "one-digit-exact"],
@@ -116,6 +117,30 @@ Then("9つのコースが指定順に並び問題が範囲内で出る", async (
 
   await expect(page.locator("#courses .course")).toHaveCount(courses.length);
   await expect(page.locator("#courses .course strong")).toHaveText(courses.map(([, name]) => name));
+  const positions = await page.locator("#courses .course").evaluateAll((elements) =>
+    elements.map((element) => {
+      const { x, y } = element.getBoundingClientRect();
+      return { x, y };
+    }),
+  );
+  expect(positions[0].x).toBeLessThan(positions[1].x);
+  expect(positions[1].x).toBeLessThan(positions[2].x);
+  expect(positions[3].x).toBeGreaterThan(positions[4].x);
+  expect(positions[4].x).toBeGreaterThan(positions[5].x);
+  expect(positions[6].x).toBeLessThan(positions[7].x);
+  expect(positions[7].x).toBeLessThan(positions[8].x);
+  expect(positions[0].y).toBe(positions[1].y);
+  expect(positions[1].y).toBe(positions[2].y);
+  expect(positions[3].y).toBe(positions[4].y);
+  expect(positions[4].y).toBe(positions[5].y);
+  expect(positions[6].y).toBe(positions[7].y);
+  expect(positions[7].y).toBe(positions[8].y);
+  expect(positions[0].y).toBeLessThan(positions[3].y);
+  expect(positions[3].y).toBeLessThan(positions[6].y);
+  const lastArrow = await page.locator("#courses .course:last-child").evaluate((element) =>
+    getComputedStyle(element, "::after").content,
+  );
+  expect(lastArrow).toBe("none");
 
   for (const [id, , type] of courses) {
     await page.locator(`#courses [data-course="${id}"]`).click();
