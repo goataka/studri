@@ -72,26 +72,31 @@ function renderCourses() {
     button.dataset.course = course.id;
     button.dataset.step = String(index + 1);
 
-    const grade = document.createElement("span");
-    grade.className = "grade";
-    grade.textContent = "小学3年生";
+    const copy = document.createElement("span");
+    copy.className = "course-copy";
     const name = document.createElement("strong");
     name.textContent = course.name;
     const description = document.createElement("small");
     description.textContent = course.desc;
+    copy.append(name, description);
+
+    const details = document.createElement("span");
+    details.className = "course-details";
     const progress = document.createElement("div");
     progress.className = "course-progress";
     const progressLabel = document.createElement("span");
     progressLabel.textContent = "連続合格";
     const progressCount = document.createElement("b");
     progressCount.className = "course-progress-count";
-    const progressTrack = document.createElement("span");
-    progressTrack.className = "course-meter";
-    progressTrack.setAttribute("aria-hidden", "true");
-    const progressFill = document.createElement("span");
-    progressFill.className = "course-meter-fill";
-    progressTrack.append(progressFill);
-    progress.append(progressLabel, progressCount, progressTrack);
+    const steps = document.createElement("span");
+    steps.className = "course-steps";
+    steps.setAttribute("aria-hidden", "true");
+    for (let step = 0; step < 3; step += 1) {
+      const indicator = document.createElement("span");
+      indicator.className = "course-step";
+      steps.append(indicator);
+    }
+    progress.append(progressLabel, progressCount, steps);
 
     const record = document.createElement("small");
     record.className = "course-record course-attempts";
@@ -106,7 +111,8 @@ function renderCourses() {
     const unlock = document.createElement("small");
     unlock.className = "course-unlock";
 
-    button.append(grade, name, description, progress, record, challenges, unlock);
+    details.append(progress, record, challenges, unlock);
+    button.append(copy, details);
     button.addEventListener("click", () => {
       selectedCourse = course.id;
       data.course = selectedCourse;
@@ -128,7 +134,9 @@ function renderCourseProgress() {
     const stats = data.stats[course.id] || { streak: 0, attempts: 0, best: null };
     const streak = Math.min(stats.streak, 3);
     button.querySelector(".course-progress-count").textContent = `${streak}/3`;
-    button.querySelector(".course-meter-fill").style.width = `${(streak / 3) * 100}%`;
+    button.querySelectorAll(".course-step").forEach((step, index) => {
+      step.classList.toggle("complete", index < streak);
+    });
     button.querySelector(".course-record").textContent =
       `挑戦${stats.attempts}回 ・ ベスト ${stats.best ? `${stats.best}秒` : "—"}`;
     const unlockMessage = stats.streak >= 3
