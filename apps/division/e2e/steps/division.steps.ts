@@ -91,7 +91,7 @@ Then("挑戦回数が0になる", async ({ page }) => {
   await expect(page.locator(".course-attempts")).toContainText(Array(9).fill("挑戦 0回"));
 });
 
-Then("すごろくから問題文の下に計算エリアが表示される", async ({ page }) => {
+Then("トレイルから問題文の下に計算エリアが表示される", async ({ page }) => {
   await page.setViewportSize({ width: 1440, height: 900 });
   await expect(page.locator("#courses .course")).toHaveCount(9);
   await expect(page.locator("#questionNo")).toHaveText("1 / 10");
