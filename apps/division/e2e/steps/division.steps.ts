@@ -66,8 +66,9 @@ When("コース選択に戻る", async ({ page }) => {
 });
 
 Then("今回の挑戦記録が保存される", async ({ page }) => {
-  await expect(page.locator("#attempts")).toHaveText("1");
-  await expect(page.locator("#streak")).toHaveText("1");
+  const course = page.locator('#courses [data-course="g3-one-digit-exact"]');
+  await expect(course.locator(".course-attempts")).toContainText("挑戦 1回");
+  await expect(course.locator(".course-progress-count")).toHaveText("1 / 3回");
 });
 
 When("ページを再読み込みする", async ({ page }) => {
@@ -75,8 +76,9 @@ When("ページを再読み込みする", async ({ page }) => {
 });
 
 Then("挑戦記録が保持される", async ({ page }) => {
-  await expect(page.locator("#attempts")).toHaveText("1");
-  await expect(page.locator("#streak")).toHaveText("1");
+  const course = page.locator('#courses [data-course="g3-one-digit-exact"]');
+  await expect(course.locator(".course-attempts")).toContainText("挑戦 1回");
+  await expect(course.locator(".course-progress-count")).toHaveText("1 / 3回");
 });
 
 When("学習記録の初期化を確定する", async ({ page }) => {
@@ -85,7 +87,8 @@ When("学習記録の初期化を確定する", async ({ page }) => {
 });
 
 Then("挑戦回数が0になる", async ({ page }) => {
-  await expect(page.locator("#attempts")).toHaveText("0");
+  await expect(page.locator(".course-attempts")).toHaveCount(9);
+  await expect(page.locator(".course-attempts")).toContainText(Array(9).fill("挑戦 0回"));
 });
 
 Then("すごろくから問題文の下に計算エリアが表示される", async ({ page }) => {
@@ -106,12 +109,19 @@ Then("すごろくから問題文の下に計算エリアが表示される", as
 Then("誤答を記録し連続合格を0回にする", async ({ page }) => {
   await expect(page.locator("#wrongCount")).toHaveText("1問");
   await expect(page.locator("#reviewList .review-item")).toHaveCount(1);
-  await expect(page.locator("#streak")).toHaveText("0");
+  await expect(page.locator('#courses [data-course="g3-one-digit-exact"] .course-progress-count')).toHaveText("0 / 3回");
 });
 
 Then("コースは小学3年生のみで音とバージョンが表示される", async ({ page }) => {
   await expect(page.locator("#courses .course")).toHaveCount(9);
   await expect(page.locator("#courses .grade")).toHaveText(Array(9).fill("小学3年生"));
+  await expect(page).toHaveTitle("スタドリ - 算数・３年生・わり算編");
+  await expect(page.locator("#statsTitle")).toHaveCount(0);
+  await expect(page.locator(".course-progress-count")).toHaveText(Array(9).fill("0 / 3回"));
+  await expect(page.locator(".course-challenges span")).toHaveText(
+    Array(9).fill(["⏱ タイムアタック", "🔥 連続正解チャレンジ"]).flat(),
+  );
+  await expect(page.locator(".course-unlock")).toHaveText(Array(9).fill("ミスなしであと3回合格すると解放"));
   await expect(page.locator("#sound")).toHaveAttribute("aria-pressed", "true");
   await expect(page.locator(".site-footer")).toHaveText(/^Ver\. \d{8}\.\d{6}\.\d{3}$/);
   await expect(page.locator("textarea")).toHaveCount(0);
@@ -133,26 +143,23 @@ Then("9つのコースが指定順に並び問題が範囲内で出る", async (
 
   await expect(page.locator("#courses .course")).toHaveCount(courses.length);
   await expect(page.locator("#courses .course strong")).toHaveText(courses.map(([, name]) => name));
-  const positions = await page.locator("#courses .course").evaluateAll((elements) =>
-    elements.map((element) => {
-      const { x, y } = element.getBoundingClientRect();
-      return { x, y };
-    }),
-  );
-  expect(positions[0].x).toBeLessThan(positions[1].x);
-  expect(positions[1].x).toBeLessThan(positions[2].x);
-  expect(positions[3].x).toBeGreaterThan(positions[4].x);
-  expect(positions[4].x).toBeGreaterThan(positions[5].x);
-  expect(positions[6].x).toBeLessThan(positions[7].x);
-  expect(positions[7].x).toBeLessThan(positions[8].x);
-  expect(positions[0].y).toBe(positions[1].y);
-  expect(positions[1].y).toBe(positions[2].y);
-  expect(positions[3].y).toBe(positions[4].y);
-  expect(positions[4].y).toBe(positions[5].y);
-  expect(positions[6].y).toBe(positions[7].y);
-  expect(positions[7].y).toBe(positions[8].y);
-  expect(positions[0].y).toBeLessThan(positions[3].y);
-  expect(positions[3].y).toBeLessThan(positions[6].y);
+  for (const width of [1440, 390]) {
+    await page.setViewportSize({ width, height: 1000 });
+    const positions = await page.locator("#courses .course").evaluateAll((elements) =>
+      elements.map((element) => {
+        const { x, y } = element.getBoundingClientRect();
+        return { x, y };
+      }),
+    );
+    for (let index = 1; index < positions.length; index += 1) {
+      expect(positions[index].x).toBe(positions[0].x);
+      expect(positions[index].y).toBeGreaterThan(positions[index - 1].y);
+    }
+    const columns = await page.locator("#courses").evaluate((element) =>
+      getComputedStyle(element).gridTemplateColumns.split(" ").length,
+    );
+    expect(columns).toBe(1);
+  }
   const lastArrow = await page.locator("#courses .course:last-child").evaluate((element) =>
     getComputedStyle(element, "::after").content,
   );

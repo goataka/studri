@@ -95,7 +95,7 @@ function renderCourses() {
     progress.append(progressLabel, progressCount, progressTrack);
 
     const record = document.createElement("small");
-    record.className = "course-record";
+    record.className = "course-record course-attempts";
     const challenges = document.createElement("div");
     challenges.className = "course-challenges";
     challenges.setAttribute("aria-label", "合格後のチャレンジ");
