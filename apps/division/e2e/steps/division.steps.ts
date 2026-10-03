@@ -127,6 +127,26 @@ Then("コースは小学3年生のみで音とバージョンが表示される"
   await expect(page.locator("textarea")).toHaveCount(0);
 });
 
+Then("コース一覧にトレイルの目印が表示される", async ({ page }) => {
+  await expect(page.locator("#courses")).toHaveAttribute("aria-label", "小学3年生のトレイルコース");
+  const routeStyle = await page.locator("#courses").evaluate((element) =>
+    getComputedStyle(element, "::before").borderLeftStyle,
+  );
+  expect(routeStyle).toBe("dashed");
+
+  for (const [selector, pseudo, marker] of [
+    [".course:first-child .grade", "::before", "🚩 スタート"],
+    [".course:nth-child(4) .grade", "::after", "⚑ マイルストーン"],
+    [".course:nth-child(7) .grade", "::after", "⚑ マイルストーン"],
+    [".course:last-child .grade", "::before", "🏁 ゴール"],
+  ]) {
+    const content = await page.locator(selector).evaluate((element, pseudoElement) =>
+      getComputedStyle(element, pseudoElement).content,
+    pseudo);
+    expect(content).toContain(marker);
+  }
+});
+
 Then("9つのコースが指定順に並び問題が範囲内で出る", async ({ page }) => {
   await page.setViewportSize({ width: 1440, height: 1000 });
   const courses = [
