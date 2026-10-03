@@ -24,7 +24,8 @@ When("最初の問題で誤答して再回答する", async ({ page }) => {
   await expect(page.locator("#feedback")).toContainText("おしい！");
   await expect(page.locator("#feedback")).toContainText("ヒント：");
   await expect(page.locator("#feedback")).not.toContainText(`正解は「${correctAnswer}」です。`);
-  await page.getByRole("button", { name: "もう一度" }).click();
+  await expect(page.getByRole("button", { name: "もう一度" })).toBeVisible();
+  await page.keyboard.press("Enter");
   await expect(page.locator("#feedback")).not.toBeVisible();
   await page.locator("#answer").fill(correctAnswer);
   await page.getByRole("button", { name: "答え合わせ" }).click();
