@@ -98,7 +98,7 @@ function renderCourses() {
     const challenges = document.createElement("div");
     challenges.className = "course-challenges";
     challenges.setAttribute("aria-label", "合格後のチャレンジ");
-    ["⏱ タイムアタック", "🔥 連続正解チャレンジ"].forEach((label) => {
+    ["⏱ タイムアタック", "🔥 連続正解"].forEach((label) => {
       const challenge = document.createElement("span");
       challenge.textContent = label;
       challenges.append(challenge);
@@ -127,13 +127,13 @@ function renderCourseProgress() {
 
     const stats = data.stats[course.id] || { streak: 0, attempts: 0, best: null };
     const streak = Math.min(stats.streak, 3);
-    button.querySelector(".course-progress-count").textContent = `${streak} / 3回`;
+    button.querySelector(".course-progress-count").textContent = `${streak}/3`;
     button.querySelector(".course-meter-fill").style.width = `${(streak / 3) * 100}%`;
     button.querySelector(".course-record").textContent =
-      `挑戦 ${stats.attempts}回 ・ ベスト ${stats.best ? `${stats.best}秒` : "—"}`;
+      `挑戦${stats.attempts}回 ・ ベスト ${stats.best ? `${stats.best}秒` : "—"}`;
     const unlockMessage = stats.streak >= 3
-      ? "チャレンジ解放！"
-      : `ミスなしであと${3 - streak}回合格すると解放`;
+      ? "解放済み"
+      : `あと${3 - streak}回で解放`;
     button.querySelector(".course-unlock").textContent = unlockMessage;
     button.setAttribute(
       "aria-label",
