@@ -224,7 +224,7 @@ main {
   position: relative;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-start;
   gap: 24px;
   width: 100%;
   min-height: 108px;
@@ -269,7 +269,8 @@ main {
 .course-copy {
   display: grid;
   gap: 4px;
-  flex: 1 1 auto;
+  flex: 0 1 max-content;
+  max-width: 520px;
   min-width: 0;
 }
 
