@@ -71,7 +71,6 @@ function renderCourses() {
     button.className = `course${selectedCourse === course.id ? " selected" : ""}`;
     button.dataset.course = course.id;
     button.dataset.step = String(index + 1);
-    button.setAttribute("aria-label", `小学3年生、${course.name}。${course.desc}`);
 
     const grade = document.createElement("span");
     grade.className = "grade";
@@ -132,9 +131,14 @@ function renderCourseProgress() {
     button.querySelector(".course-meter-fill").style.width = `${(streak / 3) * 100}%`;
     button.querySelector(".course-record").textContent =
       `挑戦 ${stats.attempts}回 ・ ベスト ${stats.best ? `${stats.best}秒` : "—"}`;
-    button.querySelector(".course-unlock").textContent = stats.streak >= 3
+    const unlockMessage = stats.streak >= 3
       ? "チャレンジ解放！"
       : `ミスなしであと${3 - streak}回合格すると解放`;
+    button.querySelector(".course-unlock").textContent = unlockMessage;
+    button.setAttribute(
+      "aria-label",
+      `小学3年生、${course.name}。${course.desc}。連続合格 ${streak} / 3回。挑戦 ${stats.attempts}回。タイムアタックと連続正解チャレンジ。${unlockMessage}。`,
+    );
   });
 }
 

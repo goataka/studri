@@ -165,6 +165,20 @@ Then("9つのコースが指定順に並び問題が範囲内で出る", async (
   );
   expect(lastArrow).toBe("none");
 
+  await page.evaluate(() => {
+    localStorage.setItem("studri-division-v1", JSON.stringify({
+      course: "g3-meaning-story",
+      stats: { "g3-meaning-story": { streak: 3, attempts: 4, best: 23 } },
+      wrong: [],
+    }));
+  });
+  await page.reload();
+  const passedCourse = page.locator('#courses [data-course="g3-meaning-story"]');
+  await expect(passedCourse.locator(".course-progress-count")).toHaveText("3 / 3回");
+  await expect(passedCourse.locator(".course-attempts")).toHaveText("挑戦 4回 ・ ベスト 23秒");
+  await expect(passedCourse.locator(".course-unlock")).toHaveText("チャレンジ解放！");
+  await expect(passedCourse).toHaveAttribute("aria-label", /タイムアタック/);
+
   for (const [id, , type] of courses) {
     await page.locator(`#courses [data-course="${id}"]`).click();
     const problem = (await page.locator("#problem").textContent()) || "";
