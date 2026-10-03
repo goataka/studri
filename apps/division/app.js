@@ -71,7 +71,6 @@ function renderCourses() {
     button.className = `course${selectedCourse === course.id ? " selected" : ""}`;
     button.dataset.course = course.id;
     button.dataset.step = String(index + 1);
-    button.setAttribute("aria-label", `小学3年生、${course.name}。${course.desc}`);
 
     const grade = document.createElement("span");
     grade.className = "grade";
@@ -80,8 +79,34 @@ function renderCourses() {
     name.textContent = course.name;
     const description = document.createElement("small");
     description.textContent = course.desc;
+    const progress = document.createElement("div");
+    progress.className = "course-progress";
+    const progressLabel = document.createElement("span");
+    progressLabel.textContent = "連続合格";
+    const progressCount = document.createElement("b");
+    progressCount.className = "course-progress-count";
+    const progressTrack = document.createElement("span");
+    progressTrack.className = "course-meter";
+    progressTrack.setAttribute("aria-hidden", "true");
+    const progressFill = document.createElement("span");
+    progressFill.className = "course-meter-fill";
+    progressTrack.append(progressFill);
+    progress.append(progressLabel, progressCount, progressTrack);
 
-    button.append(grade, name, description);
+    const record = document.createElement("small");
+    record.className = "course-record course-attempts";
+    const challenges = document.createElement("div");
+    challenges.className = "course-challenges";
+    challenges.setAttribute("aria-label", "合格後のチャレンジ");
+    ["⏱ タイムアタック", "🔥 連続正解チャレンジ"].forEach((label) => {
+      const challenge = document.createElement("span");
+      challenge.textContent = label;
+      challenges.append(challenge);
+    });
+    const unlock = document.createElement("small");
+    unlock.className = "course-unlock";
+
+    button.append(grade, name, description, progress, record, challenges, unlock);
     button.addEventListener("click", () => {
       selectedCourse = course.id;
       data.course = selectedCourse;
@@ -92,16 +117,33 @@ function renderCourses() {
     });
     courseList.append(button);
   });
+  renderCourseProgress();
+}
+
+function renderCourseProgress() {
+  courses.forEach((course) => {
+    const button = get("courses").querySelector(`[data-course="${course.id}"]`);
+    if (!button) return;
+
+    const stats = data.stats[course.id] || { streak: 0, attempts: 0, best: null };
+    const streak = Math.min(stats.streak, 3);
+    button.querySelector(".course-progress-count").textContent = `${streak} / 3回`;
+    button.querySelector(".course-meter-fill").style.width = `${(streak / 3) * 100}%`;
+    button.querySelector(".course-record").textContent =
+      `挑戦 ${stats.attempts}回 ・ ベスト ${stats.best ? `${stats.best}秒` : "—"}`;
+    const unlockMessage = stats.streak >= 3
+      ? "チャレンジ解放！"
+      : `ミスなしであと${3 - streak}回合格すると解放`;
+    button.querySelector(".course-unlock").textContent = unlockMessage;
+    button.setAttribute(
+      "aria-label",
+      `小学3年生、${course.name}。${course.desc}。連続合格 ${streak} / 3回。挑戦 ${stats.attempts}回。タイムアタックと連続正解チャレンジ。${unlockMessage}。`,
+    );
+  });
 }
 
 function renderStats() {
-  const stats = data.stats[selectedCourse] || { streak: 0, attempts: 0, best: null };
-  get("streak").textContent = String(stats.streak);
-  get("attempts").textContent = String(stats.attempts);
-  get("best").textContent = stats.best ? `${stats.best}秒` : "—";
-  get("passBadge").textContent = stats.streak >= 3
-    ? "合格！チャレンジ解放"
-    : `合格まであと${Math.max(0, 3 - stats.streak)}回`;
+  renderCourseProgress();
   get("wrongCount").textContent = `${data.wrong.length}問`;
 
   const reviewList = get("reviewList");
@@ -231,6 +273,9 @@ function makeDivisionProblem(dividend, divisor, remainder, text = `${dividend} �
     text,
     answer,
     unit: remainder ? "こ（あまりも入力）" : "こ",
+    hint: remainder
+      ? "わる数の九九で、わられる数をこえないいちばん大きな数を見つけよう。残りも考えてみよう。"
+      : "わる数を何倍すると、わられる数になるかな？",
     explanation,
   };
 }
@@ -324,14 +369,10 @@ function showFeedback(isCorrect, problem, rawAnswer) {
   const message = document.createElement("p");
   message.textContent = isCorrect
     ? "すばらしい！この調子で進もう。"
-    : `正解は「${problem.answer}」です。`;
+    : `ヒント：${problem.hint}`;
   content.append(title, message);
 
   if (!isCorrect) {
-    const explanation = document.createElement("p");
-    explanation.className = "feedback-answer";
-    explanation.textContent = problem.explanation;
-    content.append(explanation);
     data.wrong.push({
       grade: 3,
       problem: problem.text,
@@ -350,16 +391,39 @@ function showFeedback(isCorrect, problem, rawAnswer) {
   actions.append(primary);
 
   if (!isCorrect) {
-    const next = document.createElement("button");
-    next.type = "button";
-    next.className = "secondary";
-    next.textContent = "次へ";
-    next.addEventListener("click", advanceQuiz);
-    actions.append(next);
+    const confirmAnswer = document.createElement("button");
+    confirmAnswer.type = "button";
+    confirmAnswer.className = "secondary";
+    confirmAnswer.textContent = "答えを確認";
+    confirmAnswer.addEventListener("click", () => revealAnswer(problem));
+    actions.append(confirmAnswer);
   }
 
   dialog.showModal();
   primary.focus();
+}
+
+function revealAnswer(problem) {
+  const content = get("feedbackContent");
+  const actions = get("feedbackActions");
+  const title = content.querySelector("h2");
+  title.textContent = "答えを確認しよう";
+  content.replaceChildren(title);
+
+  const answer = document.createElement("p");
+  answer.className = "feedback-answer";
+  answer.textContent = `正解は「${problem.answer}」です。`;
+  const explanation = document.createElement("p");
+  explanation.textContent = problem.explanation;
+  content.append(answer, explanation);
+
+  actions.replaceChildren();
+  const next = document.createElement("button");
+  next.type = "button";
+  next.textContent = "次へ";
+  next.addEventListener("click", advanceQuiz);
+  actions.append(next);
+  next.focus();
 }
 
 function judgeAnswer() {
