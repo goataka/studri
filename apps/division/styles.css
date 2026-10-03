@@ -783,6 +783,12 @@ main {
   }
 }
 
+@media (max-width: 560px) {
+  .courses {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
 @media (max-width: 380px) {
   .site-header,
   main {
@@ -804,12 +810,6 @@ main {
 
   .course strong {
     font-size: 0.84rem;
-  }
-
-  @media (max-width: 560px) {
-    .courses {
-      grid-template-columns: minmax(0, 1fr);
-    }
   }
 
   .course small {
