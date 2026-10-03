@@ -160,7 +160,7 @@ Then("コース一覧が横長のバーと丸い合格ステップで表示さ�
   expect(progress!.x).toBeGreaterThanOrEqual(title!.x + title!.width);
   expect(steps!.width / 3).toBeGreaterThanOrEqual(22);
   expect(firstChallenge!.x).toBeGreaterThan(steps!.x + steps!.width);
-  await expect(firstCourse.locator(".course strong")).toHaveCSS("font-size", "19.2px");
+  await expect(firstCourse.locator(".course-copy strong")).toHaveCSS("font-size", "19.2px");
 
   await page.setViewportSize({ width: 390, height: 844 });
   const mobileColumns = await page.locator("#courses").evaluate((element) =>
