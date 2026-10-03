@@ -8,7 +8,7 @@ Given("算数アプリを開く", async ({ page }) => {
 });
 
 When("コースを選んで挑戦を始める", async ({ page }) => {
-  await page.locator('#courses [data-course="g3-table"]').click();
+  await page.locator('#courses [data-course="g3-one-digit-exact"]').click();
   await expect(page.locator("#quiz")).toBeVisible();
 });
 
@@ -74,7 +74,7 @@ Then("挑戦回数が0になる", async ({ page }) => {
 
 Then("すごろくから問題文の下に計算エリアが表示される", async ({ page }) => {
   await page.setViewportSize({ width: 1440, height: 900 });
-  await expect(page.locator("#courses .course")).toHaveCount(12);
+  await expect(page.locator("#courses .course")).toHaveCount(9);
   await expect(page.locator("#questionNo")).toHaveText("1 / 10");
   const columns = await page.locator(".quiz-board").evaluate((element) =>
     getComputedStyle(element).gridTemplateColumns.split(" ").length,
@@ -94,11 +94,100 @@ Then("誤答を記録し連続合格を0回にする", async ({ page }) => {
 });
 
 Then("コースは小学3年生のみで音とバージョンが表示される", async ({ page }) => {
-  await expect(page.locator("#courses .course")).toHaveCount(12);
-  await expect(page.locator("#courses .grade")).toHaveText(Array(12).fill("小学3年生"));
+  await expect(page.locator("#courses .course")).toHaveCount(9);
+  await expect(page.locator("#courses .grade")).toHaveText(Array(9).fill("小学3年生"));
   await expect(page.locator("#sound")).toHaveAttribute("aria-pressed", "true");
   await expect(page.locator(".site-footer")).toHaveText(/^Ver\. \d{8}\.\d{6}\.\d{3}$/);
   await expect(page.locator("textarea")).toHaveCount(0);
+});
+
+Then("9つのコースが指定順に並び問題が範囲内で出る", async ({ page }) => {
+  await page.setViewportSize({ width: 1440, height: 1000 });
+  const courses = [
+    ["g3-meaning-story", "文章題（割り算の意味）", "meaning"],
+    ["g3-one-digit-exact", "1桁 ÷ 1桁（九九の範囲・あまりなし）", "one-digit-exact"],
+    ["g3-two-digit-exact", "2桁 ÷ 1桁（九九の範囲・あまりなし）", "two-digit-exact"],
+    ["g3-exact-story", "文章題（九九の範囲・あまりなし）", "exact-story"],
+    ["g3-one-digit-remainder", "1桁 ÷ 1桁（九九の範囲・あまりあり）", "one-digit-remainder"],
+    ["g3-two-digit-remainder", "2桁 ÷ 1桁（九九の範囲・あまりあり）", "two-digit-remainder"],
+    ["g3-remainder-story", "文章題（九九の範囲・あまりあり）", "remainder-story"],
+    ["g3-zero-one", "０や１のわり算", "zero-one"],
+    ["g3-two-digit-mental", "2桁 ÷ 1桁（九九を超える暗算）", "mental"],
+  ];
+
+  await expect(page.locator("#courses .course")).toHaveCount(courses.length);
+  await expect(page.locator("#courses .course strong")).toHaveText(courses.map(([, name]) => name));
+  const positions = await page.locator("#courses .course").evaluateAll((elements) =>
+    elements.map((element) => {
+      const { x, y } = element.getBoundingClientRect();
+      return { x, y };
+    }),
+  );
+  expect(positions[0].x).toBeLessThan(positions[1].x);
+  expect(positions[1].x).toBeLessThan(positions[2].x);
+  expect(positions[3].x).toBeGreaterThan(positions[4].x);
+  expect(positions[4].x).toBeGreaterThan(positions[5].x);
+  expect(positions[6].x).toBeLessThan(positions[7].x);
+  expect(positions[7].x).toBeLessThan(positions[8].x);
+  expect(positions[0].y).toBe(positions[1].y);
+  expect(positions[1].y).toBe(positions[2].y);
+  expect(positions[3].y).toBe(positions[4].y);
+  expect(positions[4].y).toBe(positions[5].y);
+  expect(positions[6].y).toBe(positions[7].y);
+  expect(positions[7].y).toBe(positions[8].y);
+  expect(positions[0].y).toBeLessThan(positions[3].y);
+  expect(positions[3].y).toBeLessThan(positions[6].y);
+  const lastArrow = await page.locator("#courses .course:last-child").evaluate((element) =>
+    getComputedStyle(element, "::after").content,
+  );
+  expect(lastArrow).toBe("none");
+
+  for (const [id, , type] of courses) {
+    await page.locator(`#courses [data-course="${id}"]`).click();
+    const problem = (await page.locator("#problem").textContent()) || "";
+    const operands = [...problem.matchAll(/\d+/g)].slice(0, 2).map(([number]) => Number(number));
+    expect(operands).toHaveLength(2);
+    const [dividend, divisor] = operands;
+    expect(divisor).toBeGreaterThan(0);
+
+    if (type === "meaning") {
+      expect(problem).not.toContain("÷");
+    } else if (type === "one-digit-exact") {
+      expect(dividend).toBeLessThan(10);
+      expect(divisor).toBeLessThan(10);
+      expect(dividend % divisor).toBe(0);
+    } else if (type === "two-digit-exact" || type === "exact-story") {
+      expect(dividend).toBeGreaterThanOrEqual(10);
+      expect(dividend).toBeLessThan(100);
+      expect(divisor).toBeLessThan(10);
+      expect(dividend / divisor).toBeLessThanOrEqual(9);
+      expect(dividend % divisor).toBe(0);
+      if (type === "exact-story") expect(problem).not.toContain("÷");
+    } else if (type === "one-digit-remainder") {
+      expect(dividend).toBeLessThan(10);
+      expect(divisor).toBeLessThan(10);
+      expect(dividend % divisor).toBeGreaterThan(0);
+    } else if (type === "two-digit-remainder" || type === "remainder-story") {
+      expect(dividend).toBeGreaterThanOrEqual(10);
+      expect(dividend).toBeLessThan(100);
+      expect(divisor).toBeLessThan(10);
+      expect(dividend / divisor).toBeLessThan(10);
+      expect(dividend % divisor).toBeGreaterThan(0);
+      if (type === "remainder-story") expect(problem).not.toContain("÷");
+    } else if (type === "zero-one") {
+      expect(dividend === 0 || divisor === 1).toBe(true);
+    } else {
+      expect(dividend).toBeGreaterThanOrEqual(10);
+      expect(dividend).toBeLessThan(100);
+      expect(divisor).toBeGreaterThan(1);
+      expect(divisor).toBeLessThan(10);
+      expect(Math.floor(dividend / divisor)).toBeGreaterThan(9);
+    }
+
+    page.once("dialog", (dialog) => dialog.accept());
+    await page.locator("#quit").click();
+    await expect(page.locator("#home")).toBeVisible();
+  }
 });
 
 async function answerQuestions(page: Page, start: number, end: number) {
@@ -115,7 +204,10 @@ async function answerQuestions(page: Page, start: number, end: number) {
 async function currentAnswer(page: Page) {
   const problem = await page.locator("#problem").textContent();
   if (!problem) throw new Error("Division problem is missing");
-  const match = problem.match(/(\d+)\s*÷\s*(\d+)/);
-  if (!match) throw new Error(`Unexpected division problem: ${problem}`);
-  return String(Number(match[1]) / Number(match[2]));
+  const operands = [...problem.matchAll(/\d+/g)].slice(0, 2).map(([number]) => Number(number));
+  if (operands.length !== 2 || operands[1] === 0) throw new Error(`Unexpected division problem: ${problem}`);
+  const [dividend, divisor] = operands;
+  const quotient = Math.floor(dividend / divisor);
+  const remainder = dividend % divisor;
+  return problem.includes("あまる") ? `${quotient}あまり${remainder}` : String(quotient);
 }

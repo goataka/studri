@@ -3,36 +3,30 @@
 const STORAGE_KEY = "studri-division-v1";
 const SOUND_KEY = `${STORAGE_KEY}-sound`;
 const COURSE_IDS = new Set([
-  "g3-table",
-  "g3-two",
-  "g3-three",
-  "g3-exact",
-  "g3-remainder",
-  "g3-fact-family",
-  "g3-dividend",
-  "g3-quotient",
-  "g3-remainder-review",
-  "g3-fluency",
-  "g3-mix",
-  "g3-finish",
+  "g3-meaning-story",
+  "g3-one-digit-exact",
+  "g3-two-digit-exact",
+  "g3-exact-story",
+  "g3-one-digit-remainder",
+  "g3-two-digit-remainder",
+  "g3-remainder-story",
+  "g3-zero-one",
+  "g3-two-digit-mental",
 ]);
 
 const courses = [
-  { id: "g3-table", name: "九九のわり算", desc: "九九を使って、ぴったり分けよう", divisor: 9, quotient: 9 },
-  { id: "g3-two", name: "2けた÷1けた", desc: "九九の答えを広げて計算しよう", divisor: 9, quotient: 12 },
-  { id: "g3-three", name: "3けた÷1けた", desc: "大きな数も正確に分けよう", divisor: 9, quotient: 32 },
-  { id: "g3-exact", name: "あまりなしの計算", desc: "商を考えて、ぴったり分けよう", divisor: 9, quotient: 45 },
-  { id: "g3-remainder", name: "あまりのあるわり算", desc: "商とあまりをセットで答えよう", divisor: 9, quotient: 20, remainder: true },
-  { id: "g3-fact-family", name: "かけ算から考えよう", desc: "九九のきまりを使ってみよう", divisor: 9, quotient: 30 },
-  { id: "g3-dividend", name: "大きな数を分けよう", desc: "3けたの数にも挑戦しよう", divisor: 9, quotient: 60 },
-  { id: "g3-quotient", name: "商を見つけよう", desc: "わる数と商の組み合わせに注目", divisor: 9, quotient: 80 },
-  { id: "g3-remainder-review", name: "あまりをたしかめよう", desc: "あまりのある計算を練習しよう", divisor: 9, quotient: 50, remainder: true },
-  { id: "g3-fluency", name: "わり算スピードアップ", desc: "いろいろな数をすばやく計算", divisor: 9, quotient: 70, remainder: true },
-  { id: "g3-mix", name: "わり算ミックス", desc: "ぴったり？あまりあり？見きわめよう", divisor: 9, quotient: 80, remainder: true },
-  { id: "g3-finish", name: "わり算名人コース", desc: "小学3年生のわり算をまとめて練習", divisor: 9, quotient: 80, remainder: true },
+  { id: "g3-meaning-story", name: "文章題（割り算の意味）", desc: "分ける・いくつ分の場面を考えよう", type: "meaning" },
+  { id: "g3-one-digit-exact", name: "1桁 ÷ 1桁（九九の範囲・あまりなし）", desc: "九九を使って、ぴったり分けよう", type: "one-digit-exact" },
+  { id: "g3-two-digit-exact", name: "2桁 ÷ 1桁（九九の範囲・あまりなし）", desc: "2桁の数を九九でぴったり分けよう", type: "two-digit-exact" },
+  { id: "g3-exact-story", name: "文章題（九九の範囲・あまりなし）", desc: "文章題を読んで、ぴったり分けよう", type: "exact-story" },
+  { id: "g3-one-digit-remainder", name: "1桁 ÷ 1桁（九九の範囲・あまりあり）", desc: "1桁のわり算で、商とあまりを答えよう", type: "one-digit-remainder" },
+  { id: "g3-two-digit-remainder", name: "2桁 ÷ 1桁（九九の範囲・あまりあり）", desc: "九九を使って、商とあまりを見つけよう", type: "two-digit-remainder" },
+  { id: "g3-remainder-story", name: "文章題（九九の範囲・あまりあり）", desc: "文章題で、商とあまりを考えよう", type: "remainder-story" },
+  { id: "g3-zero-one", name: "０や１のわり算", desc: "0をわる計算や、1でわる計算に挑戦", type: "zero-one" },
+  { id: "g3-two-digit-mental", name: "2桁 ÷ 1桁（九九を超える暗算）", desc: "商が10以上になる計算を暗算しよう", type: "two-digit-mental" },
 ];
 
-const defaultData = () => ({ course: "g3-table", stats: {}, wrong: [] });
+const defaultData = () => ({ course: "g3-meaning-story", stats: {}, wrong: [] });
 const loadData = () => {
   try {
     const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || "null");
@@ -45,7 +39,7 @@ const loadData = () => {
       ? saved.wrong.filter((entry) => entry && entry.grade === 3).slice(-30)
       : [];
     return {
-      course: COURSE_IDS.has(saved.course) ? saved.course : "g3-table",
+      course: COURSE_IDS.has(saved.course) ? saved.course : "g3-meaning-story",
       stats,
       wrong,
     };
@@ -140,20 +134,116 @@ function randomInteger(min, max) {
 function makeProblem(index) {
   const course = courses.find((item) => item.id === selectedCourse);
   const level = Math.min(index, 9);
-  const divisor = randomInteger(2, Math.min(course.divisor, 3 + level));
-  const quotient = randomInteger(2, Math.min(course.quotient, 5 + level * 9));
-  const remainder = course.remainder ? randomInteger(1, divisor - 1) : 0;
-  const dividend = divisor * quotient + remainder;
+  let dividend;
+  let divisor;
+  let remainder = 0;
+
+  switch (course.type) {
+    case "meaning": {
+      divisor = randomInteger(2, Math.min(5, 2 + Math.floor(level / 2)));
+      const quotient = randomInteger(2, 3 + level);
+      dividend = divisor * quotient;
+      return makeStoryProblem(dividend, divisor, 0, Math.random() < 0.5);
+    }
+    case "one-digit-exact": {
+      const pairs = [];
+      for (let candidateDivisor = 2; candidateDivisor <= Math.min(9, 3 + level); candidateDivisor += 1) {
+        for (let quotient = 1; quotient <= 9; quotient += 1) {
+          if (candidateDivisor * quotient <= 9) pairs.push([candidateDivisor * quotient, candidateDivisor]);
+        }
+      }
+      [dividend, divisor] = choose(pairs);
+      break;
+    }
+    case "two-digit-exact":
+    case "exact-story": {
+      const pairs = [];
+      for (let candidateDivisor = 2; candidateDivisor <= Math.min(9, 3 + level); candidateDivisor += 1) {
+        for (let quotient = 2; quotient <= Math.min(9, 4 + level); quotient += 1) {
+          const product = candidateDivisor * quotient;
+          if (product >= 10 && product <= 99) pairs.push([product, candidateDivisor]);
+        }
+      }
+      [dividend, divisor] = choose(pairs);
+      if (course.type === "exact-story") return makeStoryProblem(dividend, divisor, 0, Math.random() < 0.5);
+      break;
+    }
+    case "one-digit-remainder":
+    case "two-digit-remainder":
+    case "remainder-story": {
+      const singleDigit = course.type === "one-digit-remainder";
+      const pairs = [];
+      for (let candidateDivisor = 2; candidateDivisor <= Math.min(9, 3 + level); candidateDivisor += 1) {
+        for (let quotient = 1; quotient <= 9; quotient += 1) {
+          for (let candidateRemainder = 1; candidateRemainder < candidateDivisor; candidateRemainder += 1) {
+            const number = candidateDivisor * quotient + candidateRemainder;
+            if ((singleDigit && number <= 9) || (!singleDigit && number >= 10 && number <= 99)) {
+              pairs.push([number, candidateDivisor, candidateRemainder]);
+            }
+          }
+        }
+      }
+      [dividend, divisor, remainder] = choose(pairs);
+      if (course.type === "remainder-story") return makeStoryProblem(dividend, divisor, remainder, Math.random() < 0.5);
+      break;
+    }
+    case "zero-one":
+      if (Math.random() < 0.5) {
+        dividend = 0;
+        divisor = randomInteger(2, 9);
+      } else {
+        dividend = randomInteger(0, 10 + level * 9);
+        divisor = 1;
+      }
+      break;
+    case "two-digit-mental": {
+      const pairs = [];
+      for (let candidateDivisor = 2; candidateDivisor <= 9; candidateDivisor += 1) {
+        for (let quotient = 10; quotient <= Math.min(Math.floor(99 / candidateDivisor), 12 + level * 2); quotient += 1) {
+          for (let candidateRemainder = 0; candidateRemainder < candidateDivisor; candidateRemainder += 1) {
+            const number = candidateDivisor * quotient + candidateRemainder;
+            if (number <= 99) pairs.push([number, candidateDivisor, candidateRemainder]);
+          }
+        }
+      }
+      [dividend, divisor, remainder] = choose(pairs);
+      break;
+    }
+    default:
+      throw new Error(`Unknown division course type: ${course.type}`);
+  }
+
+  return makeDivisionProblem(dividend, divisor, remainder);
+}
+
+function choose(items) {
+  return items[randomInteger(0, items.length - 1)];
+}
+
+function makeDivisionProblem(dividend, divisor, remainder, text = `${dividend} ÷ ${divisor} =`) {
+  const quotient = Math.floor(dividend / divisor);
+  const answer = remainder ? `${quotient}あまり${remainder}` : String(quotient);
   const explanation = remainder
-    ? `${divisor}×${quotient}=${divisor * quotient}、${dividend}-${divisor * quotient}=${remainder}。答えは${quotient}あまり${remainder}です。`
+    ? `${divisor}×${quotient}=${divisor * quotient}、${dividend}-${divisor * quotient}=${remainder}。答えは${answer}です。`
     : `${divisor}×${quotient}=${dividend}。答えは${quotient}です。`;
 
   return {
-    text: `${dividend} ÷ ${divisor} =`,
-    answer: remainder ? `${quotient}あまり${remainder}` : String(quotient),
+    text,
+    answer,
     unit: remainder ? "こ（あまりも入力）" : "こ",
     explanation,
   };
+}
+
+function makeStoryProblem(dividend, divisor, remainder, sharing) {
+  const text = sharing
+    ? remainder
+      ? `${dividend}このりんごを${divisor}人で同じ数ずつ分けると、1人分は何こで、何こあまる？`
+      : `${dividend}このりんごを${divisor}人で同じ数ずつ分けると、1人分は何こ？`
+    : remainder
+      ? `${dividend}このりんごを${divisor}こずつふくろに入れると、何ふくろできて、何こあまる？`
+      : `${dividend}このりんごを${divisor}こずつふくろに入れると、何ふくろできる？`;
+  return makeDivisionProblem(dividend, divisor, remainder, text);
 }
 
 function setupQuiz() {
@@ -444,7 +534,7 @@ get("resetData").addEventListener("click", () => {
   localStorage.removeItem(STORAGE_KEY);
   localStorage.removeItem(`${STORAGE_KEY}-chain`);
   data = defaultData();
-  selectedCourse = "g3-table";
+  selectedCourse = "g3-meaning-story";
   renderCourses();
   renderStats();
 });
