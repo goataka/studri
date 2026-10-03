@@ -148,6 +148,19 @@ Then("コース一覧が横長のバーと丸い合格ステップで表示さ�
   }
   await expect(courses.first()).toHaveCSS("display", "flex");
   await expect(page.locator(".course-steps .course-step")).toHaveCount(27);
+  const firstCourse = courses.first();
+  const title = await firstCourse.locator(".course-copy").boundingBox();
+  const progress = await firstCourse.locator(".course-progress").boundingBox();
+  const steps = await firstCourse.locator(".course-steps").boundingBox();
+  const firstChallenge = await firstCourse.locator(".course-challenges span").first().boundingBox();
+  expect(title).not.toBeNull();
+  expect(progress).not.toBeNull();
+  expect(steps).not.toBeNull();
+  expect(firstChallenge).not.toBeNull();
+  expect(progress!.x).toBeGreaterThanOrEqual(title!.x + title!.width);
+  expect(steps!.width / 3).toBeGreaterThanOrEqual(22);
+  expect(firstChallenge!.x).toBeGreaterThan(steps!.x + steps!.width);
+  await expect(firstCourse.locator(".course strong")).toHaveCSS("font-size", "19.2px");
 
   await page.setViewportSize({ width: 390, height: 844 });
   const mobileColumns = await page.locator("#courses").evaluate((element) =>
