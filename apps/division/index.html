@@ -4,8 +4,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="theme-color" content="#f7f7ef">
-    <meta name="description" content="スタドリ - 算数・わり算編。小学3年生のわり算を楽しく学ぼう。">
-    <title>スタドリ - 算数・わり算編</title>
+    <meta name="description" content="スタドリ - 算数・３年生・わり算編。小学3年生のわり算を楽しく学ぼう。">
+    <title>スタドリ - 算数・３年生・わり算編</title>
     <link rel="stylesheet" href="styles.css">
     <script src="app.js" defer></script>
   </head>
@@ -13,7 +13,7 @@
     <header class="site-header">
       <a class="brand" href="../../">
         <span class="brand-mark" aria-hidden="true">✳</span>
-        スタドリ - 算数・わり算編
+        スタドリ - 算数・３年生・わり算編
       </a>
       <button class="sound" id="sound" type="button" aria-pressed="true">🔔 音あり</button>
     </header>
@@ -36,22 +36,8 @@
             <h2 id="coursesTitle">コースをえらぼう</h2>
             <span class="badge">小学3年生・全10問</span>
           </div>
+          <p class="course-guide">上から順に進もう！各コースをミスなしで3回合格すると、タイムアタックと連続正解チャレンジに挑戦できるよ。</p>
           <div class="courses" id="courses" aria-label="小学3年生のすごろくコース"></div>
-        </section>
-
-        <section class="panel" aria-labelledby="statsTitle">
-          <div class="panel-title">
-            <h2 id="statsTitle">きろく</h2>
-            <span class="badge" id="passBadge">合格まであと3回</span>
-          </div>
-          <div class="stats">
-            <div class="stat"><b id="streak">0</b><small>連続合格</small></div>
-            <div class="stat"><b id="attempts">0</b><small>挑戦回数</small></div>
-            <div class="stat"><b id="best">—</b><small>ベストタイム</small></div>
-          </div>
-          <div class="history-actions">
-            <button class="outline" id="resetData" type="button">学習記録を初期化</button>
-          </div>
         </section>
 
         <section class="panel" aria-labelledby="reviewTitle">
@@ -61,6 +47,9 @@
           </div>
           <div id="reviewList" class="review-list">
             <p>まだまちがいはありません。挑戦してみよう！</p>
+          </div>
+          <div class="history-actions">
+            <button class="outline" id="resetData" type="button">学習記録を初期化</button>
           </div>
         </section>
       </section>
