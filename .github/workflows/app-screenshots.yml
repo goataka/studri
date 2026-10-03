@@ -1,0 +1,87 @@
+name: App screenshots
+
+on:
+  push:
+    paths:
+      - "apps/**"
+      - ".github/workflows/app-screenshots.yml"
+  pull_request:
+    paths:
+      - "apps/**"
+      - ".github/workflows/app-screenshots.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  screenshots:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Enable pnpm
+        run: corepack enable
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Install Playwright Chromium
+        run: pnpm exec playwright install --with-deps chromium
+
+      - name: Capture app screenshots
+        run: |
+          pnpm exec tsx tests/e2e/server.ts > /tmp/studri-server.log 2>&1 &
+          server_pid=$!
+          trap 'kill "$server_pid" 2>/dev/null || true' EXIT
+
+          for attempt in $(seq 1 30); do
+            if curl --fail --silent --output /dev/null http://127.0.0.1:4173/index.html; then
+              break
+            fi
+            sleep 1
+          done
+          curl --fail --silent --output /dev/null http://127.0.0.1:4173/index.html
+
+          shopt -s nullglob
+          app_indexes=(apps/*/index.html)
+          if ((${#app_indexes[@]} == 0)); then
+            echo "No app entry points found under apps/."
+            exit 1
+          fi
+
+          mkdir -p screenshots
+          for app_index in "${app_indexes[@]}"; do
+            app_name="${app_index#apps/}"
+            app_name="${app_name%/index.html}"
+            pnpm exec playwright screenshot \
+              --viewport-size="1280,900" \
+              --wait-for-timeout=1000 \
+              "http://127.0.0.1:4173/apps/${app_name}/" \
+              "screenshots/${app_name}.png"
+          done
+
+      - name: Upload screenshots
+        id: upload
+        uses: actions/upload-artifact@v4
+        with:
+          name: app-screenshots-${{ github.run_id }}
+          path: screenshots/*.png
+          if-no-files-found: error
+          retention-days: 7
+
+      - name: Show artifact link
+        env:
+          ARTIFACT_URL: ${{ steps.upload.outputs.artifact-url }}
+        run: |
+          {
+            echo "## App screenshots"
+            echo
+            echo "[Download screenshot artifact](${ARTIFACT_URL})"
+          } >> "$GITHUB_STEP_SUMMARY"
