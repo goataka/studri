@@ -209,16 +209,26 @@ main {
 }
 
 .courses {
+  position: relative;
   display: grid;
   grid-template-columns: minmax(0, 1fr);
-  gap: 28px;
+  gap: 14px;
   width: min(100%, 760px);
   margin-inline: auto;
-  padding: 8px 2px;
+  padding: 8px 2px 10px;
+}
+
+.courses::before {
+  position: absolute;
+  top: 28px;
+  bottom: 30px;
+  left: 28px;
+  border-left: 3px dashed #a9c392;
+  content: "";
 }
 
 .course-guide {
-  margin: -6px 0 16px;
+  margin: -6px 0 12px;
   color: var(--muted);
   line-height: 1.7;
 }
@@ -228,9 +238,9 @@ main {
   display: grid;
   gap: 7px;
   min-height: 0;
-  padding: 16px 18px 18px 54px;
+  padding: 13px 18px 14px 54px;
   border: 2px solid #dfe8d8;
-  border-radius: 22px 22px 22px 9px;
+  border-radius: 18px;
   background: #fffefb;
   box-shadow: 0 5px 0 #e8eddf;
   text-align: left;
@@ -245,7 +255,7 @@ main {
 
 .course::before {
   position: absolute;
-  top: 16px;
+  top: 14px;
   left: 14px;
   display: grid;
   width: 26px;
@@ -259,19 +269,17 @@ main {
   font-weight: 900;
 }
 
-.course::after {
-  position: absolute;
-  right: calc(50% - 9px);
-  bottom: -27px;
-  z-index: 1;
-  color: #9ab18c;
-  content: "⬇";
-  font-size: 1.1rem;
-  font-weight: 900;
+.course:first-child .grade::before {
+  content: "🚩 スタート　";
 }
 
-.course:last-child::after {
-  content: none;
+.course:nth-child(4) .grade::after,
+.course:nth-child(7) .grade::after {
+  content: "　⚑ マイルストーン";
+}
+
+.course:last-child .grade::before {
+  content: "🏁 ゴール　";
 }
 
 .course.selected {
@@ -749,8 +757,14 @@ main {
   }
 
   .courses {
-    gap: 26px;
+    gap: 12px;
     padding: 4px 0;
+  }
+
+  .courses::before {
+    top: 24px;
+    bottom: 24px;
+    left: 25px;
   }
 
   .course {
