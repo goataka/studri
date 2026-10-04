@@ -58,7 +58,7 @@ Then("結果に10問正解と表示される", async ({ page }) => {
 
 Then("ミスがあったことを結果に表示する", async ({ page }) => {
   await expect(page.locator("#resultTitle")).toHaveText("ぜんもん正解！");
-  await expect(page.locator("#resultMessage")).toContainText("挑戦中にミスがあった");
+  await expect(page.locator("#resultMessage")).toContainText("途中でミスがあった");
 });
 
 When("コース選択に戻る", async ({ page }) => {

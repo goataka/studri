@@ -519,7 +519,7 @@ function finishQuiz() {
     : "よくがんばったね！";
   get("resultMessage").textContent = quiz.correct === 10
     ? (quiz.missed
-      ? "再回答して全問正解！ただし挑戦中にミスがあったので、連続合格は0回からだよ。"
+      ? "再回答して全問正解！ただし途中でミスがあったので、合格ステップは0からだよ。"
       : `ミスなし合格 ${stats.streak}/3回。${stats.streak >= 3 ? "チャレンジモードが解放されたよ！" : "あと少しで合格だよ！"}`)
     : "まちがいはノートに保存したよ。もう一度やってみよう。";
   get("chainBest").textContent = localStorage.getItem(`${STORAGE_KEY}-chain`) || "0";
