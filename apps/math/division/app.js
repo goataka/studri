@@ -502,7 +502,7 @@ function showFeedback(isCorrect, problem, rawAnswer) {
 
   const primary = document.createElement("button");
   primary.type = "button";
-  primary.textContent = isCorrect ? "つぎへ（Enter）" : "もう一度（Enter）";
+  primary.textContent = isCorrect ? "つぎへ（↵）" : "もう一度（Enter）";
   primary.addEventListener("click", isCorrect ? advanceQuiz : retryQuestion);
   actions.append(primary);
 

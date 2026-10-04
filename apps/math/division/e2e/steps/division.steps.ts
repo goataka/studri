@@ -89,6 +89,7 @@ When("誤答を修正して正解する", async ({ page }) => {
   await page.locator("#answer").fill(correctAnswer);
   await page.getByRole("button", { name: "答え合わせ" }).click();
   await expect(page.locator("#feedback")).toHaveClass(/ok/);
+  await expect(page.locator("#feedbackActions button").first()).toHaveText("つぎへ（↵）");
 });
 
 When("Enterキーで次の問題へ進む", async ({ page }) => {
@@ -208,6 +209,9 @@ Then("画面幅に応じた位置に計算エリアが表示される", async ({
   const workArea = await page.locator(".canvas-box").boundingBox();
   expect(workArea).not.toBeNull();
   expect(workArea!.width).toBeGreaterThan(desktopPrimary!.width);
+  const desktopCanvas = await page.locator("#noteCanvas").boundingBox();
+  expect(desktopCanvas).not.toBeNull();
+  expect(desktopCanvas!.height).toBeGreaterThanOrEqual(desktopWork!.height - 50);
   await expect(page.locator("#answerCanvas")).toHaveCount(0);
   await expect(page.locator("#noteCanvas")).toBeVisible();
   await expect(page.locator(".canvas-box")).toHaveCount(1);
