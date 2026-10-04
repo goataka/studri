@@ -126,7 +126,7 @@ Then("コースは小学3年生のみで音とバージョンが表示される"
     "title",
     "3回連続でミスなし合格すると解放されます",
   );
-  await expect(courses.first().locator(".course-step")).toHaveText(["1", "2", "3"]);
+  await expect(page.locator("#courses .course").first().locator(".course-step")).toHaveText(["1", "2", "3"]);
   await expect(page.locator(".course-pass-label")).toHaveText(Array(9).fill("3つ目で合格"));
   await expect(page.locator(".course-unlock")).toHaveText(Array(9).fill("あと3回で解放"));
   await expect(page.locator("#sound")).toHaveAttribute("aria-pressed", "true");
@@ -168,7 +168,7 @@ Then("コース一覧に番号付き合格ステップと解放条件つきボ�
   expect(steps!.width / 3).toBeGreaterThanOrEqual(22);
   expect(firstChallenge!.x).toBeGreaterThan(steps!.x + steps!.width);
   await expect(firstCourse.locator(".course-copy strong")).toHaveCSS("font-size", "19.2px");
-  await expect(firstCourse.locator(".course-step")).toHaveCSS("width", "36px");
+  await expect(firstCourse.locator(".course-step").first()).toHaveCSS("width", "36px");
 
   await page.setViewportSize({ width: 390, height: 844 });
   const mobileColumns = await page.locator("#courses").evaluate((element) =>
