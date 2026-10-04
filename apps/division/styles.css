@@ -210,6 +210,7 @@ main {
 }
 
 .mascot::after {
+  display: none;
   position: absolute;
   top: -8px;
   right: -6px;
@@ -292,7 +293,8 @@ main {
 }
 
 .course,
-.course-goal {
+.course-goal,
+.course-begin {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -306,7 +308,8 @@ main {
   box-shadow: 0 3px 0 #e8eddf;
 }
 
-.course-goal {
+.course-goal,
+.course-begin {
   color: #805c2d;
   font-weight: 900;
 }
@@ -378,7 +381,8 @@ main {
 }
 
 .course strong,
-.course-goal strong {
+.course-goal strong,
+.course-begin strong {
   display: block;
   font-size: 1.2rem;
   line-height: 1.4;
@@ -996,7 +1000,8 @@ main {
     padding: 14px 12px;
   }
 
-  .course-goal {
+  .course-goal,
+  .course-begin {
     align-items: flex-start;
     padding: 14px 12px;
   }

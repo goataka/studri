@@ -104,7 +104,7 @@ function renderCourses() {
     for (let step = 0; step < 4; step += 1) {
       const indicator = document.createElement("span");
       indicator.className = step === 0 ? "course-step start-dot" : step === 3 ? "course-step final" : "course-step";
-      indicator.textContent = step === 0 ? "" : String(step);
+      indicator.textContent = ["", "🥇", "🥈", "🥉"][step];
       steps.append(indicator);
     }
     basicGroup.append(basicLabel, steps);
@@ -159,6 +159,19 @@ function renderCourses() {
     });
     courseList.append(card);
   });
+  const begin = document.createElement("div");
+  begin.className = "course-begin";
+  const beginCopy = document.createElement("span");
+  beginCopy.className = "course-copy";
+  const beginLabel = document.createElement("strong");
+  const beginIcon = document.createElement("span");
+  beginIcon.className = "course-icon";
+  beginIcon.setAttribute("aria-hidden", "true");
+  beginIcon.textContent = "🧭";
+  beginLabel.append(beginIcon, document.createTextNode(" スタート"));
+  beginCopy.append(beginLabel);
+  begin.append(beginCopy);
+  courseList.prepend(begin);
   const goal = document.createElement("div");
   goal.className = "course-goal";
   const goalCopy = document.createElement("span");
@@ -167,7 +180,7 @@ function renderCourses() {
   const goalIcon = document.createElement("span");
   goalIcon.className = "course-icon";
   goalIcon.setAttribute("aria-hidden", "true");
-  goalIcon.textContent = "🏁";
+  goalIcon.textContent = "🚩";
   goalLabel.append(goalIcon, document.createTextNode(" ゴール"));
   goalCopy.append(goalLabel);
   goal.append(goalCopy);
