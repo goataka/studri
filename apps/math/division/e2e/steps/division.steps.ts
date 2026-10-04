@@ -337,6 +337,18 @@ Then("コース一覧に進捗ステップと解放条件つきボタンが表�
   const firstCourse = courses.first();
   await expect(firstCourse.locator(".course-log")).toBeDisabled();
   await expect(page.locator(".course-begin .course-log, .course-goal .course-log")).toHaveCount(0);
+  const begin = page.locator(".course-begin");
+  const beginBounds = await begin.boundingBox();
+  const firstCourseBoundsForTrail = await firstCourse.boundingBox();
+  const beginTrail = await begin.evaluate((element) => {
+    const { top, left, height, width } = getComputedStyle(element, "::after");
+    return { top: Number.parseFloat(top), left: Number.parseFloat(left), height: Number.parseFloat(height), width: Number.parseFloat(width) };
+  });
+  expect(beginBounds).not.toBeNull();
+  expect(firstCourseBoundsForTrail).not.toBeNull();
+  expect(beginTrail.top).toBeCloseTo(beginBounds!.height, 0);
+  expect(beginTrail.height).toBeCloseTo(firstCourseBoundsForTrail!.y - (beginBounds!.y + beginBounds!.height), 0);
+  await expect(begin).toHaveCSS("border-top-width", "0px");
   await expect(firstCourse).not.toHaveAttribute("data-step", /\d+/);
   const title = await firstCourse.locator(".course-copy").boundingBox();
   const progress = await firstCourse.locator(".course-progress").boundingBox();
@@ -362,6 +374,7 @@ Then("コース一覧に進捗ステップと解放条件つきボタンが表�
   expect(firstCourseBounds).not.toBeNull();
   expect(courseSide).not.toBeNull();
   expect(courseLog).not.toBeNull();
+  expect(beginTrail.left).toBeCloseTo(connectorLeft, 0);
   expect(basicLabel).not.toBeNull();
   expect(challengeLabel).not.toBeNull();
   expect(challengeLabel!.x).toBeCloseTo(firstChallenge!.x, 0);
@@ -385,7 +398,13 @@ Then("コース一覧に進捗ステップと解放条件つきボタンが表�
   expect(goalBounds).not.toBeNull();
   expect(goalBounds!.width).toBe(lastCourseBounds!.width);
   expect(goalBounds!.y).toBe(lastCourseBounds!.y + lastCourseBounds!.height + 22);
-  await expect(goal).toHaveCSS("border-radius", "16px");
+  await expect(goal).toHaveCSS("border-top-width", "0px");
+  const finalTrail = await lastCourse.evaluate((element) => {
+    const style = getComputedStyle(element, "::after");
+    return { height: Number.parseFloat(style.height), left: Number.parseFloat(style.left) };
+  });
+  expect(finalTrail.height).toBeCloseTo(goalBounds!.y - (lastCourseBounds!.y + lastCourseBounds!.height), 0);
+  expect(finalTrail.left).toBeCloseTo(connectorLeft, 0);
   await expect(lastCourse).toHaveCSS("border-radius", "16px");
   await expect(goal.locator("strong")).toHaveCSS("font-size", await lastCourse.locator("strong").evaluate((element) =>
     getComputedStyle(element).fontSize,
@@ -421,7 +440,7 @@ Then("コース一覧に進捗ステップと解放条件つきボタンが表�
   expect(mobileCard).not.toBeNull();
   expect(mobileTools).not.toBeNull();
   expect(mobileLog).not.toBeNull();
-  expect(Math.abs(mobileLog!.x + mobileLog!.width - (mobileCard!.x + mobileCard!.width - 12))).toBeLessThanOrEqual(1);
+  expect(Math.abs(mobileLog!.x - (mobileCard!.x + 12))).toBeLessThanOrEqual(1);
   await expect(firstCourse.locator(".course-tools-group .course-group-label")).toHaveText("🧰 ツール");
 });
 

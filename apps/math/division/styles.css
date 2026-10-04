@@ -263,8 +263,30 @@ main {
 
 .course-goal,
 .course-begin {
+  position: relative;
   color: #805c2d;
   font-weight: 900;
+}
+
+.course-goal,
+.course-begin {
+  min-height: 64px;
+  padding: 8px 20px;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+.course-begin::after {
+  position: absolute;
+  top: 100%;
+  left: calc(21px + 0.6rem);
+  width: 4px;
+  height: 22px;
+  margin-left: -2px;
+  background: #9db596;
+  content: "";
 }
 
 .course::after {
@@ -1015,7 +1037,8 @@ main {
   .course-goal,
   .course-begin {
     align-items: flex-start;
-    padding: 14px 12px;
+    min-height: 54px;
+    padding: 8px 12px;
   }
 
   .course-start {
@@ -1044,15 +1067,19 @@ main {
 
   .course-tools-group {
     width: 100%;
-    justify-items: end;
+    justify-items: start;
   }
 
   .course-log {
-    justify-self: end;
+    justify-self: start;
   }
 
   .course strong {
     font-size: 1.08rem;
+  }
+
+  .course-begin::after {
+    left: calc(13px + 0.54rem);
   }
 
   .course-record {
