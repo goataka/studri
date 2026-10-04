@@ -7,6 +7,62 @@ Given("算数アプリを開く", async ({ page }) => {
   await page.goto("/apps/division/");
 });
 
+Given("画面確認用に算数アプリを開く", async ({ page }) => {
+  await page.addInitScript(() => {
+    Math.random = () => 0.5;
+  });
+  await page.goto("/apps/division/");
+});
+
+When("モバイル表示に切り替える", async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+});
+
+When("デスクトップ表示に切り替える", async ({ page }) => {
+  await page.setViewportSize({ width: 1440, height: 1000 });
+});
+
+When("復習ノートを表示する", async ({ page }) => {
+  await page.locator("#tabReview").click();
+});
+
+When("コース一覧を表示する", async ({ page }) => {
+  await page.locator("#tabCourses").click();
+});
+
+When("現在の問題に誤答する", async ({ page }) => {
+  const correctAnswer = await currentAnswer(page);
+  await page.locator("#answer").fill(correctAnswer === "0" ? "1" : "0");
+  await page.getByRole("button", { name: "答え合わせ" }).click();
+  await expect(page.locator("#feedback")).toHaveClass(/no/);
+});
+
+When("誤答を修正して正解する", async ({ page }) => {
+  const correctAnswer = await currentAnswer(page);
+  await page.getByRole("button", { name: "もう一度" }).click();
+  await page.locator("#answer").fill(correctAnswer);
+  await page.getByRole("button", { name: "答え合わせ" }).click();
+  await expect(page.locator("#feedback")).toHaveClass(/ok/);
+});
+
+When("Enterキーで次の問題へ進む", async ({ page }) => {
+  await page.keyboard.press("Enter");
+});
+
+Then("VR画像「{string}」を確認する", async ({ page }, screenshotName: string) => {
+  const feedback = page.locator("#feedback");
+  if (await feedback.isVisible()) {
+    await expect(feedback).toHaveScreenshot(screenshotName, { animations: "disabled" });
+    return;
+  }
+
+  await expect(page).toHaveScreenshot(screenshotName, {
+    animations: "disabled",
+    caret: "hide",
+    fullPage: true,
+  });
+});
+
 When("コースを選んで挑戦を始める", async ({ page }) => {
   await page.locator('#courses [data-course="g3-one-digit-exact"] .course-start').click();
   await expect(page.locator("#quiz")).toBeVisible();
