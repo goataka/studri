@@ -14,8 +14,18 @@ Given("画面確認用に算数アプリを開く", async ({ page }) => {
   await page.goto("/apps/math/division/");
 });
 
-Given("算数ページを開く", async ({ page }) => {
-  await page.goto("/apps/math/");
+Given("スタドリホームを開く", async ({ page }) => {
+  await page.goto("/");
+});
+
+When("算数のリンクを選ぶ", async ({ page }) => {
+  await page.locator('a[href="apps/math/"]').click();
+});
+
+Then("算数トップページを表示する", async ({ page }) => {
+  await expect(page).toHaveTitle("スタドリ - 算数編");
+  await expect(page.locator(".breadcrumbs [aria-current='page']")).toHaveText("🔢 算数");
+  await expect(page.locator(".breadcrumbs a").first()).toHaveAttribute("href", "../../");
 });
 
 When("モバイル表示に切り替える", async ({ page }) => {
@@ -168,6 +178,12 @@ Then("誤答を記録し連続合格を0回にする", async ({ page }) => {
   await page.locator('#courses [data-course="g3-one-digit-exact"] .course-log').click();
   await expect(page.locator("#reviewList .review-item")).toHaveCount(1);
   await expect(page.locator("#reviewTitle")).toHaveText("📜 ログ：1桁 ÷ 1桁（九九の範囲・あまりなし）");
+  await page.locator("#reviewBack").click();
+  await page.locator('#courses [data-course="g3-meaning-story"] .course-log').click();
+  await expect(page.locator("#reviewList")).toContainText("このコースのまちがいはまだありません");
+  await page.locator("#reviewBack").click();
+  await page.locator('#courses [data-course="g3-one-digit-exact"] .course-log').click();
+  await expect(page.locator("#reviewList .review-item")).toHaveCount(1);
 });
 
 Then("算数ページのパンくずと音・初期化ボタンとバージョンが表示される", async ({ page }) => {
@@ -307,6 +323,9 @@ Then("コース一覧に進捗ステップと解放条件つきボタンが表�
   const steps = await firstCourse.locator(".course-steps").boundingBox();
   const firstChallenge = await firstCourse.locator(".course-challenge").first().boundingBox();
   const firstStep = await firstCourse.locator(".course-step").nth(1).boundingBox();
+  const firstCourseBounds = await firstCourse.boundingBox();
+  const courseSide = await firstCourse.locator(".course-side").boundingBox();
+  const courseLog = await firstCourse.locator(".course-log").boundingBox();
   const basicLabel = await firstCourse.locator(".course-group-label").first().boundingBox();
   const challengeLabel = await firstCourse.locator(".course-challenge-group .course-group-label").boundingBox();
   const connectorLeft = await firstCourse.evaluate((element) =>
@@ -320,6 +339,9 @@ Then("コース一覧に進捗ステップと解放条件つきボタンが表�
   expect(steps).not.toBeNull();
   expect(firstChallenge).not.toBeNull();
   expect(firstStep).not.toBeNull();
+  expect(firstCourseBounds).not.toBeNull();
+  expect(courseSide).not.toBeNull();
+  expect(courseLog).not.toBeNull();
   expect(basicLabel).not.toBeNull();
   expect(challengeLabel).not.toBeNull();
   expect(challengeLabel!.x).toBeCloseTo(firstChallenge!.x, 0);
@@ -329,6 +351,8 @@ Then("コース一覧に進捗ステップと解放条件つきボタンが表�
   expect(steps!.width / 4).toBeGreaterThanOrEqual(22);
   expect(firstChallenge!.x).toBeGreaterThan(steps!.x + steps!.width);
   expect(firstChallenge!.height).toBe(firstStep!.height);
+  expect(courseLog!.x).toBeGreaterThan(courseSide!.x + courseSide!.width);
+  expect(Math.abs(courseLog!.x + courseLog!.width - (firstCourseBounds!.x + firstCourseBounds!.width - 20))).toBeLessThanOrEqual(1);
   await expect(firstCourse.locator(".course-copy strong")).toHaveCSS("font-size", "19.2px");
   await expect(firstCourse.locator(".course-step").nth(1)).toHaveCSS("width", "54px");
   await expect(firstCourse.locator(".course-step").nth(1)).toHaveCSS("font-size", "24px");
@@ -417,6 +441,14 @@ Then("9つのコースが指定順に並び問題が範囲内で出る", async (
   await page.reload();
   const passedCourse = page.locator('#courses [data-course="g3-meaning-story"]');
   await expect(passedCourse.locator(".course-step.complete")).toHaveCount(2);
+  const pin = passedCourse.locator(".course-pass-pin");
+  await expect(pin).toHaveText("📍");
+  const courseBounds = await passedCourse.boundingBox();
+  const pinBounds = await pin.boundingBox();
+  expect(courseBounds).not.toBeNull();
+  expect(pinBounds).not.toBeNull();
+  expect(pinBounds!.x).toBeLessThan(courseBounds!.x);
+  expect(pinBounds!.y + pinBounds!.height / 2).toBeCloseTo(courseBounds!.y + courseBounds!.height / 2, 0);
   await expect(passedCourse.locator(".course-step.start-dot")).toHaveCSS("background-color", "rgb(251, 230, 213)");
   await expect(passedCourse.locator(".course-step.current")).toHaveText("🥈");
   await expect(passedCourse.locator(".course-step.current")).toHaveCSS("background-color", "rgb(217, 120, 67)");
@@ -432,6 +464,7 @@ Then("9つのコースが指定順に並び問題が範囲内で出る", async (
   await page.reload();
   const fullyPassedCourse = page.locator('#courses [data-course="g3-meaning-story"]');
   await expect(fullyPassedCourse.locator(".course-step.complete")).toHaveCount(4);
+  await expect(fullyPassedCourse.locator(".course-pass-pin")).toHaveCount(1);
   await expect(fullyPassedCourse.locator(".course-step.complete").first()).toHaveCSS("background-color", "rgb(251, 230, 213)");
   await expect(fullyPassedCourse.locator(".course-challenge-group")).toHaveClass(/is-next/);
   await expect(fullyPassedCourse.locator(".course-challenge:not(:disabled)").first()).toHaveCSS("background-color", "rgb(217, 120, 67)");
