@@ -228,7 +228,7 @@ main {
   gap: 24px;
   width: 100%;
   min-height: 108px;
-  padding: 16px 20px 16px 58px;
+  padding: 16px 20px;
   border: 1px solid #dfe8d8;
   border-radius: 16px;
   background: #fffefb;
@@ -258,23 +258,6 @@ main {
 .course-start:focus-visible {
   outline: 3px solid var(--orange);
   outline-offset: 4px;
-}
-
-.course::before {
-  position: absolute;
-  top: 50%;
-  left: 14px;
-  display: grid;
-  width: 28px;
-  aspect-ratio: 1;
-  place-items: center;
-  border-radius: 50%;
-  background: #f5dca8;
-  color: #7d6741;
-  content: attr(data-step);
-  font-size: 0.82rem;
-  font-weight: 900;
-  transform: translateY(-50%);
 }
 
 .course.selected {
@@ -312,7 +295,7 @@ main {
 
 .course-progress {
   display: grid;
-  grid-template-columns: auto auto;
+  grid-template-columns: auto;
   align-items: baseline;
   justify-items: start;
   gap: 4px 7px;
@@ -321,32 +304,41 @@ main {
   font-weight: 750;
 }
 
-.course-progress > span:first-child {
-  white-space: nowrap;
-}
-
 .course-progress-count {
   white-space: nowrap;
 }
 
 .course-steps {
+  position: relative;
   display: inline-flex;
   grid-column: 1 / -1;
   align-items: center;
-  gap: 7px;
-  padding-block: 2px 18px;
+  gap: 12px;
+  padding-block: 2px;
+}
+
+.course-steps::before {
+  position: absolute;
+  top: 29px;
+  right: 27px;
+  left: 27px;
+  height: 3px;
+  background: #9db596;
+  content: "";
 }
 
 .course-step {
+  position: relative;
+  z-index: 1;
   display: grid;
-  width: 36px;
+  width: 54px;
   aspect-ratio: 1;
   place-items: center;
   border: 2px solid #9db596;
   border-radius: 50%;
   background: #fff;
   color: #53795d;
-  font-size: 0.9rem;
+  font-size: 1rem;
   font-weight: 900;
 }
 
@@ -354,6 +346,7 @@ main {
   border-color: #d79b54;
   background: #fff4df;
   color: #805c2d;
+  font-size: 1.2rem;
 }
 
 .course-step.complete {
@@ -365,14 +358,6 @@ main {
 .course-step.complete.final {
   border-color: #426d4f;
   background: #5e895c;
-}
-
-.course-pass-label {
-  grid-column: 1 / -1;
-  margin-top: -22px;
-  color: #805c2d;
-  font-size: 0.68rem;
-  font-weight: 800;
 }
 
 .course-record {
@@ -424,6 +409,14 @@ main {
   font-size: 0.72rem !important;
   font-weight: 750;
   text-align: right;
+}
+
+.course-unlock.pending {
+  visibility: hidden;
+}
+
+.course:hover .course-unlock.pending {
+  visibility: visible;
 }
 
 .history-actions {
@@ -828,7 +821,7 @@ main {
     align-items: flex-start;
     flex-wrap: wrap;
     gap: 10px;
-    padding: 14px 12px 14px 46px;
+    padding: 14px 12px;
   }
 
   .course-start {
@@ -858,10 +851,6 @@ main {
 
   .course strong {
     font-size: 1.08rem;
-  }
-
-  .course::before {
-    left: 10px;
   }
 
   .course-record {

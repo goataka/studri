@@ -65,11 +65,10 @@ function renderCourses() {
   const courseList = get("courses");
   courseList.replaceChildren();
 
-  courses.forEach((course, index) => {
+  courses.forEach((course) => {
     const card = document.createElement("article");
     card.className = `course${selectedCourse === course.id ? " selected" : ""}`;
     card.dataset.course = course.id;
-    card.dataset.step = String(index + 1);
 
     const start = document.createElement("button");
     start.type = "button";
@@ -86,8 +85,6 @@ function renderCourses() {
     details.className = "course-details";
     const progress = document.createElement("span");
     progress.className = "course-progress";
-    const progressLabel = document.createElement("span");
-    progressLabel.textContent = "連続合格";
     const progressCount = document.createElement("b");
     progressCount.className = "course-progress-count";
     const steps = document.createElement("span");
@@ -95,14 +92,11 @@ function renderCourses() {
     steps.setAttribute("aria-hidden", "true");
     for (let step = 0; step < 3; step += 1) {
       const indicator = document.createElement("span");
-      indicator.className = "course-step";
-      indicator.textContent = String(step + 1);
+      indicator.className = step === 2 ? "course-step final" : "course-step";
+      indicator.textContent = step === 2 ? "◎" : String(step + 1);
       steps.append(indicator);
     }
-    const passLabel = document.createElement("small");
-    passLabel.className = "course-pass-label";
-    passLabel.textContent = "3つ目で合格";
-    progress.append(progressLabel, progressCount, steps, passLabel);
+    progress.append(progressCount, steps);
 
     const record = document.createElement("small");
     record.className = "course-record course-attempts";
@@ -157,23 +151,21 @@ function renderCourseProgress() {
       step.classList.toggle("complete", index < streak);
     });
     button.querySelector(".course-record").textContent =
-      `挑戦${stats.attempts}回 ・ ベスト ${stats.best ? `${stats.best}秒` : "—"}`;
+      `${stats.attempts}回 ・ ベスト ${stats.best ? `${stats.best}秒` : "—"}`;
     const unlockMessage = stats.streak >= 3
       ? "解放済み"
       : `あと${3 - streak}回で解放`;
-    button.querySelector(".course-unlock").textContent = unlockMessage;
-    const challengeTitle = stats.streak >= 3
-      ? "解放済み"
-      : "3回連続でミスなし合格すると解放されます";
+    const unlock = button.querySelector(".course-unlock");
+    unlock.textContent = unlockMessage;
+    unlock.classList.toggle("pending", stats.streak < 3);
     button.querySelectorAll(".course-challenge").forEach((challenge) => {
       challenge.disabled = stats.streak < 3;
-      challenge.title = challengeTitle;
-      challenge.setAttribute("aria-label", `${challenge.textContent}。${challengeTitle}`);
-      challenge.parentElement.title = challengeTitle;
+      challenge.removeAttribute("title");
+      challenge.setAttribute("aria-label", challenge.textContent);
     });
     button.querySelector(".course-start").setAttribute(
       "aria-label",
-      `小学3年生、${course.name}。${course.desc}。連続合格 ${streak} / 3回。挑戦 ${stats.attempts}回。${unlockMessage}。`,
+      `小学3年生、${course.name}。${course.desc}。合格ステップ ${streak} / 3回。${stats.streak >= 3 ? "解放済み。" : ""}`,
     );
   });
 }
@@ -527,7 +519,7 @@ function finishQuiz() {
     : "よくがんばったね！";
   get("resultMessage").textContent = quiz.correct === 10
     ? (quiz.missed
-      ? "再回答して全問正解！ただし挑戦中にミスがあったので、連続合格は0回からだよ。"
+      ? "再回答して全問正解！ただし途中でミスがあったので、合格ステップは0からだよ。"
       : `ミスなし合格 ${stats.streak}/3回。${stats.streak >= 3 ? "チャレンジモードが解放されたよ！" : "あと少しで合格だよ！"}`)
     : "まちがいはノートに保存したよ。もう一度やってみよう。";
   get("chainBest").textContent = localStorage.getItem(`${STORAGE_KEY}-chain`) || "0";
