@@ -116,7 +116,7 @@ function renderCourses() {
     const challengeGroupIcon = document.createElement("span");
     challengeGroupIcon.className = "course-group-icon";
     challengeGroupIcon.setAttribute("aria-hidden", "true");
-    challengeGroupIcon.textContent = "✨";
+    challengeGroupIcon.textContent = "🌳";
     challengeLabel.append(challengeGroupIcon, document.createTextNode(" チャレンジ"));
     const challenges = document.createElement("div");
     challenges.className = "course-challenges";

@@ -120,9 +120,9 @@ Then("算数ページのパンくずと音・初期化ボタンとバージョ�
   await expect(page.locator("#tabCourses")).toHaveCSS("background-color", "rgb(220, 235, 216)");
   await expect(page.locator("#resetData")).toHaveAttribute("aria-label", "学習データを初期化");
   await expect(page.locator(".course-group-label")).toHaveText([
-    "🌱 ベーシック", "✨ チャレンジ", "🌱 ベーシック", "✨ チャレンジ", "🌱 ベーシック", "✨ チャレンジ",
-    "🌱 ベーシック", "✨ チャレンジ", "🌱 ベーシック", "✨ チャレンジ", "🌱 ベーシック", "✨ チャレンジ",
-    "🌱 ベーシック", "✨ チャレンジ", "🌱 ベーシック", "✨ チャレンジ", "🌱 ベーシック", "✨ チャレンジ",
+    "🌱 ベーシック", "🌳 チャレンジ", "🌱 ベーシック", "🌳 チャレンジ", "🌱 ベーシック", "🌳 チャレンジ",
+    "🌱 ベーシック", "🌳 チャレンジ", "🌱 ベーシック", "🌳 チャレンジ", "🌱 ベーシック", "🌳 チャレンジ",
+    "🌱 ベーシック", "🌳 チャレンジ", "🌱 ベーシック", "🌳 チャレンジ", "🌱 ベーシック", "🌳 チャレンジ",
   ]);
   const challengeIconSize = Number.parseFloat(await page.locator(".course-challenge-icon").first().evaluate((element) =>
     getComputedStyle(element).fontSize,
@@ -143,7 +143,13 @@ Then("算数ページのパンくずと音・初期化ボタンとバージョ�
   await expect(page.locator(".breadcrumbs a").last()).toHaveText("🔢 算数");
   await expect(page.locator(".breadcrumbs a").first()).toHaveAttribute("href", "../../");
   await expect(page.locator(".breadcrumbs a").last()).toHaveAttribute("href", "#home");
-  await expect(page.locator(".hero-copy h1")).toHaveText("➗3年生・わり算");
+  await expect(page.locator(".hero-copy h1")).toHaveText("3年生・わり算");
+  const mascotDecoration = await page.locator(".mascot").evaluate((element) =>
+    getComputedStyle(element, "::after").content,
+  );
+  expect(mascotDecoration).not.toBe('"÷"');
+  await expect(page.locator(".tabs").evaluate((element) => element.closest(".panel"))).resolves.toBeNull();
+  await expect(page.locator(".hero-copy")).not.toContainText("トレイルを");
   await expect(page.locator(".hero-copy")).not.toContainText("小学3年生の算数");
   const mascotPosition = await page.locator(".mascot").boundingBox();
   const heroCopyPosition = await page.locator(".hero-copy").boundingBox();

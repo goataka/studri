@@ -209,23 +209,6 @@ main {
   transform: rotate(-2deg);
 }
 
-.mascot::after {
-  display: none;
-  position: absolute;
-  top: -8px;
-  right: -6px;
-  display: grid;
-  width: 48px;
-  aspect-ratio: 1;
-  place-items: center;
-  border-radius: 50%;
-  background: #f5c779;
-  color: var(--ink);
-  content: "÷";
-  font-size: 1.8rem;
-  font-weight: 900;
-}
-
 .panel {
   margin-top: 18px;
   padding: clamp(18px, 4vw, 30px);
@@ -260,11 +243,16 @@ main {
 
 .tabs {
   display: flex;
+  width: min(100%, 460px);
   gap: 5px;
-  margin-bottom: 14px;
+  margin: 18px 0 0;
   padding: 5px;
   border-radius: 16px;
   background: #eef2e8;
+}
+
+.home-panel {
+  margin-top: 8px;
 }
 
 .tab {
@@ -983,11 +971,6 @@ main {
 
   .mascot {
     width: min(28vw, 120px);
-  }
-
-  .mascot::after {
-    width: 36px;
-    font-size: 1.4rem;
   }
 
   .courses {
