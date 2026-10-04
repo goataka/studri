@@ -31,22 +31,19 @@
           </div>
         </div>
 
-        <section class="panel" aria-labelledby="coursesTitle">
-          <div class="panel-title">
-            <h2 id="coursesTitle">コースをえらぼう</h2>
-            <span class="badge">小学3年生・全10問</span>
+        <section class="panel">
+          <div class="tabs" role="tablist">
+            <button class="tab active" id="tabCourses" data-tab="coursesPanel" role="tab" aria-selected="true" type="button">コース</button>
+            <button class="tab" id="tabReview" data-tab="reviewPanel" role="tab" aria-selected="false" type="button">復習ノート <span class="badge" id="wrongCount">0問</span></button>
           </div>
-          <p class="course-guide">スタートから道をたどって進もう！合格ステップを3つ集めると、タイムアタックと連続正解チャレンジが解放されるよ。</p>
-          <div class="courses" id="courses" aria-label="小学3年生のコース一覧"></div>
-        </section>
-
-        <section class="panel" aria-labelledby="reviewTitle">
-          <div class="panel-title">
-            <h2 id="reviewTitle">まちがいノート</h2>
-            <span class="badge" id="wrongCount">0問</span>
+          <div id="coursesPanel" role="tabpanel" aria-labelledby="tabCourses">
+            <p class="course-guide">スタートから道をたどって進もう！合格ステップを3つ集めると、タイムアタックと連続正解チャレンジが解放されるよ。</p>
+            <div class="courses" id="courses" aria-label="小学3年生のコース一覧"></div>
           </div>
-          <div id="reviewList" class="review-list">
-            <p>まだまちがいはありません。挑戦してみよう！</p>
+          <div id="reviewPanel" class="hidden" role="tabpanel" aria-labelledby="tabReview">
+            <div id="reviewList" class="review-list">
+              <p>まだまちがいはありません。挑戦してみよう！</p>
+            </div>
           </div>
           <div class="history-actions">
             <button class="outline" id="resetData" type="button">学習記録を初期化</button>
