@@ -242,16 +242,24 @@ main {
   box-shadow: 0 2px 0 rgb(35 74 50 / 10%);
 }
 
+.course,
 .course-goal {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
   width: 100%;
   min-height: 108px;
   padding: 16px 20px;
   border: 1px solid #dfe8d8;
   border-radius: 16px;
   background: #fffefb;
+  box-shadow: 0 3px 0 #e8eddf;
+}
+
+.course-goal {
   color: #805c2d;
   font-weight: 900;
-  box-shadow: 0 3px 0 #e8eddf;
 }
 
 .course::after {
@@ -279,22 +287,11 @@ main {
 
 .course {
   position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 24px;
-  width: 100%;
-  min-height: 108px;
-  padding: 16px 20px;
-  border: 1px solid #dfe8d8;
-  border-radius: 16px;
-  background: #fffefb;
-  box-shadow: 0 3px 0 #e8eddf;
   text-align: left;
   transition: transform 160ms ease, border-color 160ms ease, background-color 160ms ease;
 }
 
-.course:hover {
+.course:not(.course-goal):hover {
   transform: translateY(-2px);
   border-color: #9cbd8b;
   background: #fff;
@@ -331,10 +328,19 @@ main {
   min-width: 0;
 }
 
-.course strong {
+.course strong,
+.course-goal strong {
   display: block;
   font-size: 1.2rem;
   line-height: 1.4;
+}
+
+.course-icon {
+  font-size: 1.15em;
+}
+
+.course-group-icon {
+  font-size: 1.15em;
 }
 
 .course small {
@@ -479,7 +485,7 @@ main {
 }
 
 .course-challenge-icon {
-  font-size: 1.45em;
+  font-size: 1.15em;
   line-height: 1;
 }
 
@@ -923,6 +929,11 @@ main {
     align-items: flex-start;
     flex-wrap: wrap;
     gap: 10px;
+    padding: 14px 12px;
+  }
+
+  .course-goal {
+    align-items: flex-start;
     padding: 14px 12px;
   }
 

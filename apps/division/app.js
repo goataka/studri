@@ -17,13 +17,13 @@ const COURSE_IDS = new Set([
 const courses = [
   { id: "g3-meaning-story", emoji: "📖", name: "文章題（割り算の意味）", desc: "分ける・いくつ分の場面を考えよう", type: "meaning" },
   { id: "g3-one-digit-exact", emoji: "🔢", name: "1桁 ÷ 1桁（九九の範囲・あまりなし）", desc: "九九を使って、ぴったり分けよう", type: "one-digit-exact" },
-  { id: "g3-two-digit-exact", emoji: "➗", name: "2桁 ÷ 1桁（九九の範囲・あまりなし）", desc: "2桁の数を九九でぴったり分けよう", type: "two-digit-exact" },
-  { id: "g3-exact-story", emoji: "📚", name: "文章題（九九の範囲・あまりなし）", desc: "文章題を読んで、ぴったり分けよう", type: "exact-story" },
-  { id: "g3-one-digit-remainder", emoji: "🧮", name: "1桁 ÷ 1桁（九九の範囲・あまりあり）", desc: "1桁のわり算で、商とあまりを答えよう", type: "one-digit-remainder" },
-  { id: "g3-two-digit-remainder", emoji: "🟠", name: "2桁 ÷ 1桁（九九の範囲・あまりあり）", desc: "九九を使って、商とあまりを見つけよう", type: "two-digit-remainder" },
-  { id: "g3-remainder-story", emoji: "📘", name: "文章題（九九の範囲・あまりあり）", desc: "文章題で、商とあまりを考えよう", type: "remainder-story" },
-  { id: "g3-zero-one", emoji: "⭕", name: "０や１のわり算", desc: "0をわる計算や、1でわる計算に挑戦", type: "zero-one" },
-  { id: "g3-two-digit-mental", emoji: "💡", name: "2桁 ÷ 1桁（九九を超える暗算）", desc: "商が10以上になる計算を暗算しよう", type: "two-digit-mental" },
+  { id: "g3-two-digit-exact", emoji: "🔢", name: "2桁 ÷ 1桁（九九の範囲・あまりなし）", desc: "2桁の数を九九でぴったり分けよう", type: "two-digit-exact" },
+  { id: "g3-exact-story", emoji: "📖", name: "文章題（九九の範囲・あまりなし）", desc: "文章題を読んで、ぴったり分けよう", type: "exact-story" },
+  { id: "g3-one-digit-remainder", emoji: "🔢", name: "1桁 ÷ 1桁（九九の範囲・あまりあり）", desc: "1桁のわり算で、商とあまりを答えよう", type: "one-digit-remainder" },
+  { id: "g3-two-digit-remainder", emoji: "🔢", name: "2桁 ÷ 1桁（九九の範囲・あまりあり）", desc: "九九を使って、商とあまりを見つけよう", type: "two-digit-remainder" },
+  { id: "g3-remainder-story", emoji: "📖", name: "文章題（九九の範囲・あまりあり）", desc: "文章題で、商とあまりを考えよう", type: "remainder-story" },
+  { id: "g3-zero-one", emoji: "🔢", name: "０や１のわり算", desc: "0をわる計算や、1でわる計算に挑戦", type: "zero-one" },
+  { id: "g3-two-digit-mental", emoji: "🔢", name: "2桁 ÷ 1桁（九九を超える暗算）", desc: "商が10以上になる計算を暗算しよう", type: "two-digit-mental" },
 ];
 
 const defaultData = () => ({ course: "g3-meaning-story", stats: {}, wrong: [] });
@@ -76,7 +76,11 @@ function renderCourses() {
     const copy = document.createElement("span");
     copy.className = "course-copy";
     const name = document.createElement("strong");
-    name.textContent = `${course.emoji} ${course.name}`;
+    const courseIcon = document.createElement("span");
+    courseIcon.className = "course-icon";
+    courseIcon.setAttribute("aria-hidden", "true");
+    courseIcon.textContent = course.emoji;
+    name.append(courseIcon, document.createTextNode(` ${course.name}`));
     const description = document.createElement("small");
     description.textContent = course.desc;
     copy.append(name, description);
@@ -89,7 +93,11 @@ function renderCourses() {
     basicGroup.className = "course-group";
     const basicLabel = document.createElement("span");
     basicLabel.className = "course-group-label";
-    basicLabel.textContent = "ベーシック";
+    const basicIcon = document.createElement("span");
+    basicIcon.className = "course-group-icon";
+    basicIcon.setAttribute("aria-hidden", "true");
+    basicIcon.textContent = "🌱";
+    basicLabel.append(basicIcon, document.createTextNode(" ベーシック"));
     const steps = document.createElement("span");
     steps.className = "course-steps";
     steps.setAttribute("aria-hidden", "true");
@@ -105,7 +113,11 @@ function renderCourses() {
     challengeGroup.className = "course-challenge-group";
     const challengeLabel = document.createElement("span");
     challengeLabel.className = "course-group-label";
-    challengeLabel.textContent = "チャレンジ";
+    const challengeGroupIcon = document.createElement("span");
+    challengeGroupIcon.className = "course-group-icon";
+    challengeGroupIcon.setAttribute("aria-hidden", "true");
+    challengeGroupIcon.textContent = "✨";
+    challengeLabel.append(challengeGroupIcon, document.createTextNode(" チャレンジ"));
     const challenges = document.createElement("div");
     challenges.className = "course-challenges";
     challenges.setAttribute("aria-label", "合格後のチャレンジ");
@@ -149,7 +161,16 @@ function renderCourses() {
   });
   const goal = document.createElement("div");
   goal.className = "course-goal";
-  goal.textContent = "🏁 ゴール";
+  const goalCopy = document.createElement("span");
+  goalCopy.className = "course-copy";
+  const goalLabel = document.createElement("strong");
+  const goalIcon = document.createElement("span");
+  goalIcon.className = "course-icon";
+  goalIcon.setAttribute("aria-hidden", "true");
+  goalIcon.textContent = "🏁";
+  goalLabel.append(goalIcon, document.createTextNode(" ゴール"));
+  goalCopy.append(goalLabel);
+  goal.append(goalCopy);
   courseList.append(goal);
   renderCourseProgress();
 }
