@@ -4,14 +4,18 @@ import { createBdd } from "playwright-bdd";
 const { Given, When, Then } = createBdd();
 
 Given("算数アプリを開く", async ({ page }) => {
-  await page.goto("/apps/division/");
+  await page.goto("/apps/math/division/");
 });
 
 Given("画面確認用に算数アプリを開く", async ({ page }) => {
   await page.addInitScript(() => {
     Math.random = () => 0.5;
   });
-  await page.goto("/apps/division/");
+  await page.goto("/apps/math/division/");
+});
+
+Given("算数ページを開く", async ({ page }) => {
+  await page.goto("/apps/math/");
 });
 
 When("モバイル表示に切り替える", async ({ page }) => {
@@ -23,11 +27,19 @@ When("デスクトップ表示に切り替える", async ({ page }) => {
 });
 
 When("復習ノートを表示する", async ({ page }) => {
-  await page.locator("#tabReview").click();
+  await page.locator('#courses [data-course="g3-one-digit-exact"] .course-log').click();
 });
 
 When("コース一覧を表示する", async ({ page }) => {
-  await page.locator("#tabCourses").click();
+  await page.locator("#reviewBack").click();
+});
+
+Then("わり算コースへ進める", async ({ page }) => {
+  await expect(page).toHaveTitle("スタドリ - 算数編");
+  await expect(page.getByRole("link", { name: /3年生・わり算/ })).toHaveAttribute("href", "division/");
+  await page.getByRole("link", { name: /3年生・わり算/ }).click();
+  await expect(page).toHaveTitle("スタドリ - 算数・３年生・わり算編");
+  await expect(page.locator("#courses")).toBeVisible();
 });
 
 When("現在の問題に誤答する", async ({ page }) => {
@@ -152,11 +164,10 @@ Then("トレイルから問題文の下に計算エリアが表示される", as
 });
 
 Then("誤答を記録し連続合格を0回にする", async ({ page }) => {
-  await expect(page.locator("#wrongCount")).toHaveText("1問");
   await expect(page.locator('#courses [data-course="g3-one-digit-exact"] .course-step.start-dot.current')).toHaveCount(1);
-  await page.locator("#tabReview").click();
+  await page.locator('#courses [data-course="g3-one-digit-exact"] .course-log').click();
   await expect(page.locator("#reviewList .review-item")).toHaveCount(1);
-  await expect(page.locator("#reviewList .review-course")).toHaveText("コース：1桁 ÷ 1桁（九九の範囲・あまりなし）");
+  await expect(page.locator("#reviewTitle")).toHaveText("📜 ログ：1桁 ÷ 1桁（九九の範囲・あまりなし）");
 });
 
 Then("算数ページのパンくずと音・初期化ボタンとバージョンが表示される", async ({ page }) => {
@@ -169,11 +180,11 @@ Then("算数ページのパンくずと音・初期化ボタンとバージョ�
   );
   await expect(page.locator(".course-challenge:disabled")).toHaveCount(18);
   await expect(page.locator("#courses .course").first().locator(".course-step")).toHaveText(["", "🥇", "🥈", "🥉"]);
-  await expect(page.locator(".course-pass-label")).toHaveCount(0);
+  await expect(page.locator(".course-pass-pin")).toHaveCount(0);
   await expect(page.locator(".course-challenge-control").first()).toHaveAttribute("title", "あと3回で解放");
   await expect(page.locator("body")).not.toContainText("あと3回で解放");
   await expect(page.locator("body")).not.toContainText("解放済み");
-  await expect(page.locator("#tabCourses")).toHaveCSS("background-color", "rgb(220, 235, 216)");
+  await expect(page.locator(".course-log")).toHaveText(Array(9).fill("📜 ログ"));
   await expect(page.locator("#resetData")).toHaveAttribute("aria-label", "学習データを初期化");
   await expect(page.locator(".course-group-label")).toHaveText([
     "🌱 ベーシック", "🌳 チャレンジ", "🌱 ベーシック", "🌳 チャレンジ", "🌱 ベーシック", "🌳 チャレンジ",
@@ -187,24 +198,24 @@ Then("算数ページのパンくずと音・初期化ボタンとバージョ�
     getComputedStyle(element).fontSize,
   ));
   expect(challengeIconSize).toBeGreaterThan(challengeTextSize);
-  await page.locator("#tabReview").click();
+  await page.locator("#courses .course-log").first().click();
   await expect(page.locator("#reviewPanel")).toBeVisible();
   await expect(page.locator("#coursesPanel")).toBeHidden();
-  await expect(page.locator("#tabReview")).toHaveCSS("background-color", "rgb(220, 235, 216)");
-  await page.locator("#tabCourses").click();
+  await expect(page.locator("#reviewList")).toContainText("このコースのまちがいはまだありません");
+  await page.locator("#reviewBack").click();
   await expect(page.locator("#sound")).toHaveAttribute("aria-pressed", "true");
   await expect(page.locator("#sound")).toHaveAttribute("aria-label", "音あり");
   await expect(page.locator("#sound")).toHaveText("🔊");
   await expect(page.locator(".breadcrumbs a").first()).toContainText("スタドリ");
-  await expect(page.locator(".breadcrumbs a").last()).toHaveText("🔢 算数");
   await expect(page.locator(".breadcrumbs a").first()).toHaveAttribute("href", "../../");
-  await expect(page.locator(".breadcrumbs a").last()).toHaveAttribute("href", "#home");
+  await expect(page.locator(".breadcrumbs [aria-current='page']")).toHaveText("🔢 算数");
+  await expect(page.locator(".breadcrumbs [aria-current='page']")).toHaveAttribute("href", "../");
   await expect(page.locator(".hero-copy h1")).toHaveText("3年生・わり算");
   const mascotDecoration = await page.locator(".mascot").evaluate((element) =>
     getComputedStyle(element, "::after").content,
   );
   expect(mascotDecoration).not.toBe('"÷"');
-  await expect(page.locator(".tabs").evaluate((element) => element.closest(".panel"))).resolves.toBeNull();
+  await expect(page.locator(".tabs")).toHaveCount(0);
   await expect(page.locator(".hero-copy")).not.toContainText("トレイルを");
   await expect(page.locator(".hero-copy")).not.toContainText("小学3年生の算数");
   const mascotPosition = await page.locator(".mascot").boundingBox();
@@ -247,14 +258,15 @@ When("学習記録と復習ノートを作って初期化する", async ({ page 
     }));
   });
   await page.reload();
-  await expect(page.locator("#wrongCount")).toHaveText("1問");
+  await expect(page.locator('#courses [data-course="g3-one-digit-exact"] .course-log-count')).toHaveText("1");
   page.once("dialog", (dialog) => dialog.accept());
   await page.locator("#resetData").click();
 });
 
 Then("学習データが初期化される", async ({ page }) => {
-  await expect(page.locator("#wrongCount")).toHaveText("0問");
-  await expect(page.locator("#reviewList")).toContainText("まだまちがいはありません");
+  await expect(page.locator("#courses .course-log-count")).toHaveCount(0);
+  await page.locator('#courses [data-course="g3-one-digit-exact"] .course-log').click();
+  await expect(page.locator("#reviewList")).toContainText("このコースのまちがいはまだありません");
   await expect(page.locator('#courses [data-course="g3-one-digit-exact"] .course-step.current')).toHaveCount(1);
   await expect(page.locator("#home")).toBeVisible();
   await expect(page.locator("#quiz")).toBeHidden();

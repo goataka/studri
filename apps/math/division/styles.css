@@ -241,43 +241,8 @@ main {
   font-weight: 800;
 }
 
-.tabs {
-  display: flex;
-  width: min(100%, 460px);
-  gap: 5px;
-  margin: 18px 0 0;
-  padding: 5px;
-  border-radius: 16px;
-  background: #eef2e8;
-}
-
 .home-panel {
-  margin-top: 8px;
-}
-
-.tab {
-  flex: 1;
-  min-height: 48px;
-  padding: 10px 14px;
-  border: 2px solid transparent;
-  border-radius: 12px;
-  background: transparent;
-  color: #596960;
-  font: inherit;
-  font-weight: 800;
-  cursor: pointer;
-}
-
-.tab:hover:not(.active) {
-  background: rgb(255 255 255 / 70%);
-  color: var(--ink);
-}
-
-.tab.active {
-  border-color: #aac5a4;
-  background: #dcebd8;
-  color: #315c43;
-  box-shadow: 0 2px 0 rgb(35 74 50 / 10%);
+  margin-top: 18px;
 }
 
 .course,
@@ -329,6 +294,19 @@ main {
   position: relative;
   text-align: left;
   transition: transform 160ms ease, border-color 160ms ease, background-color 160ms ease;
+}
+
+.course-pass-pin {
+  position: absolute;
+  z-index: 2;
+  top: 50%;
+  left: -18px;
+  padding: 2px;
+  border-radius: 50%;
+  background: #fffdf8;
+  font-size: 1.25rem;
+  line-height: 1;
+  transform: translateY(-50%);
 }
 
 .course:not(.course-goal):hover {
@@ -494,6 +472,38 @@ main {
   justify-items: start;
 }
 
+.course-log {
+  display: inline-flex;
+  flex: 0 0 auto;
+  align-items: center;
+  gap: 5px;
+  min-height: 42px;
+  padding: 8px 11px;
+  border: 1px solid #cbdac3;
+  border-radius: 999px;
+  background: #f3f7ef;
+  color: #426d4f;
+  font-size: 0.8rem;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+.course-log:hover {
+  border-color: #92b67e;
+  background: #e8efdf;
+}
+
+.course-log-count {
+  display: grid;
+  min-width: 20px;
+  aspect-ratio: 1;
+  place-items: center;
+  border-radius: 50%;
+  background: #d97843;
+  color: white;
+  font-size: 0.68rem;
+}
+
 .course-challenge-group {
   display: grid;
   justify-items: start;
@@ -577,6 +587,16 @@ main {
   gap: 10px;
 }
 
+.review-back {
+  padding: 8px 12px;
+  border: 1px solid #cbdac3;
+  border-radius: 999px;
+  background: #f3f7ef;
+  color: #426d4f;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
 .review-list p {
   margin: 0;
   color: var(--muted);
@@ -591,13 +611,6 @@ main {
 .review-item b {
   display: block;
   color: #925637;
-}
-
-.review-item .review-course {
-  display: block;
-  margin: 0 0 5px;
-  color: #596960;
-  font-weight: 750;
 }
 
 .review-item small {
@@ -1013,6 +1026,11 @@ main {
   .course-side {
     flex-basis: 100%;
     justify-items: start;
+  }
+
+  .course-log {
+    align-self: flex-end;
+    margin-left: auto;
   }
 
   .course strong {
