@@ -200,9 +200,8 @@ Then("画面幅に応じた位置に計算エリアが表示される", async ({
   expect(desktopWork).not.toBeNull();
   const desktopPrimary = await page.locator(".quiz-primary").boundingBox();
   expect(desktopPrimary).not.toBeNull();
-  expect(desktopQuestion!.x).toBeLessThan(desktopBoard!.x + desktopBoard!.width / 2);
-  expect(desktopAnswer!.x).toBeLessThan(desktopBoard!.x + desktopBoard!.width / 2);
-  expect(desktopWork!.x).toBeGreaterThanOrEqual(desktopBoard!.x + desktopBoard!.width / 2);
+  expect(desktopQuestion!.x + desktopQuestion!.width).toBeLessThanOrEqual(desktopWork!.x);
+  expect(desktopAnswer!.x + desktopAnswer!.width).toBeLessThanOrEqual(desktopWork!.x);
   const problemCenter = desktopQuestion!.x + desktopQuestion!.width / 2;
   const primaryCenter = desktopPrimary!.x + desktopPrimary!.width / 2;
   expect(Math.abs(problemCenter - primaryCenter)).toBeLessThanOrEqual(1);
@@ -467,11 +466,11 @@ Then("コース一覧に進捗ステップと解放条件つきボタンが表�
   await expect(mobileGuide).toHaveCSS("white-space", "normal");
   const guideLayout = await mobileGuide.evaluate((element) => ({
     height: element.getBoundingClientRect().height,
-    lineHeight: Number.parseFloat(getComputedStyle(element).lineHeight),
+    fontSize: Number.parseFloat(getComputedStyle(element).fontSize),
     scrollWidth: element.scrollWidth,
     clientWidth: element.clientWidth,
   }));
-  expect(guideLayout.height).toBeGreaterThan(guideLayout.lineHeight);
+  expect(guideLayout.height).toBeGreaterThan(guideLayout.fontSize * 2);
   expect(guideLayout.scrollWidth).toBeLessThanOrEqual(guideLayout.clientWidth);
   const mobileStepPositions = await courses.locator(".course-steps").evaluateAll((elements) =>
     elements.map((element) => element.getBoundingClientRect().x),
