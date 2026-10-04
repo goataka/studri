@@ -66,12 +66,14 @@ function renderCourses() {
   courseList.replaceChildren();
 
   courses.forEach((course, index) => {
-    const button = document.createElement("button");
-    button.type = "button";
-    button.className = `course${selectedCourse === course.id ? " selected" : ""}`;
-    button.dataset.course = course.id;
-    button.dataset.step = String(index + 1);
+    const card = document.createElement("article");
+    card.className = `course${selectedCourse === course.id ? " selected" : ""}`;
+    card.dataset.course = course.id;
+    card.dataset.step = String(index + 1);
 
+    const start = document.createElement("button");
+    start.type = "button";
+    start.className = "course-start";
     const copy = document.createElement("span");
     copy.className = "course-copy";
     const name = document.createElement("strong");
@@ -82,7 +84,7 @@ function renderCourses() {
 
     const details = document.createElement("span");
     details.className = "course-details";
-    const progress = document.createElement("div");
+    const progress = document.createElement("span");
     progress.className = "course-progress";
     const progressLabel = document.createElement("span");
     progressLabel.textContent = "連続合格";
@@ -94,26 +96,43 @@ function renderCourses() {
     for (let step = 0; step < 3; step += 1) {
       const indicator = document.createElement("span");
       indicator.className = "course-step";
+      indicator.textContent = String(step + 1);
       steps.append(indicator);
     }
-    progress.append(progressLabel, progressCount, steps);
+    const passLabel = document.createElement("small");
+    passLabel.className = "course-pass-label";
+    passLabel.textContent = "3つ目で合格";
+    progress.append(progressLabel, progressCount, steps, passLabel);
 
     const record = document.createElement("small");
     record.className = "course-record course-attempts";
     const challenges = document.createElement("div");
     challenges.className = "course-challenges";
     challenges.setAttribute("aria-label", "合格後のチャレンジ");
-    ["⏱ タイムアタック", "🔥 連続正解"].forEach((label) => {
-      const challenge = document.createElement("span");
+    [
+      ["⏱ タイムアタック", "time"],
+      ["🔥 連続正解", "chain"],
+    ].forEach(([label, mode]) => {
+      const control = document.createElement("span");
+      control.className = "course-challenge-control";
+      const challenge = document.createElement("button");
+      challenge.type = "button";
+      challenge.className = "course-challenge";
+      challenge.dataset.mode = mode;
       challenge.textContent = label;
-      challenges.append(challenge);
+      control.append(challenge);
+      challenges.append(control);
     });
     const unlock = document.createElement("small");
     unlock.className = "course-unlock";
 
-    details.append(progress, record, challenges, unlock);
-    button.append(copy, details);
-    button.addEventListener("click", () => {
+    details.append(progress, record);
+    start.append(copy, details);
+    const side = document.createElement("div");
+    side.className = "course-side";
+    side.append(challenges, unlock);
+    card.append(start, side);
+    start.addEventListener("click", () => {
       selectedCourse = course.id;
       data.course = selectedCourse;
       save();
@@ -121,7 +140,7 @@ function renderCourses() {
       renderStats();
       setupQuiz();
     });
-    courseList.append(button);
+    courseList.append(card);
   });
   renderCourseProgress();
 }
@@ -143,9 +162,18 @@ function renderCourseProgress() {
       ? "解放済み"
       : `あと${3 - streak}回で解放`;
     button.querySelector(".course-unlock").textContent = unlockMessage;
-    button.setAttribute(
+    const challengeTitle = stats.streak >= 3
+      ? "解放済み"
+      : "3回連続でミスなし合格すると解放されます";
+    button.querySelectorAll(".course-challenge").forEach((challenge) => {
+      challenge.disabled = stats.streak < 3;
+      challenge.title = challengeTitle;
+      challenge.setAttribute("aria-label", `${challenge.textContent}。${challengeTitle}`);
+      challenge.parentElement.title = challengeTitle;
+    });
+    button.querySelector(".course-start").setAttribute(
       "aria-label",
-      `小学3年生、${course.name}。${course.desc}。連続合格 ${streak} / 3回。挑戦 ${stats.attempts}回。タイムアタックと連続正解チャレンジ。${unlockMessage}。`,
+      `小学3年生、${course.name}。${course.desc}。連続合格 ${streak} / 3回。挑戦 ${stats.attempts}回。${unlockMessage}。`,
     );
   });
 }
@@ -505,6 +533,13 @@ function finishQuiz() {
   get("chainBest").textContent = localStorage.getItem(`${STORAGE_KEY}-chain`) || "0";
   get("timeAttack").disabled = stats.streak < 3;
   get("chainAttack").disabled = stats.streak < 3;
+  const challengeTitle = stats.streak >= 3
+    ? "解放済み"
+    : "3回連続でミスなし合格すると解放されます";
+  ["timeAttack", "chainAttack"].forEach((id) => {
+    get(id).title = challengeTitle;
+    get(id).parentElement.title = challengeTitle;
+  });
   renderStats();
 }
 
