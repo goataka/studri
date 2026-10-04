@@ -148,7 +148,19 @@ function renderCourses() {
     side.className = "course-side";
     challengeGroup.append(challengeLabel, challenges);
     side.append(challengeGroup);
-    card.append(start, side);
+    const toolsGroup = document.createElement("div");
+    toolsGroup.className = "course-tools-group";
+    const toolsLabel = document.createElement("span");
+    toolsLabel.className = "course-group-label";
+    toolsLabel.textContent = "🧰 ツール";
+    const log = document.createElement("button");
+    log.type = "button";
+    log.className = "course-log";
+    log.dataset.reviewCourse = course.id;
+    log.setAttribute("aria-label", `📜 ログ：${course.name}`);
+    log.addEventListener("click", () => showCourseLog(course));
+    toolsGroup.append(toolsLabel, log);
+    card.append(start, side, toolsGroup);
     start.addEventListener("click", () => {
       selectedCourse = course.id;
       data.course = selectedCourse;
@@ -199,6 +211,16 @@ function renderCourseProgress() {
 
     const stats = data.stats[course.id] || { streak: 0, attempts: 0, best: null };
     const streak = Math.min(stats.streak, 3);
+    let pin = button.querySelector(".course-pass-pin");
+    if (stats.streak > 0 && !pin) {
+      pin = document.createElement("span");
+      pin.className = "course-pass-pin";
+      pin.textContent = "📍";
+      pin.setAttribute("aria-label", "ベーシック合格");
+      button.prepend(pin);
+    } else if (stats.streak === 0) {
+      pin?.remove();
+    }
     const challengeGroup = button.querySelector(".course-challenge-group");
     challengeGroup.classList.toggle("is-next", streak >= 3);
     button.querySelectorAll(".course-step").forEach((step, index) => {
@@ -212,6 +234,17 @@ function renderCourseProgress() {
       if (stats.streak < 3) control.title = `あと${3 - streak}回で解放`;
       else control.removeAttribute("title");
     });
+    const log = button.querySelector(".course-log");
+    const mistakeCount = data.wrong.filter((entry) => entry.courseId === course.id).length;
+    log.replaceChildren(document.createTextNode("📜 ログ"));
+    log.disabled = mistakeCount === 0;
+    log.title = mistakeCount === 0 ? "このコースの誤答ログはありません" : `${mistakeCount}件の誤答ログ`;
+    if (mistakeCount) {
+      const count = document.createElement("span");
+      count.className = "course-log-count";
+      count.textContent = String(mistakeCount);
+      log.append(count);
+    }
     button.querySelector(".course-start").setAttribute(
       "aria-label",
       `小学3年生、${course.name}。${course.desc}。合格ステップ ${streak}回。`,
@@ -219,47 +252,34 @@ function renderCourseProgress() {
   });
 }
 
-function setupTabs() {
-  const tabs = document.querySelectorAll(".tab");
-  tabs.forEach((tab) => {
-    tab.addEventListener("click", () => {
-      tabs.forEach((other) => {
-        const active = other === tab;
-        other.classList.toggle("active", active);
-        other.setAttribute("aria-selected", String(active));
-        get(other.dataset.tab).classList.toggle("hidden", !active);
-      });
-    });
-  });
-}
-
 function renderStats() {
   renderCourseProgress();
-  get("wrongCount").textContent = `${data.wrong.length}問`;
+}
 
+function showCourseLog(course) {
+  get("coursesPanel").classList.add("hidden");
+  get("reviewPanel").classList.remove("hidden");
+  get("reviewTitle").textContent = `📜 ログ：${course.name}`;
   const reviewList = get("reviewList");
   reviewList.replaceChildren();
-  if (data.wrong.length === 0) {
+  const courseMistakes = data.wrong.filter((entry) => entry.courseId === course.id);
+  if (courseMistakes.length === 0) {
     const emptyMessage = document.createElement("p");
-    emptyMessage.textContent = "まだまちがいはありません。挑戦してみよう！";
+    emptyMessage.textContent = "このコースのまちがいはまだありません。挑戦してみよう！";
     reviewList.append(emptyMessage);
     return;
   }
 
-  data.wrong.slice(-8).reverse().forEach((entry) => {
+  courseMistakes.slice(-8).reverse().forEach((entry) => {
     const item = document.createElement("div");
     item.className = "review-item";
-    const reviewCourse = document.createElement("small");
-    reviewCourse.className = "review-course";
-    const course = courses.find((candidate) => candidate.id === entry.courseId);
-    reviewCourse.textContent = `コース：${course?.name || "コース情報なし"}`;
     const problem = document.createElement("b");
     problem.textContent = entry.problem;
     const answer = document.createElement("div");
     answer.textContent = `あなたの答え：${entry.answer || "未入力"} / 正解：${entry.correct}`;
     const explanation = document.createElement("small");
     explanation.textContent = entry.explain;
-    item.append(reviewCourse, problem, answer, explanation);
+    item.append(problem, answer, explanation);
     reviewList.append(item);
   });
 }
@@ -672,7 +692,6 @@ function returnToCourses() {
   renderStats();
 }
 
-setupTabs();
 renderCourses();
 renderStats();
 buildKeypad();
@@ -698,6 +717,10 @@ get("quit").addEventListener("click", () => {
   if (confirm("挑戦を中断してコース選択へ戻りますか？")) returnToCourses();
 });
 get("again").addEventListener("click", setupQuiz);
+get("reviewBack").addEventListener("click", () => {
+  get("reviewPanel").classList.add("hidden");
+  get("coursesPanel").classList.remove("hidden");
+});
 get("homeButton").addEventListener("click", (event) => {
   event.preventDefault();
   returnToCourses();

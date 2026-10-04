@@ -28,13 +28,13 @@ createServer(async (request: IncomingMessage, response: ServerResponse) => {
   if (
     !method ||
     !["GET", "HEAD"].includes(method) ||
-    !(relativePath === "index.html" || relativePath === "studri.jpeg" || relativePath.startsWith("apps/"))
+    !(relativePath === "" || relativePath === "index.html" || relativePath === "studri.jpeg" || relativePath.startsWith("apps/"))
   ) {
     response.writeHead(404).end("Not found");
     return;
   }
 
-  let filePath = path.resolve(root, relativePath || "index.html");
+  let filePath = path.resolve(root, relativePath || ".");
   if (filePath !== root && !filePath.startsWith(`${root}${path.sep}`)) {
     response.writeHead(404).end("Not found");
     return;

@@ -14,7 +14,7 @@
       <nav aria-label="パンくずリスト">
         <ol class="breadcrumbs">
           <li><a href="../../"><span class="brand-mark" aria-hidden="true">✳</span>スタドリ</a></li>
-          <li><a href="#home" aria-current="page">🔢 算数</a></li>
+          <li><a href="../" aria-current="page">🔢 算数</a></li>
         </ol>
       </nav>
       <div class="header-actions">
@@ -27,7 +27,7 @@
       <section id="home">
         <div class="hero">
           <div class="mascot">
-            <img src="../../studri.jpeg" alt="スタドリのキャラクター">
+            <img src="../../../studri.jpeg" alt="スタドリのキャラクター">
           </div>
           <div class="hero-copy">
             <h1>3年生・わり算</h1>
@@ -35,19 +35,19 @@
           </div>
         </div>
 
-        <div class="tabs" role="tablist">
-          <button class="tab active" id="tabCourses" data-tab="coursesPanel" role="tab" aria-selected="true" aria-controls="coursesPanel" type="button">🗺️ コース</button>
-          <button class="tab" id="tabReview" data-tab="reviewPanel" role="tab" aria-selected="false" aria-controls="reviewPanel" type="button">📒 復習ノート <span class="badge" id="wrongCount">0問</span></button>
-        </div>
         <section class="panel home-panel">
-          <div id="coursesPanel" role="tabpanel" aria-labelledby="tabCourses">
+          <div id="coursesPanel">
             <div class="courses" id="courses" aria-label="小学3年生のコース一覧"></div>
           </div>
-          <div id="reviewPanel" class="hidden" role="tabpanel" aria-labelledby="tabReview">
+          <section id="reviewPanel" class="hidden" aria-labelledby="reviewTitle">
+            <div class="panel-title">
+              <h2 id="reviewTitle"></h2>
+              <button class="review-back" id="reviewBack" type="button">← コース一覧へ</button>
+            </div>
             <div id="reviewList" class="review-list">
               <p>まだまちがいはありません。挑戦してみよう！</p>
             </div>
-          </div>
+          </section>
         </section>
       </section>
 
