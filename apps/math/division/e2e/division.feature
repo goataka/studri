@@ -70,7 +70,7 @@
     ならば VR画像 "courses-mobile.png" を確認する
     もし デスクトップ表示に切り替える
     かつ 復習ノートを表示する
-    ならば VR画像 "review-empty.png" を確認する
+    ならば VR画像 "review-course-log.png" を確認する
     もし コース一覧を表示する
     かつ コースを選んで挑戦を始める
     ならば VR画像 "quiz.png" を確認する

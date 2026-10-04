@@ -472,6 +472,13 @@ main {
   justify-items: start;
 }
 
+.course-tools-group {
+  display: grid;
+  flex: 0 0 auto;
+  gap: 4px;
+  justify-items: end;
+}
+
 .course-log {
   display: inline-flex;
   flex: 0 0 auto;
@@ -491,6 +498,13 @@ main {
 .course-log:hover {
   border-color: #92b67e;
   background: #e8efdf;
+}
+
+.course-log:disabled {
+  border-color: #e0e2dc;
+  background: #f0f1ed;
+  color: #8a9088;
+  cursor: not-allowed;
 }
 
 .course-log-count {
@@ -1028,9 +1042,13 @@ main {
     justify-items: start;
   }
 
+  .course-tools-group {
+    width: 100%;
+    justify-items: end;
+  }
+
   .course-log {
-    align-self: flex-end;
-    margin-left: auto;
+    justify-self: end;
   }
 
   .course strong {

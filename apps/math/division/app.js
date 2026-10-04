@@ -148,13 +148,19 @@ function renderCourses() {
     side.className = "course-side";
     challengeGroup.append(challengeLabel, challenges);
     side.append(challengeGroup);
+    const toolsGroup = document.createElement("div");
+    toolsGroup.className = "course-tools-group";
+    const toolsLabel = document.createElement("span");
+    toolsLabel.className = "course-group-label";
+    toolsLabel.textContent = "🧰 ツール";
     const log = document.createElement("button");
     log.type = "button";
     log.className = "course-log";
     log.dataset.reviewCourse = course.id;
     log.setAttribute("aria-label", `📜 ログ：${course.name}`);
     log.addEventListener("click", () => showCourseLog(course));
-    card.append(start, side, log);
+    toolsGroup.append(toolsLabel, log);
+    card.append(start, side, toolsGroup);
     start.addEventListener("click", () => {
       selectedCourse = course.id;
       data.course = selectedCourse;
@@ -231,6 +237,8 @@ function renderCourseProgress() {
     const log = button.querySelector(".course-log");
     const mistakeCount = data.wrong.filter((entry) => entry.courseId === course.id).length;
     log.replaceChildren(document.createTextNode("📜 ログ"));
+    log.disabled = mistakeCount === 0;
+    log.title = mistakeCount === 0 ? "このコースの誤答ログはありません" : `${mistakeCount}件の誤答ログ`;
     if (mistakeCount) {
       const count = document.createElement("span");
       count.className = "course-log-count";
