@@ -224,7 +224,7 @@ main {
   position: relative;
   display: flex;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: space-between;
   gap: 24px;
   width: 100%;
   min-height: 108px;
@@ -241,6 +241,23 @@ main {
   transform: translateY(-2px);
   border-color: #9cbd8b;
   background: #fff;
+}
+
+.course-start {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  flex: 1 1 auto;
+  min-width: 0;
+  padding: 0;
+  border-radius: 12px;
+  background: transparent;
+  text-align: left;
+}
+
+.course-start:focus-visible {
+  outline: 3px solid var(--orange);
+  outline-offset: 4px;
 }
 
 .course::before {
@@ -288,22 +305,17 @@ main {
 
 .course-details {
   display: grid;
-  grid-template-columns: minmax(120px, auto) minmax(0, 1fr);
-  grid-template-rows: auto auto;
-  align-items: center;
-  justify-items: start;
-  gap: 5px 14px;
-  flex: 0 1 430px;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 4px;
+  flex: 0 0 auto;
 }
 
 .course-progress {
   display: grid;
-  grid-column: 1;
-  grid-row: 1;
   grid-template-columns: auto auto;
-  align-items: center;
+  align-items: baseline;
   justify-items: start;
-  gap: 4px 6px;
+  gap: 4px 7px;
   color: #426d4f;
   font-size: 0.76rem;
   font-weight: 750;
@@ -320,42 +332,71 @@ main {
 .course-steps {
   display: inline-flex;
   grid-column: 1 / -1;
-  gap: 6px;
+  align-items: center;
+  gap: 7px;
+  padding-block: 2px 18px;
 }
 
 .course-step {
-  width: 22px;
+  display: grid;
+  width: 36px;
   aspect-ratio: 1;
-  border: 2px solid #a9bea0;
+  place-items: center;
+  border: 2px solid #9db596;
   border-radius: 50%;
   background: #fff;
-  box-shadow: inset 0 0 0 3px #fff;
+  color: #53795d;
+  font-size: 0.9rem;
+  font-weight: 900;
+}
+
+.course-step.final {
+  border-color: #d79b54;
+  background: #fff4df;
+  color: #805c2d;
 }
 
 .course-step.complete {
   border-color: #5e895c;
   background: #78a875;
+  color: white;
+}
+
+.course-step.complete.final {
+  border-color: #426d4f;
+  background: #5e895c;
+}
+
+.course-pass-label {
+  grid-column: 1 / -1;
+  margin-top: -22px;
+  color: #805c2d;
+  font-size: 0.68rem;
+  font-weight: 800;
 }
 
 .course-record {
-  grid-column: 1;
-  grid-row: 2;
   color: var(--muted);
   white-space: nowrap;
+}
+
+.course-side {
+  display: grid;
+  flex: 0 0 auto;
+  gap: 5px;
+  justify-items: end;
 }
 
 .course-challenges {
   display: flex;
   flex-wrap: wrap;
-  grid-column: 2;
-  grid-row: 1;
   align-items: center;
   gap: 6px;
 }
 
-.course-challenges span {
-  padding: 6px 9px;
-  border: 1px solid #ead9b5;
+.course-challenge {
+  padding: 7px 10px;
+  border: 1px solid #dec99e;
   border-radius: 999px;
   background: #fff8e9;
   color: #765a2c;
@@ -364,13 +405,25 @@ main {
   white-space: nowrap;
 }
 
+.course-challenge:disabled {
+  border-color: #d8d9d1;
+  background: #eeefea;
+  color: #777d75;
+  cursor: not-allowed;
+  filter: grayscale(1);
+  opacity: 0.72;
+}
+
+.course-challenge:not(:disabled):hover {
+  border-color: #c89c55;
+  background: #fff0d1;
+}
+
 .course-unlock {
-  grid-column: 2;
-  grid-row: 2;
   color: #53795d !important;
   font-size: 0.72rem !important;
   font-weight: 750;
-  text-align: left;
+  text-align: right;
 }
 
 .history-actions {
@@ -778,34 +831,29 @@ main {
     padding: 14px 12px 14px 46px;
   }
 
+  .course-start {
+    flex-basis: 100%;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
   .course-copy,
   .course-details {
     flex-basis: 100%;
   }
 
   .course-details {
-    grid-template-columns: 130px minmax(0, 1fr);
-    gap: 5px 10px;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 4px;
   }
 
-  .course-progress {
-    grid-column: 1;
-    grid-row: 1;
-  }
-
-  .course-record {
-    grid-column: 1;
-    grid-row: 2;
-  }
-
-  .course-challenges {
-    grid-column: 2;
-    grid-row: 1;
+  .course-side {
+    flex-basis: 100%;
+    justify-items: start;
   }
 
   .course-unlock {
-    grid-column: 2;
-    grid-row: 2;
+    text-align: left;
   }
 
   .course strong {
@@ -876,7 +924,7 @@ main {
     font-size: 0.68rem;
   }
 
-  .course-challenges span {
+  .course-challenge {
     padding: 5px 7px;
     font-size: 0.62rem;
   }
