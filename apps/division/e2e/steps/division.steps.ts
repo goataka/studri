@@ -119,9 +119,9 @@ Then("コースは小学3年生のみで音とバージョンが表示される"
   await expect(page.locator("#tabCourses")).toHaveCSS("background-color", "rgb(220, 235, 216)");
   await expect(page.locator("#resetData")).toHaveCount(0);
   await expect(page.locator(".course-group-label")).toHaveText([
-    "ベーシック", "チャレンジ", "ベーシック", "チャレンジ", "ベーシック", "チャレンジ",
-    "ベーシック", "チャレンジ", "ベーシック", "チャレンジ", "ベーシック", "チャレンジ",
-    "ベーシック", "チャレンジ", "ベーシック", "チャレンジ", "ベーシック", "チャレンジ",
+    "🌱 ベーシック", "✨ チャレンジ", "🌱 ベーシック", "✨ チャレンジ", "🌱 ベーシック", "✨ チャレンジ",
+    "🌱 ベーシック", "✨ チャレンジ", "🌱 ベーシック", "✨ チャレンジ", "🌱 ベーシック", "✨ チャレンジ",
+    "🌱 ベーシック", "✨ チャレンジ", "🌱 ベーシック", "✨ チャレンジ", "🌱 ベーシック", "✨ チャレンジ",
   ]);
   const challengeIconSize = Number.parseFloat(await page.locator(".course-challenge-icon").first().evaluate((element) =>
     getComputedStyle(element).fontSize,
@@ -204,6 +204,24 @@ Then("コース一覧に進捗ステップと解放条件つきボタンが表�
   expect(goalBounds!.y).toBe(lastCourseBounds!.y + lastCourseBounds!.height + 22);
   await expect(goal).toHaveCSS("border-radius", "16px");
   await expect(lastCourse).toHaveCSS("border-radius", "16px");
+  await expect(goal.locator("strong")).toHaveCSS("font-size", await lastCourse.locator("strong").evaluate((element) =>
+    getComputedStyle(element).fontSize,
+  ));
+  await expect(goal).toHaveCSS("display", "flex");
+  const courseIconSize = Number.parseFloat(await firstCourse.locator(".course-icon").evaluate((element) =>
+    getComputedStyle(element).fontSize,
+  ));
+  const courseTextSize = Number.parseFloat(await firstCourse.locator("strong").evaluate((element) =>
+    getComputedStyle(element).fontSize,
+  ));
+  expect(courseIconSize).toBeGreaterThan(courseTextSize);
+  const groupIconSize = Number.parseFloat(await firstCourse.locator(".course-group-icon").first().evaluate((element) =>
+    getComputedStyle(element).fontSize,
+  ));
+  const groupTextSize = Number.parseFloat(await firstCourse.locator(".course-group-label").first().evaluate((element) =>
+    getComputedStyle(element).fontSize,
+  ));
+  expect(groupIconSize).toBeGreaterThan(groupTextSize);
 
   await page.setViewportSize({ width: 390, height: 844 });
   const mobileColumns = await page.locator("#courses").evaluate((element) =>
@@ -221,13 +239,13 @@ Then("9つのコースが指定順に並び問題が範囲内で出る", async (
   const courses = [
     ["g3-meaning-story", "📖 文章題（割り算の意味）", "meaning"],
     ["g3-one-digit-exact", "🔢 1桁 ÷ 1桁（九九の範囲・あまりなし）", "one-digit-exact"],
-    ["g3-two-digit-exact", "➗ 2桁 ÷ 1桁（九九の範囲・あまりなし）", "two-digit-exact"],
-    ["g3-exact-story", "📚 文章題（九九の範囲・あまりなし）", "exact-story"],
-    ["g3-one-digit-remainder", "🧮 1桁 ÷ 1桁（九九の範囲・あまりあり）", "one-digit-remainder"],
-    ["g3-two-digit-remainder", "🟠 2桁 ÷ 1桁（九九の範囲・あまりあり）", "two-digit-remainder"],
-    ["g3-remainder-story", "📘 文章題（九九の範囲・あまりあり）", "remainder-story"],
-    ["g3-zero-one", "⭕ ０や１のわり算", "zero-one"],
-    ["g3-two-digit-mental", "💡 2桁 ÷ 1桁（九九を超える暗算）", "mental"],
+    ["g3-two-digit-exact", "🔢 2桁 ÷ 1桁（九九の範囲・あまりなし）", "two-digit-exact"],
+    ["g3-exact-story", "📖 文章題（九九の範囲・あまりなし）", "exact-story"],
+    ["g3-one-digit-remainder", "🔢 1桁 ÷ 1桁（九九の範囲・あまりあり）", "one-digit-remainder"],
+    ["g3-two-digit-remainder", "🔢 2桁 ÷ 1桁（九九の範囲・あまりあり）", "two-digit-remainder"],
+    ["g3-remainder-story", "📖 文章題（九九の範囲・あまりあり）", "remainder-story"],
+    ["g3-zero-one", "🔢 ０や１のわり算", "zero-one"],
+    ["g3-two-digit-mental", "🔢 2桁 ÷ 1桁（九九を超える暗算）", "mental"],
   ];
 
   await expect(page.locator("#courses .course")).toHaveCount(courses.length);
