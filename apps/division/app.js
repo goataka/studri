@@ -100,7 +100,7 @@ function renderCourses() {
     challenges.setAttribute("aria-label", "合格後のチャレンジ");
     [
       ["⏱ タイムアタック", "time"],
-      ["🔥 連続正解", "chain"],
+      ["🔥 連続正解チャレンジ", "chain"],
     ].forEach(([label, mode]) => {
       const control = document.createElement("span");
       control.className = "course-challenge-control";
@@ -112,14 +112,12 @@ function renderCourses() {
       control.append(challenge);
       challenges.append(control);
     });
-    const unlock = document.createElement("small");
-    unlock.className = "course-unlock";
 
     details.append(progress);
     start.append(copy, details);
     const side = document.createElement("div");
     side.className = "course-side";
-    side.append(challenges, unlock);
+    side.append(challenges);
     card.append(start, side);
     start.addEventListener("click", () => {
       selectedCourse = course.id;
@@ -149,20 +147,16 @@ function renderCourseProgress() {
       step.classList.toggle("current", index === streak && streak < 3);
       step.classList.toggle("complete", index > 0 && index <= streak);
     });
-    const unlockMessage = stats.streak >= 3
-      ? "解放済み"
-      : `あと${3 - streak}回で解放`;
-    const unlock = button.querySelector(".course-unlock");
-    unlock.textContent = unlockMessage;
-    unlock.classList.toggle("pending", stats.streak < 3);
     button.querySelectorAll(".course-challenge").forEach((challenge) => {
       challenge.disabled = stats.streak < 3;
-      challenge.removeAttribute("title");
       challenge.setAttribute("aria-label", challenge.textContent);
+      const control = challenge.parentElement;
+      if (stats.streak < 3) control.title = `あと${3 - streak}回で解放`;
+      else control.removeAttribute("title");
     });
     button.querySelector(".course-start").setAttribute(
       "aria-label",
-      `小学3年生、${course.name}。${course.desc}。合格ステップ ${streak}回。${stats.streak >= 3 ? "解放済み。" : ""}`,
+      `小学3年生、${course.name}。${course.desc}。合格ステップ ${streak}回。`,
     );
   });
 }
@@ -531,14 +525,14 @@ function finishQuiz() {
   get("resultMessage").textContent = quiz.correct === 10
     ? (quiz.missed
       ? "再回答して全問正解！ただし途中でミスがあったので、合格ステップは0からだよ。"
-      : `ミスなし合格 ${stats.streak}/3回。${stats.streak >= 3 ? "チャレンジモードが解放されたよ！" : "あと少しで合格だよ！"}`)
+      : `ミスなし合格 ${stats.streak}/3回。${stats.streak >= 3 ? "チャレンジに挑戦できるよ！" : "あと少しで合格だよ！"}`)
     : "まちがいはノートに保存したよ。もう一度やってみよう。";
   get("chainBest").textContent = localStorage.getItem(`${STORAGE_KEY}-chain`) || "0";
   get("timeAttack").disabled = stats.streak < 3;
   get("chainAttack").disabled = stats.streak < 3;
   const challengeTitle = stats.streak >= 3
-    ? "解放済み"
-    : "3回連続でミスなし合格すると解放されます";
+    ? "チャレンジに挑戦できます"
+    : `あと${3 - stats.streak}回で解放`;
   ["timeAttack", "chainAttack"].forEach((id) => {
     get(id).title = challengeTitle;
     get(id).parentElement.title = challengeTitle;

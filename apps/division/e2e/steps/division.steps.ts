@@ -116,17 +116,20 @@ Then("コースは小学3年生のみで音とバージョンが表示される"
   await expect(page).toHaveTitle("スタドリ - 算数・３年生・わり算編");
   await expect(page.locator("#statsTitle")).toHaveCount(0);
   await expect(page.locator(".course-challenge")).toHaveText(
-    Array(9).fill(["⏱ タイムアタック", "🔥 連続正解"]).flat(),
+    Array(9).fill(["⏱ タイムアタック", "🔥 連続正解チャレンジ"]).flat(),
   );
   await expect(page.locator(".course-challenge:disabled")).toHaveCount(18);
   await expect(page.locator("#courses .course").first().locator(".course-step")).toHaveText(["", "1", "2", "3"]);
   await expect(page.locator(".course-pass-label")).toHaveCount(0);
-  await expect(page.locator(".course-unlock")).toHaveText(Array(9).fill("あと3回で解放"));
-  await expect(page.locator(".course-unlock").first()).toBeHidden();
-  await page.locator("#courses .course").first().hover();
-  await expect(page.locator(".course-unlock").first()).toBeVisible();
-  await page.mouse.move(0, 0);
-  await expect(page.locator(".course-unlock").first()).toBeHidden();
+  await expect(page.locator(".course-challenge-control").first()).toHaveAttribute("title", "あと3回で解放");
+  await expect(page.locator("body")).not.toContainText("あと3回で解放");
+  await expect(page.locator("body")).not.toContainText("解放済み");
+  await expect(page.locator("#tabCourses")).toHaveCSS("background-color", "rgb(49, 92, 67)");
+  await page.locator("#tabReview").click();
+  await expect(page.locator("#reviewPanel")).toBeVisible();
+  await expect(page.locator("#coursesPanel")).toBeHidden();
+  await expect(page.locator("#tabReview")).toHaveCSS("background-color", "rgb(49, 92, 67)");
+  await page.locator("#tabCourses").click();
   await expect(page.locator("#sound")).toHaveAttribute("aria-pressed", "true");
   await expect(page.locator(".site-footer")).toHaveText(/^Ver\. \d{8}\.\d{6}\.\d{3}$/);
   await expect(page.locator("textarea")).toHaveCount(0);
@@ -151,18 +154,29 @@ Then("コース一覧に進捗ステップと解放条件つきボタンが表�
     expect(desktopPositions[index].x).toBe(desktopPositions[0].x);
     expect(desktopPositions[index].y).toBeGreaterThan(desktopPositions[index - 1].y);
   }
-  await expect(courses.first()).toHaveCSS("display", "flex");
+  await expect(courses.first().locator(".course-start")).toHaveCSS("display", "grid");
   await expect(page.locator(".course-steps .course-step")).toHaveCount(36);
+  const stepPositions = await courses.locator(".course-steps").evaluateAll((elements) =>
+    elements.map((element) => element.getBoundingClientRect().x),
+  );
+  expect(new Set(stepPositions).size).toBe(1);
   const firstCourse = courses.first();
   await expect(firstCourse).not.toHaveAttribute("data-step", /\d+/);
   const title = await firstCourse.locator(".course-copy").boundingBox();
   const progress = await firstCourse.locator(".course-progress").boundingBox();
   const steps = await firstCourse.locator(".course-steps").boundingBox();
   const firstChallenge = await firstCourse.locator(".course-challenge").first().boundingBox();
+  const connectorLeft = await firstCourse.evaluate((element) =>
+    Number.parseFloat(getComputedStyle(element, "::after").left),
+  );
+  const titleFontSize = Number.parseFloat(await firstCourse.locator(".course-copy strong").evaluate((element) =>
+    getComputedStyle(element).fontSize,
+  ));
   expect(title).not.toBeNull();
   expect(progress).not.toBeNull();
   expect(steps).not.toBeNull();
   expect(firstChallenge).not.toBeNull();
+  expect(connectorLeft).toBeCloseTo(title!.x - (await firstCourse.boundingBox())!.x + titleFontSize / 2, 0);
   expect(progress!.x).toBeGreaterThanOrEqual(title!.x + title!.width);
   expect(steps!.width / 4).toBeGreaterThanOrEqual(22);
   expect(firstChallenge!.x).toBeGreaterThan(steps!.x + steps!.width);
@@ -174,7 +188,10 @@ Then("コース一覧に進捗ステップと解放条件つきボタンが表�
     getComputedStyle(element).gridTemplateColumns.split(" ").length,
   );
   expect(mobileColumns).toBe(1);
-  await expect(page.locator(".course-unlock")).toHaveText(Array(9).fill("あと3回で解放"));
+  const mobileStepPositions = await courses.locator(".course-steps").evaluateAll((elements) =>
+    elements.map((element) => element.getBoundingClientRect().x),
+  );
+  expect(new Set(mobileStepPositions).size).toBe(1);
 });
 
 Then("9つのコースが指定順に並び問題が範囲内で出る", async ({ page }) => {
@@ -224,8 +241,11 @@ Then("9つのコースが指定順に並び問題が範囲内で出る", async (
   await expect(passedCourse.locator(".course-step.current")).toHaveCount(0);
   await expect(passedCourse.locator(".course-step.final")).toHaveText("3");
   await expect(page.locator(".course-goal")).toHaveCount(1);
-  await expect(passedCourse.locator(".course-unlock")).toHaveText("解放済み");
-  await expect(passedCourse.locator(".course-start")).toHaveAttribute("aria-label", /解放済み/);
+  const challengeTitles = await passedCourse.locator(".course-challenge-control").evaluateAll((elements) =>
+    elements.map((element) => element.hasAttribute("title")),
+  );
+  expect(challengeTitles).toEqual([false, false]);
+  await expect(passedCourse.locator(".course-start")).not.toHaveAttribute("aria-label", /解放済み/);
   await expect(passedCourse.locator(".course-challenge:disabled")).toHaveCount(0);
 
   for (const [id, , type] of courses) {

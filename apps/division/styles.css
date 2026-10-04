@@ -210,25 +210,36 @@ main {
 
 .tabs {
   display: flex;
-  gap: 8px;
+  gap: 5px;
   margin-bottom: 14px;
+  padding: 5px;
+  border-radius: 16px;
+  background: #eef2e8;
 }
 
 .tab {
-  padding: 10px 18px;
-  border: 2px solid #dfe8d8;
-  border-radius: 999px;
-  background: #fffefb;
-  color: #426d4f;
+  flex: 1;
+  min-height: 48px;
+  padding: 10px 14px;
+  border: 2px solid transparent;
+  border-radius: 12px;
+  background: transparent;
+  color: #596960;
   font: inherit;
   font-weight: 800;
   cursor: pointer;
 }
 
+.tab:hover:not(.active) {
+  background: rgb(255 255 255 / 70%);
+  color: var(--ink);
+}
+
 .tab.active {
-  border-color: #5e895c;
-  background: #78a875;
+  border-color: #315c43;
+  background: #315c43;
   color: #fff;
+  box-shadow: 0 3px 0 rgb(35 74 50 / 18%);
 }
 
 .course-goal {
@@ -241,11 +252,10 @@ main {
   font-weight: 900;
 }
 
-.course:not(:last-child)::after,
 .course::after {
   position: absolute;
   top: 100%;
-  left: 50%;
+  left: calc(21px + 0.6rem);
   width: 4px;
   height: 22px;
   margin-left: -2px;
@@ -289,9 +299,10 @@ main {
 }
 
 .course-start {
-  display: flex;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 240px;
   align-items: center;
-  gap: 24px;
+  gap: 18px;
   flex: 1 1 auto;
   min-width: 0;
   padding: 0;
@@ -314,7 +325,6 @@ main {
 .course-copy {
   display: grid;
   gap: 4px;
-  flex: 0 1 max-content;
   max-width: 520px;
   min-width: 0;
 }
@@ -335,7 +345,7 @@ main {
   display: grid;
   grid-template-columns: minmax(0, 1fr);
   gap: 4px;
-  flex: 0 0 auto;
+  min-width: 0;
 }
 
 .course-progress {
@@ -358,7 +368,9 @@ main {
   display: inline-flex;
   grid-column: 1 / -1;
   align-items: center;
+  justify-content: space-between;
   gap: 12px;
+  width: 100%;
   padding-block: 2px;
 }
 
@@ -444,21 +456,6 @@ main {
 .course-challenge:not(:disabled):hover {
   border-color: #c89c55;
   background: #fff0d1;
-}
-
-.course-unlock {
-  color: #53795d !important;
-  font-size: 0.72rem !important;
-  font-weight: 750;
-  text-align: right;
-}
-
-.course-unlock.pending {
-  visibility: hidden;
-}
-
-.course:hover .course-unlock.pending {
-  visibility: visible;
 }
 
 .history-actions {
@@ -867,14 +864,13 @@ main {
   }
 
   .course-start {
-    flex-basis: 100%;
-    flex-wrap: wrap;
+    grid-template-columns: minmax(0, 1fr);
     gap: 8px;
   }
 
   .course-copy,
   .course-details {
-    flex-basis: 100%;
+    width: 100%;
   }
 
   .course-details {
@@ -882,13 +878,13 @@ main {
     gap: 4px;
   }
 
+  .course::after {
+    left: calc(13px + 0.54rem);
+  }
+
   .course-side {
     flex-basis: 100%;
     justify-items: start;
-  }
-
-  .course-unlock {
-    text-align: left;
   }
 
   .course strong {
@@ -949,6 +945,10 @@ main {
 
   .course strong {
     font-size: 0.96rem;
+  }
+
+  .course::after {
+    left: calc(13px + 0.48rem);
   }
 
   .course small {
