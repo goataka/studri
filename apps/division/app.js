@@ -565,6 +565,7 @@ function finishQuiz() {
   get("quiz").classList.add("hidden");
   get("result").classList.remove("hidden");
   get("score").textContent = `${quiz.correct} / 10 問 正解`;
+  get("again").textContent = quiz.missed ? "もう一度挑戦する" : "続けて挑戦する";
   get("resultTitle").textContent = quiz.correct === 10
     ? (quiz.missed ? "ぜんもん正解！" : "パーフェクト！")
     : "よくがんばったね！";
@@ -584,6 +585,7 @@ function finishQuiz() {
     get(id).parentElement.title = challengeTitle;
   });
   renderStats();
+  get("again").focus();
 }
 
 function buildKeypad() {
@@ -680,13 +682,34 @@ get("quit").addEventListener("click", () => {
 });
 get("again").addEventListener("click", setupQuiz);
 get("homeButton").addEventListener("click", returnToCourses);
-get("sound").setAttribute("aria-pressed", String(soundEnabled));
-get("sound").textContent = soundEnabled ? "🔔 音あり" : "🔕 消音";
+function updateSoundControl() {
+  get("sound").setAttribute("aria-pressed", String(soundEnabled));
+  get("sound").setAttribute("aria-label", soundEnabled ? "音あり" : "消音");
+  get("sound").title = soundEnabled ? "音あり" : "消音";
+  get("sound").textContent = soundEnabled ? "🔊" : "🔇";
+}
+
+updateSoundControl();
 get("sound").addEventListener("click", () => {
   soundEnabled = !soundEnabled;
   localStorage.setItem(SOUND_KEY, String(soundEnabled));
-  get("sound").setAttribute("aria-pressed", String(soundEnabled));
-  get("sound").textContent = soundEnabled ? "🔔 音あり" : "🔕 消音";
+  updateSoundControl();
+});
+get("resetData").addEventListener("click", () => {
+  if (!confirm("学習記録、進捗、復習ノートを初期化します。よろしいですか？")) return;
+  clearTimeout(advanceTimer);
+  if (get("feedback").open) get("feedback").close();
+  localStorage.removeItem(STORAGE_KEY);
+  data = defaultData();
+  selectedCourse = data.course;
+  quiz = null;
+  locked = false;
+  get("quiz").classList.add("hidden");
+  get("result").classList.add("hidden");
+  get("home").classList.remove("hidden");
+  renderCourses();
+  renderStats();
+  get("courses").querySelector(".course-start")?.focus();
 });
 document.querySelectorAll(".clear").forEach((button) => {
   button.addEventListener("click", () => {
