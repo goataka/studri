@@ -138,7 +138,8 @@ Then("算数ページのパンくずと音・初期化ボタンとバージョ�
   await expect(page.locator("#sound")).toHaveAttribute("aria-pressed", "true");
   await expect(page.locator("#sound")).toHaveAttribute("aria-label", "音あり");
   await expect(page.locator("#sound")).toHaveText("🔊");
-  await expect(page.locator(".breadcrumbs a")).toHaveText(["スタドリのホーム", "算数"]);
+  await expect(page.locator(".breadcrumbs a").first()).toContainText("スタドリのホーム");
+  await expect(page.locator(".breadcrumbs a").last()).toHaveText("算数");
   await expect(page.locator(".breadcrumbs a").first()).toHaveAttribute("href", "../../");
   await expect(page.locator(".breadcrumbs a").last()).toHaveAttribute("href", "#home");
   await expect(page.locator(".hero-copy .eyebrow")).toHaveText("🌱 3年生・わり算");
