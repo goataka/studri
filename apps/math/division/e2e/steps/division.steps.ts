@@ -182,19 +182,36 @@ Then("挑戦記録が保持される", async ({ page }) => {
   await expect(course.locator(".course-step.current")).toHaveText("🥈");
 });
 
-Then("トレイルから問題文の下に計算エリアが表示される", async ({ page }) => {
+Then("画面幅に応じた位置に計算エリアが表示される", async ({ page }) => {
   await page.setViewportSize({ width: 1440, height: 900 });
   await expect(page.locator("#courses .course")).toHaveCount(9);
   await expect(page.locator("#questionNo")).toHaveText("1 / 10");
   const columns = await page.locator(".quiz-board").evaluate((element) =>
     getComputedStyle(element).gridTemplateColumns.split(" ").length,
   );
-  expect(columns).toBe(1);
-  const problem = await page.locator("#problem").boundingBox();
-  const answer = await page.locator("#answer").boundingBox();
-  expect(problem).not.toBeNull();
-  expect(answer).not.toBeNull();
-  expect(problem!.y + problem!.height).toBeLessThan(answer!.y);
+  expect(columns).toBe(2);
+  const desktopBoard = await page.locator(".quiz-board").boundingBox();
+  const desktopQuestion = await page.locator(".quiz-question").boundingBox();
+  const desktopWork = await page.locator(".quiz-work").boundingBox();
+  expect(desktopBoard).not.toBeNull();
+  expect(desktopQuestion).not.toBeNull();
+  expect(desktopWork).not.toBeNull();
+  expect(desktopWork!.x).toBeGreaterThanOrEqual(desktopBoard!.x + desktopBoard!.width / 2);
+  expect(desktopQuestion!.x + desktopQuestion!.width).toBeLessThanOrEqual(desktopWork!.x);
+  await expect(page.locator("#answerCanvas")).toHaveCount(0);
+  await expect(page.locator("#noteCanvas")).toBeVisible();
+  await expect(page.locator(".canvas-box")).toHaveCount(1);
+
+  await page.setViewportSize({ width: 390, height: 844 });
+  const mobileQuestion = await page.locator(".quiz-question").boundingBox();
+  const mobileWork = await page.locator(".quiz-work").boundingBox();
+  expect(mobileQuestion).not.toBeNull();
+  expect(mobileWork).not.toBeNull();
+  expect(mobileWork!.y).toBeGreaterThanOrEqual(mobileQuestion!.y + mobileQuestion!.height);
+  const mobileColumns = await page.locator(".quiz-board").evaluate((element) =>
+    getComputedStyle(element).gridTemplateColumns.split(" ").length,
+  );
+  expect(mobileColumns).toBe(1);
 });
 
 Then("誤答を記録し連続合格を0回にする", async ({ page }) => {
@@ -311,9 +328,9 @@ Then("コース一覧に進捗ステップと解放条件つきボタンが表�
   await expect(page.locator("#courses")).toHaveAttribute("aria-label", "小学3年生のコース一覧");
   await page.setViewportSize({ width: 1440, height: 1000 });
   await expect(courses).toHaveCount(9);
-  await expect(page.locator(".course-begin")).toContainText("合格ステップを3つ集めよう！いっしょに進もう！");
+  await expect(page.locator(".course-begin")).toContainText("ベーシックを3つ進めよう！間違えたらログから確認して。チャレンジできるようになるよ♪");
   await expect(page.locator(".course-guide")).toHaveCount(0);
-  await expect(page.locator(".course-goal")).toContainText("ここまで来たね、おめでとう！次の挑戦もがんばろう！");
+  await expect(page.locator(".course-goal")).toContainText("たくさん頑張ったね、おめでとう！次の挑戦もがんばろう！");
   const desktopColumns = await page.locator("#courses").evaluate((element) =>
     getComputedStyle(element).gridTemplateColumns.split(" ").length,
   );
@@ -535,6 +552,9 @@ Then("9つのコースが指定順に並び問題が範囲内で出る", async (
 
     if (type === "meaning") {
       expect(problem).not.toContain("÷");
+      expect(dividend % divisor).toBe(0);
+      expect(divisor).toBeLessThan(10);
+      expect(dividend / divisor).toBeLessThanOrEqual(9);
     } else if (type === "one-digit-exact") {
       expect(dividend).toBeLessThan(10);
       expect(divisor).toBeLessThan(10);

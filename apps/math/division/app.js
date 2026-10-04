@@ -182,7 +182,7 @@ function renderCourses() {
   beginIcon.textContent = "🧭";
   beginLabel.append(beginIcon, document.createTextNode(" スタート"));
   const beginMessage = document.createElement("small");
-  beginMessage.textContent = "合格ステップを3つ集めよう！いっしょに進もう！";
+  beginMessage.textContent = "ベーシックを3つ進めよう！間違えたらログから確認して。チャレンジできるようになるよ♪";
   beginCopy.append(beginLabel, beginMessage);
   begin.append(beginCopy);
   courseList.prepend(begin);
@@ -197,7 +197,7 @@ function renderCourses() {
   goalIcon.textContent = "🚩";
   goalLabel.append(goalIcon, document.createTextNode(" ゴール"));
   const goalMessage = document.createElement("small");
-  goalMessage.textContent = "ここまで来たね、おめでとう！次の挑戦もがんばろう！";
+  goalMessage.textContent = "たくさん頑張ったね、おめでとう！次の挑戦もがんばろう！";
   goalCopy.append(goalLabel, goalMessage);
   goal.append(goalCopy);
   courseList.append(goal);
@@ -298,7 +298,7 @@ function makeProblem(index) {
   switch (course.type) {
     case "meaning": {
       divisor = randomInteger(2, Math.min(5, 2 + Math.floor(level / 2)));
-      const quotient = randomInteger(2, 3 + level);
+      const quotient = randomInteger(2, Math.min(9, 3 + level));
       dividend = divisor * quotient;
       return makeStoryProblem(dividend, divisor, 0, Math.random() < 0.5);
     }
@@ -695,8 +695,7 @@ function returnToCourses() {
 renderCourses();
 renderStats();
 buildKeypad();
-const clearAnswerCanvas = setupCanvas("answerCanvas");
-const clearNoteCanvas = setupCanvas("noteCanvas");
+const clearWorkCanvas = setupCanvas("noteCanvas");
 window.addEventListener("resize", resizeCanvases);
 
 get("check").addEventListener("click", judgeAnswer);
@@ -755,8 +754,5 @@ get("resetData").addEventListener("click", () => {
   get("courses").querySelector(".course-start")?.focus();
 });
 document.querySelectorAll(".clear").forEach((button) => {
-  button.addEventListener("click", () => {
-    if (button.dataset.canvas === "answerCanvas") clearAnswerCanvas();
-    else clearNoteCanvas();
-  });
+  button.addEventListener("click", clearWorkCanvas);
 });
