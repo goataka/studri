@@ -65,7 +65,7 @@ function renderCourses() {
   const courseList = get("courses");
   courseList.replaceChildren();
 
-  courses.forEach((course, index) => {
+  courses.forEach((course) => {
     const card = document.createElement("article");
     card.className = `course${selectedCourse === course.id ? " selected" : ""}`;
     card.dataset.course = course.id;
