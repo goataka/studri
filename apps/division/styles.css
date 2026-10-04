@@ -343,13 +343,10 @@ main {
 }
 
 .course-step.final {
-  font-size: 1.2rem;
-}
-
-.course-step.final {
   border-color: #d79b54;
   background: #fff4df;
   color: #805c2d;
+  font-size: 1.2rem;
 }
 
 .course-step.complete {

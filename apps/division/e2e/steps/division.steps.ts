@@ -128,9 +128,7 @@ Then("コースは小学3年生のみで音とバージョンが表示される"
   await expect(page.locator(".course-unlock").first()).toBeHidden();
   await page.locator("#courses .course").first().hover();
   await expect(page.locator(".course-unlock").first()).toBeVisible();
-  await page.locator("#courses .course").first().evaluate((element) => {
-    element.dispatchEvent(new MouseEvent("mouseleave", { bubbles: true }));
-  });
+  await page.mouse.move(0, 0);
   await expect(page.locator(".course-unlock").first()).toBeHidden();
   await expect(page.locator("#sound")).toHaveAttribute("aria-pressed", "true");
   await expect(page.locator(".site-footer")).toHaveText(/^Ver\. \d{8}\.\d{6}\.\d{3}$/);
@@ -159,6 +157,7 @@ Then("コース一覧に進捗ステップと解放条件つきボタンが表�
   await expect(courses.first()).toHaveCSS("display", "flex");
   await expect(page.locator(".course-steps .course-step")).toHaveCount(27);
   const firstCourse = courses.first();
+  await expect(firstCourse).not.toHaveAttribute("data-step", /\d+/);
   const title = await firstCourse.locator(".course-copy").boundingBox();
   const progress = await firstCourse.locator(".course-progress").boundingBox();
   const steps = await firstCourse.locator(".course-steps").boundingBox();
@@ -228,6 +227,7 @@ Then("9つのコースが指定順に並び問題が範囲内で出る", async (
   const passedCourse = page.locator('#courses [data-course="g3-meaning-story"]');
   await expect(passedCourse.locator(".course-progress-count")).toHaveText("3/3");
   await expect(passedCourse.locator(".course-step.complete")).toHaveCount(3);
+  await expect(passedCourse.locator(".course-step.final")).toHaveText("◎");
   await expect(passedCourse.locator(".course-attempts")).toHaveText("4回 ・ ベスト 23秒");
   await expect(passedCourse.locator(".course-unlock")).toHaveText("解放済み");
   await expect(passedCourse.locator(".course-start")).toHaveAttribute("aria-label", /解放済み/);

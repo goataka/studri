@@ -92,7 +92,7 @@ function renderCourses() {
     steps.setAttribute("aria-hidden", "true");
     for (let step = 0; step < 3; step += 1) {
       const indicator = document.createElement("span");
-      indicator.className = "course-step";
+      indicator.className = step === 2 ? "course-step final" : "course-step";
       indicator.textContent = step === 2 ? "◎" : String(step + 1);
       steps.append(indicator);
     }
@@ -165,7 +165,7 @@ function renderCourseProgress() {
     });
     button.querySelector(".course-start").setAttribute(
       "aria-label",
-      `小学3年生、${course.name}。${course.desc}。合格ステップ ${streak} / 3回。`,
+      `小学3年生、${course.name}。${course.desc}。合格ステップ ${streak} / 3回。${stats.streak >= 3 ? "解放済み。" : ""}`,
     );
   });
 }
