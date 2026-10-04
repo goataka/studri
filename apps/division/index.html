@@ -41,7 +41,6 @@
             <button class="tab" id="tabReview" data-tab="reviewPanel" role="tab" aria-selected="false" aria-controls="reviewPanel" type="button">📒 復習ノート <span class="badge" id="wrongCount">0問</span></button>
           </div>
           <div id="coursesPanel" role="tabpanel" aria-labelledby="tabCourses">
-            <p class="course-guide">🧭 スタートから道をたどって進もう！合格ステップを3つ集めると、タイムアタックと連続正解に挑戦できるよ。</p>
             <div class="courses" id="courses" aria-label="小学3年生のコース一覧"></div>
           </div>
           <div id="reviewPanel" class="hidden" role="tabpanel" aria-labelledby="tabReview">
@@ -97,7 +96,7 @@
           <p id="resultMessage"></p>
           <div class="history-actions">
             <button class="start" id="again" type="button">もう一度挑戦する</button>
-            <button class="outline" id="homeButton" type="button">コース選択へ</button>
+            <a class="outline" id="homeButton" href="#home">算数ページに戻る</a>
           </div>
           <div class="challenge-grid">
             <div class="challenge">

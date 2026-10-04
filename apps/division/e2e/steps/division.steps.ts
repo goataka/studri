@@ -54,6 +54,7 @@ When("残りの問題に正解して挑戦を終える", async ({ page }) => {
 Then("結果に10問正解と表示される", async ({ page }) => {
   await expect(page.locator("#result")).toBeVisible();
   await expect(page.locator("#score")).toHaveText("10 / 10 問 正解");
+  await expect(page.getByRole("link", { name: "算数ページに戻る" })).toHaveAttribute("href", "#home");
 });
 
 Then("ミスがあったことを結果に表示する", async ({ page }) => {
@@ -202,6 +203,9 @@ Then("コース一覧に進捗ステップと解放条件つきボタンが表�
   await expect(page.locator("#courses")).toHaveAttribute("aria-label", "小学3年生のコース一覧");
   await page.setViewportSize({ width: 1440, height: 1000 });
   await expect(courses).toHaveCount(9);
+  await expect(page.locator(".course-begin")).toContainText("合格ステップを3つ集めよう！いっしょに進もう！");
+  await expect(page.locator(".course-guide")).toHaveCount(0);
+  await expect(page.locator(".course-goal")).toContainText("ここまで来たね、おめでとう！次の挑戦もがんばろう！");
   const desktopColumns = await page.locator("#courses").evaluate((element) =>
     getComputedStyle(element).gridTemplateColumns.split(" ").length,
   );
@@ -253,6 +257,7 @@ Then("コース一覧に進捗ステップと解放条件つきボタンが表�
   expect(firstChallenge!.height).toBe(firstStep!.height);
   await expect(firstCourse.locator(".course-copy strong")).toHaveCSS("font-size", "19.2px");
   await expect(firstCourse.locator(".course-step").nth(1)).toHaveCSS("width", "54px");
+  await expect(firstCourse.locator(".course-step").nth(1)).toHaveCSS("font-size", "24px");
   await expect(firstCourse.locator(".course-step.current")).toHaveCSS("background-color", "rgb(217, 120, 67)");
   const lastCourse = courses.last();
   const lastCourseBounds = await lastCourse.boundingBox();
