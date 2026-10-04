@@ -26,6 +26,7 @@ Then("算数トップページを表示する", async ({ page }) => {
   await expect(page).toHaveTitle("スタドリ - 算数編");
   await expect(page.locator(".breadcrumbs [aria-current='page']")).toHaveText("🔢 算数");
   await expect(page.locator(".breadcrumbs a").first()).toHaveAttribute("href", "../../");
+  await expect(page.locator(".mascot img")).toHaveJSProperty("naturalWidth", 1024);
 });
 
 When("モバイル表示に切り替える", async ({ page }) => {
@@ -50,6 +51,7 @@ Then("わり算コースへ進める", async ({ page }) => {
   await page.getByRole("link", { name: /3年生・わり算/ }).click();
   await expect(page).toHaveTitle("スタドリ - 算数・３年生・わり算編");
   await expect(page.locator("#courses")).toBeVisible();
+  await expect(page.locator(".mascot img")).toHaveJSProperty("naturalWidth", 1024);
 });
 
 When("現在の問題に誤答する", async ({ page }) => {
