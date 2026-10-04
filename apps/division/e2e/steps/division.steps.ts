@@ -121,7 +121,7 @@ Then("コースは小学3年生のみで音とバージョンが表示される"
   await expect(page.locator(".course-challenge:disabled")).toHaveCount(18);
   await expect(page.locator("#courses .course").first().locator(".course-step")).toHaveText(["", "1", "2", "3"]);
   await expect(page.locator(".course-pass-label")).toHaveCount(0);
-  await expect(page.locator(".course-challenge-control")).toHaveAttribute("title", "あと3回で解放");
+  await expect(page.locator(".course-challenge-control").first()).toHaveAttribute("title", "あと3回で解放");
   await expect(page.locator("body")).not.toContainText("あと3回で解放");
   await expect(page.locator("body")).not.toContainText("解放済み");
   await expect(page.locator("#tabCourses")).toHaveCSS("background-color", "rgb(49, 92, 67)");
@@ -241,7 +241,10 @@ Then("9つのコースが指定順に並び問題が範囲内で出る", async (
   await expect(passedCourse.locator(".course-step.current")).toHaveCount(0);
   await expect(passedCourse.locator(".course-step.final")).toHaveText("3");
   await expect(page.locator(".course-goal")).toHaveCount(1);
-  await expect(passedCourse.locator(".course-challenge-control")).not.toHaveAttribute("title");
+  const challengeTitles = await passedCourse.locator(".course-challenge-control").evaluateAll((elements) =>
+    elements.map((element) => element.hasAttribute("title")),
+  );
+  expect(challengeTitles).toEqual([false, false]);
   await expect(passedCourse.locator(".course-start")).not.toHaveAttribute("aria-label", /解放済み/);
   await expect(passedCourse.locator(".course-challenge:disabled")).toHaveCount(0);
 

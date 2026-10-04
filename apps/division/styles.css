@@ -255,7 +255,7 @@ main {
 .course::after {
   position: absolute;
   top: 100%;
-  left: calc(20px + 0.6rem);
+  left: calc(21px + 0.6rem);
   width: 4px;
   height: 22px;
   margin-left: -2px;
@@ -879,7 +879,7 @@ main {
   }
 
   .course::after {
-    left: calc(12px + 0.54rem);
+    left: calc(13px + 0.54rem);
   }
 
   .course-side {
@@ -948,7 +948,7 @@ main {
   }
 
   .course::after {
-    left: calc(12px + 0.48rem);
+    left: calc(13px + 0.48rem);
   }
 
   .course small {
