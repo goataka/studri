@@ -6,6 +6,7 @@ export default {
     steps: "apps/**/e2e/steps/*.ts",
     language: "ja",
   }),
+  snapshotPathTemplate: "apps/division/e2e/screenshots/{arg}{ext}",
   reporter: "list",
   use: {
     baseURL: "http://127.0.0.1:4173",
