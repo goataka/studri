@@ -368,6 +368,18 @@ main {
   min-width: 0;
 }
 
+.course-begin .course-copy {
+  flex: 1 1 auto;
+  max-width: none;
+}
+
+.course-begin small {
+  display: block;
+  max-width: 100%;
+  overflow-x: auto;
+  white-space: nowrap;
+}
+
 .course strong,
 .course-goal strong,
 .course-begin strong {
@@ -705,10 +717,17 @@ main {
   gap: 18px;
 }
 
+.quiz-primary {
+  display: grid;
+  align-content: start;
+  gap: 18px;
+  min-width: 0;
+}
+
 .quiz-question {
   padding: 8px 12px 16px;
   border-bottom: 1px solid var(--line);
-  text-align: center;
+  text-align: left;
 }
 
 .quiz-question .eyebrow {
@@ -723,6 +742,14 @@ main {
 }
 
 .quiz-work {
+  display: grid;
+  align-content: start;
+  justify-items: stretch;
+  gap: 10px;
+  min-width: 0;
+}
+
+.quiz-response {
   display: grid;
   justify-items: center;
   gap: 10px;
@@ -807,7 +834,7 @@ main {
   display: grid;
   grid-template-columns: minmax(0, 1fr);
   gap: 12px;
-  width: min(100%, 650px);
+  width: 100%;
 }
 
 .canvas-box {

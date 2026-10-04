@@ -192,22 +192,25 @@ Then("画面幅に応じた位置に計算エリアが表示される", async ({
   expect(columns).toBe(2);
   const desktopBoard = await page.locator(".quiz-board").boundingBox();
   const desktopQuestion = await page.locator(".quiz-question").boundingBox();
+  const desktopAnswer = await page.locator(".quiz-response").boundingBox();
   const desktopWork = await page.locator(".quiz-work").boundingBox();
   expect(desktopBoard).not.toBeNull();
   expect(desktopQuestion).not.toBeNull();
+  expect(desktopAnswer).not.toBeNull();
   expect(desktopWork).not.toBeNull();
+  expect(desktopQuestion!.x).toBeLessThan(desktopBoard!.x + desktopBoard!.width / 2);
+  expect(desktopAnswer!.x).toBeLessThan(desktopBoard!.x + desktopBoard!.width / 2);
   expect(desktopWork!.x).toBeGreaterThanOrEqual(desktopBoard!.x + desktopBoard!.width / 2);
-  expect(desktopQuestion!.x + desktopQuestion!.width).toBeLessThanOrEqual(desktopWork!.x);
   await expect(page.locator("#answerCanvas")).toHaveCount(0);
   await expect(page.locator("#noteCanvas")).toBeVisible();
   await expect(page.locator(".canvas-box")).toHaveCount(1);
 
   await page.setViewportSize({ width: 390, height: 844 });
-  const mobileQuestion = await page.locator(".quiz-question").boundingBox();
+  const mobilePrimary = await page.locator(".quiz-primary").boundingBox();
   const mobileWork = await page.locator(".quiz-work").boundingBox();
-  expect(mobileQuestion).not.toBeNull();
+  expect(mobilePrimary).not.toBeNull();
   expect(mobileWork).not.toBeNull();
-  expect(mobileWork!.y).toBeGreaterThanOrEqual(mobileQuestion!.y + mobileQuestion!.height);
+  expect(mobileWork!.y).toBeGreaterThanOrEqual(mobilePrimary!.y + mobilePrimary!.height);
   const mobileColumns = await page.locator(".quiz-board").evaluate((element) =>
     getComputedStyle(element).gridTemplateColumns.split(" ").length,
   );
@@ -328,9 +331,10 @@ Then("コース一覧に進捗ステップと解放条件つきボタンが表�
   await expect(page.locator("#courses")).toHaveAttribute("aria-label", "小学3年生のコース一覧");
   await page.setViewportSize({ width: 1440, height: 1000 });
   await expect(courses).toHaveCount(9);
-  await expect(page.locator(".course-begin")).toContainText("ベーシックを3つ進めよう！間違えたらログから確認して。チャレンジできるようになるよ♪");
+  await expect(page.locator(".course-begin")).toContainText("ベーシックを3つ進めよう！チャレンジできるようになるよ♪間違えたらログから確認してみてね。");
+  await expect(page.locator(".course-begin small")).toHaveCSS("white-space", "nowrap");
   await expect(page.locator(".course-guide")).toHaveCount(0);
-  await expect(page.locator(".course-goal")).toContainText("たくさん頑張ったね、おめでとう！次の挑戦もがんばろう！");
+  await expect(page.locator(".course-goal")).toContainText("おめでとう！たくさん頑張ったね♪次にも挑戦してみてね。");
   const desktopColumns = await page.locator("#courses").evaluate((element) =>
     getComputedStyle(element).gridTemplateColumns.split(" ").length,
   );

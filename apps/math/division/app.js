@@ -182,7 +182,7 @@ function renderCourses() {
   beginIcon.textContent = "🧭";
   beginLabel.append(beginIcon, document.createTextNode(" スタート"));
   const beginMessage = document.createElement("small");
-  beginMessage.textContent = "ベーシックを3つ進めよう！間違えたらログから確認して。チャレンジできるようになるよ♪";
+  beginMessage.textContent = "ベーシックを3つ進めよう！チャレンジできるようになるよ♪間違えたらログから確認してみてね。";
   beginCopy.append(beginLabel, beginMessage);
   begin.append(beginCopy);
   courseList.prepend(begin);
@@ -197,7 +197,7 @@ function renderCourses() {
   goalIcon.textContent = "🚩";
   goalLabel.append(goalIcon, document.createTextNode(" ゴール"));
   const goalMessage = document.createElement("small");
-  goalMessage.textContent = "たくさん頑張ったね、おめでとう！次の挑戦もがんばろう！";
+  goalMessage.textContent = "おめでとう！たくさん頑張ったね♪次にも挑戦してみてね。";
   goalCopy.append(goalLabel, goalMessage);
   goal.append(goalCopy);
   courseList.append(goal);
