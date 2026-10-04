@@ -198,12 +198,24 @@ Then("画面幅に応じた位置に計算エリアが表示される", async ({
   expect(desktopQuestion).not.toBeNull();
   expect(desktopAnswer).not.toBeNull();
   expect(desktopWork).not.toBeNull();
+  const desktopPrimary = await page.locator(".quiz-primary").boundingBox();
+  expect(desktopPrimary).not.toBeNull();
   expect(desktopQuestion!.x).toBeLessThan(desktopBoard!.x + desktopBoard!.width / 2);
   expect(desktopAnswer!.x).toBeLessThan(desktopBoard!.x + desktopBoard!.width / 2);
   expect(desktopWork!.x).toBeGreaterThanOrEqual(desktopBoard!.x + desktopBoard!.width / 2);
+  const problemCenter = desktopQuestion!.x + desktopQuestion!.width / 2;
+  const primaryCenter = desktopPrimary!.x + desktopPrimary!.width / 2;
+  expect(Math.abs(problemCenter - primaryCenter)).toBeLessThanOrEqual(1);
+  const workArea = await page.locator(".canvas-box").boundingBox();
+  expect(workArea).not.toBeNull();
+  expect(workArea!.width).toBeGreaterThan(desktopPrimary!.width);
   await expect(page.locator("#answerCanvas")).toHaveCount(0);
   await expect(page.locator("#noteCanvas")).toBeVisible();
   await expect(page.locator(".canvas-box")).toHaveCount(1);
+  const keypadButton = await page.locator("#keypad button").first().boundingBox();
+  expect(keypadButton).not.toBeNull();
+  expect(keypadButton!.height).toBeGreaterThanOrEqual(42);
+  expect(keypadButton!.height).toBeLessThanOrEqual(44);
 
   await page.setViewportSize({ width: 390, height: 844 });
   const mobilePrimary = await page.locator(".quiz-primary").boundingBox();
@@ -451,6 +463,16 @@ Then("コース一覧に進捗ステップと解放条件つきボタンが表�
     getComputedStyle(element).gridTemplateColumns.split(" ").length,
   );
   expect(mobileColumns).toBe(1);
+  const mobileGuide = page.locator(".course-begin small");
+  await expect(mobileGuide).toHaveCSS("white-space", "normal");
+  const guideLayout = await mobileGuide.evaluate((element) => ({
+    height: element.getBoundingClientRect().height,
+    lineHeight: Number.parseFloat(getComputedStyle(element).lineHeight),
+    scrollWidth: element.scrollWidth,
+    clientWidth: element.clientWidth,
+  }));
+  expect(guideLayout.height).toBeGreaterThan(guideLayout.lineHeight);
+  expect(guideLayout.scrollWidth).toBeLessThanOrEqual(guideLayout.clientWidth);
   const mobileStepPositions = await courses.locator(".course-steps").evaluateAll((elements) =>
     elements.map((element) => element.getBoundingClientRect().x),
   );

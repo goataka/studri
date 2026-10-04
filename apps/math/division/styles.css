@@ -713,21 +713,23 @@ main {
 
 .quiz-board {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 18px;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.25fr);
+  gap: 24px;
 }
 
 .quiz-primary {
   display: grid;
-  align-content: start;
-  gap: 18px;
+  align-content: center;
+  justify-items: center;
+  gap: 14px;
   min-width: 0;
 }
 
 .quiz-question {
+  width: 100%;
   padding: 8px 12px 16px;
   border-bottom: 1px solid var(--line);
-  text-align: left;
+  text-align: center;
 }
 
 .quiz-question .eyebrow {
@@ -745,14 +747,15 @@ main {
   display: grid;
   align-content: start;
   justify-items: stretch;
-  gap: 10px;
+  gap: 14px;
+  min-height: 100%;
   min-width: 0;
 }
 
 .quiz-response {
   display: grid;
   justify-items: center;
-  gap: 10px;
+  gap: 8px;
   min-width: 0;
 }
 
@@ -789,16 +792,17 @@ main {
 
 .keypad {
   display: grid;
-  grid-template-columns: repeat(4, minmax(52px, 68px));
-  gap: 7px;
+  grid-template-columns: repeat(4, minmax(48px, 60px));
+  gap: 5px;
   justify-content: center;
 }
 
 .keypad button {
-  padding: 10px 6px;
-  border-radius: 13px;
+  min-height: 42px;
+  padding: 7px 5px;
+  border-radius: 11px;
   background: #e8efdf;
-  font-size: 1.05rem;
+  font-size: 0.95rem;
   font-weight: 750;
 }
 
@@ -1109,6 +1113,11 @@ main {
     left: calc(13px + 0.54rem);
   }
 
+  .course-begin small {
+    overflow-x: visible;
+    white-space: normal;
+  }
+
   .course-record {
     font-size: 0.7rem !important;
   }
@@ -1184,8 +1193,8 @@ main {
   }
 
   .keypad {
-    grid-template-columns: repeat(4, minmax(46px, 60px));
-    gap: 5px;
+    grid-template-columns: repeat(4, minmax(44px, 56px));
+    gap: 4px;
   }
 }
 
