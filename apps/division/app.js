@@ -124,7 +124,7 @@ function renderCourses() {
       icon.setAttribute("aria-hidden", "true");
       icon.textContent = emoji;
       const text = document.createElement("span");
-      text.textContent = label;
+      text.textContent = ` ${label}`;
       challenge.append(icon, text);
       control.append(challenge);
       challenges.append(control);
@@ -164,8 +164,8 @@ function renderCourseProgress() {
     const challengeGroup = button.querySelector(".course-challenge-group");
     challengeGroup.classList.toggle("is-next", streak >= 3);
     button.querySelectorAll(".course-step").forEach((step, index) => {
-      step.classList.toggle("current", index === streak && streak < 3);
-      step.classList.toggle("complete", streak > 0 && index <= streak);
+      step.classList.toggle("current", index === (streak === 0 ? 0 : streak + 1) && streak < 3);
+      step.classList.toggle("complete", (index === 0 && streak > 0) || (index > 0 && index <= streak));
     });
     button.querySelectorAll(".course-challenge").forEach((challenge) => {
       challenge.disabled = stats.streak < 3;

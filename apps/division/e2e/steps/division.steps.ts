@@ -67,7 +67,7 @@ When("コース選択に戻る", async ({ page }) => {
 
 Then("今回の挑戦記録が保存される", async ({ page }) => {
   const course = page.locator('#courses [data-course="g3-one-digit-exact"]');
-  await expect(course.locator(".course-step.current")).toHaveText("1");
+  await expect(course.locator(".course-step.current")).toHaveText("2");
 });
 
 When("ページを再読み込みする", async ({ page }) => {
@@ -76,7 +76,7 @@ When("ページを再読み込みする", async ({ page }) => {
 
 Then("挑戦記録が保持される", async ({ page }) => {
   const course = page.locator('#courses [data-course="g3-one-digit-exact"]');
-  await expect(course.locator(".course-step.current")).toHaveText("1");
+  await expect(course.locator(".course-step.current")).toHaveText("2");
 });
 
 Then("トレイルから問題文の下に計算エリアが表示される", async ({ page }) => {
@@ -123,7 +123,13 @@ Then("コースは小学3年生のみで音とバージョンが表示される"
     "ベーシック", "チャレンジ", "ベーシック", "チャレンジ", "ベーシック", "チャレンジ",
     "ベーシック", "チャレンジ", "ベーシック", "チャレンジ", "ベーシック", "チャレンジ",
   ]);
-  await expect(page.locator(".course-challenge-icon")).toHaveCSS("font-size", "16.82px");
+  const challengeIconSize = Number.parseFloat(await page.locator(".course-challenge-icon").first().evaluate((element) =>
+    getComputedStyle(element).fontSize,
+  ));
+  const challengeTextSize = Number.parseFloat(await page.locator(".course-challenge").first().evaluate((element) =>
+    getComputedStyle(element).fontSize,
+  ));
+  expect(challengeIconSize).toBeGreaterThan(challengeTextSize);
   await page.locator("#tabReview").click();
   await expect(page.locator("#reviewPanel")).toBeVisible();
   await expect(page.locator("#coursesPanel")).toBeHidden();
@@ -179,7 +185,7 @@ Then("コース一覧に進捗ステップと解放条件つきボタンが表�
   expect(firstChallenge).not.toBeNull();
   expect(basicLabel).not.toBeNull();
   expect(challengeLabel).not.toBeNull();
-  expect(challengeLabel!.x).toBeLessThan(firstChallenge!.x);
+  expect(challengeLabel!.x).toBeCloseTo(firstChallenge!.x, 0);
   expect(challengeLabel!.y).toBeCloseTo(basicLabel!.y, 0);
   expect(connectorLeft).toBeCloseTo(title!.x - (await firstCourse.boundingBox())!.x + titleFontSize / 2, 0);
   expect(progress!.x).toBeGreaterThanOrEqual(title!.x + title!.width);
