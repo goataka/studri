@@ -180,6 +180,17 @@ Then("コース一覧に進捗ステップと解放条件つきボタンが表�
   expect(firstChallenge!.x).toBeGreaterThan(steps!.x + steps!.width);
   await expect(firstCourse.locator(".course-copy strong")).toHaveCSS("font-size", "19.2px");
   await expect(firstCourse.locator(".course-step").nth(1)).toHaveCSS("width", "54px");
+  await expect(firstCourse.locator(".course-step.current")).toHaveCSS("background-color", "rgb(217, 120, 67)");
+  const lastCourse = courses.last();
+  const lastCourseBounds = await lastCourse.boundingBox();
+  const goal = page.locator(".course-goal");
+  const goalBounds = await goal.boundingBox();
+  expect(lastCourseBounds).not.toBeNull();
+  expect(goalBounds).not.toBeNull();
+  expect(goalBounds!.width).toBe(lastCourseBounds!.width);
+  expect(goalBounds!.y).toBe(lastCourseBounds!.y + lastCourseBounds!.height + 22);
+  await expect(goal).toHaveCSS("border-radius", "16px");
+  await expect(lastCourse).toHaveCSS("border-radius", "16px");
 
   await page.setViewportSize({ width: 390, height: 844 });
   const mobileColumns = await page.locator("#courses").evaluate((element) =>

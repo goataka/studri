@@ -205,11 +205,11 @@ function renderStats() {
   data.wrong.slice(-8).reverse().forEach((entry) => {
     const item = document.createElement("div");
     item.className = "review-item";
-  const reviewCourse = document.createElement("small");
-  reviewCourse.className = "review-course";
-  const course = courses.find((candidate) => candidate.id === entry.courseId);
-  reviewCourse.textContent = `コース：${course?.name || "コース情報なし"}`;
-  const problem = document.createElement("b");
+    const reviewCourse = document.createElement("small");
+    reviewCourse.className = "review-course";
+    const course = courses.find((candidate) => candidate.id === entry.courseId);
+    reviewCourse.textContent = `コース：${course?.name || "コース情報なし"}`;
+    const problem = document.createElement("b");
     problem.textContent = entry.problem;
     const answer = document.createElement("div");
     answer.textContent = `あなたの答え：${entry.answer || "未入力"} / 正解：${entry.correct}`;
