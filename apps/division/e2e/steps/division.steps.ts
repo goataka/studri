@@ -49,7 +49,7 @@ When("Enterキーで次の問題へ進む", async ({ page }) => {
   await page.keyboard.press("Enter");
 });
 
-Then("VR画像「{string}」を確認する", async ({ page }, screenshotName: string) => {
+Then(/VR画像 "(.*)" を確認する/, async ({ page }, screenshotName: string) => {
   const feedback = page.locator("#feedback");
   if (await feedback.isVisible()) {
     await expect(feedback).toHaveScreenshot(screenshotName, { animations: "disabled" });

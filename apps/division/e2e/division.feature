@@ -58,23 +58,23 @@
 
   シナリオ: 画面パターンのスクリーンショットを取得してVR確認する
     前提 画面確認用に算数アプリを開く
-    ならば VR画像「courses-desktop.png」を確認する
+    ならば VR画像 "courses-desktop.png" を確認する
     もし モバイル表示に切り替える
-    ならば VR画像「courses-mobile.png」を確認する
+    ならば VR画像 "courses-mobile.png" を確認する
     もし デスクトップ表示に切り替える
     かつ 復習ノートを表示する
-    ならば VR画像「review-empty.png」を確認する
+    ならば VR画像 "review-empty.png" を確認する
     もし コース一覧を表示する
     かつ コースを選んで挑戦を始める
-    ならば VR画像「quiz.png」を確認する
+    ならば VR画像 "quiz.png" を確認する
     もし 現在の問題に誤答する
-    ならば VR画像「feedback-wrong.png」を確認する
+    ならば VR画像 "feedback-wrong.png" を確認する
     もし 誤答を修正して正解する
-    ならば VR画像「feedback-correct.png」を確認する
+    ならば VR画像 "feedback-correct.png" を確認する
     もし Enterキーで次の問題へ進む
     かつ 残りの問題に正解して挑戦を終える
     ならば 結果に10問正解と表示される
-    かつ VR画像「result.png」を確認する
+    かつ VR画像 "result.png" を確認する
     もし コース選択に戻る
     かつ 復習ノートを表示する
-    ならば VR画像「review-with-mistake.png」を確認する
+    ならば VR画像 "review-with-mistake.png" を確認する
