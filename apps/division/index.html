@@ -11,23 +11,28 @@
   </head>
   <body>
     <header class="site-header">
-      <a class="brand" href="../../">
-        <span class="brand-mark" aria-hidden="true">✳</span>
-        スタドリ - 算数・３年生・わり算編
-      </a>
-      <button class="sound" id="sound" type="button" aria-pressed="true">🔔 音あり</button>
+      <nav aria-label="パンくずリスト">
+        <ol class="breadcrumbs">
+          <li><a href="../../"><span class="brand-mark" aria-hidden="true">✳</span>スタドリのホーム</a></li>
+          <li><a href="#home" aria-current="page">算数</a></li>
+        </ol>
+      </nav>
+      <div class="header-actions">
+        <button class="sound" id="sound" type="button" aria-pressed="true" aria-label="音あり" title="音あり">🔊</button>
+        <button class="reset" id="resetData" type="button" aria-label="学習データを初期化" title="学習データを初期化">🔄</button>
+      </div>
     </header>
 
     <main>
       <section id="home">
         <div class="hero">
-          <div class="hero-copy">
-            <p class="eyebrow">🌱 小学3年生の算数</p>
-            <h1>わけるって、<br>おもしろい！</h1>
-            <p>九九をつかったわり算や、あまりのある計算に挑戦しよう。<br>トレイルを一歩ずつ進んでレベルアップ！</p>
-          </div>
           <div class="mascot">
             <img src="../../studri.jpeg" alt="スタドリのキャラクター">
+          </div>
+          <div class="hero-copy">
+            <p class="eyebrow">🌱 3年生・わり算</p>
+            <h1>わけるって、<br>おもしろい！</h1>
+            <p>九九をつかったわり算や、あまりのある計算に挑戦しよう。<br>トレイルを一歩ずつ進んでレベルアップ！</p>
           </div>
         </div>
 
@@ -91,6 +96,10 @@
           <h1 id="resultTitle">おつかれさま！</h1>
           <div class="score" id="score"></div>
           <p id="resultMessage"></p>
+          <div class="history-actions">
+            <button class="start" id="again" type="button">もう一度挑戦する</button>
+            <button class="outline" id="homeButton" type="button">コース選択へ</button>
+          </div>
           <div class="challenge-grid">
             <div class="challenge">
               <b><span class="challenge-icon" aria-hidden="true">⏱</span> タイムアタック</b><br>
@@ -102,10 +111,6 @@
               <small>最高記録：<span id="chainBest">0</span>問</small><br>
               <button id="chainAttack" type="button">挑戦する</button>
             </div>
-          </div>
-          <div class="history-actions">
-            <button class="start" id="again" type="button">もう一度挑戦する</button>
-            <button class="outline" id="homeButton" type="button">コース選択へ</button>
           </div>
         </div>
       </section>
