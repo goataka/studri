@@ -85,21 +85,16 @@ function renderCourses() {
     details.className = "course-details";
     const progress = document.createElement("span");
     progress.className = "course-progress";
-    const progressCount = document.createElement("b");
-    progressCount.className = "course-progress-count";
     const steps = document.createElement("span");
     steps.className = "course-steps";
     steps.setAttribute("aria-hidden", "true");
-    for (let step = 0; step < 3; step += 1) {
+    for (let step = 0; step < 4; step += 1) {
       const indicator = document.createElement("span");
-      indicator.className = step === 2 ? "course-step final" : "course-step";
-      indicator.textContent = step === 2 ? "◎" : String(step + 1);
+      indicator.className = step === 0 ? "course-step start-dot" : step === 3 ? "course-step final" : "course-step";
+      indicator.textContent = step === 0 ? "" : String(step);
       steps.append(indicator);
     }
-    progress.append(progressCount, steps);
-
-    const record = document.createElement("small");
-    record.className = "course-record course-attempts";
+    progress.append(steps);
     const challenges = document.createElement("div");
     challenges.className = "course-challenges";
     challenges.setAttribute("aria-label", "合格後のチャレンジ");
@@ -120,7 +115,7 @@ function renderCourses() {
     const unlock = document.createElement("small");
     unlock.className = "course-unlock";
 
-    details.append(progress, record);
+    details.append(progress);
     start.append(copy, details);
     const side = document.createElement("div");
     side.className = "course-side";
@@ -136,6 +131,10 @@ function renderCourses() {
     });
     courseList.append(card);
   });
+  const goal = document.createElement("div");
+  goal.className = "course-goal";
+  goal.textContent = "🏁 ゴール";
+  courseList.append(goal);
   renderCourseProgress();
 }
 
@@ -146,12 +145,10 @@ function renderCourseProgress() {
 
     const stats = data.stats[course.id] || { streak: 0, attempts: 0, best: null };
     const streak = Math.min(stats.streak, 3);
-    button.querySelector(".course-progress-count").textContent = `${streak}/3`;
     button.querySelectorAll(".course-step").forEach((step, index) => {
-      step.classList.toggle("complete", index < streak);
+      step.classList.toggle("current", index === streak && streak < 3);
+      step.classList.toggle("complete", index > 0 && index <= streak);
     });
-    button.querySelector(".course-record").textContent =
-      `${stats.attempts}回 ・ ベスト ${stats.best ? `${stats.best}秒` : "—"}`;
     const unlockMessage = stats.streak >= 3
       ? "解放済み"
       : `あと${3 - streak}回で解放`;
@@ -165,8 +162,22 @@ function renderCourseProgress() {
     });
     button.querySelector(".course-start").setAttribute(
       "aria-label",
-      `小学3年生、${course.name}。${course.desc}。合格ステップ ${streak} / 3回。${stats.streak >= 3 ? "解放済み。" : ""}`,
+      `小学3年生、${course.name}。${course.desc}。合格ステップ ${streak}回。${stats.streak >= 3 ? "解放済み。" : ""}`,
     );
+  });
+}
+
+function setupTabs() {
+  const tabs = document.querySelectorAll(".tab");
+  tabs.forEach((tab) => {
+    tab.addEventListener("click", () => {
+      tabs.forEach((other) => {
+        const active = other === tab;
+        other.classList.toggle("active", active);
+        other.setAttribute("aria-selected", String(active));
+        get(other.dataset.tab).classList.toggle("hidden", !active);
+      });
+    });
   });
 }
 
@@ -602,6 +613,7 @@ function returnToCourses() {
   renderStats();
 }
 
+setupTabs();
 renderCourses();
 renderStats();
 buildKeypad();

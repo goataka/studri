@@ -67,8 +67,7 @@ When("コース選択に戻る", async ({ page }) => {
 
 Then("今回の挑戦記録が保存される", async ({ page }) => {
   const course = page.locator('#courses [data-course="g3-one-digit-exact"]');
-  await expect(course.locator(".course-attempts")).toContainText("1回");
-  await expect(course.locator(".course-progress-count")).toHaveText("1/3");
+  await expect(course.locator(".course-step.current")).toHaveText("1");
 });
 
 When("ページを再読み込みする", async ({ page }) => {
@@ -77,8 +76,7 @@ When("ページを再読み込みする", async ({ page }) => {
 
 Then("挑戦記録が保持される", async ({ page }) => {
   const course = page.locator('#courses [data-course="g3-one-digit-exact"]');
-  await expect(course.locator(".course-attempts")).toContainText("1回");
-  await expect(course.locator(".course-progress-count")).toHaveText("1/3");
+  await expect(course.locator(".course-step.current")).toHaveText("1");
 });
 
 When("学習記録の初期化を確定する", async ({ page }) => {
@@ -87,8 +85,7 @@ When("学習記録の初期化を確定する", async ({ page }) => {
 });
 
 Then("挑戦回数が0になる", async ({ page }) => {
-  await expect(page.locator(".course-attempts")).toHaveCount(9);
-  await expect(page.locator(".course-attempts")).toContainText(Array(9).fill("0回"));
+  await expect(page.locator(".course-step.start-dot.current")).toHaveCount(9);
 });
 
 Then("トレイルから問題文の下に計算エリアが表示される", async ({ page }) => {
@@ -108,8 +105,9 @@ Then("トレイルから問題文の下に計算エリアが表示される", as
 
 Then("誤答を記録し連続合格を0回にする", async ({ page }) => {
   await expect(page.locator("#wrongCount")).toHaveText("1問");
+  await expect(page.locator('#courses [data-course="g3-one-digit-exact"] .course-step.start-dot.current')).toHaveCount(1);
+  await page.locator("#tabReview").click();
   await expect(page.locator("#reviewList .review-item")).toHaveCount(1);
-  await expect(page.locator('#courses [data-course="g3-one-digit-exact"] .course-progress-count')).toHaveText("0/3");
 });
 
 Then("コースは小学3年生のみで音とバージョンが表示される", async ({ page }) => {
@@ -117,12 +115,11 @@ Then("コースは小学3年生のみで音とバージョンが表示される"
   await expect(page.locator("#courses .grade")).toHaveCount(0);
   await expect(page).toHaveTitle("スタドリ - 算数・３年生・わり算編");
   await expect(page.locator("#statsTitle")).toHaveCount(0);
-  await expect(page.locator(".course-progress-count")).toHaveText(Array(9).fill("0/3"));
   await expect(page.locator(".course-challenge")).toHaveText(
     Array(9).fill(["⏱ タイムアタック", "🔥 連続正解"]).flat(),
   );
   await expect(page.locator(".course-challenge:disabled")).toHaveCount(18);
-  await expect(page.locator("#courses .course").first().locator(".course-step")).toHaveText(["1", "2", "◎"]);
+  await expect(page.locator("#courses .course").first().locator(".course-step")).toHaveText(["", "1", "2", "3"]);
   await expect(page.locator(".course-pass-label")).toHaveCount(0);
   await expect(page.locator(".course-unlock")).toHaveText(Array(9).fill("あと3回で解放"));
   await expect(page.locator(".course-unlock").first()).toBeHidden();
@@ -155,7 +152,7 @@ Then("コース一覧に進捗ステップと解放条件つきボタンが表�
     expect(desktopPositions[index].y).toBeGreaterThan(desktopPositions[index - 1].y);
   }
   await expect(courses.first()).toHaveCSS("display", "flex");
-  await expect(page.locator(".course-steps .course-step")).toHaveCount(27);
+  await expect(page.locator(".course-steps .course-step")).toHaveCount(36);
   const firstCourse = courses.first();
   await expect(firstCourse).not.toHaveAttribute("data-step", /\d+/);
   const title = await firstCourse.locator(".course-copy").boundingBox();
@@ -167,18 +164,16 @@ Then("コース一覧に進捗ステップと解放条件つきボタンが表�
   expect(steps).not.toBeNull();
   expect(firstChallenge).not.toBeNull();
   expect(progress!.x).toBeGreaterThanOrEqual(title!.x + title!.width);
-  expect(steps!.width / 3).toBeGreaterThanOrEqual(22);
+  expect(steps!.width / 4).toBeGreaterThanOrEqual(22);
   expect(firstChallenge!.x).toBeGreaterThan(steps!.x + steps!.width);
   await expect(firstCourse.locator(".course-copy strong")).toHaveCSS("font-size", "19.2px");
-  await expect(firstCourse.locator(".course-step").first()).toHaveCSS("width", "54px");
+  await expect(firstCourse.locator(".course-step").nth(1)).toHaveCSS("width", "54px");
 
   await page.setViewportSize({ width: 390, height: 844 });
   const mobileColumns = await page.locator("#courses").evaluate((element) =>
     getComputedStyle(element).gridTemplateColumns.split(" ").length,
   );
   expect(mobileColumns).toBe(1);
-  await expect(page.locator(".course-progress-count")).toHaveText(Array(9).fill("0/3"));
-  await expect(page.locator(".course-attempts")).toHaveText(Array(9).fill("0回 ・ ベスト —"));
   await expect(page.locator(".course-unlock")).toHaveText(Array(9).fill("あと3回で解放"));
 });
 
@@ -225,10 +220,10 @@ Then("9つのコースが指定順に並び問題が範囲内で出る", async (
   });
   await page.reload();
   const passedCourse = page.locator('#courses [data-course="g3-meaning-story"]');
-  await expect(passedCourse.locator(".course-progress-count")).toHaveText("3/3");
   await expect(passedCourse.locator(".course-step.complete")).toHaveCount(3);
-  await expect(passedCourse.locator(".course-step.final")).toHaveText("◎");
-  await expect(passedCourse.locator(".course-attempts")).toHaveText("4回 ・ ベスト 23秒");
+  await expect(passedCourse.locator(".course-step.current")).toHaveCount(0);
+  await expect(passedCourse.locator(".course-step.final")).toHaveText("3");
+  await expect(page.locator(".course-goal")).toHaveCount(1);
   await expect(passedCourse.locator(".course-unlock")).toHaveText("解放済み");
   await expect(passedCourse.locator(".course-start")).toHaveAttribute("aria-label", /解放済み/);
   await expect(passedCourse.locator(".course-challenge:disabled")).toHaveCount(0);
