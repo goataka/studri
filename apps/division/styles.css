@@ -443,12 +443,13 @@ main {
   display: grid;
   flex: 0 0 auto;
   gap: 5px;
-  justify-items: end;
+  align-self: flex-start;
+  justify-items: start;
 }
 
 .course-challenge-group {
   display: grid;
-  justify-items: end;
+  justify-items: start;
   gap: 4px;
 }
 
@@ -464,6 +465,9 @@ main {
 }
 
 .course-challenge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
   padding: 7px 10px;
   border: 1px solid #dec99e;
   border-radius: 999px;
@@ -472,6 +476,11 @@ main {
   font-size: 0.72rem;
   font-weight: 750;
   white-space: nowrap;
+}
+
+.course-challenge-icon {
+  font-size: 1.45em;
+  line-height: 1;
 }
 
 .course-challenge:disabled {
@@ -763,6 +772,11 @@ main {
   padding: 16px;
   border-radius: 16px;
   background: #f4f7ef;
+}
+
+.challenge-icon {
+  font-size: 1.5em;
+  vertical-align: -0.1em;
 }
 
 .challenge button {

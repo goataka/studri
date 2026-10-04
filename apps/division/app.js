@@ -15,15 +15,15 @@ const COURSE_IDS = new Set([
 ]);
 
 const courses = [
-  { id: "g3-meaning-story", name: "文章題（割り算の意味）", desc: "分ける・いくつ分の場面を考えよう", type: "meaning" },
-  { id: "g3-one-digit-exact", name: "1桁 ÷ 1桁（九九の範囲・あまりなし）", desc: "九九を使って、ぴったり分けよう", type: "one-digit-exact" },
-  { id: "g3-two-digit-exact", name: "2桁 ÷ 1桁（九九の範囲・あまりなし）", desc: "2桁の数を九九でぴったり分けよう", type: "two-digit-exact" },
-  { id: "g3-exact-story", name: "文章題（九九の範囲・あまりなし）", desc: "文章題を読んで、ぴったり分けよう", type: "exact-story" },
-  { id: "g3-one-digit-remainder", name: "1桁 ÷ 1桁（九九の範囲・あまりあり）", desc: "1桁のわり算で、商とあまりを答えよう", type: "one-digit-remainder" },
-  { id: "g3-two-digit-remainder", name: "2桁 ÷ 1桁（九九の範囲・あまりあり）", desc: "九九を使って、商とあまりを見つけよう", type: "two-digit-remainder" },
-  { id: "g3-remainder-story", name: "文章題（九九の範囲・あまりあり）", desc: "文章題で、商とあまりを考えよう", type: "remainder-story" },
-  { id: "g3-zero-one", name: "０や１のわり算", desc: "0をわる計算や、1でわる計算に挑戦", type: "zero-one" },
-  { id: "g3-two-digit-mental", name: "2桁 ÷ 1桁（九九を超える暗算）", desc: "商が10以上になる計算を暗算しよう", type: "two-digit-mental" },
+  { id: "g3-meaning-story", emoji: "📖", name: "文章題（割り算の意味）", desc: "分ける・いくつ分の場面を考えよう", type: "meaning" },
+  { id: "g3-one-digit-exact", emoji: "🔢", name: "1桁 ÷ 1桁（九九の範囲・あまりなし）", desc: "九九を使って、ぴったり分けよう", type: "one-digit-exact" },
+  { id: "g3-two-digit-exact", emoji: "➗", name: "2桁 ÷ 1桁（九九の範囲・あまりなし）", desc: "2桁の数を九九でぴったり分けよう", type: "two-digit-exact" },
+  { id: "g3-exact-story", emoji: "📚", name: "文章題（九九の範囲・あまりなし）", desc: "文章題を読んで、ぴったり分けよう", type: "exact-story" },
+  { id: "g3-one-digit-remainder", emoji: "🧮", name: "1桁 ÷ 1桁（九九の範囲・あまりあり）", desc: "1桁のわり算で、商とあまりを答えよう", type: "one-digit-remainder" },
+  { id: "g3-two-digit-remainder", emoji: "🟠", name: "2桁 ÷ 1桁（九九の範囲・あまりあり）", desc: "九九を使って、商とあまりを見つけよう", type: "two-digit-remainder" },
+  { id: "g3-remainder-story", emoji: "📘", name: "文章題（九九の範囲・あまりあり）", desc: "文章題で、商とあまりを考えよう", type: "remainder-story" },
+  { id: "g3-zero-one", emoji: "⭕", name: "０や１のわり算", desc: "0をわる計算や、1でわる計算に挑戦", type: "zero-one" },
+  { id: "g3-two-digit-mental", emoji: "💡", name: "2桁 ÷ 1桁（九九を超える暗算）", desc: "商が10以上になる計算を暗算しよう", type: "two-digit-mental" },
 ];
 
 const defaultData = () => ({ course: "g3-meaning-story", stats: {}, wrong: [] });
@@ -76,7 +76,7 @@ function renderCourses() {
     const copy = document.createElement("span");
     copy.className = "course-copy";
     const name = document.createElement("strong");
-    name.textContent = course.name;
+    name.textContent = `${course.emoji} ${course.name}`;
     const description = document.createElement("small");
     description.textContent = course.desc;
     copy.append(name, description);
@@ -110,16 +110,22 @@ function renderCourses() {
     challenges.className = "course-challenges";
     challenges.setAttribute("aria-label", "合格後のチャレンジ");
     [
-      ["⏱ タイムアタック", "time"],
-      ["🔥 連続正解チャレンジ", "chain"],
-    ].forEach(([label, mode]) => {
+      ["⏱", "タイムアタック", "time"],
+      ["🔥", "連続正解", "chain"],
+    ].forEach(([emoji, label, mode]) => {
       const control = document.createElement("span");
       control.className = "course-challenge-control";
       const challenge = document.createElement("button");
       challenge.type = "button";
       challenge.className = "course-challenge";
       challenge.dataset.mode = mode;
-      challenge.textContent = label;
+      const icon = document.createElement("span");
+      icon.className = "course-challenge-icon";
+      icon.setAttribute("aria-hidden", "true");
+      icon.textContent = emoji;
+      const text = document.createElement("span");
+      text.textContent = ` ${label}`;
+      challenge.append(icon, text);
       control.append(challenge);
       challenges.append(control);
     });
@@ -158,8 +164,8 @@ function renderCourseProgress() {
     const challengeGroup = button.querySelector(".course-challenge-group");
     challengeGroup.classList.toggle("is-next", streak >= 3);
     button.querySelectorAll(".course-step").forEach((step, index) => {
-      step.classList.toggle("current", index === streak && streak < 3);
-      step.classList.toggle("complete", index > 0 && index <= streak);
+      step.classList.toggle("current", index === (streak === 0 ? 0 : streak + 1) && streak < 3);
+      step.classList.toggle("complete", (index === 0 && streak > 0) || (index > 0 && index <= streak));
     });
     button.querySelectorAll(".course-challenge").forEach((challenge) => {
       challenge.disabled = stats.streak < 3;
