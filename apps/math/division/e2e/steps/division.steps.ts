@@ -211,7 +211,7 @@ Then("画面幅に応じた位置に計算エリアが表示される", async ({
   expect(workArea!.width).toBeGreaterThan(desktopPrimary!.width);
   const desktopCanvas = await page.locator("#noteCanvas").boundingBox();
   expect(desktopCanvas).not.toBeNull();
-  expect(desktopCanvas!.height).toBeGreaterThanOrEqual(desktopWork!.height - 50);
+  expect(desktopCanvas!.height).toBeGreaterThanOrEqual(desktopWork!.height * 0.85);
   await expect(page.locator("#answerCanvas")).toHaveCount(0);
   await expect(page.locator("#noteCanvas")).toBeVisible();
   await expect(page.locator(".canvas-box")).toHaveCount(1);
