@@ -85,6 +85,11 @@ function renderCourses() {
     details.className = "course-details";
     const progress = document.createElement("span");
     progress.className = "course-progress";
+    const basicGroup = document.createElement("span");
+    basicGroup.className = "course-group";
+    const basicLabel = document.createElement("span");
+    basicLabel.className = "course-group-label";
+    basicLabel.textContent = "ベーシック";
     const steps = document.createElement("span");
     steps.className = "course-steps";
     steps.setAttribute("aria-hidden", "true");
@@ -94,7 +99,13 @@ function renderCourses() {
       indicator.textContent = step === 0 ? "" : String(step);
       steps.append(indicator);
     }
-    progress.append(steps);
+    basicGroup.append(basicLabel, steps);
+    progress.append(basicGroup);
+    const challengeGroup = document.createElement("div");
+    challengeGroup.className = "course-challenge-group";
+    const challengeLabel = document.createElement("span");
+    challengeLabel.className = "course-group-label";
+    challengeLabel.textContent = "チャレンジ";
     const challenges = document.createElement("div");
     challenges.className = "course-challenges";
     challenges.setAttribute("aria-label", "合格後のチャレンジ");
@@ -117,7 +128,8 @@ function renderCourses() {
     start.append(copy, details);
     const side = document.createElement("div");
     side.className = "course-side";
-    side.append(challenges);
+    challengeGroup.append(challengeLabel, challenges);
+    side.append(challengeGroup);
     card.append(start, side);
     start.addEventListener("click", () => {
       selectedCourse = course.id;
@@ -143,6 +155,8 @@ function renderCourseProgress() {
 
     const stats = data.stats[course.id] || { streak: 0, attempts: 0, best: null };
     const streak = Math.min(stats.streak, 3);
+    const challengeGroup = button.querySelector(".course-challenge-group");
+    challengeGroup.classList.toggle("is-next", streak >= 3);
     button.querySelectorAll(".course-step").forEach((step, index) => {
       step.classList.toggle("current", index === streak && streak < 3);
       step.classList.toggle("complete", index > 0 && index <= streak);
@@ -191,13 +205,17 @@ function renderStats() {
   data.wrong.slice(-8).reverse().forEach((entry) => {
     const item = document.createElement("div");
     item.className = "review-item";
-    const problem = document.createElement("b");
+  const reviewCourse = document.createElement("small");
+  reviewCourse.className = "review-course";
+  const course = courses.find((candidate) => candidate.id === entry.courseId);
+  reviewCourse.textContent = `コース：${course?.name || "コース情報なし"}`;
+  const problem = document.createElement("b");
     problem.textContent = entry.problem;
     const answer = document.createElement("div");
     answer.textContent = `あなたの答え：${entry.answer || "未入力"} / 正解：${entry.correct}`;
     const explanation = document.createElement("small");
     explanation.textContent = entry.explain;
-    item.append(problem, answer, explanation);
+    item.append(reviewCourse, problem, answer, explanation);
     reviewList.append(item);
   });
 }
@@ -408,6 +426,7 @@ function showFeedback(isCorrect, problem, rawAnswer) {
   if (!isCorrect) {
     data.wrong.push({
       grade: 3,
+      courseId: selectedCourse,
       problem: problem.text,
       answer: rawAnswer,
       correct: problem.answer,
@@ -634,15 +653,6 @@ get("quit").addEventListener("click", () => {
 });
 get("again").addEventListener("click", setupQuiz);
 get("homeButton").addEventListener("click", returnToCourses);
-get("resetData").addEventListener("click", () => {
-  if (!confirm("学習記録とまちがいノートをすべて削除しますか？")) return;
-  localStorage.removeItem(STORAGE_KEY);
-  localStorage.removeItem(`${STORAGE_KEY}-chain`);
-  data = defaultData();
-  selectedCourse = "g3-meaning-story";
-  renderCourses();
-  renderStats();
-});
 get("sound").setAttribute("aria-pressed", String(soundEnabled));
 get("sound").textContent = soundEnabled ? "🔔 音あり" : "🔕 消音";
 get("sound").addEventListener("click", () => {

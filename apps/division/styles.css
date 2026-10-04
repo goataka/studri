@@ -236,20 +236,22 @@ main {
 }
 
 .tab.active {
-  border-color: #315c43;
-  background: #315c43;
-  color: #fff;
-  box-shadow: 0 3px 0 rgb(35 74 50 / 18%);
+  border-color: #aac5a4;
+  background: #dcebd8;
+  color: #315c43;
+  box-shadow: 0 2px 0 rgb(35 74 50 / 10%);
 }
 
 .course-goal {
-  justify-self: center;
-  padding: 10px 28px;
-  border: 3px double #d79b54;
-  border-radius: 999px;
-  background: #fff4df;
+  width: 100%;
+  min-height: 108px;
+  padding: 16px 20px;
+  border: 1px solid #dfe8d8;
+  border-radius: 16px;
+  background: #fffefb;
   color: #805c2d;
   font-weight: 900;
+  box-shadow: 0 3px 0 #e8eddf;
 }
 
 .course::after {
@@ -359,6 +361,18 @@ main {
   font-weight: 750;
 }
 
+.course-group {
+  display: grid;
+  gap: 4px;
+}
+
+.course-group-label {
+  color: #66766a;
+  font-size: 0.72rem;
+  font-weight: 850;
+  letter-spacing: 0.04em;
+}
+
 .course-progress-count {
   white-space: nowrap;
 }
@@ -409,9 +423,15 @@ main {
 }
 
 .course-step.current {
-  border-color: #5e895c;
-  background: #78a875;
+  border-color: #c96532;
+  background: #d97843;
   color: white;
+}
+
+.course-step.complete {
+  border-color: #e8ad84;
+  background: #fbe6d5;
+  color: #9a562c;
 }
 
 .course-record {
@@ -424,6 +444,16 @@ main {
   flex: 0 0 auto;
   gap: 5px;
   justify-items: end;
+}
+
+.course-challenge-group {
+  display: grid;
+  justify-items: end;
+  gap: 4px;
+}
+
+.course-challenge-group.is-next .course-group-label {
+  color: #a95025;
 }
 
 .course-challenges {
@@ -458,6 +488,17 @@ main {
   background: #fff0d1;
 }
 
+.course-challenge-group.is-next .course-challenge:not(:disabled) {
+  border-color: #c96532;
+  background: #d97843;
+  color: white;
+}
+
+.course-challenge-group.is-next .course-challenge:not(:disabled):hover {
+  border-color: #a95025;
+  background: #c96532;
+}
+
 .history-actions {
   display: flex;
   flex-wrap: wrap;
@@ -486,7 +527,15 @@ main {
 }
 
 .review-item b {
+  display: block;
   color: #925637;
+}
+
+.review-item .review-course {
+  display: block;
+  margin: 0 0 5px;
+  color: #596960;
+  font-weight: 750;
 }
 
 .review-item small {

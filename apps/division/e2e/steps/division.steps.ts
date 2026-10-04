@@ -79,15 +79,6 @@ Then("挑戦記録が保持される", async ({ page }) => {
   await expect(course.locator(".course-step.current")).toHaveText("1");
 });
 
-When("学習記録の初期化を確定する", async ({ page }) => {
-  page.once("dialog", (dialog) => dialog.accept());
-  await page.locator("#resetData").click();
-});
-
-Then("挑戦回数が0になる", async ({ page }) => {
-  await expect(page.locator(".course-step.start-dot.current")).toHaveCount(9);
-});
-
 Then("トレイルから問題文の下に計算エリアが表示される", async ({ page }) => {
   await page.setViewportSize({ width: 1440, height: 900 });
   await expect(page.locator("#courses .course")).toHaveCount(9);
@@ -108,6 +99,7 @@ Then("誤答を記録し連続合格を0回にする", async ({ page }) => {
   await expect(page.locator('#courses [data-course="g3-one-digit-exact"] .course-step.start-dot.current')).toHaveCount(1);
   await page.locator("#tabReview").click();
   await expect(page.locator("#reviewList .review-item")).toHaveCount(1);
+  await expect(page.locator("#reviewList .review-course")).toHaveText("コース：1桁 ÷ 1桁（九九の範囲・あまりなし）");
 });
 
 Then("コースは小学3年生のみで音とバージョンが表示される", async ({ page }) => {
@@ -124,11 +116,17 @@ Then("コースは小学3年生のみで音とバージョンが表示される"
   await expect(page.locator(".course-challenge-control").first()).toHaveAttribute("title", "あと3回で解放");
   await expect(page.locator("body")).not.toContainText("あと3回で解放");
   await expect(page.locator("body")).not.toContainText("解放済み");
-  await expect(page.locator("#tabCourses")).toHaveCSS("background-color", "rgb(49, 92, 67)");
+  await expect(page.locator("#tabCourses")).toHaveCSS("background-color", "rgb(220, 235, 216)");
+  await expect(page.locator("#resetData")).toHaveCount(0);
+  await expect(page.locator(".course-group-label")).toHaveText([
+    "ベーシック", "チャレンジ", "ベーシック", "チャレンジ", "ベーシック", "チャレンジ",
+    "ベーシック", "チャレンジ", "ベーシック", "チャレンジ", "ベーシック", "チャレンジ",
+    "ベーシック", "チャレンジ", "ベーシック", "チャレンジ", "ベーシック", "チャレンジ",
+  ]);
   await page.locator("#tabReview").click();
   await expect(page.locator("#reviewPanel")).toBeVisible();
   await expect(page.locator("#coursesPanel")).toBeHidden();
-  await expect(page.locator("#tabReview")).toHaveCSS("background-color", "rgb(49, 92, 67)");
+  await expect(page.locator("#tabReview")).toHaveCSS("background-color", "rgb(220, 235, 216)");
   await page.locator("#tabCourses").click();
   await expect(page.locator("#sound")).toHaveAttribute("aria-pressed", "true");
   await expect(page.locator(".site-footer")).toHaveText(/^Ver\. \d{8}\.\d{6}\.\d{3}$/);
@@ -238,6 +236,9 @@ Then("9つのコースが指定順に並び問題が範囲内で出る", async (
   await page.reload();
   const passedCourse = page.locator('#courses [data-course="g3-meaning-story"]');
   await expect(passedCourse.locator(".course-step.complete")).toHaveCount(3);
+  await expect(passedCourse.locator(".course-step.complete").first()).toHaveCSS("background-color", "rgb(251, 230, 213)");
+  await expect(passedCourse.locator(".course-challenge-group")).toHaveClass(/is-next/);
+  await expect(passedCourse.locator(".course-challenge:not(:disabled)").first()).toHaveCSS("background-color", "rgb(217, 120, 67)");
   await expect(passedCourse.locator(".course-step.current")).toHaveCount(0);
   await expect(passedCourse.locator(".course-step.final")).toHaveText("3");
   await expect(page.locator(".course-goal")).toHaveCount(1);
