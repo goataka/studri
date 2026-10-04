@@ -169,7 +169,9 @@ function renderCourses() {
   beginIcon.setAttribute("aria-hidden", "true");
   beginIcon.textContent = "🧭";
   beginLabel.append(beginIcon, document.createTextNode(" スタート"));
-  beginCopy.append(beginLabel);
+  const beginMessage = document.createElement("small");
+  beginMessage.textContent = "合格ステップを3つ集めよう！いっしょに進もう！";
+  beginCopy.append(beginLabel, beginMessage);
   begin.append(beginCopy);
   courseList.prepend(begin);
   const goal = document.createElement("div");
@@ -182,7 +184,9 @@ function renderCourses() {
   goalIcon.setAttribute("aria-hidden", "true");
   goalIcon.textContent = "🚩";
   goalLabel.append(goalIcon, document.createTextNode(" ゴール"));
-  goalCopy.append(goalLabel);
+  const goalMessage = document.createElement("small");
+  goalMessage.textContent = "ここまで来たね、おめでとう！次の挑戦もがんばろう！";
+  goalCopy.append(goalLabel, goalMessage);
   goal.append(goalCopy);
   courseList.append(goal);
   renderCourseProgress();
@@ -694,7 +698,10 @@ get("quit").addEventListener("click", () => {
   if (confirm("挑戦を中断してコース選択へ戻りますか？")) returnToCourses();
 });
 get("again").addEventListener("click", setupQuiz);
-get("homeButton").addEventListener("click", returnToCourses);
+get("homeButton").addEventListener("click", (event) => {
+  event.preventDefault();
+  returnToCourses();
+});
 function updateSoundControl() {
   get("sound").setAttribute("aria-pressed", String(soundEnabled));
   get("sound").setAttribute("aria-label", soundEnabled ? "音あり" : "消音");
