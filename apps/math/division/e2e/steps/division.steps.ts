@@ -104,6 +104,7 @@ Then(/VR画像 "(.*)" を確認する/, async ({ page }, screenshotName: string)
   }
 
   await expect(page).toHaveScreenshot(screenshotName, {
+    mask: [page.locator("#modeStatus")],
     animations: "disabled",
     caret: "hide",
     fullPage: true,
@@ -268,7 +269,7 @@ Then("算数ページのパンくずと音・初期化ボタンとバージョ�
   await expect(page).toHaveTitle("スタドリ - 算数・３年生・わり算編");
   await expect(page.locator("#statsTitle")).toHaveCount(0);
   await expect(page.locator(".course-challenge")).toHaveText(
-    Array(9).fill(["⏱ タイムアタック", "🔥 連続正解"]).flat(),
+    Array(9).fill(["⏱ タイムアタック--", "🔥 連続正解--"]).flat(),
   );
   await expect(page.locator(".course-challenge:disabled")).toHaveCount(18);
   await expect(page.locator("#courses .course").first().locator(".course-step")).toHaveText(["", "🥇", "🥈", "🥉"]);
@@ -564,7 +565,7 @@ Then("9つのコースが指定順に並び問題が範囲内で出る", async (
   await expect(passedCourse.locator(".course-step.start-dot")).toHaveCSS("background-color", "rgb(251, 230, 213)");
   await expect(passedCourse.locator(".course-step.current")).toHaveText("🥈");
   await expect(passedCourse.locator(".course-step.current")).toHaveCSS("background-color", "rgb(217, 120, 67)");
-  await expect(passedCourse.locator(".course-challenge")).toHaveText(["⏱ タイムアタック", "🔥 連続正解"]);
+  await expect(passedCourse.locator(".course-challenge")).toHaveText(["⏱ タイムアタック--", "🔥 連続正解--"]);
 
   await page.evaluate(() => {
     localStorage.setItem("studri-division-v1", JSON.stringify({

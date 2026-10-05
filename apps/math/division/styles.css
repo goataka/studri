@@ -1225,3 +1225,27 @@ main {
   border-radius: 8px;
   background: #fff;
 }
+
+.mode-status {
+  margin-left: auto;
+  padding: 4px 12px;
+  border-radius: 999px;
+  background: #fff0d1;
+  color: #765a2c;
+  font-weight: 850;
+  font-variant-numeric: tabular-nums;
+}
+
+.mode-status.hidden {
+  display: none;
+}
+
+.course-challenge-record {
+  min-width: 2.2em;
+  padding: 1px 7px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.7);
+  color: #5d4a25;
+  font-weight: 850;
+  text-align: center;
+}

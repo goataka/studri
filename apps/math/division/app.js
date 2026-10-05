@@ -137,7 +137,10 @@ function renderCourses() {
       icon.textContent = emoji;
       const text = document.createElement("span");
       text.textContent = ` ${label}`;
-      challenge.append(icon, text);
+      text.className = "course-challenge-label";
+      const record = document.createElement("span");
+      record.className = "course-challenge-record";
+      challenge.append(icon, text, record);
       challenge.addEventListener("click", () => {
         selectedCourse = course.id;
         data.course = selectedCourse;
@@ -236,7 +239,14 @@ function renderCourseProgress() {
     });
     button.querySelectorAll(".course-challenge").forEach((challenge) => {
       challenge.disabled = stats.streak < 3;
-      challenge.setAttribute("aria-label", challenge.textContent);
+      const record = challenge.dataset.mode === "time"
+        ? (stats.timeBest ? `${stats.timeBest}秒` : "--")
+        : (stats.chainBest ? `${stats.chainBest}問` : "--");
+      challenge.querySelector(".course-challenge-record").textContent = record;
+      challenge.setAttribute(
+        "aria-label",
+        `${challenge.querySelector(".course-challenge-label").textContent.trim()} 記録 ${record}`,
+      );
       const control = challenge.parentElement;
       if (stats.streak < 3) control.title = `あと${3 - streak}回で解放`;
       else control.removeAttribute("title");
@@ -451,6 +461,8 @@ function setupQuiz(mode = "basic") {
     balance: {},
   };
   locked = false;
+  clearInterval(modeTimer);
+  if (mode === "time") modeTimer = setInterval(updateModeStatus, 500);
   get("home").classList.add("hidden");
   get("result").classList.add("hidden");
   get("quiz").classList.remove("hidden");
@@ -458,8 +470,25 @@ function setupQuiz(mode = "basic") {
   nextProblem();
 }
 
+let modeTimer = null;
+function updateModeStatus() {
+  const status = get("modeStatus");
+  if (!quiz || quiz.mode === "basic") {
+    status.classList.add("hidden");
+    return;
+  }
+  status.classList.remove("hidden");
+  if (quiz.mode === "time") {
+    const elapsed = Math.floor((Date.now() - quiz.started) / 1000);
+    status.textContent = `⏱ ${Math.floor(elapsed / 60)}:${String(elapsed % 60).padStart(2, "0")}`;
+  } else {
+    status.textContent = `🔥 ${quiz.correct}問正解`;
+  }
+}
+
 function nextProblem() {
   clearTimeout(advanceTimer);
+  updateModeStatus();
   if (quiz.mode !== "chain" && quiz.index >= 10) {
     finishQuiz();
     return;
@@ -614,6 +643,7 @@ function judgeAnswer() {
 
   if (isCorrect) {
     quiz.correct += 1;
+    updateModeStatus();
     showFeedback(true, problem, rawAnswer);
     advanceTimer = setTimeout(advanceQuiz, 3000);
     return;
@@ -646,6 +676,7 @@ function retryQuestion() {
 }
 
 function finishQuiz() {
+  clearInterval(modeTimer);
   const stats = data.stats[selectedCourse] || { streak: 0, attempts: 0, best: null };
   const seconds = Math.round((Date.now() - quiz.started) / 1000);
   const mode = quiz.mode;
@@ -789,6 +820,7 @@ function setupCanvas(id) {
 }
 
 function returnToCourses() {
+  clearInterval(modeTimer);
   get("quiz").classList.add("hidden");
   get("result").classList.add("hidden");
   get("home").classList.remove("hidden");
