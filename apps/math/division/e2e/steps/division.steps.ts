@@ -127,12 +127,13 @@ When("最初の問題で誤答して再回答する", async ({ page }) => {
   await expect(page.locator("#feedback")).toContainText("おしい！");
   await expect(page.locator("#feedback")).toContainText("ヒント：");
   await expect(page.locator("#feedback")).not.toContainText(`正解は「${correctAnswer}」です。`);
-  await expect(page.getByRole("button", { name: "もう一度" })).toBeVisible();
+  await expect(page.locator("#feedbackActions button").first()).toHaveText("もう一度 ↵");
   await page.keyboard.press("Enter");
   await expect(page.locator("#feedback")).not.toBeVisible();
   await page.locator("#answer").fill(correctAnswer);
   await page.getByRole("button", { name: "答え合わせ" }).click();
   await expect(page.locator("#feedback")).toHaveClass(/ok/);
+  await expect(page.locator("#feedbackActions button").first()).toHaveText("つぎへ ↵");
   await page.keyboard.press("Enter");
 });
 
@@ -157,12 +158,14 @@ When("残りの問題に正解して挑戦を終える", async ({ page }) => {
 Then("結果に10問正解と表示される", async ({ page }) => {
   await expect(page.locator("#result")).toBeVisible();
   await expect(page.locator("#score")).toHaveText("10 / 10 問 正解");
+  await expect(page.locator("#again")).toHaveText(/(?:続けて|もう一度)挑戦する ↵/);
   await expect(page.getByRole("link", { name: "算数ページに戻る" })).toHaveAttribute("href", "#home");
 });
 
 Then("ミスがあったことを結果に表示する", async ({ page }) => {
   await expect(page.locator("#resultTitle")).toHaveText("ぜんもん正解！");
   await expect(page.locator("#resultMessage")).toContainText("途中でミスがあった");
+  await expect(page.locator("#again")).toHaveText("もう一度挑戦する ↵");
 });
 
 When("コース選択に戻る", async ({ page }) => {
