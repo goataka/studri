@@ -502,7 +502,7 @@ function showFeedback(isCorrect, problem, rawAnswer) {
 
   const primary = document.createElement("button");
   primary.type = "button";
-  primary.textContent = isCorrect ? "つぎへ（↵）" : "もう一度（Enter）";
+  primary.textContent = isCorrect ? "つぎへ ↵" : "もう一度 ↵";
   primary.addEventListener("click", isCorrect ? advanceQuiz : retryQuestion);
   actions.append(primary);
 
@@ -536,7 +536,7 @@ function revealAnswer(problem) {
   actions.replaceChildren();
   const next = document.createElement("button");
   next.type = "button";
-  next.textContent = "次へ";
+  next.textContent = "次へ ↵";
   next.addEventListener("click", advanceQuiz);
   actions.append(next);
   next.focus();
@@ -602,7 +602,7 @@ function finishQuiz() {
   get("quiz").classList.add("hidden");
   get("result").classList.remove("hidden");
   get("score").textContent = `${quiz.correct} / 10 問 正解`;
-  get("again").textContent = quiz.missed ? "もう一度挑戦する" : "続けて挑戦する";
+  get("again").textContent = quiz.missed ? "もう一度挑戦する ↵" : "続けて挑戦する ↵";
   get("resultTitle").textContent = quiz.correct === 10
     ? (quiz.missed ? "ぜんもん正解！" : "パーフェクト！")
     : "よくがんばったね！";

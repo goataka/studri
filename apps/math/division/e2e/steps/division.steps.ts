@@ -89,7 +89,7 @@ When("誤答を修正して正解する", async ({ page }) => {
   await page.locator("#answer").fill(correctAnswer);
   await page.getByRole("button", { name: "答え合わせ" }).click();
   await expect(page.locator("#feedback")).toHaveClass(/ok/);
-  await expect(page.locator("#feedbackActions button").first()).toHaveText("つぎへ（↵）");
+  await expect(page.locator("#feedbackActions button").first()).toHaveText("つぎへ ↵");
 });
 
 When("Enterキーで次の問題へ進む", async ({ page }) => {
@@ -145,8 +145,8 @@ When("最初の問題で誤答して答えを確認する", async ({ page }) => 
   await expect(page.locator("#feedback")).not.toContainText(`正解は「${correctAnswer}」です。`);
   await page.getByRole("button", { name: "答えを確認" }).click();
   await expect(page.locator("#feedback")).toContainText(`正解は「${correctAnswer}」です。`);
-  await expect(page.locator("#feedbackActions")).toHaveText("次へ");
-  await page.getByRole("button", { name: "次へ" }).click();
+  await expect(page.locator("#feedbackActions")).toHaveText("次へ ↵");
+  await page.getByRole("button", { name: "次へ ↵" }).click();
   await expect(page.locator("#questionNo")).toHaveText("2 / 10");
 });
 
@@ -214,7 +214,23 @@ Then("画面幅に応じた位置に計算エリアが表示される", async ({
   expect(desktopCanvas!.height).toBeGreaterThanOrEqual(desktopWork!.height * 0.85);
   await expect(page.locator("#answerCanvas")).toHaveCount(0);
   await expect(page.locator("#noteCanvas")).toBeVisible();
+  await expect(page.locator(".quiz-work")).toHaveAttribute("aria-label", "計算エリア");
+  await expect(page.locator("#noteCanvas")).toHaveAttribute("aria-label", "計算エリア。手書きで計算できます");
   await expect(page.locator(".canvas-box")).toHaveCount(1);
+  const canvas = await page.locator("#noteCanvas").boundingBox();
+  expect(canvas).not.toBeNull();
+  await page.mouse.move(canvas!.x + 10, canvas!.y + 10);
+  await page.mouse.down();
+  await page.mouse.move(canvas!.x + 40, canvas!.y + 20);
+  await page.mouse.up();
+  const hasHandwriting = await page.locator("#noteCanvas").evaluate((element) => {
+    const canvasElement = element as HTMLCanvasElement;
+    const context = canvasElement.getContext("2d");
+    if (!context) return false;
+    const pixels = context.getImageData(0, 0, canvasElement.width, canvasElement.height).data;
+    return pixels.some((value, index) => index % 4 === 3 && value > 0);
+  });
+  expect(hasHandwriting).toBe(true);
   const keypadButton = await page.locator("#keypad button").first().boundingBox();
   expect(keypadButton).not.toBeNull();
   expect(keypadButton!.height).toBeGreaterThanOrEqual(42);
@@ -298,7 +314,7 @@ Then("算数ページのパンくずと音・初期化ボタンとバージョ�
 });
 
 Then("続けて挑戦するボタンがチャレンジより上に表示される", async ({ page }) => {
-  await expect(page.locator("#again")).toHaveText("続けて挑戦する");
+  await expect(page.locator("#again")).toHaveText("続けて挑戦する ↵");
   await expect(page.locator("#again")).toBeFocused();
   const again = await page.locator("#again").boundingBox();
   const challenges = await page.locator(".challenge-grid").boundingBox();
