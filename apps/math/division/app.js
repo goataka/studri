@@ -138,6 +138,13 @@ function renderCourses() {
       const text = document.createElement("span");
       text.textContent = ` ${label}`;
       challenge.append(icon, text);
+      challenge.addEventListener("click", () => {
+        selectedCourse = course.id;
+        data.course = selectedCourse;
+        save();
+        renderCourses();
+        setupQuiz(mode);
+      });
       control.append(challenge);
       challenges.append(control);
     });
@@ -280,6 +287,13 @@ function showCourseLog(course) {
     const explanation = document.createElement("small");
     explanation.textContent = entry.explain;
     item.append(problem, answer, explanation);
+    if (typeof entry.work === "string" && entry.work.startsWith("data:image/png")) {
+      const work = document.createElement("img");
+      work.className = "review-work";
+      work.src = entry.work;
+      work.alt = "そのときの計算エリア";
+      item.append(work);
+    }
     reviewList.append(item);
   });
 }
@@ -297,9 +311,13 @@ function makeProblem(index) {
 
   switch (course.type) {
     case "meaning": {
-      divisor = randomInteger(2, Math.min(5, 2 + Math.floor(level / 2)));
-      const quotient = randomInteger(2, Math.min(9, 3 + level));
-      dividend = divisor * quotient;
+      const pairs = [];
+      for (let candidateDivisor = 2; candidateDivisor <= Math.min(5, 2 + Math.floor(level / 2)); candidateDivisor += 1) {
+        for (let quotient = 2; quotient <= Math.min(9, 3 + level); quotient += 1) {
+          pairs.push([candidateDivisor * quotient, candidateDivisor]);
+        }
+      }
+      [dividend, divisor] = choose(pairs);
       return makeStoryProblem(dividend, divisor, 0, Math.random() < 0.5);
     }
     case "one-digit-exact": {
@@ -344,15 +362,15 @@ function makeProblem(index) {
       if (course.type === "remainder-story") return makeStoryProblem(dividend, divisor, remainder, Math.random() < 0.5);
       break;
     }
-    case "zero-one":
-      if (Math.random() < 0.5) {
-        dividend = 0;
-        divisor = randomInteger(2, 9);
-      } else {
-        dividend = randomInteger(0, 10 + level * 9);
-        divisor = 1;
+    case "zero-one": {
+      const pairs = [];
+      for (let candidateDivisor = 2; candidateDivisor <= 9; candidateDivisor += 1) pairs.push([0, candidateDivisor]);
+      for (let candidateDividend = 1; candidateDividend <= 10 + level * 9; candidateDividend += 1) {
+        pairs.push([candidateDividend, 1]);
       }
+      [dividend, divisor] = choose(pairs);
       break;
+    }
     case "two-digit-mental": {
       const pairs = [];
       for (let candidateDivisor = 2; candidateDivisor <= 9; candidateDivisor += 1) {
@@ -374,7 +392,18 @@ function makeProblem(index) {
 }
 
 function choose(items) {
-  return items[randomInteger(0, items.length - 1)];
+  if (!quiz) return items[randomInteger(0, items.length - 1)];
+  const seen = quiz.seen;
+  const fresh = items.filter((item) => !seen.has(item.slice(0, 2).join("/")));
+  const pool = fresh.length ? fresh : items;
+  const keyOf = (item) => (item[0] === 0 ? "zero" : item[1] === 1 ? "one" : item[1]);
+  const count = (item) => quiz.balance[keyOf(item)] || 0;
+  const fewest = Math.min(...pool.map(count));
+  const balanced = pool.filter((item) => count(item) === fewest);
+  const picked = balanced[randomInteger(0, balanced.length - 1)];
+  seen.add(picked.slice(0, 2).join("/"));
+  quiz.balance[keyOf(picked)] = count(picked) + 1;
+  return picked;
 }
 
 function makeDivisionProblem(dividend, divisor, remainder, text = `${dividend} ÷ ${divisor} =`) {
@@ -406,10 +435,21 @@ function makeStoryProblem(dividend, divisor, remainder, sharing) {
   return makeDivisionProblem(dividend, divisor, remainder, text);
 }
 
-function setupQuiz() {
+function setupQuiz(mode = "basic") {
   clearTimeout(advanceTimer);
   if (get("feedback").open) get("feedback").close();
-  quiz = { index: 0, correct: 0, missed: false, started: Date.now(), problems: [] };
+  if (typeof mode !== "string") mode = "basic";
+  quiz = {
+    mode,
+    index: 0,
+    correct: 0,
+    missed: false,
+    failed: false,
+    started: Date.now(),
+    problems: [],
+    seen: new Set(),
+    balance: {},
+  };
   locked = false;
   get("home").classList.add("hidden");
   get("result").classList.add("hidden");
@@ -420,16 +460,21 @@ function setupQuiz() {
 
 function nextProblem() {
   clearTimeout(advanceTimer);
-  if (quiz.index >= 10) {
+  if (quiz.mode !== "chain" && quiz.index >= 10) {
     finishQuiz();
     return;
   }
 
   const problem = makeProblem(quiz.index);
   quiz.problems[quiz.index] = problem;
-  get("questionNo").textContent = `${quiz.index + 1} / 10`;
-  get("progress").style.width = `${quiz.index * 10}%`;
-  get("difficulty").textContent = quiz.index < 3
+  get("questionNo").textContent = quiz.mode === "chain" ? `${quiz.index + 1}問目` : `${quiz.index + 1} / 10`;
+  get("progress").style.width = quiz.mode === "chain" ? "100%" : `${quiz.index * 10}%`;
+  clearWorkCanvas();
+  get("difficulty").textContent = quiz.mode === "time"
+    ? "⏱ タイムアタック"
+    : quiz.mode === "chain"
+      ? "🔥 連続正解"
+      : quiz.index < 3
     ? "LEVEL 1・じゅんび"
     : quiz.index < 7
       ? "LEVEL 2・ステップアップ"
@@ -441,6 +486,15 @@ function nextProblem() {
   get("check").disabled = false;
   locked = false;
   get("answer").focus();
+}
+
+function nextAfterFeedback() {
+  if (quiz.mode === "chain" && quiz.failed) {
+    closeFeedback();
+    finishQuiz();
+    return;
+  }
+  advanceQuiz();
 }
 
 function playFeedbackTone(isCorrect) {
@@ -488,22 +542,26 @@ function showFeedback(isCorrect, problem, rawAnswer) {
   content.append(title, message);
 
   if (!isCorrect) {
-    data.wrong.push({
+    const entry = {
       grade: 3,
       courseId: selectedCourse,
       problem: problem.text,
       answer: rawAnswer,
       correct: problem.answer,
       explain: problem.explanation,
-    });
+    };
+    const work = captureWork();
+    if (work) entry.work = work;
+    data.wrong.push(entry);
     data.wrong = data.wrong.slice(-30);
     save();
   }
 
   const primary = document.createElement("button");
   primary.type = "button";
-  primary.textContent = isCorrect ? "つぎへ ↵" : "もう一度 ↵";
-  primary.addEventListener("click", isCorrect ? advanceQuiz : retryQuestion);
+  const chainEnds = !isCorrect && quiz.mode === "chain";
+  primary.textContent = isCorrect ? "つぎへ ↵" : chainEnds ? "結果を見る ↵" : "もう一度 ↵";
+  primary.addEventListener("click", isCorrect ? advanceQuiz : chainEnds ? nextAfterFeedback : retryQuestion);
   actions.append(primary);
 
   if (!isCorrect) {
@@ -536,8 +594,8 @@ function revealAnswer(problem) {
   actions.replaceChildren();
   const next = document.createElement("button");
   next.type = "button";
-  next.textContent = "次へ ↵";
-  next.addEventListener("click", advanceQuiz);
+  next.textContent = quiz.mode === "chain" ? "結果を見る ↵" : "次へ ↵";
+  next.addEventListener("click", nextAfterFeedback);
   actions.append(next);
   next.focus();
 }
@@ -562,6 +620,7 @@ function judgeAnswer() {
   }
 
   quiz.missed = true;
+  quiz.failed = true;
   get("answer").disabled = true;
   showFeedback(false, problem, rawAnswer);
 }
@@ -588,30 +647,55 @@ function retryQuestion() {
 
 function finishQuiz() {
   const stats = data.stats[selectedCourse] || { streak: 0, attempts: 0, best: null };
-  stats.attempts += 1;
-  if (quiz.correct === 10 && !quiz.missed) stats.streak += 1;
-  else stats.streak = 0;
-
   const seconds = Math.round((Date.now() - quiz.started) / 1000);
-  if (quiz.correct === 10 && !quiz.missed && (!stats.best || seconds < stats.best)) {
-    stats.best = seconds;
+  const mode = quiz.mode;
+  let backToCourses = false;
+
+  if (mode === "basic") {
+    stats.attempts += 1;
+    if (quiz.correct === 10 && !quiz.missed) stats.streak += 1;
+    else stats.streak = 0;
+    if (quiz.correct === 10 && !quiz.missed && (!stats.best || seconds < stats.best)) {
+      stats.best = seconds;
+    }
+    backToCourses = quiz.correct === 10 && !quiz.missed && stats.streak >= 3;
+  } else if (mode === "time" && !quiz.missed && (!stats.timeBest || seconds < stats.timeBest)) {
+    stats.timeBest = seconds;
+  } else if (mode === "chain" && quiz.correct > (stats.chainBest || 0)) {
+    stats.chainBest = quiz.correct;
   }
   data.stats[selectedCourse] = stats;
   save();
+  quiz.backToCourses = backToCourses;
 
   get("quiz").classList.add("hidden");
   get("result").classList.remove("hidden");
-  get("score").textContent = `${quiz.correct} / 10 問 正解`;
-  get("again").textContent = quiz.missed ? "もう一度挑戦する ↵" : "続けて挑戦する ↵";
-  get("resultTitle").textContent = quiz.correct === 10
-    ? (quiz.missed ? "ぜんもん正解！" : "パーフェクト！")
-    : "よくがんばったね！";
-  get("resultMessage").textContent = quiz.correct === 10
-    ? (quiz.missed
-      ? "再回答して全問正解！ただし途中でミスがあったので、合格ステップは0からだよ。"
-      : `ミスなし合格 ${stats.streak}/3回。${stats.streak >= 3 ? "チャレンジに挑戦できるよ！" : "あと少しで合格だよ！"}`)
-    : "まちがいはノートに保存したよ。もう一度やってみよう。";
-  get("chainBest").textContent = localStorage.getItem(`${STORAGE_KEY}-chain`) || "0";
+  const again = get("again");
+  if (mode === "basic") {
+    get("score").textContent = `${quiz.correct} / 10 問 正解`;
+    again.textContent = backToCourses
+      ? "コースに戻る ↵"
+      : quiz.missed ? "もう一度挑戦する ↵" : "続けて挑戦する ↵";
+    get("resultTitle").textContent = quiz.correct === 10
+      ? (quiz.missed ? "ぜんもん正解！" : "パーフェクト！")
+      : "よくがんばったね！";
+    get("resultMessage").textContent = quiz.correct === 10
+      ? (quiz.missed
+        ? "再回答して全問正解！ただし途中でミスがあったので、合格ステップは0からだよ。"
+        : `ミスなし合格 ${stats.streak}/3回。${stats.streak >= 3 ? "チャレンジに挑戦できるよ！" : "あと少しで合格だよ！"}`)
+      : "まちがいはノートに保存したよ。もう一度やってみよう。";
+  } else if (mode === "time") {
+    get("score").textContent = `${seconds} 秒`;
+    again.textContent = "もう一度挑戦する ↵";
+    get("resultTitle").textContent = "⏱ タイムアタック";
+    get("resultMessage").textContent = `10問クリア！ベスト記録：${stats.timeBest ?? "-"}秒${quiz.missed ? "（ミスがあったので記録は更新されないよ）" : ""}`;
+  } else {
+    get("score").textContent = `${quiz.correct} 問 連続正解`;
+    again.textContent = "もう一度挑戦する ↵";
+    get("resultTitle").textContent = "🔥 連続正解";
+    get("resultMessage").textContent = `最高記録：${stats.chainBest || 0}問`;
+  }
+  get("chainBest").textContent = String(stats.chainBest || 0);
   get("timeAttack").disabled = stats.streak < 3;
   get("chainAttack").disabled = stats.streak < 3;
   const challengeTitle = stats.streak >= 3
@@ -622,7 +706,7 @@ function finishQuiz() {
     get(id).parentElement.title = challengeTitle;
   });
   renderStats();
-  get("again").focus();
+  again.focus();
 }
 
 function buildKeypad() {
@@ -650,6 +734,7 @@ function setupCanvas(id) {
   const canvas = get(id);
   const context = canvas.getContext("2d");
   let drawing = false;
+  let hasInk = false;
 
   function resize() {
     const bounds = canvas.getBoundingClientRect();
@@ -674,6 +759,7 @@ function setupCanvas(id) {
     if (!drawing) return;
     context.lineTo(event.offsetX, event.offsetY);
     context.stroke();
+    hasInk = true;
   });
   canvas.addEventListener("pointerup", () => {
     drawing = false;
@@ -682,7 +768,24 @@ function setupCanvas(id) {
     drawing = false;
   });
 
-  return () => context.clearRect(0, 0, canvas.width, canvas.height);
+  return {
+    clear() {
+      context.clearRect(0, 0, canvas.width, canvas.height);
+      hasInk = false;
+    },
+    snapshot() {
+      if (!hasInk || !canvas.width || !canvas.height) return "";
+      const width = Math.min(360, canvas.width);
+      const small = document.createElement("canvas");
+      small.width = width;
+      small.height = Math.max(1, Math.round((canvas.height * width) / canvas.width));
+      const smallContext = small.getContext("2d");
+      smallContext.fillStyle = "#fff";
+      smallContext.fillRect(0, 0, small.width, small.height);
+      smallContext.drawImage(canvas, 0, 0, small.width, small.height);
+      return small.toDataURL("image/png");
+    },
+  };
 }
 
 function returnToCourses() {
@@ -695,7 +798,9 @@ function returnToCourses() {
 renderCourses();
 renderStats();
 buildKeypad();
-const clearWorkCanvas = setupCanvas("noteCanvas");
+const workCanvas = setupCanvas("noteCanvas");
+const clearWorkCanvas = () => workCanvas.clear();
+const captureWork = () => workCanvas.snapshot();
 window.addEventListener("resize", resizeCanvases);
 
 get("check").addEventListener("click", judgeAnswer);
@@ -711,11 +816,29 @@ document.addEventListener("keydown", (event) => {
   event.preventDefault();
   get("feedbackActions").querySelector("button")?.click();
 });
+document.addEventListener("keydown", (event) => {
+  const moves = { ArrowLeft: -1, ArrowUp: -1, ArrowRight: 1, ArrowDown: 1 };
+  const step = moves[event.key];
+  const current = event.target;
+  if (!step || !(current instanceof HTMLButtonElement)) return;
+  const scope = current.closest("dialog, #coursesPanel, #reviewPanel, #result, .quiz-response");
+  if (!scope) return;
+  const buttons = [...scope.querySelectorAll("button:not(:disabled)")].filter((button) => button.offsetParent !== null);
+  const position = buttons.indexOf(current);
+  if (position < 0 || buttons.length < 2) return;
+  event.preventDefault();
+  buttons[(position + step + buttons.length) % buttons.length].focus();
+});
 get("feedback").addEventListener("cancel", (event) => event.preventDefault());
 get("quit").addEventListener("click", () => {
   if (confirm("挑戦を中断してコース選択へ戻りますか？")) returnToCourses();
 });
-get("again").addEventListener("click", setupQuiz);
+get("again").addEventListener("click", () => {
+  if (quiz?.backToCourses) returnToCourses();
+  else setupQuiz(quiz?.mode);
+});
+get("timeAttack").addEventListener("click", () => setupQuiz("time"));
+get("chainAttack").addEventListener("click", () => setupQuiz("chain"));
 get("reviewBack").addEventListener("click", () => {
   get("reviewPanel").classList.add("hidden");
   get("coursesPanel").classList.remove("hidden");

@@ -510,7 +510,7 @@ main {
   display: grid;
   flex: 0 0 auto;
   gap: 4px;
-  justify-items: end;
+  justify-items: start;
 }
 
 .course-log {
@@ -1215,4 +1215,13 @@ main {
     scroll-behavior: auto !important;
     transition-duration: 0.01ms !important;
   }
+}
+
+.review-work {
+  display: block;
+  max-width: 100%;
+  margin-top: 6px;
+  border: 1px solid #d6dccd;
+  border-radius: 8px;
+  background: #fff;
 }
