@@ -253,15 +253,14 @@ function renderCourseProgress() {
     });
     const log = button.querySelector(".course-log");
     const mistakeCount = data.wrong.filter((entry) => entry.courseId === course.id).length;
-    log.replaceChildren(document.createTextNode("📜 ログ"));
+    const logLabel = document.createElement("span");
+    logLabel.textContent = "📜 ログ";
+    const logRecord = document.createElement("span");
+    logRecord.className = "course-log-count";
+    logRecord.textContent = mistakeCount ? `${mistakeCount}件` : "--";
+    log.replaceChildren(logLabel, logRecord);
     log.disabled = mistakeCount === 0;
     log.title = mistakeCount === 0 ? "このコースの誤答ログはありません" : `${mistakeCount}件の誤答ログ`;
-    if (mistakeCount) {
-      const count = document.createElement("span");
-      count.className = "course-log-count";
-      count.textContent = String(mistakeCount);
-      log.append(count);
-    }
     button.querySelector(".course-start").setAttribute(
       "aria-label",
       `小学3年生、${course.name}。${course.desc}。合格ステップ ${streak}回。`,
@@ -296,7 +295,22 @@ function showCourseLog(course) {
     answer.textContent = `あなたの答え：${entry.answer || "未入力"} / 正解：${entry.correct}`;
     const explanation = document.createElement("small");
     explanation.textContent = entry.explain;
-    item.append(problem, answer, explanation);
+    item.classList.toggle("checked", Boolean(entry.checked));
+    const check = document.createElement("button");
+    check.type = "button";
+    check.className = "review-check";
+    const syncCheck = () => {
+      check.setAttribute("aria-pressed", String(Boolean(entry.checked)));
+      check.textContent = entry.checked ? "✅ 確認済み" : "☐ 確認済み";
+      item.classList.toggle("checked", Boolean(entry.checked));
+    };
+    check.addEventListener("click", () => {
+      entry.checked = !entry.checked;
+      save();
+      syncCheck();
+    });
+    syncCheck();
+    item.append(problem, answer, explanation, check);
     if (typeof entry.work === "string" && entry.work.startsWith("data:image/png")) {
       const work = document.createElement("img");
       work.className = "review-work";
@@ -721,7 +735,7 @@ function finishQuiz() {
     get("resultTitle").textContent = "⏱ タイムアタック";
     get("resultMessage").textContent = `10問クリア！ベスト記録：${stats.timeBest ?? "-"}秒${quiz.missed ? "（ミスがあったので記録は更新されないよ）" : ""}`;
   } else {
-    get("score").textContent = `${quiz.correct} 問 連続正解`;
+    get("score").textContent = `${quiz.correct} 問`;
     again.textContent = "もう一度挑戦する ↵";
     get("resultTitle").textContent = "🔥 連続正解";
     get("resultMessage").textContent = `最高記録：${stats.chainBest || 0}問`;

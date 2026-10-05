@@ -277,7 +277,7 @@ Then("算数ページのパンくずと音・初期化ボタンとバージョ�
   await expect(page.locator(".course-challenge-control").first()).toHaveAttribute("title", "あと3回で解放");
   await expect(page.locator("body")).not.toContainText("あと3回で解放");
   await expect(page.locator("body")).not.toContainText("解放済み");
-  await expect(page.locator(".course-log")).toHaveText(Array(9).fill("📜 ログ"));
+  await expect(page.locator(".course-log")).toHaveText(Array(9).fill("📜 ログ--"));
   await expect(page.locator(".course-tools-group .course-group-label")).toHaveText(Array(9).fill("🧰 ツール"));
   await expect(page.locator(".course-log:disabled")).toHaveCount(9);
   await expect(page.locator("#resetData")).toHaveAttribute("aria-label", "学習データを初期化");
@@ -348,13 +348,13 @@ When("学習記録と復習ノートを作って初期化する", async ({ page 
     }));
   });
   await page.reload();
-  await expect(page.locator('#courses [data-course="g3-one-digit-exact"] .course-log-count')).toHaveText("1");
+  await expect(page.locator('#courses [data-course="g3-one-digit-exact"] .course-log-count')).toHaveText("1件");
   page.once("dialog", (dialog) => dialog.accept());
   await page.locator("#resetData").click();
 });
 
 Then("学習データが初期化される", async ({ page }) => {
-  await expect(page.locator("#courses .course-log-count")).toHaveCount(0);
+  await expect(page.locator("#courses .course-log-count")).toHaveText(Array(9).fill("--"));
   await expect(page.locator('#courses [data-course="g3-one-digit-exact"] .course-log')).toBeDisabled();
   await expect(page.locator('#courses [data-course="g3-one-digit-exact"] .course-step.current')).toHaveCount(1);
   await expect(page.locator("#home")).toBeVisible();
