@@ -662,3 +662,46 @@ async function currentAnswer(page: Page) {
   const remainder = dividend % divisor;
   return problem.includes("あまる") ? `${quotient}あまり${remainder}` : String(quotient);
 }
+
+Given("合格済みの状態で画面確認用に算数アプリを開く", async ({ page }) => {
+  await page.addInitScript(() => {
+    Math.random = () => 0.5;
+    if (!localStorage.getItem("studri-division-v1")) {
+      localStorage.setItem("studri-division-v1", JSON.stringify({
+        course: "g3-one-digit-exact",
+        stats: { "g3-one-digit-exact": { streak: 3, attempts: 3, best: 60 } },
+        wrong: [],
+      }));
+    }
+  });
+  await page.goto("/apps/math/division/");
+});
+
+When("タイムアタックを始める", async ({ page }) => {
+  await page.locator('[data-course="g3-one-digit-exact"] .course-challenge[data-mode="time"]').click();
+  await expect(page.locator("#difficulty")).toHaveText("⏱ タイムアタック");
+});
+
+When("連続正解を始める", async ({ page }) => {
+  await page.locator('[data-course="g3-one-digit-exact"] .course-challenge[data-mode="chain"]').click();
+  await expect(page.locator("#difficulty")).toHaveText("🔥 連続正解");
+});
+
+When("計算エリアに手書きして誤答する", async ({ page }) => {
+  const box = await page.locator("#noteCanvas").boundingBox();
+  if (!box) throw new Error("Canvas is missing");
+  await page.mouse.move(box.x + 30, box.y + 40);
+  await page.mouse.down();
+  await page.mouse.move(box.x + 120, box.y + 70, { steps: 5 });
+  await page.mouse.move(box.x + 60, box.y + 110, { steps: 5 });
+  await page.mouse.up();
+  const correctAnswer = await currentAnswer(page);
+  await page.locator("#answer").fill(correctAnswer === "0" ? "1" : "0");
+  await page.getByRole("button", { name: "答え合わせ" }).click();
+  await expect(page.locator("#feedback")).toHaveClass(/no/);
+});
+
+When("手書き付きの復習ノートを表示する", async ({ page }) => {
+  await page.locator('#courses [data-course="g3-one-digit-exact"] .course-log').click();
+  await expect(page.locator(".review-work")).toBeVisible();
+});
