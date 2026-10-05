@@ -59,28 +59,27 @@
           </div>
           <div class="progress" aria-label="挑戦の進み具合"><span id="progress"></span></div>
           <div class="quiz-board">
-            <div class="quiz-question">
-              <p class="eyebrow" id="difficulty"></p>
-              <h2 id="problem"></h2>
-            </div>
-            <div class="quiz-work" aria-label="計算機エリア">
-              <p class="work-instruction">答えを入力して「答え合わせ」をしよう</p>
-              <div class="answer">
-                <input id="answer" inputmode="text" autocomplete="off" aria-label="答え（あまりがある問題は「あまり」も入力）">
-                <span id="unit">こ</span>
+            <div class="quiz-primary">
+              <div class="quiz-question">
+                <p class="eyebrow" id="difficulty"></p>
+                <h2 id="problem"></h2>
               </div>
-              <div class="keypad" id="keypad" aria-label="計算機"></div>
-              <button class="check" id="check" type="button">答え合わせ</button>
+              <div class="quiz-response">
+                <p class="work-instruction">答えを入力して「答え合わせ」をしよう</p>
+                <div class="answer">
+                  <input id="answer" inputmode="text" autocomplete="off" aria-label="答え（あまりがある問題は「あまり」も入力）">
+                  <span id="unit">こ</span>
+                </div>
+                <div class="keypad" id="keypad" aria-label="計算機"></div>
+                <button class="check" id="check" type="button">答え合わせ</button>
+              </div>
+            </div>
+            <div class="quiz-work" aria-label="計算エリア">
               <div class="canvas-wrap">
                 <div class="canvas-box">
-                  <span class="canvas-label">✍️ 答えのかき方（認識機能はありません）</span>
-                  <canvas class="draw" id="answerCanvas"></canvas>
-                  <button class="clear" data-canvas="answerCanvas" type="button">消す</button>
-                </div>
-                <div class="canvas-box">
-                  <span class="canvas-label">📝 途中式を書く</span>
-                  <canvas class="draw" id="noteCanvas"></canvas>
-                  <button class="clear" data-canvas="noteCanvas" type="button">消す</button>
+                  <span class="canvas-label">✍️ 計算エリア（手書き）</span>
+                  <canvas class="draw" id="noteCanvas" aria-label="計算エリア。手書きで計算できます"></canvas>
+                  <button class="clear" type="button">消す</button>
                 </div>
               </div>
             </div>

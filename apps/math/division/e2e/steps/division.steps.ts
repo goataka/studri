@@ -89,6 +89,7 @@ When("誤答を修正して正解する", async ({ page }) => {
   await page.locator("#answer").fill(correctAnswer);
   await page.getByRole("button", { name: "答え合わせ" }).click();
   await expect(page.locator("#feedback")).toHaveClass(/ok/);
+  await expect(page.locator("#feedbackActions button").first()).toHaveText("つぎへ ↵");
 });
 
 When("Enterキーで次の問題へ進む", async ({ page }) => {
@@ -126,12 +127,13 @@ When("最初の問題で誤答して再回答する", async ({ page }) => {
   await expect(page.locator("#feedback")).toContainText("おしい！");
   await expect(page.locator("#feedback")).toContainText("ヒント：");
   await expect(page.locator("#feedback")).not.toContainText(`正解は「${correctAnswer}」です。`);
-  await expect(page.getByRole("button", { name: "もう一度" })).toBeVisible();
+  await expect(page.locator("#feedbackActions button").first()).toHaveText("もう一度 ↵");
   await page.keyboard.press("Enter");
   await expect(page.locator("#feedback")).not.toBeVisible();
   await page.locator("#answer").fill(correctAnswer);
   await page.getByRole("button", { name: "答え合わせ" }).click();
   await expect(page.locator("#feedback")).toHaveClass(/ok/);
+  await expect(page.locator("#feedbackActions button").first()).toHaveText("つぎへ ↵");
   await page.keyboard.press("Enter");
 });
 
@@ -144,8 +146,8 @@ When("最初の問題で誤答して答えを確認する", async ({ page }) => 
   await expect(page.locator("#feedback")).not.toContainText(`正解は「${correctAnswer}」です。`);
   await page.getByRole("button", { name: "答えを確認" }).click();
   await expect(page.locator("#feedback")).toContainText(`正解は「${correctAnswer}」です。`);
-  await expect(page.locator("#feedbackActions")).toHaveText("次へ");
-  await page.getByRole("button", { name: "次へ" }).click();
+  await expect(page.locator("#feedbackActions")).toHaveText("次へ ↵");
+  await page.getByRole("button", { name: "次へ ↵" }).click();
   await expect(page.locator("#questionNo")).toHaveText("2 / 10");
 });
 
@@ -156,12 +158,14 @@ When("残りの問題に正解して挑戦を終える", async ({ page }) => {
 Then("結果に10問正解と表示される", async ({ page }) => {
   await expect(page.locator("#result")).toBeVisible();
   await expect(page.locator("#score")).toHaveText("10 / 10 問 正解");
+  await expect(page.locator("#again")).toHaveText(/(?:続けて|もう一度)挑戦する ↵/);
   await expect(page.getByRole("link", { name: "算数ページに戻る" })).toHaveAttribute("href", "#home");
 });
 
 Then("ミスがあったことを結果に表示する", async ({ page }) => {
   await expect(page.locator("#resultTitle")).toHaveText("ぜんもん正解！");
   await expect(page.locator("#resultMessage")).toContainText("途中でミスがあった");
+  await expect(page.locator("#again")).toHaveText("もう一度挑戦する ↵");
 });
 
 When("コース選択に戻る", async ({ page }) => {
@@ -182,19 +186,69 @@ Then("挑戦記録が保持される", async ({ page }) => {
   await expect(course.locator(".course-step.current")).toHaveText("🥈");
 });
 
-Then("トレイルから問題文の下に計算エリアが表示される", async ({ page }) => {
+Then("画面幅に応じた位置に計算エリアが表示される", async ({ page }) => {
   await page.setViewportSize({ width: 1440, height: 900 });
   await expect(page.locator("#courses .course")).toHaveCount(9);
   await expect(page.locator("#questionNo")).toHaveText("1 / 10");
   const columns = await page.locator(".quiz-board").evaluate((element) =>
     getComputedStyle(element).gridTemplateColumns.split(" ").length,
   );
-  expect(columns).toBe(1);
-  const problem = await page.locator("#problem").boundingBox();
-  const answer = await page.locator("#answer").boundingBox();
-  expect(problem).not.toBeNull();
-  expect(answer).not.toBeNull();
-  expect(problem!.y + problem!.height).toBeLessThan(answer!.y);
+  expect(columns).toBe(2);
+  const desktopBoard = await page.locator(".quiz-board").boundingBox();
+  const desktopQuestion = await page.locator(".quiz-question").boundingBox();
+  const desktopAnswer = await page.locator(".quiz-response").boundingBox();
+  const desktopWork = await page.locator(".quiz-work").boundingBox();
+  expect(desktopBoard).not.toBeNull();
+  expect(desktopQuestion).not.toBeNull();
+  expect(desktopAnswer).not.toBeNull();
+  expect(desktopWork).not.toBeNull();
+  const desktopPrimary = await page.locator(".quiz-primary").boundingBox();
+  expect(desktopPrimary).not.toBeNull();
+  expect(desktopQuestion!.x + desktopQuestion!.width).toBeLessThanOrEqual(desktopWork!.x);
+  expect(desktopAnswer!.x + desktopAnswer!.width).toBeLessThanOrEqual(desktopWork!.x);
+  const problemCenter = desktopQuestion!.x + desktopQuestion!.width / 2;
+  const primaryCenter = desktopPrimary!.x + desktopPrimary!.width / 2;
+  expect(Math.abs(problemCenter - primaryCenter)).toBeLessThanOrEqual(1);
+  const workArea = await page.locator(".canvas-box").boundingBox();
+  expect(workArea).not.toBeNull();
+  expect(workArea!.width).toBeGreaterThan(desktopPrimary!.width);
+  const desktopCanvas = await page.locator("#noteCanvas").boundingBox();
+  expect(desktopCanvas).not.toBeNull();
+  expect(desktopCanvas!.height).toBeGreaterThanOrEqual(desktopWork!.height * 0.85);
+  await expect(page.locator("#answerCanvas")).toHaveCount(0);
+  await expect(page.locator("#noteCanvas")).toBeVisible();
+  await expect(page.locator(".quiz-work")).toHaveAttribute("aria-label", "計算エリア");
+  await expect(page.locator("#noteCanvas")).toHaveAttribute("aria-label", "計算エリア。手書きで計算できます");
+  await expect(page.locator(".canvas-box")).toHaveCount(1);
+  const canvas = await page.locator("#noteCanvas").boundingBox();
+  expect(canvas).not.toBeNull();
+  await page.mouse.move(canvas!.x + 10, canvas!.y + 10);
+  await page.mouse.down();
+  await page.mouse.move(canvas!.x + 40, canvas!.y + 20);
+  await page.mouse.up();
+  const hasHandwriting = await page.locator("#noteCanvas").evaluate((element) => {
+    const canvasElement = element as HTMLCanvasElement;
+    const context = canvasElement.getContext("2d");
+    if (!context) return false;
+    const pixels = context.getImageData(0, 0, canvasElement.width, canvasElement.height).data;
+    return pixels.some((value, index) => index % 4 === 3 && value > 0);
+  });
+  expect(hasHandwriting).toBe(true);
+  const keypadButton = await page.locator("#keypad button").first().boundingBox();
+  expect(keypadButton).not.toBeNull();
+  expect(keypadButton!.height).toBeGreaterThanOrEqual(42);
+  expect(keypadButton!.height).toBeLessThanOrEqual(44);
+
+  await page.setViewportSize({ width: 390, height: 844 });
+  const mobilePrimary = await page.locator(".quiz-primary").boundingBox();
+  const mobileWork = await page.locator(".quiz-work").boundingBox();
+  expect(mobilePrimary).not.toBeNull();
+  expect(mobileWork).not.toBeNull();
+  expect(mobileWork!.y).toBeGreaterThanOrEqual(mobilePrimary!.y + mobilePrimary!.height);
+  const mobileColumns = await page.locator(".quiz-board").evaluate((element) =>
+    getComputedStyle(element).gridTemplateColumns.split(" ").length,
+  );
+  expect(mobileColumns).toBe(1);
 });
 
 Then("誤答を記録し連続合格を0回にする", async ({ page }) => {
@@ -263,7 +317,7 @@ Then("算数ページのパンくずと音・初期化ボタンとバージョ�
 });
 
 Then("続けて挑戦するボタンがチャレンジより上に表示される", async ({ page }) => {
-  await expect(page.locator("#again")).toHaveText("続けて挑戦する");
+  await expect(page.locator("#again")).toHaveText("続けて挑戦する ↵");
   await expect(page.locator("#again")).toBeFocused();
   const again = await page.locator("#again").boundingBox();
   const challenges = await page.locator(".challenge-grid").boundingBox();
@@ -311,9 +365,10 @@ Then("コース一覧に進捗ステップと解放条件つきボタンが表�
   await expect(page.locator("#courses")).toHaveAttribute("aria-label", "小学3年生のコース一覧");
   await page.setViewportSize({ width: 1440, height: 1000 });
   await expect(courses).toHaveCount(9);
-  await expect(page.locator(".course-begin")).toContainText("合格ステップを3つ集めよう！いっしょに進もう！");
+  await expect(page.locator(".course-begin")).toContainText("ベーシックを3つ進めよう！チャレンジできるようになるよ♪間違えたらログから確認してみてね。");
+  await expect(page.locator(".course-begin small")).toHaveCSS("white-space", "nowrap");
   await expect(page.locator(".course-guide")).toHaveCount(0);
-  await expect(page.locator(".course-goal")).toContainText("ここまで来たね、おめでとう！次の挑戦もがんばろう！");
+  await expect(page.locator(".course-goal")).toContainText("おめでとう！たくさん頑張ったね♪次にも挑戦してみてね。");
   const desktopColumns = await page.locator("#courses").evaluate((element) =>
     getComputedStyle(element).gridTemplateColumns.split(" ").length,
   );
@@ -430,6 +485,16 @@ Then("コース一覧に進捗ステップと解放条件つきボタンが表�
     getComputedStyle(element).gridTemplateColumns.split(" ").length,
   );
   expect(mobileColumns).toBe(1);
+  const mobileGuide = page.locator(".course-begin small");
+  await expect(mobileGuide).toHaveCSS("white-space", "normal");
+  const guideLayout = await mobileGuide.evaluate((element) => ({
+    height: element.getBoundingClientRect().height,
+    fontSize: Number.parseFloat(getComputedStyle(element).fontSize),
+    scrollWidth: element.scrollWidth,
+    clientWidth: element.clientWidth,
+  }));
+  expect(guideLayout.height).toBeGreaterThan(guideLayout.fontSize * 2);
+  expect(guideLayout.scrollWidth).toBeLessThanOrEqual(guideLayout.clientWidth);
   const mobileStepPositions = await courses.locator(".course-steps").evaluateAll((elements) =>
     elements.map((element) => element.getBoundingClientRect().x),
   );
@@ -535,6 +600,9 @@ Then("9つのコースが指定順に並び問題が範囲内で出る", async (
 
     if (type === "meaning") {
       expect(problem).not.toContain("÷");
+      expect(dividend % divisor).toBe(0);
+      expect(divisor).toBeLessThan(10);
+      expect(dividend / divisor).toBeLessThanOrEqual(9);
     } else if (type === "one-digit-exact") {
       expect(dividend).toBeLessThan(10);
       expect(divisor).toBeLessThan(10);
