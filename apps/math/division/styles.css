@@ -510,7 +510,7 @@ main {
   display: grid;
   flex: 0 0 auto;
   gap: 4px;
-  justify-items: end;
+  justify-items: start;
 }
 
 .course-log {
@@ -518,7 +518,7 @@ main {
   flex: 0 0 auto;
   align-items: center;
   gap: 5px;
-  min-height: 42px;
+  min-height: 54px;
   padding: 8px 11px;
   border: 1px solid #cbdac3;
   border-radius: 999px;
@@ -571,6 +571,7 @@ main {
 
 .course-challenge {
   display: inline-flex;
+  flex-wrap: wrap;
   align-items: center;
   gap: 5px;
   min-height: 54px;
@@ -1215,4 +1216,90 @@ main {
     scroll-behavior: auto !important;
     transition-duration: 0.01ms !important;
   }
+}
+
+.review-work {
+  display: block;
+  max-width: 100%;
+  margin-top: 6px;
+  border: 1px solid #d6dccd;
+  border-radius: 8px;
+  background: #fff;
+}
+
+.mode-status {
+  margin-left: auto;
+  padding: 4px 12px;
+  border-radius: 999px;
+  background: #fff0d1;
+  color: #765a2c;
+  font-weight: 850;
+  font-variant-numeric: tabular-nums;
+}
+
+.mode-status.hidden {
+  display: none;
+}
+
+.course-challenge-record {
+  min-width: 2.2em;
+  padding: 1px 7px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.7);
+  color: #5d4a25;
+  font-weight: 850;
+  text-align: center;
+}
+
+.course-challenge {
+  display: grid;
+  grid-template-columns: auto auto;
+  justify-content: center;
+  justify-items: center;
+  row-gap: 2px;
+}
+
+.course-challenge-record {
+  grid-column: 1 / -1;
+}
+
+.course-log {
+  display: grid;
+  justify-items: center;
+  row-gap: 2px;
+}
+
+.course-log .course-log-count {
+  width: auto;
+  min-width: 2.2em;
+  aspect-ratio: auto;
+  padding: 1px 7px;
+  border-radius: 999px;
+  font-size: 0.72rem;
+}
+
+.course-log:disabled .course-log-count {
+  background: #e0e2dc;
+  color: #6f766d;
+}
+
+.review-check {
+  margin-top: 8px;
+  padding: 6px 12px;
+  border: 1px solid #cbdac3;
+  border-radius: 999px;
+  background: #fff;
+  color: #426d4f;
+  font-weight: 800;
+}
+
+.review-item.checked {
+  border-color: #6aa86f;
+  background: #e4f4e1;
+}
+
+.review-item.checked .review-check {
+  border-color: #3f8a49;
+  background: #4f9d5a;
+  color: #fff;
 }

@@ -104,6 +104,7 @@ Then(/VR画像 "(.*)" を確認する/, async ({ page }, screenshotName: string)
   }
 
   await expect(page).toHaveScreenshot(screenshotName, {
+    mask: [page.locator("#modeStatus")],
     animations: "disabled",
     caret: "hide",
     fullPage: true,
@@ -268,7 +269,7 @@ Then("算数ページのパンくずと音・初期化ボタンとバージョ�
   await expect(page).toHaveTitle("スタドリ - 算数・３年生・わり算編");
   await expect(page.locator("#statsTitle")).toHaveCount(0);
   await expect(page.locator(".course-challenge")).toHaveText(
-    Array(9).fill(["⏱ タイムアタック", "🔥 連続正解"]).flat(),
+    Array(9).fill(["⏱ タイムアタック--", "🔥 連続正解--"]).flat(),
   );
   await expect(page.locator(".course-challenge:disabled")).toHaveCount(18);
   await expect(page.locator("#courses .course").first().locator(".course-step")).toHaveText(["", "🥇", "🥈", "🥉"]);
@@ -276,7 +277,7 @@ Then("算数ページのパンくずと音・初期化ボタンとバージョ�
   await expect(page.locator(".course-challenge-control").first()).toHaveAttribute("title", "あと3回で解放");
   await expect(page.locator("body")).not.toContainText("あと3回で解放");
   await expect(page.locator("body")).not.toContainText("解放済み");
-  await expect(page.locator(".course-log")).toHaveText(Array(9).fill("📜 ログ"));
+  await expect(page.locator(".course-log")).toHaveText(Array(9).fill("📜 ログ--"));
   await expect(page.locator(".course-tools-group .course-group-label")).toHaveText(Array(9).fill("🧰 ツール"));
   await expect(page.locator(".course-log:disabled")).toHaveCount(9);
   await expect(page.locator("#resetData")).toHaveAttribute("aria-label", "学習データを初期化");
@@ -347,13 +348,13 @@ When("学習記録と復習ノートを作って初期化する", async ({ page 
     }));
   });
   await page.reload();
-  await expect(page.locator('#courses [data-course="g3-one-digit-exact"] .course-log-count')).toHaveText("1");
+  await expect(page.locator('#courses [data-course="g3-one-digit-exact"] .course-log-count')).toHaveText("1件");
   page.once("dialog", (dialog) => dialog.accept());
   await page.locator("#resetData").click();
 });
 
 Then("学習データが初期化される", async ({ page }) => {
-  await expect(page.locator("#courses .course-log-count")).toHaveCount(0);
+  await expect(page.locator("#courses .course-log-count")).toHaveText(Array(9).fill("--"));
   await expect(page.locator('#courses [data-course="g3-one-digit-exact"] .course-log')).toBeDisabled();
   await expect(page.locator('#courses [data-course="g3-one-digit-exact"] .course-step.current')).toHaveCount(1);
   await expect(page.locator("#home")).toBeVisible();
@@ -564,7 +565,7 @@ Then("9つのコースが指定順に並び問題が範囲内で出る", async (
   await expect(passedCourse.locator(".course-step.start-dot")).toHaveCSS("background-color", "rgb(251, 230, 213)");
   await expect(passedCourse.locator(".course-step.current")).toHaveText("🥈");
   await expect(passedCourse.locator(".course-step.current")).toHaveCSS("background-color", "rgb(217, 120, 67)");
-  await expect(passedCourse.locator(".course-challenge")).toHaveText(["⏱ タイムアタック", "🔥 連続正解"]);
+  await expect(passedCourse.locator(".course-challenge")).toHaveText(["⏱ タイムアタック--", "🔥 連続正解--"]);
 
   await page.evaluate(() => {
     localStorage.setItem("studri-division-v1", JSON.stringify({
@@ -662,3 +663,46 @@ async function currentAnswer(page: Page) {
   const remainder = dividend % divisor;
   return problem.includes("あまる") ? `${quotient}あまり${remainder}` : String(quotient);
 }
+
+Given("合格済みの状態で画面確認用に算数アプリを開く", async ({ page }) => {
+  await page.addInitScript(() => {
+    Math.random = () => 0.5;
+    if (!localStorage.getItem("studri-division-v1")) {
+      localStorage.setItem("studri-division-v1", JSON.stringify({
+        course: "g3-one-digit-exact",
+        stats: { "g3-one-digit-exact": { streak: 3, attempts: 3, best: 60 } },
+        wrong: [],
+      }));
+    }
+  });
+  await page.goto("/apps/math/division/");
+});
+
+When("タイムアタックを始める", async ({ page }) => {
+  await page.locator('[data-course="g3-one-digit-exact"] .course-challenge[data-mode="time"]').click();
+  await expect(page.locator("#difficulty")).toHaveText("⏱ タイムアタック");
+});
+
+When("連続正解を始める", async ({ page }) => {
+  await page.locator('[data-course="g3-one-digit-exact"] .course-challenge[data-mode="chain"]').click();
+  await expect(page.locator("#difficulty")).toHaveText("🔥 連続正解");
+});
+
+When("計算エリアに手書きして誤答する", async ({ page }) => {
+  const box = await page.locator("#noteCanvas").boundingBox();
+  if (!box) throw new Error("Canvas is missing");
+  await page.mouse.move(box.x + 30, box.y + 40);
+  await page.mouse.down();
+  await page.mouse.move(box.x + 120, box.y + 70, { steps: 5 });
+  await page.mouse.move(box.x + 60, box.y + 110, { steps: 5 });
+  await page.mouse.up();
+  const correctAnswer = await currentAnswer(page);
+  await page.locator("#answer").fill(correctAnswer === "0" ? "1" : "0");
+  await page.getByRole("button", { name: "答え合わせ" }).click();
+  await expect(page.locator("#feedback")).toHaveClass(/no/);
+});
+
+When("手書き付きの復習ノートを表示する", async ({ page }) => {
+  await page.locator('#courses [data-course="g3-one-digit-exact"] .course-log').click();
+  await expect(page.locator(".review-work")).toBeVisible();
+});
