@@ -53,7 +53,7 @@ Then("ホームのGitHubリンクとVERSIONが表示される", async ({ page })
   expect(link).not.toBeNull();
   expect(link!.x).toBeGreaterThan(header!.x + header!.width / 2);
   await expect(page.getByRole("link", { name: /プロジェクトを見る/ })).toHaveCount(0);
-  await expect(page.locator(".site-footer")).toHaveText(/^Ver\. \d{8}\.\d{6}\.\d{3}$/);
+  await expect(page.locator(".site-footer")).toHaveText("Ver. 20261010.102102.018");
 });
 
 When("モバイル表示に切り替える", async ({ page }) => {
