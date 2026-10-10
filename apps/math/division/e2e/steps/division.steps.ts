@@ -133,6 +133,30 @@ Then(/VR画像 "(.*)" を確認する/, async ({ page }, screenshotName: string)
   });
 });
 
+Then("ログ画面と問題画面のレイアウトが揃っている", async ({ page }) => {
+  await expect(page.locator("#reviewPanel")).toBeVisible();
+  const panelPadding = await Promise.all(
+    [".home-panel", ".quiz-panel"].map((selector) =>
+      page.locator(selector).evaluate((element) => getComputedStyle(element).padding),
+    ),
+  );
+  expect(panelPadding[0]).toBe(panelPadding[1]);
+  const headerStyles = await Promise.all(
+    [".panel-title", ".quiz-head"].map((selector) =>
+      page.locator(selector).evaluate((element) => {
+        const style = getComputedStyle(element);
+        return [style.display, style.alignItems, style.justifyContent, style.gap, style.marginBottom];
+      }),
+    ),
+  );
+  expect(headerStyles[0]).toEqual(headerStyles[1]);
+  const back = await page.locator("#reviewBack").boundingBox();
+  const title = await page.locator("#reviewTitle").boundingBox();
+  expect(back).not.toBeNull();
+  expect(title).not.toBeNull();
+  expect(back!.x).toBeLessThan(title!.x);
+});
+
 When("コースを選んで挑戦を始める", async ({ page }) => {
   await page.locator('#courses [data-course="g3-one-digit-exact"] .course-start').click();
   await expect(page.locator("#quiz")).toBeVisible();
@@ -443,9 +467,30 @@ Then("コース一覧に進捗ステップと解放条件つきボタンが表�
   await expect(page.locator("#courses")).toHaveAttribute("aria-label", "小学3年生のコース一覧");
   await page.setViewportSize({ width: 1440, height: 1000 });
   await expect(courses).toHaveCount(9);
+  await expect(page.locator(".course-challenge")).toHaveText(
+    Array(9).fill(["⏱ タイムアタック--", "🔥 連続正解--"]).flat(),
+  );
   await expect(page.locator(".course-begin")).toContainText("ベーシックを3つ進めるとチャレンジできるよ♪");
   await expect(page.locator(".course-begin small")).toHaveCSS("display", "inline");
   await expect(page.locator(".course-begin .course-copy")).toHaveCSS("white-space", "nowrap");
+  const startCopy = await page.locator(".course-begin .course-copy").boundingBox();
+  const goalCopy = await page.locator(".course-goal .course-copy").boundingBox();
+  const challengeButton = await page.locator(".course-challenge").first().boundingBox();
+  expect(startCopy).not.toBeNull();
+  expect(goalCopy).not.toBeNull();
+  expect(challengeButton).not.toBeNull();
+  expect(Math.abs(startCopy!.x - challengeButton!.x)).toBeLessThanOrEqual(1);
+  expect(Math.abs(goalCopy!.x - challengeButton!.x)).toBeLessThanOrEqual(1);
+  const startLabel = await page.locator(".course-begin strong").boundingBox();
+  const startMessage = await page.locator(".course-begin small").boundingBox();
+  const goalLabel = await page.locator(".course-goal strong").boundingBox();
+  const goalMessage = await page.locator(".course-goal small").boundingBox();
+  expect(startLabel).not.toBeNull();
+  expect(startMessage).not.toBeNull();
+  expect(goalLabel).not.toBeNull();
+  expect(goalMessage).not.toBeNull();
+  expect(startLabel!.y).toBeCloseTo(startMessage!.y, 0);
+  expect(goalLabel!.y).toBeCloseTo(goalMessage!.y, 0);
   await expect(page.locator(".course-guide")).toHaveCount(0);
   await expect(page.locator(".course-goal")).toContainText("おめでとう！がんばったね♪次のコースも進もう！");
   await expect(page.locator(".course-goal .course-copy")).toHaveCSS("white-space", "nowrap");
@@ -566,7 +611,7 @@ Then("コース一覧に進捗ステップと解放条件つきボタンが表�
   );
   expect(mobileColumns).toBe(1);
   const mobileGuide = page.locator(".course-begin small");
-  await expect(mobileGuide).toHaveCSS("white-space", "nowrap");
+  await expect(mobileGuide).toHaveCSS("white-space", "normal");
   const guideLayout = await mobileGuide.evaluate((element) => ({
     height: element.getBoundingClientRect().height,
     fontSize: Number.parseFloat(getComputedStyle(element).fontSize),

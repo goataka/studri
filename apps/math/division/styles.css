@@ -218,14 +218,6 @@ main {
   box-shadow: 0 14px 38px rgb(55 77 52 / 7%);
 }
 
-.panel-title {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  margin-bottom: 18px;
-}
-
 .panel-title h2 {
   margin: 0;
   color: var(--ink);
@@ -243,6 +235,20 @@ main {
 
 .home-panel {
   margin-top: 18px;
+}
+
+.home-panel,
+.quiz-panel {
+  padding: 20px clamp(18px, 5vw, 42px) 26px;
+}
+
+.panel-title,
+.quiz-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 12px;
 }
 
 .course,
@@ -384,13 +390,19 @@ main {
 }
 
 .course-begin .course-copy {
-  flex: 1 1 auto;
-  max-width: none;
+  flex: 0 0 320px;
+  max-width: 320px;
 }
 
 .course-begin .course-copy,
 .course-goal .course-copy {
   display: block;
+  white-space: nowrap;
+}
+
+.course-begin .course-copy strong,
+.course-goal .course-copy strong {
+  display: inline;
 }
 
 .course-begin strong,
@@ -405,9 +417,8 @@ main {
   white-space: nowrap;
 }
 
-.course-begin .course-copy,
-.course-goal .course-copy {
-  white-space: nowrap;
+.course-marker-spacer {
+  flex: 1 1 auto;
 }
 
 .course strong,
@@ -530,7 +541,7 @@ main {
 
 .course-side {
   display: grid;
-  flex: 0 0 auto;
+  flex: 0 0 320px;
   gap: 5px;
   align-self: flex-start;
   justify-items: start;
@@ -541,6 +552,12 @@ main {
   flex: 0 0 auto;
   gap: 4px;
   justify-items: start;
+}
+
+.course-tools-spacer {
+  flex: 0 0 70px;
+  visibility: hidden;
+  pointer-events: none;
 }
 
 .course-log {
@@ -667,10 +684,8 @@ main {
 }
 
 .review-back {
-  padding: 8px 12px;
-  border: 1px solid #cbdac3;
-  border-radius: 999px;
-  background: #f3f7ef;
+  padding: 4px 0;
+  background: transparent;
   color: #426d4f;
   font-weight: 800;
   white-space: nowrap;
@@ -703,16 +718,7 @@ main {
 }
 
 .quiz-panel {
-  padding: 20px clamp(18px, 5vw, 42px) 26px;
-}
-
-.quiz-head {
   position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  margin-bottom: 12px;
 }
 
 .back {
@@ -1141,6 +1147,23 @@ main {
     padding: 8px 12px;
   }
 
+  .course-marker-spacer,
+  .course-tools-spacer {
+    display: none;
+  }
+
+  .course-begin .course-copy,
+  .course-goal .course-copy {
+    flex: 1 1 100%;
+    max-width: none;
+    white-space: normal;
+  }
+
+  .course-begin small,
+  .course-goal small {
+    white-space: normal;
+  }
+
   .course-start {
     grid-template-columns: minmax(0, 1fr);
     gap: 8px;
@@ -1162,6 +1185,7 @@ main {
 
   .course-side {
     flex-basis: 100%;
+    width: 100%;
     justify-items: start;
   }
 
@@ -1222,10 +1246,6 @@ main {
     height: 160px;
   }
 
-
-  .panel-title {
-    align-items: flex-start;
-  }
 
   .badge {
     font-size: 0.68rem;
