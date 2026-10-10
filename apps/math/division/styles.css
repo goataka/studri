@@ -355,6 +355,10 @@ main {
   outline-offset: 4px;
 }
 
+.course-start:disabled {
+  cursor: not-allowed;
+}
+
 .course.selected {
   border-color: #5f8a60;
   background: #f1f7ec;
@@ -803,13 +807,23 @@ main {
 
 .answer {
   display: flex;
-  align-items: center;
+  align-items: end;
   justify-content: center;
-  gap: 10px;
+  gap: 8px;
+}
+
+.answer label {
+  display: grid;
+  justify-items: center;
+  gap: 3px;
+  color: var(--muted);
+  font-size: 0.85rem;
+  font-weight: 750;
 }
 
 .answer input {
-  width: 180px;
+  width: min(140px, 32vw);
+  min-width: 0;
   padding: 10px 12px;
   border: 2px solid #cbdac3;
   border-radius: 14px;
@@ -822,7 +836,8 @@ main {
   opacity: 0.65;
 }
 
-.answer span {
+.answer > span {
+  padding-bottom: 12px;
   font-size: 1.35rem;
 }
 
@@ -1281,16 +1296,6 @@ main {
   color: #765a2c;
   font-weight: 850;
   font-variant-numeric: tabular-nums;
-}
-
-.mode-title {
-  position: absolute;
-  left: 50%;
-  color: #765a2c;
-  font-size: 1rem;
-  font-weight: 850;
-  transform: translateX(-50%);
-  white-space: nowrap;
 }
 
 .mode-status.hidden {

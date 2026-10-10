@@ -55,6 +55,7 @@ let locked = false;
 let advanceTimer = null;
 let soundEnabled = localStorage.getItem(SOUND_KEY) !== "false";
 let audioContext = null;
+let activeAnswerField = null;
 const canvasResizers = [];
 
 const get = (id) => document.getElementById(id);
@@ -172,6 +173,7 @@ function renderCourses() {
     toolsGroup.append(toolsLabel, log);
     card.append(start, side, toolsGroup);
     start.addEventListener("click", () => {
+      if ((data.stats[course.id]?.streak || 0) >= 3) return;
       selectedCourse = course.id;
       data.course = selectedCourse;
       save();
@@ -264,8 +266,11 @@ function renderCourseProgress() {
     log.title = mistakeCount === 0 ? "このコースの誤答ログはありません" : `${mistakeCount}件の誤答ログ`;
     button.querySelector(".course-start").setAttribute(
       "aria-label",
-      `小学3年生、${course.name}。${course.desc}。合格ステップ ${streak}回。`,
+      streak >= 3
+        ? `小学3年生、${course.name}。ベーシック合格済み。チャレンジを選んでね。`
+        : `小学3年生、${course.name}。${course.desc}。合格ステップ ${streak}回。`,
     );
+    button.querySelector(".course-start").disabled = streak >= 3;
   });
 }
 
@@ -329,7 +334,7 @@ function randomInteger(min, max) {
 
 function makeProblem(index) {
   const course = courses.find((item) => item.id === selectedCourse);
-  const level = Math.min(index, 9);
+  const level = Math.min(index + 3, 9);
   let dividend;
   let divisor;
   let remainder = 0;
@@ -441,7 +446,7 @@ function makeDivisionProblem(dividend, divisor, remainder, text = `${dividend} �
   return {
     text,
     answer,
-    unit: remainder ? "こ（あまりも入力）" : "こ",
+    unit: "こ",
     hint: remainder
       ? "わる数の九九で、わられる数をこえないいちばん大きな数を見つけよう。残りも考えてみよう。"
       : "わる数を何倍すると、わられる数になるかな？",
@@ -478,12 +483,6 @@ function setupQuiz(mode = "basic") {
   locked = false;
   clearInterval(modeTimer);
   if (mode === "time") modeTimer = setInterval(updateModeStatus, 500);
-  get("modeTitle").classList.toggle("hidden", !["time", "chain"].includes(mode));
-  get("modeTitle").textContent = mode === "time"
-    ? "⏱ タイムアタック"
-    : mode === "chain"
-      ? "🔥 連続正解"
-      : "";
   get("home").classList.add("hidden");
   get("result").classList.add("hidden");
   get("quiz").classList.remove("hidden");
@@ -525,19 +524,17 @@ function nextProblem() {
   get("questionNo").textContent = quiz.mode === "chain" ? `${quiz.index + 1}問目` : `${quiz.index + 1} / 10`;
   get("progress").style.width = quiz.mode === "chain" ? "100%" : `${quiz.index * 10}%`;
   clearWorkCanvas();
-  get("difficulty").textContent = quiz.mode === "time"
-    ? "⏱ タイムアタック"
-    : quiz.mode === "chain"
-      ? "🔥 連続正解"
-      : quiz.index < 3
-    ? "LEVEL 1・じゅんび"
-    : quiz.index < 7
-      ? "LEVEL 2・ステップアップ"
-      : "LEVEL 3・チャレンジ";
+  get("difficulty").textContent = quiz.mode === "basic"
+    ? quiz.index < 4 ? "LEVEL 1・ステップアップ" : "LEVEL 2・チャレンジ"
+    : "";
   get("problem").textContent = problem.text;
   get("unit").textContent = problem.unit;
   get("answer").value = "";
+  get("remainder").value = "";
+  get("remainderField").classList.toggle("hidden", !problem.answer.includes("あまり"));
+  activeAnswerField = get("answer");
   get("answer").disabled = false;
+  get("remainder").disabled = false;
   get("check").disabled = false;
   locked = false;
   get("answer").focus();
@@ -657,14 +654,17 @@ function revealAnswer(problem) {
 
 function judgeAnswer() {
   if (locked || !quiz) return;
-  const rawAnswer = get("answer").value.trim();
-  if (!rawAnswer) return;
+  const quotient = get("answer").value.trim();
+  const remainder = get("remainder").value.trim();
+  const rawAnswer = remainder ? `${quotient}あまり${remainder}` : quotient;
+  if (!quotient && !remainder) return;
 
   locked = true;
   get("check").disabled = true;
   const problem = quiz.problems[quiz.index];
-  const normalizedAnswer = rawAnswer.replace(/\s/g, "");
-  const isCorrect = problem.answer === normalizedAnswer;
+  const [correctQuotient, correctRemainder] = problem.answer.split("あまり");
+  const isCorrect = quotient.replace(/\s/g, "") === correctQuotient
+    && (correctRemainder === undefined || remainder.replace(/\s/g, "") === correctRemainder);
   playFeedbackTone(isCorrect);
 
   if (isCorrect) {
@@ -678,6 +678,7 @@ function judgeAnswer() {
   quiz.missed = true;
   quiz.failed = true;
   get("answer").disabled = true;
+  get("remainder").disabled = true;
   showFeedback(false, problem, rawAnswer);
 }
 
@@ -697,6 +698,8 @@ function retryQuestion() {
   locked = false;
   get("answer").disabled = false;
   get("answer").value = "";
+  get("remainder").disabled = false;
+  get("remainder").value = "";
   get("check").disabled = false;
   get("answer").focus();
 }
@@ -767,21 +770,19 @@ function finishQuiz() {
 }
 
 function buildKeypad() {
-  const keys = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "⌫", "0", "あまり", "クリア"];
+  const keys = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "⌫", "0", "クリア"];
   const keypad = get("keypad");
   keys.forEach((key) => {
     const button = document.createElement("button");
     button.type = "button";
     button.textContent = key;
     button.addEventListener("click", () => {
-      const answer = get("answer");
-      if (answer.disabled) return;
-      if (key === "⌫") answer.value = answer.value.slice(0, -1);
-      else if (key === "クリア") answer.value = "";
-      else if (key === "あまり") {
-        if (!answer.value.includes("あまり")) answer.value += "あまり";
-      } else answer.value += key;
-      answer.focus();
+      const activeField = activeAnswerField || get("answer");
+      if (activeField.disabled) return;
+      if (key === "⌫") activeField.value = activeField.value.slice(0, -1);
+      else if (key === "クリア") activeField.value = "";
+      else activeField.value += key;
+      activeField.focus();
     });
     keypad.append(button);
   });
@@ -863,6 +864,19 @@ window.addEventListener("resize", resizeCanvases);
 
 get("check").addEventListener("click", judgeAnswer);
 get("answer").addEventListener("keydown", (event) => {
+  if (event.key === "Enter") {
+    event.preventDefault();
+    event.stopPropagation();
+    judgeAnswer();
+  }
+});
+get("answer").addEventListener("focus", () => {
+  activeAnswerField = get("answer");
+});
+get("remainder").addEventListener("focus", () => {
+  activeAnswerField = get("remainder");
+});
+get("remainder").addEventListener("keydown", (event) => {
   if (event.key === "Enter") {
     event.preventDefault();
     event.stopPropagation();

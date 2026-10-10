@@ -136,6 +136,35 @@ Then(/VR画像 "(.*)" を確認する/, async ({ page }, screenshotName: string)
 When("コースを選んで挑戦を始める", async ({ page }) => {
   await page.locator('#courses [data-course="g3-one-digit-exact"] .course-start').click();
   await expect(page.locator("#quiz")).toBeVisible();
+  await expect(page.locator("#difficulty")).toHaveText("LEVEL 1・ステップアップ");
+  await expect(page.locator("#difficulty")).not.toContainText("じゅんび");
+});
+
+When("あまりのあるコースを選んで挑戦を始める", async ({ page }) => {
+  await page.locator('#courses [data-course="g3-one-digit-remainder"] .course-start').click();
+  await expect(page.locator("#quiz")).toBeVisible();
+});
+
+Then("商とあまりを別々に入力できる", async ({ page }) => {
+  await expect(page.getByRole("textbox", { name: "商" })).toBeVisible();
+  await expect(page.getByRole("textbox", { name: "あまり" })).toBeVisible();
+  await expect(page.getByRole("button", { name: "あまり", exact: true })).toHaveCount(0);
+});
+
+Then("商とあまりを分けて判定する", async ({ page }) => {
+  const [quotient, remainder] = (await currentAnswer(page)).split("あまり");
+  await page.locator("#remainder").focus();
+  await page.locator("#keypad button").first().click();
+  await expect(page.locator("#remainder")).toHaveValue("1");
+  await page.locator("#remainder").fill("");
+  await page.locator("#answer").fill(quotient);
+  await page.getByRole("button", { name: "答え合わせ" }).click();
+  await expect(page.locator("#feedback")).toHaveClass(/no/);
+  await page.getByRole("button", { name: "もう一度" }).click();
+  await page.locator("#answer").fill(quotient);
+  await page.locator("#remainder").fill(remainder);
+  await page.getByRole("button", { name: "答え合わせ" }).click();
+  await expect(page.locator("#feedback")).toHaveClass(/ok/);
 });
 
 When("文章題コースを選んで挑戦を始める", async ({ page }) => {
@@ -640,6 +669,18 @@ Then("9つのコースが指定順に並び問題が範囲内で出る", async (
   expect(challengeTitles).toEqual([false, false]);
   await expect(fullyPassedCourse.locator(".course-start")).not.toHaveAttribute("aria-label", /解放済み/);
   await expect(fullyPassedCourse.locator(".course-challenge:disabled")).toHaveCount(0);
+  await expect(fullyPassedCourse.locator(".course-start")).toBeDisabled();
+  await fullyPassedCourse.locator(".course-start").click({ force: true });
+  await expect(page.locator("#quiz")).toBeHidden();
+
+  await page.evaluate(() => {
+    localStorage.setItem("studri-division-v1", JSON.stringify({
+      course: "g3-meaning-story",
+      stats: { "g3-meaning-story": { streak: 2, attempts: 4, best: 23 } },
+      wrong: [],
+    }));
+  });
+  await page.reload();
 
   for (const [id, , type] of courses) {
     await page.locator(`#courses [data-course="${id}"] .course-start`).click();
@@ -732,28 +773,20 @@ Given("合格済みの状態で画面確認用に算数アプリを開く", asyn
 
 When("タイムアタックを始める", async ({ page }) => {
   await page.locator('[data-course="g3-one-digit-exact"] .course-challenge[data-mode="time"]').click();
-  await expect(page.locator("#difficulty")).toHaveText("⏱ タイムアタック");
-  await expect(page.locator("#modeTitle")).toHaveText("⏱ タイムアタック");
-  await expect(page.locator("#modeTitle")).toHaveCSS("font-weight", "850");
+  await expect(page.locator("#difficulty")).toBeEmpty();
+  await expect(page.locator("#modeTitle")).toHaveCount(0);
   const back = await page.locator("#quit").boundingBox();
-  const title = await page.locator("#modeTitle").boundingBox();
   const quizHead = await page.locator(".quiz-head").boundingBox();
   expect(back).not.toBeNull();
-  expect(title).not.toBeNull();
   expect(quizHead).not.toBeNull();
-  expect(title!.y + title!.height / 2).toBeCloseTo(back!.y + back!.height / 2, 0);
-  expect(title!.x + title!.width / 2).toBeCloseTo(quizHead!.x + quizHead!.width / 2, 0);
+  await expect(page.locator("#modeStatus")).toBeVisible();
 });
 
 When("連続正解を始める", async ({ page }) => {
   await page.locator('[data-course="g3-one-digit-exact"] .course-challenge[data-mode="chain"]').click();
-  await expect(page.locator("#difficulty")).toHaveText("🔥 連続正解");
-  await expect(page.locator("#modeTitle")).toHaveText("🔥 連続正解");
-  const title = await page.locator("#modeTitle").boundingBox();
-  const quizHead = await page.locator(".quiz-head").boundingBox();
-  expect(title).not.toBeNull();
-  expect(quizHead).not.toBeNull();
-  expect(title!.x + title!.width / 2).toBeCloseTo(quizHead!.x + quizHead!.width / 2, 0);
+  await expect(page.locator("#difficulty")).toBeEmpty();
+  await expect(page.locator("#modeTitle")).toHaveCount(0);
+  await expect(page.locator("#modeStatus")).toBeVisible();
 });
 
 When("計算エリアに手書きして誤答する", async ({ page }) => {

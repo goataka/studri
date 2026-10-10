@@ -56,7 +56,6 @@
           <div class="quiz-head">
             <button class="back" id="quit" type="button">← コース選択へ</button>
             <span class="question-label" id="questionNo"></span>
-            <strong class="mode-title hidden" id="modeTitle"></strong>
             <span class="mode-status hidden" id="modeStatus" aria-live="off"></span>
           </div>
           <div class="progress" aria-label="挑戦の進み具合"><span id="progress"></span></div>
@@ -68,8 +67,15 @@
               </div>
               <div class="quiz-response">
                 <p class="work-instruction">答えを入力して「答え合わせ」をしよう</p>
-                <div class="answer">
-                  <input id="answer" inputmode="text" autocomplete="off" aria-label="答え（あまりがある問題は「あまり」も入力）">
+                <div class="answer" id="answerFields">
+                  <label>
+                    <span>商</span>
+                    <input id="answer" inputmode="numeric" autocomplete="off" aria-label="商">
+                  </label>
+                  <label id="remainderField" class="hidden">
+                    <span>あまり</span>
+                    <input id="remainder" inputmode="numeric" autocomplete="off" aria-label="あまり">
+                  </label>
                   <span id="unit">こ</span>
                 </div>
                 <div class="keypad" id="keypad" aria-label="計算機"></div>
