@@ -416,8 +416,10 @@ Then("コース一覧に進捗ステップと解放条件つきボタンが表�
   await expect(courses).toHaveCount(9);
   await expect(page.locator(".course-begin")).toContainText("ベーシックを3つ進めるとチャレンジできるよ♪");
   await expect(page.locator(".course-begin small")).toHaveCSS("display", "inline");
+  await expect(page.locator(".course-begin .course-copy")).toHaveCSS("white-space", "nowrap");
   await expect(page.locator(".course-guide")).toHaveCount(0);
   await expect(page.locator(".course-goal")).toContainText("おめでとう！がんばったね♪次のコースも進もう！");
+  await expect(page.locator(".course-goal .course-copy")).toHaveCSS("white-space", "nowrap");
   const desktopColumns = await page.locator("#courses").evaluate((element) =>
     getComputedStyle(element).gridTemplateColumns.split(" ").length,
   );
@@ -535,7 +537,7 @@ Then("コース一覧に進捗ステップと解放条件つきボタンが表�
   );
   expect(mobileColumns).toBe(1);
   const mobileGuide = page.locator(".course-begin small");
-  await expect(mobileGuide).toHaveCSS("white-space", "normal");
+  await expect(mobileGuide).toHaveCSS("white-space", "nowrap");
   const guideLayout = await mobileGuide.evaluate((element) => ({
     height: element.getBoundingClientRect().height,
     fontSize: Number.parseFloat(getComputedStyle(element).fontSize),
@@ -724,6 +726,8 @@ Given("合格済みの状態で画面確認用に算数アプリを開く", asyn
     }
   });
   await page.goto("/apps/math/division/");
+  await expect(page.locator('[data-course="g3-one-digit-exact"]')).toHaveClass(/is-basic-complete/);
+  await expect(page.locator('[data-course="g3-one-digit-exact"]')).toHaveCSS("background-color", "rgb(255, 243, 229)");
 });
 
 When("タイムアタックを始める", async ({ page }) => {
