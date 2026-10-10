@@ -43,6 +43,19 @@ Then("算数トップページを表示する", async ({ page }) => {
   await page.setViewportSize({ width: 1280, height: 720 });
 });
 
+Then("ホームのGitHubリンクとVERSIONが表示される", async ({ page }) => {
+  const githubLink = page.getByRole("link", { name: "GitHubでスタドリを見る" });
+  await expect(githubLink).toHaveAttribute("href", "https://github.com/goataka/studri");
+  await expect(githubLink.locator("svg")).toBeVisible();
+  const header = await page.locator(".site-header").boundingBox();
+  const link = await githubLink.boundingBox();
+  expect(header).not.toBeNull();
+  expect(link).not.toBeNull();
+  expect(link!.x).toBeGreaterThan(header!.x + header!.width / 2);
+  await expect(page.getByRole("link", { name: /プロジェクトを見る/ })).toHaveCount(0);
+  await expect(page.locator(".site-footer")).toHaveText("Ver. 20261010.102102.018");
+});
+
 When("モバイル表示に切り替える", async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
 });
