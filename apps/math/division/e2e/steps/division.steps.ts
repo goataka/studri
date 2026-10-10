@@ -752,7 +752,9 @@ async function currentAnswer(page: Page) {
   const [dividend, divisor] = operands;
   const quotient = Math.floor(dividend / divisor);
   const remainder = dividend % divisor;
-  return problem.includes("あまる") ? `${quotient}あまり${remainder}` : String(quotient);
+  return await page.locator("#remainderField").isVisible()
+    ? `${quotient}あまり${remainder}`
+    : String(quotient);
 }
 
 Given("合格済みの状態で画面確認用に算数アプリを開く", async ({ page }) => {
