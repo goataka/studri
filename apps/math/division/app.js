@@ -196,7 +196,13 @@ function renderCourses() {
   const beginMessage = document.createElement("small");
   beginMessage.textContent = "ベーシックを3つ進めるとチャレンジできるよ♪";
   beginCopy.append(beginLabel, beginMessage);
-  begin.append(beginCopy);
+  const beginSpacer = document.createElement("span");
+  beginSpacer.className = "course-marker-spacer";
+  beginSpacer.setAttribute("aria-hidden", "true");
+  const beginToolsSpacer = document.createElement("div");
+  beginToolsSpacer.className = "course-tools-group course-tools-spacer";
+  beginToolsSpacer.setAttribute("aria-hidden", "true");
+  begin.append(beginSpacer, beginCopy, beginToolsSpacer);
   courseList.prepend(begin);
   const goal = document.createElement("div");
   goal.className = "course-goal";
@@ -211,7 +217,13 @@ function renderCourses() {
   const goalMessage = document.createElement("small");
   goalMessage.textContent = "おめでとう！がんばったね♪次のコースも進もう！";
   goalCopy.append(goalLabel, goalMessage);
-  goal.append(goalCopy);
+  const goalSpacer = document.createElement("span");
+  goalSpacer.className = "course-marker-spacer";
+  goalSpacer.setAttribute("aria-hidden", "true");
+  const goalToolsSpacer = document.createElement("div");
+  goalToolsSpacer.className = "course-tools-group course-tools-spacer";
+  goalToolsSpacer.setAttribute("aria-hidden", "true");
+  goal.append(goalSpacer, goalCopy, goalToolsSpacer);
   courseList.append(goal);
   renderCourseProgress();
 }
