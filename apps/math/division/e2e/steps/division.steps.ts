@@ -160,6 +160,7 @@ Then("ログ画面と問題画面のレイアウトが揃っている", async ({
 When("コースを選んで挑戦を始める", async ({ page }) => {
   await page.locator('#courses [data-course="g3-one-digit-exact"] .course-start').click();
   await expect(page.locator("#quiz")).toBeVisible();
+  await expect(page.locator("#unit")).toBeEmpty();
   await expect(page.locator("#difficulty")).toHaveText("LEVEL 1・ステップアップ");
   await expect(page.locator("#difficulty")).not.toContainText("じゅんび");
 });
@@ -167,6 +168,7 @@ When("コースを選んで挑戦を始める", async ({ page }) => {
 When("あまりのあるコースを選んで挑戦を始める", async ({ page }) => {
   await page.locator('#courses [data-course="g3-one-digit-remainder"] .course-start').click();
   await expect(page.locator("#quiz")).toBeVisible();
+  await expect(page.locator("#unit")).toBeEmpty();
 });
 
 Then("商とあまりを別々に入力できる", async ({ page }) => {
@@ -194,6 +196,7 @@ Then("商とあまりを分けて判定する", async ({ page }) => {
 When("文章題コースを選んで挑戦を始める", async ({ page }) => {
   await page.locator('#courses [data-course="g3-meaning-story"] .course-start').click();
   await expect(page.locator("#quiz")).toBeVisible();
+  await expect(page.locator("#unit")).toHaveText(/^(こ|ふくろ)$/);
 });
 
 When("10問すべて正解して挑戦を終える", async ({ page }) => {
@@ -479,8 +482,14 @@ Then("コース一覧に進捗ステップと解放条件つきボタンが表�
   expect(startCopy).not.toBeNull();
   expect(goalCopy).not.toBeNull();
   expect(challengeButton).not.toBeNull();
-  expect(Math.abs(startCopy!.x - challengeButton!.x)).toBeLessThanOrEqual(1);
-  expect(Math.abs(goalCopy!.x - challengeButton!.x)).toBeLessThanOrEqual(1);
+  const courseCopy = await courses.first().locator(".course-copy").boundingBox();
+  expect(courseCopy).not.toBeNull();
+  expect(Math.abs(startCopy!.x - courseCopy!.x)).toBeLessThanOrEqual(1);
+  expect(Math.abs(goalCopy!.x - courseCopy!.x)).toBeLessThanOrEqual(1);
+  const firstCourseRowBounds = await courses.first().boundingBox();
+  expect(firstCourseRowBounds).not.toBeNull();
+  expect(challengeButton!.y).toBeGreaterThanOrEqual(firstCourseRowBounds!.y);
+  expect(challengeButton!.y + challengeButton!.height).toBeLessThanOrEqual(firstCourseRowBounds!.y + firstCourseRowBounds!.height);
   const startLabel = await page.locator(".course-begin strong").boundingBox();
   const startMessage = await page.locator(".course-begin small").boundingBox();
   const goalLabel = await page.locator(".course-goal strong").boundingBox();
@@ -616,6 +625,10 @@ Then("コース一覧に進捗ステップと解放条件つきボタンが表�
   expect(mobileColumns).toBe(1);
   const mobileGuide = page.locator(".course-begin small");
   await expect(mobileGuide).toHaveCSS("white-space", "normal");
+  await expect(page.locator(".course-begin strong")).toHaveCSS("display", "block");
+  await expect(page.locator(".course-goal strong")).toHaveCSS("display", "block");
+  await expect(page.locator(".course-begin small")).toHaveCSS("display", "block");
+  await expect(page.locator(".course-goal small")).toHaveCSS("display", "block");
   const guideLayout = await mobileGuide.evaluate((element) => ({
     lines: element.getClientRects().length,
     scrollWidth: element.parentElement!.scrollWidth,

@@ -404,11 +404,6 @@ main {
 .course-begin .course-copy strong,
 .course-goal .course-copy strong {
   display: inline;
-}
-
-.course-begin strong,
-.course-goal strong {
-  display: inline;
   margin-right: 8px;
 }
 
@@ -1160,8 +1155,15 @@ main {
     white-space: normal;
   }
 
+  .course-begin .course-copy strong,
+  .course-goal .course-copy strong {
+    display: block;
+    margin-right: 0;
+  }
+
   .course-begin small,
   .course-goal small {
+    display: block;
     white-space: normal;
     line-height: 1.25;
   }

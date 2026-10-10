@@ -202,7 +202,7 @@ function renderCourses() {
   const beginToolsSpacer = document.createElement("div");
   beginToolsSpacer.className = "course-tools-group course-tools-spacer";
   beginToolsSpacer.setAttribute("aria-hidden", "true");
-  begin.append(beginSpacer, beginCopy, beginToolsSpacer);
+  begin.append(beginCopy, beginSpacer, beginToolsSpacer);
   courseList.prepend(begin);
   const goal = document.createElement("div");
   goal.className = "course-goal";
@@ -223,7 +223,7 @@ function renderCourses() {
   const goalToolsSpacer = document.createElement("div");
   goalToolsSpacer.className = "course-tools-group course-tools-spacer";
   goalToolsSpacer.setAttribute("aria-hidden", "true");
-  goal.append(goalSpacer, goalCopy, goalToolsSpacer);
+  goal.append(goalCopy, goalSpacer, goalToolsSpacer);
   courseList.append(goal);
   renderCourseProgress();
 }
@@ -448,7 +448,7 @@ function choose(items) {
   return picked;
 }
 
-function makeDivisionProblem(dividend, divisor, remainder, text = `${dividend} ÷ ${divisor} =`) {
+function makeDivisionProblem(dividend, divisor, remainder, text = `${dividend} ÷ ${divisor} =`, unit = "") {
   const quotient = Math.floor(dividend / divisor);
   const answer = remainder ? `${quotient}あまり${remainder}` : String(quotient);
   const explanation = remainder
@@ -458,7 +458,7 @@ function makeDivisionProblem(dividend, divisor, remainder, text = `${dividend} �
   return {
     text,
     answer,
-    unit: "こ",
+    unit,
     hint: remainder
       ? "わる数の九九で、わられる数をこえないいちばん大きな数を見つけよう。残りも考えてみよう。"
       : "わる数を何倍すると、わられる数になるかな？",
@@ -474,7 +474,7 @@ function makeStoryProblem(dividend, divisor, remainder, sharing) {
     : remainder
       ? `${dividend}このりんごを${divisor}こずつふくろに入れると、何ふくろできて、何こあまる？`
       : `${dividend}このりんごを${divisor}こずつふくろに入れると、何ふくろできる？`;
-  return makeDivisionProblem(dividend, divisor, remainder, text);
+  return makeDivisionProblem(dividend, divisor, remainder, text, sharing ? "こ" : "ふくろ");
 }
 
 function setupQuiz(mode = "basic") {
