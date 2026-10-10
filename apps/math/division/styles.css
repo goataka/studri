@@ -361,6 +361,17 @@ main {
   box-shadow: 0 3px 0 #dce8d4, 0 0 0 2px rgb(146 182 126 / 20%);
 }
 
+.course.is-basic-complete {
+  border-color: #f0c796;
+  background: #fff3e5;
+  box-shadow: 0 3px 0 #f5dfc5;
+}
+
+.course.is-basic-complete:hover {
+  border-color: #e8ad84;
+  background: #ffedda;
+}
+
 .course-copy {
   display: grid;
   gap: 4px;
@@ -387,7 +398,12 @@ main {
 .course-begin small,
 .course-goal small {
   display: inline;
-  white-space: normal;
+  white-space: nowrap;
+}
+
+.course-begin .course-copy,
+.course-goal .course-copy {
+  white-space: nowrap;
 }
 
 .course strong,
@@ -687,6 +703,7 @@ main {
 }
 
 .quiz-head {
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -1267,9 +1284,12 @@ main {
 }
 
 .mode-title {
+  position: absolute;
+  left: 50%;
   color: #765a2c;
   font-size: 1rem;
   font-weight: 850;
+  transform: translateX(-50%);
   white-space: nowrap;
 }
 

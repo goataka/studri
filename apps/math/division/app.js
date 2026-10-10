@@ -233,6 +233,7 @@ function renderCourseProgress() {
     }
     const challengeGroup = button.querySelector(".course-challenge-group");
     challengeGroup.classList.toggle("is-next", streak >= 3);
+    button.classList.toggle("is-basic-complete", streak >= 3);
     button.querySelectorAll(".course-step").forEach((step, index) => {
       step.classList.toggle("current", index === (streak === 0 ? 0 : streak + 1) && streak < 3);
       step.classList.toggle("complete", (index === 0 && streak > 0) || (index > 0 && index <= streak));
@@ -477,8 +478,12 @@ function setupQuiz(mode = "basic") {
   locked = false;
   clearInterval(modeTimer);
   if (mode === "time") modeTimer = setInterval(updateModeStatus, 500);
-  get("modeTitle").classList.toggle("hidden", mode !== "time");
-  get("modeTitle").textContent = mode === "time" ? "⏱ タイムアタック" : "";
+  get("modeTitle").classList.toggle("hidden", !["time", "chain"].includes(mode));
+  get("modeTitle").textContent = mode === "time"
+    ? "⏱ タイムアタック"
+    : mode === "chain"
+      ? "🔥 連続正解"
+      : "";
   get("home").classList.add("hidden");
   get("result").classList.add("hidden");
   get("quiz").classList.remove("hidden");
