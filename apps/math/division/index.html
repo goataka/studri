@@ -56,6 +56,7 @@
           <div class="quiz-head">
             <button class="back" id="quit" type="button">← コース選択へ</button>
             <span class="question-label" id="questionNo"></span>
+            <strong class="mode-title hidden" id="modeTitle"></strong>
             <span class="mode-status hidden" id="modeStatus" aria-live="off"></span>
           </div>
           <div class="progress" aria-label="挑戦の進み具合"><span id="progress"></span></div>
@@ -80,7 +81,7 @@
                 <div class="canvas-box">
                   <span class="canvas-label">✍️ 計算エリア（手書き）</span>
                   <canvas class="draw" id="noteCanvas" aria-label="計算エリア。手書きで計算できます"></canvas>
-                  <button class="clear" type="button">消す</button>
+                  <button class="clear" type="button" aria-label="計算エリアを消す" title="計算エリアを消す">🗑️</button>
                 </div>
               </div>
             </div>

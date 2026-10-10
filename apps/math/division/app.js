@@ -192,7 +192,7 @@ function renderCourses() {
   beginIcon.textContent = "🧭";
   beginLabel.append(beginIcon, document.createTextNode(" スタート"));
   const beginMessage = document.createElement("small");
-  beginMessage.textContent = "ベーシックを3つ進めよう！チャレンジできるようになるよ♪間違えたらログから確認してみてね。";
+  beginMessage.textContent = "ベーシックを3つ進めるとチャレンジできるよ♪";
   beginCopy.append(beginLabel, beginMessage);
   begin.append(beginCopy);
   courseList.prepend(begin);
@@ -207,7 +207,7 @@ function renderCourses() {
   goalIcon.textContent = "🚩";
   goalLabel.append(goalIcon, document.createTextNode(" ゴール"));
   const goalMessage = document.createElement("small");
-  goalMessage.textContent = "おめでとう！たくさん頑張ったね♪次にも挑戦してみてね。";
+  goalMessage.textContent = "おめでとう！がんばったね♪次のコースも進もう！";
   goalCopy.append(goalLabel, goalMessage);
   goal.append(goalCopy);
   courseList.append(goal);
@@ -477,6 +477,8 @@ function setupQuiz(mode = "basic") {
   locked = false;
   clearInterval(modeTimer);
   if (mode === "time") modeTimer = setInterval(updateModeStatus, 500);
+  get("modeTitle").classList.toggle("hidden", mode !== "time");
+  get("modeTitle").textContent = mode === "time" ? "⏱ タイムアタック" : "";
   get("home").classList.add("hidden");
   get("result").classList.add("hidden");
   get("quiz").classList.remove("hidden");
@@ -510,6 +512,11 @@ function nextProblem() {
 
   const problem = makeProblem(quiz.index);
   quiz.problems[quiz.index] = problem;
+  const courseType = courses.find((course) => course.id === selectedCourse)?.type;
+  get("problem").classList.toggle(
+    "story",
+    ["meaning", "exact-story", "remainder-story"].includes(courseType),
+  );
   get("questionNo").textContent = quiz.mode === "chain" ? `${quiz.index + 1}問目` : `${quiz.index + 1} / 10`;
   get("progress").style.width = quiz.mode === "chain" ? "100%" : `${quiz.index * 10}%`;
   clearWorkCanvas();
