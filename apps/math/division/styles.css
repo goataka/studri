@@ -389,7 +389,8 @@ main {
   min-width: 0;
 }
 
-.course-begin .course-copy {
+.course-begin .course-copy,
+.course-goal .course-copy {
   flex: 0 0 320px;
   max-width: 320px;
 }
@@ -555,7 +556,7 @@ main {
 }
 
 .course-tools-spacer {
-  flex: 0 0 70px;
+  flex: 0 0 68.5px;
   visibility: hidden;
   pointer-events: none;
 }
@@ -1162,6 +1163,7 @@ main {
   .course-begin small,
   .course-goal small {
     white-space: normal;
+    line-height: 1.25;
   }
 
   .course-start {
@@ -1208,10 +1210,6 @@ main {
 
   .course-record {
     font-size: 0.7rem !important;
-  }
-
-  .quiz-panel {
-    padding: 16px 14px 20px;
   }
 
   .quiz-board {

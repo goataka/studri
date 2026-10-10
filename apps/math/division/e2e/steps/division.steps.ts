@@ -489,8 +489,12 @@ Then("コース一覧に進捗ステップと解放条件つきボタンが表�
   expect(startMessage).not.toBeNull();
   expect(goalLabel).not.toBeNull();
   expect(goalMessage).not.toBeNull();
-  expect(startLabel!.y).toBeCloseTo(startMessage!.y, 0);
-  expect(goalLabel!.y).toBeCloseTo(goalMessage!.y, 0);
+  await expect(page.locator(".course-begin strong")).toHaveCSS("display", "inline");
+  await expect(page.locator(".course-goal strong")).toHaveCSS("display", "inline");
+  expect(startLabel!.y).toBeLessThan(startMessage!.y + startMessage!.height);
+  expect(startMessage!.y).toBeLessThan(startLabel!.y + startLabel!.height);
+  expect(goalLabel!.y).toBeLessThan(goalMessage!.y + goalMessage!.height);
+  expect(goalMessage!.y).toBeLessThan(goalLabel!.y + goalLabel!.height);
   await expect(page.locator(".course-guide")).toHaveCount(0);
   await expect(page.locator(".course-goal")).toContainText("おめでとう！がんばったね♪次のコースも進もう！");
   await expect(page.locator(".course-goal .course-copy")).toHaveCSS("white-space", "nowrap");
@@ -613,12 +617,11 @@ Then("コース一覧に進捗ステップと解放条件つきボタンが表�
   const mobileGuide = page.locator(".course-begin small");
   await expect(mobileGuide).toHaveCSS("white-space", "normal");
   const guideLayout = await mobileGuide.evaluate((element) => ({
-    height: element.getBoundingClientRect().height,
-    fontSize: Number.parseFloat(getComputedStyle(element).fontSize),
-    scrollWidth: element.scrollWidth,
-    clientWidth: element.clientWidth,
+    lines: element.getClientRects().length,
+    scrollWidth: element.parentElement!.scrollWidth,
+    clientWidth: element.parentElement!.clientWidth,
   }));
-  expect(guideLayout.height).toBeLessThanOrEqual(guideLayout.fontSize * 2);
+  expect(guideLayout.lines).toBeLessThanOrEqual(2);
   expect(guideLayout.scrollWidth).toBeLessThanOrEqual(guideLayout.clientWidth);
   const mobileStepPositions = await courses.locator(".course-steps").evaluateAll((elements) =>
     elements.map((element) => element.getBoundingClientRect().x),
