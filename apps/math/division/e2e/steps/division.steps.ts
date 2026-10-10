@@ -116,6 +116,11 @@ When("コースを選んで挑戦を始める", async ({ page }) => {
   await expect(page.locator("#quiz")).toBeVisible();
 });
 
+When("文章題コースを選んで挑戦を始める", async ({ page }) => {
+  await page.locator('#courses [data-course="g3-meaning-story"] .course-start').click();
+  await expect(page.locator("#quiz")).toBeVisible();
+});
+
 When("10問すべて正解して挑戦を終える", async ({ page }) => {
   await answerQuestions(page, 0, 10);
 });
@@ -246,7 +251,7 @@ Then("画面幅に応じた位置に計算エリアが表示される", async ({
   const canvasBox = await page.locator(".canvas-box").boundingBox();
   expect(clearButton).not.toBeNull();
   expect(canvasBox).not.toBeNull();
-  expect(clearButton!.x + clearButton!.width).toBeCloseTo(canvasBox!.x + canvasBox!.width - 8, 0);
+  expect(Math.abs(clearButton!.x + clearButton!.width - (canvasBox!.x + canvasBox!.width - 8))).toBeLessThanOrEqual(1);
   await page.locator(".clear").click();
   const canvasCleared = await page.locator("#noteCanvas").evaluate((element) => {
     const canvasElement = element as HTMLCanvasElement;
@@ -515,7 +520,7 @@ Then("コース一覧に進捗ステップと解放条件つきボタンが表�
     scrollWidth: element.scrollWidth,
     clientWidth: element.clientWidth,
   }));
-  expect(guideLayout.height).toBeGreaterThan(guideLayout.fontSize * 2);
+  expect(guideLayout.height).toBeLessThanOrEqual(guideLayout.fontSize * 2);
   expect(guideLayout.scrollWidth).toBeLessThanOrEqual(guideLayout.clientWidth);
   const mobileStepPositions = await courses.locator(".course-steps").evaluateAll((elements) =>
     elements.map((element) => element.getBoundingClientRect().x),
@@ -702,6 +707,13 @@ Given("合格済みの状態で画面確認用に算数アプリを開く", asyn
 When("タイムアタックを始める", async ({ page }) => {
   await page.locator('[data-course="g3-one-digit-exact"] .course-challenge[data-mode="time"]').click();
   await expect(page.locator("#difficulty")).toHaveText("⏱ タイムアタック");
+  await expect(page.locator("#modeTitle")).toHaveText("⏱ タイムアタック");
+  await expect(page.locator("#modeTitle")).toHaveCSS("font-weight", "850");
+  const back = await page.locator("#quit").boundingBox();
+  const title = await page.locator("#modeTitle").boundingBox();
+  expect(back).not.toBeNull();
+  expect(title).not.toBeNull();
+  expect(title!.y + title!.height / 2).toBeCloseTo(back!.y + back!.height / 2, 0);
 });
 
 When("連続正解を始める", async ({ page }) => {

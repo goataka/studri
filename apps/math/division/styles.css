@@ -1269,6 +1269,7 @@ main {
 .mode-title {
   color: #765a2c;
   font-size: 1rem;
+  font-weight: 850;
   white-space: nowrap;
 }
 
