@@ -58,7 +58,7 @@ main {
   align-items: center;
   justify-content: space-between;
   gap: 12px;
-  padding-block: 18px;
+  padding-block: 9px;
 }
 
 .breadcrumbs {
@@ -150,7 +150,7 @@ main {
 }
 
 main {
-  padding-block: 8px 80px;
+  padding-block: 4px 80px;
 }
 
 .hero {
@@ -158,7 +158,7 @@ main {
   grid-template-columns: 220px 1fr;
   align-items: center;
   gap: 34px;
-  padding: 22px 8px 32px;
+  padding: 11px 8px 32px;
 }
 
 .eyebrow {
@@ -373,11 +373,21 @@ main {
   max-width: none;
 }
 
-.course-begin small {
+.course-begin .course-copy,
+.course-goal .course-copy {
   display: block;
-  max-width: 100%;
-  overflow-x: auto;
-  white-space: nowrap;
+}
+
+.course-begin strong,
+.course-goal strong {
+  display: inline;
+  margin-right: 8px;
+}
+
+.course-begin small,
+.course-goal small {
+  display: inline;
+  white-space: normal;
 }
 
 .course strong,
@@ -745,6 +755,12 @@ main {
   letter-spacing: 0.04em;
 }
 
+.quiz-question h2.story {
+  font-size: clamp(1.15rem, 3vw, 2.1rem);
+  letter-spacing: 0;
+  line-height: 1.5;
+}
+
 .quiz-work {
   display: grid;
   grid-template-rows: minmax(0, 1fr);
@@ -846,6 +862,7 @@ main {
 }
 
 .canvas-box {
+  position: relative;
   display: flex;
   flex-direction: column;
   min-width: 0;
@@ -856,6 +873,7 @@ main {
 
 .canvas-label {
   display: block;
+  padding-right: 40px;
   margin-bottom: 6px;
   color: var(--muted);
   font-size: 0.75rem;
@@ -872,11 +890,23 @@ main {
 }
 
 .clear {
-  margin-top: 5px;
-  padding: 2px;
-  background: transparent;
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  display: grid;
+  width: 32px;
+  aspect-ratio: 1;
+  place-items: center;
+  padding: 0;
+  border: 1px solid #cbdac3;
+  border-radius: 50%;
+  background: #fffdf8;
   color: #53795d;
-  font-size: 0.8rem;
+  font-size: 1rem;
+}
+
+.clear:hover {
+  background: #f4e7df;
 }
 
 .start {
@@ -1016,7 +1046,7 @@ main {
   }
 
   .site-header {
-    padding-block: 14px;
+    padding-block: 7px;
   }
 
   .brand {
@@ -1045,7 +1075,7 @@ main {
   .hero {
     grid-template-columns: 120px 1fr;
     gap: 14px;
-    padding: 14px 4px 22px;
+    padding: 7px 4px 22px;
   }
 
   .hero h1 {
@@ -1120,11 +1150,6 @@ main {
     left: calc(13px + 0.54rem);
   }
 
-  .course-begin small {
-    overflow-x: visible;
-    white-space: normal;
-  }
-
   .course-record {
     font-size: 0.7rem !important;
   }
@@ -1144,6 +1169,10 @@ main {
 
   .quiz-question h2 {
     font-size: clamp(2rem, 9vw, 3rem);
+  }
+
+  .quiz-question h2.story {
+    font-size: clamp(1rem, 4.5vw, 1.35rem);
   }
 
   .canvas-wrap,
@@ -1235,6 +1264,12 @@ main {
   color: #765a2c;
   font-weight: 850;
   font-variant-numeric: tabular-nums;
+}
+
+.mode-title {
+  color: #765a2c;
+  font-size: 1rem;
+  white-space: nowrap;
 }
 
 .mode-status.hidden {

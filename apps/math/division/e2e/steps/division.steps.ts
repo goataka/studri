@@ -216,6 +216,11 @@ Then("画面幅に応じた位置に計算エリアが表示される", async ({
   const desktopCanvas = await page.locator("#noteCanvas").boundingBox();
   expect(desktopCanvas).not.toBeNull();
   expect(desktopCanvas!.height).toBeGreaterThanOrEqual(desktopWork!.height * 0.85);
+  await expect(page.locator("#problem")).toHaveClass(/story/);
+  const storyFontSize = Number.parseFloat(await page.locator("#problem").evaluate((element) =>
+    getComputedStyle(element).fontSize,
+  ));
+  expect(storyFontSize).toBeLessThanOrEqual(34);
   await expect(page.locator("#answerCanvas")).toHaveCount(0);
   await expect(page.locator("#noteCanvas")).toBeVisible();
   await expect(page.locator(".quiz-work")).toHaveAttribute("aria-label", "計算エリア");
@@ -235,6 +240,22 @@ Then("画面幅に応じた位置に計算エリアが表示される", async ({
     return pixels.some((value, index) => index % 4 === 3 && value > 0);
   });
   expect(hasHandwriting).toBe(true);
+  await expect(page.locator(".clear")).toHaveText("🗑️");
+  await expect(page.locator(".clear")).toHaveAttribute("aria-label", "計算エリアを消す");
+  const clearButton = await page.locator(".clear").boundingBox();
+  const canvasBox = await page.locator(".canvas-box").boundingBox();
+  expect(clearButton).not.toBeNull();
+  expect(canvasBox).not.toBeNull();
+  expect(clearButton!.x + clearButton!.width).toBeCloseTo(canvasBox!.x + canvasBox!.width - 8, 0);
+  await page.locator(".clear").click();
+  const canvasCleared = await page.locator("#noteCanvas").evaluate((element) => {
+    const canvasElement = element as HTMLCanvasElement;
+    const context = canvasElement.getContext("2d");
+    if (!context) return false;
+    const pixels = context.getImageData(0, 0, canvasElement.width, canvasElement.height).data;
+    return pixels.every((value, index) => index % 4 !== 3 || value === 0);
+  });
+  expect(canvasCleared).toBe(true);
   const keypadButton = await page.locator("#keypad button").first().boundingBox();
   expect(keypadButton).not.toBeNull();
   expect(keypadButton!.height).toBeGreaterThanOrEqual(42);
@@ -366,10 +387,10 @@ Then("コース一覧に進捗ステップと解放条件つきボタンが表�
   await expect(page.locator("#courses")).toHaveAttribute("aria-label", "小学3年生のコース一覧");
   await page.setViewportSize({ width: 1440, height: 1000 });
   await expect(courses).toHaveCount(9);
-  await expect(page.locator(".course-begin")).toContainText("ベーシックを3つ進めよう！チャレンジできるようになるよ♪間違えたらログから確認してみてね。");
-  await expect(page.locator(".course-begin small")).toHaveCSS("white-space", "nowrap");
+  await expect(page.locator(".course-begin")).toContainText("ベーシックを3つ進めるとチャレンジできるよ♪");
+  await expect(page.locator(".course-begin small")).toHaveCSS("display", "inline");
   await expect(page.locator(".course-guide")).toHaveCount(0);
-  await expect(page.locator(".course-goal")).toContainText("おめでとう！たくさん頑張ったね♪次にも挑戦してみてね。");
+  await expect(page.locator(".course-goal")).toContainText("おめでとう！がんばったね♪次のコースも進もう！");
   const desktopColumns = await page.locator("#courses").evaluate((element) =>
     getComputedStyle(element).gridTemplateColumns.split(" ").length,
   );
