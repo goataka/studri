@@ -18,6 +18,15 @@ Given("スタドリホームを開く", async ({ page }) => {
   await page.goto("/");
 });
 
+Given("アプリ一覧URLを開く", async ({ page }) => {
+  await page.goto("/apps/");
+});
+
+Then("スタドリホームを表示する", async ({ page }) => {
+  await expect(page).toHaveURL(/\/$/);
+  await expect(page).toHaveTitle("スタドリ");
+});
+
 When("算数のリンクを選ぶ", async ({ page }) => {
   await page.locator('a[href="apps/math/"]').click();
 });
@@ -407,8 +416,10 @@ Then("コース一覧に進捗ステップと解放条件つきボタンが表�
   await expect(courses).toHaveCount(9);
   await expect(page.locator(".course-begin")).toContainText("ベーシックを3つ進めるとチャレンジできるよ♪");
   await expect(page.locator(".course-begin small")).toHaveCSS("display", "inline");
+  await expect(page.locator(".course-begin .course-copy")).toHaveCSS("white-space", "nowrap");
   await expect(page.locator(".course-guide")).toHaveCount(0);
   await expect(page.locator(".course-goal")).toContainText("おめでとう！がんばったね♪次のコースも進もう！");
+  await expect(page.locator(".course-goal .course-copy")).toHaveCSS("white-space", "nowrap");
   const desktopColumns = await page.locator("#courses").evaluate((element) =>
     getComputedStyle(element).gridTemplateColumns.split(" ").length,
   );
@@ -526,7 +537,7 @@ Then("コース一覧に進捗ステップと解放条件つきボタンが表�
   );
   expect(mobileColumns).toBe(1);
   const mobileGuide = page.locator(".course-begin small");
-  await expect(mobileGuide).toHaveCSS("white-space", "normal");
+  await expect(mobileGuide).toHaveCSS("white-space", "nowrap");
   const guideLayout = await mobileGuide.evaluate((element) => ({
     height: element.getBoundingClientRect().height,
     fontSize: Number.parseFloat(getComputedStyle(element).fontSize),
@@ -715,6 +726,8 @@ Given("合格済みの状態で画面確認用に算数アプリを開く", asyn
     }
   });
   await page.goto("/apps/math/division/");
+  await expect(page.locator('[data-course="g3-one-digit-exact"]')).toHaveClass(/is-basic-complete/);
+  await expect(page.locator('[data-course="g3-one-digit-exact"]')).toHaveCSS("background-color", "rgb(255, 243, 229)");
 });
 
 When("タイムアタックを始める", async ({ page }) => {
@@ -724,14 +737,23 @@ When("タイムアタックを始める", async ({ page }) => {
   await expect(page.locator("#modeTitle")).toHaveCSS("font-weight", "850");
   const back = await page.locator("#quit").boundingBox();
   const title = await page.locator("#modeTitle").boundingBox();
+  const quizHead = await page.locator(".quiz-head").boundingBox();
   expect(back).not.toBeNull();
   expect(title).not.toBeNull();
+  expect(quizHead).not.toBeNull();
   expect(title!.y + title!.height / 2).toBeCloseTo(back!.y + back!.height / 2, 0);
+  expect(title!.x + title!.width / 2).toBeCloseTo(quizHead!.x + quizHead!.width / 2, 0);
 });
 
 When("連続正解を始める", async ({ page }) => {
   await page.locator('[data-course="g3-one-digit-exact"] .course-challenge[data-mode="chain"]').click();
   await expect(page.locator("#difficulty")).toHaveText("🔥 連続正解");
+  await expect(page.locator("#modeTitle")).toHaveText("🔥 連続正解");
+  const title = await page.locator("#modeTitle").boundingBox();
+  const quizHead = await page.locator(".quiz-head").boundingBox();
+  expect(title).not.toBeNull();
+  expect(quizHead).not.toBeNull();
+  expect(title!.x + title!.width / 2).toBeCloseTo(quizHead!.x + quizHead!.width / 2, 0);
 });
 
 When("計算エリアに手書きして誤答する", async ({ page }) => {
