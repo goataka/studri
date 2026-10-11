@@ -125,8 +125,12 @@ Then(/VR画像 "(.*)" を確認する/, async ({ page }, screenshotName: string)
     return;
   }
 
+  const mask = [page.locator("#modeStatus")];
+  if (await page.locator("#result").isVisible() && await page.locator("#resultTitle").textContent() === "⏱ タイムアタック") {
+    mask.push(page.locator("#score"), page.locator("#resultMessage"));
+  }
   await expect(page).toHaveScreenshot(screenshotName, {
-    mask: [page.locator("#modeStatus")],
+    mask,
     animations: "disabled",
     caret: "hide",
     fullPage: true,
@@ -136,11 +140,76 @@ Then(/VR画像 "(.*)" を確認する/, async ({ page }, screenshotName: string)
 When("コースを選んで挑戦を始める", async ({ page }) => {
   await page.locator('#courses [data-course="g3-one-digit-exact"] .course-start').click();
   await expect(page.locator("#quiz")).toBeVisible();
+  await expect(page.locator("#unit")).toBeHidden();
+  await expect(page.locator("#unit")).toHaveText("");
+  await expect(page.locator(".quiz-question .eyebrow")).toHaveCount(0);
 });
 
 When("文章題コースを選んで挑戦を始める", async ({ page }) => {
   await page.locator('#courses [data-course="g3-meaning-story"] .course-start').click();
   await expect(page.locator("#quiz")).toBeVisible();
+});
+
+When("計算問題と文章題の単位表示を確認する", async ({ page }) => {
+  await page.locator('#courses [data-course="g3-one-digit-exact"] .course-start').click();
+  await expect(page.locator("#unit")).toBeHidden();
+  await expect(page.locator(".quiz-question .eyebrow")).toHaveCount(0);
+
+  page.once("dialog", (dialog) => dialog.accept());
+  await page.locator("#quit").click();
+  await page.evaluate(() => {
+    Math.random = () => 0;
+  });
+  await page.locator('#courses [data-course="g3-exact-story"] .course-start').click();
+  await expect(page.locator("#unit")).toHaveText("こ");
+  await expect(page.locator("#problem")).toContainText("何こ");
+
+  page.once("dialog", (dialog) => dialog.accept());
+  await page.locator("#quit").click();
+  await page.evaluate(() => {
+    Math.random = () => 0.9;
+  });
+  await page.locator('#courses [data-course="g3-exact-story"] .course-start').click();
+  await expect(page.locator("#unit")).toHaveText("ふくろ");
+  await expect(page.locator("#problem")).toContainText("何ふくろ");
+});
+
+When("ログ画面と問題画面のパネル配置を確認する", async ({ page }) => {
+  await page.locator('#courses [data-course="g3-one-digit-exact"] .course-start').click();
+  const quizLayout = await page.evaluate(() => {
+    const panel = document.querySelector(".quiz-panel")!;
+    const header = document.querySelector(".quiz-head")!;
+    const panelRect = panel.getBoundingClientRect();
+    const headerRect = header.getBoundingClientRect();
+    const style = getComputedStyle(panel);
+    return {
+      padding: [style.paddingTop, style.paddingRight, style.paddingBottom, style.paddingLeft],
+      headerOffset: [headerRect.x - panelRect.x, headerRect.y - panelRect.y],
+    };
+  });
+  page.once("dialog", (dialog) => dialog.accept());
+  await page.locator("#quit").click();
+  await page.evaluate(() => {
+    localStorage.setItem("studri-division-v1", JSON.stringify({
+      course: "g3-one-digit-exact",
+      stats: {},
+      wrong: [{ grade: 3, courseId: "g3-one-digit-exact", problem: "10 ÷ 2 =", answer: "4", correct: "5", explain: "2×5=10" }],
+    }));
+  });
+  await page.reload();
+  await page.locator('#courses [data-course="g3-one-digit-exact"] .course-log').click();
+  const logLayout = await page.evaluate(() => {
+    const panel = document.querySelector(".home-panel")!;
+    const header = document.querySelector("#reviewPanel .panel-title")!;
+    const panelRect = panel.getBoundingClientRect();
+    const headerRect = header.getBoundingClientRect();
+    const style = getComputedStyle(panel);
+    return {
+      padding: [style.paddingTop, style.paddingRight, style.paddingBottom, style.paddingLeft],
+      headerOffset: [headerRect.x - panelRect.x, headerRect.y - panelRect.y],
+    };
+  });
+  expect(logLayout).toEqual(quizLayout);
 });
 
 When("10問すべて正解して挑戦を終える", async ({ page }) => {
@@ -181,6 +250,10 @@ When("最初の問題で誤答して答えを確認する", async ({ page }) => 
 
 When("残りの問題に正解して挑戦を終える", async ({ page }) => {
   await answerQuestions(page, 1, 10);
+  if (await page.locator("#resultTitle").textContent() === "⏱ タイムアタック") {
+    await expect(page.locator("#score")).toHaveText(/^\d+ 秒$/);
+    await expect(page.locator("#resultMessage")).toContainText("10問クリア！");
+  }
 });
 
 Then("結果に10問正解と表示される", async ({ page }) => {
@@ -244,6 +317,10 @@ Then("画面幅に応じた位置に計算エリアが表示される", async ({
   expect(desktopCanvas).not.toBeNull();
   expect(desktopCanvas!.height).toBeGreaterThanOrEqual(desktopWork!.height * 0.85);
   await expect(page.locator("#problem")).toHaveClass(/story/);
+  await expect(page.locator("#unit")).toBeVisible();
+  await expect(page.locator(".quiz-question .eyebrow")).toHaveCount(0);
+  const storyText = await page.locator("#problem").textContent();
+  await expect(page.locator("#unit")).toHaveText(storyText?.includes("何ふくろ") ? "ふくろ" : "こ");
   const storyFontSize = Number.parseFloat(await page.locator("#problem").evaluate((element) =>
     getComputedStyle(element).fontSize,
   ));
@@ -626,6 +703,10 @@ Then("9つのコースが指定順に並び問題が範囲内で出る", async (
   });
   await page.reload();
   const fullyPassedCourse = page.locator('#courses [data-course="g3-meaning-story"]');
+  await expect(fullyPassedCourse.locator(".course-start")).toBeDisabled();
+  await expect(fullyPassedCourse.locator(".course-challenge:not(:disabled)")).toHaveCount(2);
+  await fullyPassedCourse.locator(".course-start").click({ force: true });
+  await expect(page.locator("#quiz")).toBeHidden();
   await expect(fullyPassedCourse.locator(".course-step.complete")).toHaveCount(4);
   await expect(fullyPassedCourse.locator(".course-pass-pin")).toHaveCount(1);
   await expect(fullyPassedCourse.locator(".course-step.complete").first()).toHaveCSS("background-color", "rgb(251, 230, 213)");
@@ -641,6 +722,12 @@ Then("9つのコースが指定順に並び問題が範囲内で出る", async (
   await expect(fullyPassedCourse.locator(".course-start")).not.toHaveAttribute("aria-label", /解放済み/);
   await expect(fullyPassedCourse.locator(".course-challenge:disabled")).toHaveCount(0);
 
+  await page.evaluate(() => {
+    const saved = JSON.parse(localStorage.getItem("studri-division-v1") || "{}");
+    saved.stats["g3-meaning-story"].streak = 2;
+    localStorage.setItem("studri-division-v1", JSON.stringify(saved));
+  });
+  await page.reload();
   for (const [id, , type] of courses) {
     await page.locator(`#courses [data-course="${id}"] .course-start`).click();
     const problem = (await page.locator("#problem").textContent()) || "";
@@ -732,7 +819,6 @@ Given("合格済みの状態で画面確認用に算数アプリを開く", asyn
 
 When("タイムアタックを始める", async ({ page }) => {
   await page.locator('[data-course="g3-one-digit-exact"] .course-challenge[data-mode="time"]').click();
-  await expect(page.locator("#difficulty")).toHaveText("⏱ タイムアタック");
   await expect(page.locator("#modeTitle")).toHaveText("⏱ タイムアタック");
   await expect(page.locator("#modeTitle")).toHaveCSS("font-weight", "850");
   const back = await page.locator("#quit").boundingBox();
@@ -747,7 +833,6 @@ When("タイムアタックを始める", async ({ page }) => {
 
 When("連続正解を始める", async ({ page }) => {
   await page.locator('[data-course="g3-one-digit-exact"] .course-challenge[data-mode="chain"]').click();
-  await expect(page.locator("#difficulty")).toHaveText("🔥 連続正解");
   await expect(page.locator("#modeTitle")).toHaveText("🔥 連続正解");
   const title = await page.locator("#modeTitle").boundingBox();
   const quizHead = await page.locator(".quiz-head").boundingBox();
