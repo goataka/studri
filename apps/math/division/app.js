@@ -2,6 +2,10 @@
 
 const STORAGE_KEY = "studri-division-v1";
 const SOUND_KEY = `${STORAGE_KEY}-sound`;
+const QUIZ_LENGTH = 10;
+const PASS_STREAK = 3;
+const MAX_WRONG_ENTRIES = 30;
+const COURSE_PROGRESS_STEPS = 4;
 const COURSE_IDS = new Set([
   "g3-meaning-story",
   "g3-one-digit-exact",
@@ -24,6 +28,11 @@ const courses = [
   { id: "g3-remainder-story", emoji: "📖", name: "文章題（九九の範囲・あまりあり）", desc: "文章題で、商とあまりを考えよう", type: "remainder-story" },
   { id: "g3-zero-one", emoji: "🔢", name: "０や１のわり算", desc: "0をわる計算や、1でわる計算に挑戦", type: "zero-one" },
   { id: "g3-two-digit-mental", emoji: "🔢", name: "2桁 ÷ 1桁（九九を超える暗算）", desc: "商が10以上になる計算を暗算しよう", type: "two-digit-mental" },
+];
+
+const challengeModes = [
+  { emoji: "⏱", label: "タイムアタック", mode: "time" },
+  { emoji: "🔥", label: "連続正解", mode: "chain" },
 ];
 
 const defaultData = () => ({ course: "g3-meaning-story", stats: {}, wrong: [] });
@@ -65,212 +74,257 @@ function renderCourses() {
   const courseList = get("courses");
   courseList.replaceChildren();
 
-  courses.forEach((course) => {
-    const card = document.createElement("article");
-    card.className = `course${selectedCourse === course.id ? " selected" : ""}`;
-    card.dataset.course = course.id;
-
-    const start = document.createElement("button");
-    start.type = "button";
-    start.className = "course-start";
-    const copy = document.createElement("span");
-    copy.className = "course-copy";
-    const name = document.createElement("strong");
-    const courseIcon = document.createElement("span");
-    courseIcon.className = "course-icon";
-    courseIcon.setAttribute("aria-hidden", "true");
-    courseIcon.textContent = course.emoji;
-    name.append(courseIcon, document.createTextNode(` ${course.name}`));
-    const description = document.createElement("small");
-    description.textContent = course.desc;
-    copy.append(name, description);
-
-    const details = document.createElement("span");
-    details.className = "course-details";
-    const progress = document.createElement("span");
-    progress.className = "course-progress";
-    const basicGroup = document.createElement("span");
-    basicGroup.className = "course-group";
-    const basicLabel = document.createElement("span");
-    basicLabel.className = "course-group-label";
-    const basicIcon = document.createElement("span");
-    basicIcon.className = "course-group-icon";
-    basicIcon.setAttribute("aria-hidden", "true");
-    basicIcon.textContent = "🌱";
-    basicLabel.append(basicIcon, document.createTextNode(" ベーシック"));
-    const steps = document.createElement("span");
-    steps.className = "course-steps";
-    steps.setAttribute("aria-hidden", "true");
-    for (let step = 0; step < 4; step += 1) {
-      const indicator = document.createElement("span");
-      indicator.className = step === 0 ? "course-step start-dot" : step === 3 ? "course-step final" : "course-step";
-      indicator.textContent = ["", "🥇", "🥈", "🥉"][step];
-      steps.append(indicator);
-    }
-    basicGroup.append(basicLabel, steps);
-    progress.append(basicGroup);
-    const challengeGroup = document.createElement("div");
-    challengeGroup.className = "course-challenge-group";
-    const challengeLabel = document.createElement("span");
-    challengeLabel.className = "course-group-label";
-    const challengeGroupIcon = document.createElement("span");
-    challengeGroupIcon.className = "course-group-icon";
-    challengeGroupIcon.setAttribute("aria-hidden", "true");
-    challengeGroupIcon.textContent = "🌳";
-    challengeLabel.append(challengeGroupIcon, document.createTextNode(" チャレンジ"));
-    const challenges = document.createElement("div");
-    challenges.className = "course-challenges";
-    challenges.setAttribute("aria-label", "合格後のチャレンジ");
-    [
-      ["⏱", "タイムアタック", "time"],
-      ["🔥", "連続正解", "chain"],
-    ].forEach(([emoji, label, mode]) => {
-      const control = document.createElement("span");
-      control.className = "course-challenge-control";
-      const challenge = document.createElement("button");
-      challenge.type = "button";
-      challenge.className = "course-challenge";
-      challenge.dataset.mode = mode;
-      const icon = document.createElement("span");
-      icon.className = "course-challenge-icon";
-      icon.setAttribute("aria-hidden", "true");
-      icon.textContent = emoji;
-      const text = document.createElement("span");
-      text.textContent = ` ${label}`;
-      text.className = "course-challenge-label";
-      const record = document.createElement("span");
-      record.className = "course-challenge-record";
-      challenge.append(icon, text, record);
-      challenge.addEventListener("click", () => {
-        selectedCourse = course.id;
-        data.course = selectedCourse;
-        save();
-        renderCourses();
-        setupQuiz(mode);
-      });
-      control.append(challenge);
-      challenges.append(control);
-    });
-
-    details.append(progress);
-    start.append(copy, details);
-    const side = document.createElement("div");
-    side.className = "course-side";
-    challengeGroup.append(challengeLabel, challenges);
-    side.append(challengeGroup);
-    const toolsGroup = document.createElement("div");
-    toolsGroup.className = "course-tools-group";
-    const toolsLabel = document.createElement("span");
-    toolsLabel.className = "course-group-label";
-    toolsLabel.textContent = "🧰 ツール";
-    const log = document.createElement("button");
-    log.type = "button";
-    log.className = "course-log";
-    log.dataset.reviewCourse = course.id;
-    log.setAttribute("aria-label", `📜 ログ：${course.name}`);
-    log.addEventListener("click", () => showCourseLog(course));
-    toolsGroup.append(toolsLabel, log);
-    card.append(start, side, toolsGroup);
-    start.addEventListener("click", () => {
-      selectedCourse = course.id;
-      data.course = selectedCourse;
-      save();
-      renderCourses();
-      renderStats();
-      setupQuiz();
-    });
-    courseList.append(card);
-  });
-  const begin = document.createElement("div");
-  begin.className = "course-begin";
-  const beginCopy = document.createElement("span");
-  beginCopy.className = "course-copy";
-  const beginLabel = document.createElement("strong");
-  const beginIcon = document.createElement("span");
-  beginIcon.className = "course-icon";
-  beginIcon.setAttribute("aria-hidden", "true");
-  beginIcon.textContent = "🧭";
-  beginLabel.append(beginIcon, document.createTextNode(" スタート"));
-  const beginMessage = document.createElement("small");
-  beginMessage.textContent = "ベーシックを3つ進めるとチャレンジできるよ♪";
-  beginCopy.append(beginLabel, beginMessage);
-  begin.append(beginCopy);
-  courseList.prepend(begin);
-  const goal = document.createElement("div");
-  goal.className = "course-goal";
-  const goalCopy = document.createElement("span");
-  goalCopy.className = "course-copy";
-  const goalLabel = document.createElement("strong");
-  const goalIcon = document.createElement("span");
-  goalIcon.className = "course-icon";
-  goalIcon.setAttribute("aria-hidden", "true");
-  goalIcon.textContent = "🚩";
-  goalLabel.append(goalIcon, document.createTextNode(" ゴール"));
-  const goalMessage = document.createElement("small");
-  goalMessage.textContent = "おめでとう！がんばったね♪次のコースも進もう！";
-  goalCopy.append(goalLabel, goalMessage);
-  goal.append(goalCopy);
-  courseList.append(goal);
+  courses.forEach((course) => courseList.append(createCourseCard(course)));
+  courseList.prepend(createCourseMarker("begin"));
+  courseList.append(createCourseMarker("goal"));
   renderCourseProgress();
 }
 
-function renderCourseProgress() {
-  courses.forEach((course) => {
-    const button = get("courses").querySelector(`[data-course="${course.id}"]`);
-    if (!button) return;
+function createCourseCard(course) {
+  const card = document.createElement("article");
+  card.className = `course${selectedCourse === course.id ? " selected" : ""}`;
+  card.dataset.course = course.id;
 
-    const stats = data.stats[course.id] || { streak: 0, attempts: 0, best: null };
-    const streak = Math.min(stats.streak, 3);
-    let pin = button.querySelector(".course-pass-pin");
-    if (stats.streak > 0 && !pin) {
-      pin = document.createElement("span");
-      pin.className = "course-pass-pin";
-      pin.textContent = "📍";
-      pin.setAttribute("aria-label", "ベーシック合格");
-      button.prepend(pin);
-    } else if (stats.streak === 0) {
-      pin?.remove();
-    }
-    const challengeGroup = button.querySelector(".course-challenge-group");
-    challengeGroup.classList.toggle("is-next", streak >= 3);
-    button.classList.toggle("is-basic-complete", streak >= 3);
-    button.querySelectorAll(".course-step").forEach((step, index) => {
-      step.classList.toggle("current", index === (streak === 0 ? 0 : streak + 1) && streak < 3);
-      step.classList.toggle("complete", (index === 0 && streak > 0) || (index > 0 && index <= streak));
-    });
-    button.querySelectorAll(".course-challenge").forEach((challenge) => {
-      challenge.disabled = stats.streak < 3;
-      const record = challenge.dataset.mode === "time"
-        ? (stats.timeBest ? `${stats.timeBest}秒` : "--")
-        : (stats.chainBest ? `${stats.chainBest}問` : "--");
-      challenge.querySelector(".course-challenge-record").textContent = record;
-      challenge.setAttribute(
-        "aria-label",
-        `${challenge.querySelector(".course-challenge-label").textContent.trim()} 記録 ${record}`,
-      );
-      const control = challenge.parentElement;
-      if (stats.streak < 3) control.title = `あと${3 - streak}回で解放`;
-      else control.removeAttribute("title");
-    });
-    const start = button.querySelector(".course-start");
-    start.disabled = streak >= 3;
-    if (start.disabled) start.title = "ベーシック合格済み";
-    else start.removeAttribute("title");
-    const log = button.querySelector(".course-log");
-    const mistakeCount = data.wrong.filter((entry) => entry.courseId === course.id).length;
-    const logLabel = document.createElement("span");
-    logLabel.textContent = "📜 ログ";
-    const logRecord = document.createElement("span");
-    logRecord.className = "course-log-count";
-    logRecord.textContent = mistakeCount ? `${mistakeCount}件` : "--";
-    log.replaceChildren(logLabel, logRecord);
-    log.disabled = mistakeCount === 0;
-    log.title = mistakeCount === 0 ? "このコースの誤答ログはありません" : `${mistakeCount}件の誤答ログ`;
-    button.querySelector(".course-start").setAttribute(
-      "aria-label",
-      `小学3年生、${course.name}。${course.desc}。合格ステップ ${streak}回。`,
-    );
+  const startButton = createCourseStartButton(course);
+  const side = document.createElement("div");
+  side.className = "course-side";
+  side.append(createChallengeGroup(course));
+  card.append(startButton, side, createCourseTools(course));
+  return card;
+}
+
+function createCourseStartButton(course) {
+  const button = document.createElement("button");
+  button.type = "button";
+  button.className = "course-start";
+
+  const copy = document.createElement("span");
+  copy.className = "course-copy";
+  const name = document.createElement("strong");
+  const icon = createIcon("course-icon", course.emoji);
+  name.append(icon, document.createTextNode(` ${course.name}`));
+  const description = document.createElement("small");
+  description.textContent = course.desc;
+  copy.append(name, description);
+
+  const details = document.createElement("span");
+  details.className = "course-details";
+  details.append(createBasicProgress());
+  button.append(copy, details);
+  button.addEventListener("click", () => startCourse(course));
+  return button;
+}
+
+function createBasicProgress() {
+  const progress = document.createElement("span");
+  progress.className = "course-progress";
+  const group = document.createElement("span");
+  group.className = "course-group";
+
+  const label = document.createElement("span");
+  label.className = "course-group-label";
+  label.append(createIcon("course-group-icon", "🌱"), document.createTextNode(" ベーシック"));
+  const steps = document.createElement("span");
+  steps.className = "course-steps";
+  steps.setAttribute("aria-hidden", "true");
+  const medals = ["", "🥇", "🥈", "🥉"];
+  medals.forEach((medal, index) => steps.append(createCourseStep(index, medal)));
+  group.append(label, steps);
+  progress.append(group);
+  return progress;
+}
+
+function createCourseStep(index, medal) {
+  const step = document.createElement("span");
+  const isStart = index === 0;
+  const isFinal = index === COURSE_PROGRESS_STEPS - 1;
+  step.className = `course-step${isStart ? " start-dot" : ""}${isFinal ? " final" : ""}`;
+  step.textContent = medal;
+  return step;
+}
+
+function createChallengeGroup(course) {
+  const group = document.createElement("div");
+  group.className = "course-challenge-group";
+  const label = document.createElement("span");
+  label.className = "course-group-label";
+  label.append(createIcon("course-group-icon", "🌳"), document.createTextNode(" チャレンジ"));
+  const challenges = document.createElement("div");
+  challenges.className = "course-challenges";
+  challenges.setAttribute("aria-label", "合格後のチャレンジ");
+  challengeModes.forEach((mode) => challenges.append(createChallenge(course, mode)));
+  group.append(label, challenges);
+  return group;
+}
+
+function createChallenge(course, mode) {
+  const control = document.createElement("span");
+  control.className = "course-challenge-control";
+  const button = document.createElement("button");
+  button.type = "button";
+  button.className = "course-challenge";
+  button.dataset.mode = mode.mode;
+  const icon = createIcon("course-challenge-icon", mode.emoji);
+  const label = document.createElement("span");
+  label.className = "course-challenge-label";
+  label.textContent = ` ${mode.label}`;
+  const record = document.createElement("span");
+  record.className = "course-challenge-record";
+  button.append(icon, label, record);
+  button.addEventListener("click", () => startCourse(course, mode.mode));
+  control.append(button);
+  return control;
+}
+
+function createCourseTools(course) {
+  const group = document.createElement("div");
+  group.className = "course-tools-group";
+  const label = document.createElement("span");
+  label.className = "course-group-label";
+  label.textContent = "🧰 ツール";
+  const logButton = document.createElement("button");
+  logButton.type = "button";
+  logButton.className = "course-log";
+  logButton.dataset.reviewCourse = course.id;
+  logButton.setAttribute("aria-label", `📜 ログ：${course.name}`);
+  logButton.addEventListener("click", () => showCourseLog(course));
+  group.append(label, logButton);
+  return group;
+}
+
+function createIcon(className, symbol) {
+  const icon = document.createElement("span");
+  icon.className = className;
+  icon.setAttribute("aria-hidden", "true");
+  icon.textContent = symbol;
+  return icon;
+}
+
+function createCourseMarker(type) {
+  const isStart = type === "begin";
+  const marker = document.createElement("div");
+  marker.className = isStart ? "course-begin" : "course-goal";
+  const copy = document.createElement("span");
+  copy.className = "course-copy";
+  const label = document.createElement("strong");
+  const icon = createIcon("course-icon", isStart ? "🧭" : "🚩");
+  label.append(icon, document.createTextNode(isStart ? " スタート" : " ゴール"));
+  const message = document.createElement("small");
+  message.textContent = isStart
+    ? `ベーシックを${PASS_STREAK}つ進めるとチャレンジできるよ♪`
+    : "おめでとう！がんばったね♪次のコースも進もう！";
+  copy.append(label, message);
+  marker.append(copy);
+  return marker;
+}
+
+function startCourse(course, mode = "basic") {
+  selectedCourse = course.id;
+  data.course = selectedCourse;
+  save();
+  renderCourses();
+  renderStats();
+  setupQuiz(mode);
+}
+
+function renderCourseProgress() {
+  courses.forEach(updateCourseProgress);
+}
+
+function updateCourseProgress(course) {
+  const card = get("courses").querySelector(`[data-course="${course.id}"]`);
+  if (!card) return;
+
+  const stats = getCourseStats(course.id);
+  const streak = Math.min(stats.streak, PASS_STREAK);
+  updatePassPin(card, stats.streak);
+  updateCourseSteps(card, streak);
+  updateChallengeProgress(card, stats, streak);
+  updateCourseStart(card, course, streak);
+  updateCourseLogButton(card, course);
+}
+
+function getCourseStats(courseId) {
+  return data.stats[courseId] || { streak: 0, attempts: 0, best: null };
+}
+
+function updatePassPin(card, streak) {
+  let pin = card.querySelector(".course-pass-pin");
+  if (streak > 0 && !pin) {
+    pin = document.createElement("span");
+    pin.className = "course-pass-pin";
+    pin.textContent = "📍";
+    pin.setAttribute("aria-label", "ベーシック合格");
+    card.querySelector(".course-start").prepend(pin);
+    return;
+  }
+  if (streak === 0) pin?.remove();
+}
+
+function updateCourseSteps(card, streak) {
+  const completedCourse = streak >= PASS_STREAK;
+  card.querySelector(".course-challenge-group").classList.toggle("is-next", completedCourse);
+  card.classList.toggle("is-basic-complete", completedCourse);
+  card.querySelectorAll(".course-step").forEach((step, index) => {
+    const currentStep = index === (streak === 0 ? 0 : streak + 1);
+    const completedStep = (index === 0 && streak > 0) || (index > 0 && index <= streak);
+    step.classList.toggle("current", currentStep && !completedCourse);
+    step.classList.toggle("complete", completedStep);
   });
+}
+
+function updateChallengeProgress(card, stats, streak) {
+  card.querySelectorAll(".course-challenge").forEach((button) => {
+    const lockedChallenge = stats.streak < PASS_STREAK;
+    const record = getChallengeRecord(button.dataset.mode, stats);
+    button.disabled = lockedChallenge;
+    button.querySelector(".course-challenge-record").textContent = record;
+    button.setAttribute(
+      "aria-label",
+      `${button.querySelector(".course-challenge-label").textContent.trim()} 記録 ${record}`,
+    );
+    updateChallengeUnlockLabel(button.parentElement, lockedChallenge, streak);
+  });
+}
+
+function getChallengeRecord(mode, stats) {
+  const record = mode === "time" ? stats.timeBest : stats.chainBest;
+  if (!record) return "--";
+  return mode === "time" ? `${record}秒` : `${record}問`;
+}
+
+function updateChallengeUnlockLabel(control, lockedChallenge, streak) {
+  if (!lockedChallenge) {
+    control.removeAttribute("title");
+    return;
+  }
+  control.title = `あと${PASS_STREAK - streak}回で解放`;
+}
+
+function updateCourseStart(card, course, streak) {
+  const button = card.querySelector(".course-start");
+  button.disabled = streak >= PASS_STREAK;
+  if (button.disabled) button.title = "ベーシック合格済み";
+  else button.removeAttribute("title");
+  button.setAttribute(
+    "aria-label",
+    `小学3年生、${course.name}。${course.desc}。合格ステップ ${streak}回。`,
+  );
+}
+
+function updateCourseLogButton(card, course) {
+  const button = card.querySelector(".course-log");
+  const mistakeCount = data.wrong.filter((entry) => entry.courseId === course.id).length;
+  const label = document.createElement("span");
+  label.textContent = "📜 ログ";
+  const record = document.createElement("span");
+  record.className = "course-log-count";
+  record.textContent = mistakeCount ? `${mistakeCount}件` : "--";
+  button.replaceChildren(label, record);
+  button.disabled = mistakeCount === 0;
+  button.title = mistakeCount === 0
+    ? "このコースの誤答ログはありません"
+    : `${mistakeCount}件の誤答ログ`;
 }
 
 function renderStats() {
@@ -292,39 +346,53 @@ function showCourseLog(course) {
   }
 
   courseMistakes.slice(-8).reverse().forEach((entry) => {
-    const item = document.createElement("div");
-    item.className = "review-item";
-    const problem = document.createElement("b");
-    problem.textContent = entry.problem;
-    const answer = document.createElement("div");
-    answer.textContent = `あなたの答え：${entry.answer || "未入力"} / 正解：${entry.correct}`;
-    const explanation = document.createElement("small");
-    explanation.textContent = entry.explain;
-    item.classList.toggle("checked", Boolean(entry.checked));
-    const check = document.createElement("button");
-    check.type = "button";
-    check.className = "review-check";
-    const syncCheck = () => {
-      check.setAttribute("aria-pressed", String(Boolean(entry.checked)));
-      check.textContent = entry.checked ? "✅ 確認済み" : "☐ 確認済み";
-      item.classList.toggle("checked", Boolean(entry.checked));
-    };
-    check.addEventListener("click", () => {
-      entry.checked = !entry.checked;
-      save();
-      syncCheck();
-    });
-    syncCheck();
-    item.append(problem, answer, explanation, check);
-    if (typeof entry.work === "string" && entry.work.startsWith("data:image/png")) {
-      const work = document.createElement("img");
-      work.className = "review-work";
-      work.src = entry.work;
-      work.alt = "そのときの計算エリア";
-      item.append(work);
-    }
-    reviewList.append(item);
+    reviewList.append(createReviewItem(entry));
   });
+}
+
+function createReviewItem(entry) {
+  const item = document.createElement("div");
+  item.className = "review-item";
+  const problem = document.createElement("b");
+  problem.textContent = entry.problem;
+  const answer = document.createElement("div");
+  answer.textContent = `あなたの答え：${entry.answer || "未入力"} / 正解：${entry.correct}`;
+  const explanation = document.createElement("small");
+  explanation.textContent = entry.explain;
+  const checkButton = createReviewCheckButton(entry, item);
+  item.append(problem, answer, explanation, checkButton);
+  if (typeof entry.work === "string" && entry.work.startsWith("data:image/png")) {
+    item.append(createReviewWorkImage(entry.work));
+  }
+  syncReviewCheck(entry, item, checkButton);
+  return item;
+}
+
+function createReviewCheckButton(entry, item) {
+  const button = document.createElement("button");
+  button.type = "button";
+  button.className = "review-check";
+  button.addEventListener("click", () => {
+    entry.checked = !entry.checked;
+    save();
+    syncReviewCheck(entry, item, button);
+  });
+  return button;
+}
+
+function syncReviewCheck(entry, item, button) {
+  const isChecked = Boolean(entry.checked);
+  button.setAttribute("aria-pressed", String(isChecked));
+  button.textContent = isChecked ? "✅ 確認済み" : "☐ 確認済み";
+  item.classList.toggle("checked", isChecked);
+}
+
+function createReviewWorkImage(workData) {
+  const image = document.createElement("img");
+  image.className = "review-work";
+  image.src = workData;
+  image.alt = "そのときの計算エリア";
+  return image;
 }
 
 function randomInteger(min, max) {
