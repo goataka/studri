@@ -53,7 +53,7 @@
 
       <section id="quiz" class="hidden" aria-label="わり算の問題">
         <div class="panel quiz-panel">
-          <div class="quiz-head">
+          <div class="quiz-head panel-title">
             <button class="back" id="quit" type="button">← コース選択へ</button>
             <span class="question-label" id="questionNo"></span>
             <strong class="mode-title hidden" id="modeTitle"></strong>
@@ -63,14 +63,13 @@
           <div class="quiz-board">
             <div class="quiz-primary">
               <div class="quiz-question">
-                <p class="eyebrow" id="difficulty"></p>
                 <h2 id="problem"></h2>
               </div>
               <div class="quiz-response">
                 <p class="work-instruction">答えを入力して「答え合わせ」をしよう</p>
                 <div class="answer">
                   <input id="answer" inputmode="text" autocomplete="off" aria-label="答え（あまりがある問題は「あまり」も入力）">
-                  <span id="unit">こ</span>
+                  <span id="unit" hidden></span>
                 </div>
                 <div class="keypad" id="keypad" aria-label="計算機"></div>
                 <button class="check" id="check" type="button">答え合わせ</button>

@@ -252,6 +252,10 @@ function renderCourseProgress() {
       if (stats.streak < 3) control.title = `あと${3 - streak}回で解放`;
       else control.removeAttribute("title");
     });
+    const start = button.querySelector(".course-start");
+    start.disabled = streak >= 3;
+    if (start.disabled) start.title = "ベーシック合格済み";
+    else start.removeAttribute("title");
     const log = button.querySelector(".course-log");
     const mistakeCount = data.wrong.filter((entry) => entry.courseId === course.id).length;
     const logLabel = document.createElement("span");
@@ -431,7 +435,7 @@ function choose(items) {
   return picked;
 }
 
-function makeDivisionProblem(dividend, divisor, remainder, text = `${dividend} ÷ ${divisor} =`) {
+function makeDivisionProblem(dividend, divisor, remainder, text = `${dividend} ÷ ${divisor} =`, unit = "") {
   const quotient = Math.floor(dividend / divisor);
   const answer = remainder ? `${quotient}あまり${remainder}` : String(quotient);
   const explanation = remainder
@@ -441,7 +445,7 @@ function makeDivisionProblem(dividend, divisor, remainder, text = `${dividend} �
   return {
     text,
     answer,
-    unit: remainder ? "こ（あまりも入力）" : "こ",
+    unit: unit ? (remainder ? `${unit}（あまりも入力）` : unit) : "",
     hint: remainder
       ? "わる数の九九で、わられる数をこえないいちばん大きな数を見つけよう。残りも考えてみよう。"
       : "わる数を何倍すると、わられる数になるかな？",
@@ -457,7 +461,7 @@ function makeStoryProblem(dividend, divisor, remainder, sharing) {
     : remainder
       ? `${dividend}このりんごを${divisor}こずつふくろに入れると、何ふくろできて、何こあまる？`
       : `${dividend}このりんごを${divisor}こずつふくろに入れると、何ふくろできる？`;
-  return makeDivisionProblem(dividend, divisor, remainder, text);
+  return makeDivisionProblem(dividend, divisor, remainder, text, sharing ? "こ" : "ふくろ");
 }
 
 function setupQuiz(mode = "basic") {
@@ -525,17 +529,9 @@ function nextProblem() {
   get("questionNo").textContent = quiz.mode === "chain" ? `${quiz.index + 1}問目` : `${quiz.index + 1} / 10`;
   get("progress").style.width = quiz.mode === "chain" ? "100%" : `${quiz.index * 10}%`;
   clearWorkCanvas();
-  get("difficulty").textContent = quiz.mode === "time"
-    ? "⏱ タイムアタック"
-    : quiz.mode === "chain"
-      ? "🔥 連続正解"
-      : quiz.index < 3
-    ? "LEVEL 1・じゅんび"
-    : quiz.index < 7
-      ? "LEVEL 2・ステップアップ"
-      : "LEVEL 3・チャレンジ";
   get("problem").textContent = problem.text;
   get("unit").textContent = problem.unit;
+  get("unit").hidden = !problem.unit;
   get("answer").value = "";
   get("answer").disabled = false;
   get("check").disabled = false;
