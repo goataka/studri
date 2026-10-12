@@ -12,6 +12,15 @@ const MIN_DIVISOR = 2;
 const MAX_SINGLE_DIGIT = 9;
 const MIN_TWO_DIGIT = 10;
 const MAX_TWO_DIGIT = 99;
+const STUDENT_GRADE = 3;
+const INITIAL_DIVISOR_LIMIT = 3;
+const MAX_MEANING_DIVISOR = 5;
+const INITIAL_MEANING_QUOTIENT_LIMIT = 3;
+const INITIAL_EXACT_QUOTIENT_LIMIT = 4;
+const INITIAL_MENTAL_QUOTIENT_LIMIT = 12;
+const MENTAL_QUOTIENT_LEVEL_STEP = 2;
+const MIN_MENTAL_QUOTIENT = 10;
+const STORY_SHARING_CHANCE = 0.5;
 const MODE_STATUS_REFRESH_MS = 500;
 const FEEDBACK_AUTO_ADVANCE_MS = 3000;
 const MILLISECONDS_PER_SECOND = 1000;
@@ -31,15 +40,69 @@ const COURSE_IDS = new Set([
 ]);
 
 const courses = [
-  { id: "g3-meaning-story", emoji: "📖", name: "文章題（割り算の意味）", desc: "分ける・いくつ分の場面を考えよう", type: "meaning" },
-  { id: "g3-one-digit-exact", emoji: "🔢", name: "1桁 ÷ 1桁（九九の範囲・あまりなし）", desc: "九九を使って、ぴったり分けよう", type: "one-digit-exact" },
-  { id: "g3-two-digit-exact", emoji: "🔢", name: "2桁 ÷ 1桁（九九の範囲・あまりなし）", desc: "2桁の数を九九でぴったり分けよう", type: "two-digit-exact" },
-  { id: "g3-exact-story", emoji: "📖", name: "文章題（九九の範囲・あまりなし）", desc: "文章題を読んで、ぴったり分けよう", type: "exact-story" },
-  { id: "g3-one-digit-remainder", emoji: "🔢", name: "1桁 ÷ 1桁（九九の範囲・あまりあり）", desc: "1桁のわり算で、商とあまりを答えよう", type: "one-digit-remainder" },
-  { id: "g3-two-digit-remainder", emoji: "🔢", name: "2桁 ÷ 1桁（九九の範囲・あまりあり）", desc: "九九を使って、商とあまりを見つけよう", type: "two-digit-remainder" },
-  { id: "g3-remainder-story", emoji: "📖", name: "文章題（九九の範囲・あまりあり）", desc: "文章題で、商とあまりを考えよう", type: "remainder-story" },
-  { id: "g3-zero-one", emoji: "🔢", name: "０や１のわり算", desc: "0をわる計算や、1でわる計算に挑戦", type: "zero-one" },
-  { id: "g3-two-digit-mental", emoji: "🔢", name: "2桁 ÷ 1桁（九九を超える暗算）", desc: "商が10以上になる計算を暗算しよう", type: "two-digit-mental" },
+  {
+    id: "g3-meaning-story",
+    emoji: "📖",
+    name: "文章題（割り算の意味）",
+    desc: "分ける・いくつ分の場面を考えよう",
+    type: "meaning",
+  },
+  {
+    id: "g3-one-digit-exact",
+    emoji: "🔢",
+    name: "1桁 ÷ 1桁（九九の範囲・あまりなし）",
+    desc: "九九を使って、ぴったり分けよう",
+    type: "one-digit-exact",
+  },
+  {
+    id: "g3-two-digit-exact",
+    emoji: "🔢",
+    name: "2桁 ÷ 1桁（九九の範囲・あまりなし）",
+    desc: "2桁の数を九九でぴったり分けよう",
+    type: "two-digit-exact",
+  },
+  {
+    id: "g3-exact-story",
+    emoji: "📖",
+    name: "文章題（九九の範囲・あまりなし）",
+    desc: "文章題を読んで、ぴったり分けよう",
+    type: "exact-story",
+  },
+  {
+    id: "g3-one-digit-remainder",
+    emoji: "🔢",
+    name: "1桁 ÷ 1桁（九九の範囲・あまりあり）",
+    desc: "1桁のわり算で、商とあまりを答えよう",
+    type: "one-digit-remainder",
+  },
+  {
+    id: "g3-two-digit-remainder",
+    emoji: "🔢",
+    name: "2桁 ÷ 1桁（九九の範囲・あまりあり）",
+    desc: "九九を使って、商とあまりを見つけよう",
+    type: "two-digit-remainder",
+  },
+  {
+    id: "g3-remainder-story",
+    emoji: "📖",
+    name: "文章題（九九の範囲・あまりあり）",
+    desc: "文章題で、商とあまりを考えよう",
+    type: "remainder-story",
+  },
+  {
+    id: "g3-zero-one",
+    emoji: "🔢",
+    name: "０や１のわり算",
+    desc: "0をわる計算や、1でわる計算に挑戦",
+    type: "zero-one",
+  },
+  {
+    id: "g3-two-digit-mental",
+    emoji: "🔢",
+    name: "2桁 ÷ 1桁（九九を超える暗算）",
+    desc: "商が10以上になる計算を暗算しよう",
+    type: "two-digit-mental",
+  },
 ];
 
 const challengeModes = [
@@ -57,7 +120,9 @@ const loadData = () => {
       Object.entries(saved.stats || {}).filter(([courseId]) => COURSE_IDS.has(courseId)),
     );
     const wrong = Array.isArray(saved.wrong)
-      ? saved.wrong.filter((entry) => entry && entry.grade === 3).slice(-MAX_WRONG_ENTRIES)
+      ? saved.wrong
+        .filter((entry) => entry && entry.grade === STUDENT_GRADE)
+        .slice(-MAX_WRONG_ENTRIES)
       : [];
     return {
       course: COURSE_IDS.has(saved.course) ? saved.course : "g3-meaning-story",
@@ -69,8 +134,8 @@ const loadData = () => {
   }
 };
 
-let data = loadData();
-let selectedCourse = data.course;
+let learningData = loadData();
+let selectedCourse = learningData.course;
 let quiz = null;
 let locked = false;
 let advanceTimer = null;
@@ -79,12 +144,13 @@ let audioContext = null;
 let workCanvas = null;
 const canvasResizers = [];
 
-const get = (id) => document.getElementById(id);
-const save = () => localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+const getElementById = (id) => document.getElementById(id);
+const saveLearningData = () =>
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(learningData));
 const resizeCanvases = () => canvasResizers.forEach((resize) => resize());
 
 function renderCourses() {
-  const courseList = get("courses");
+  const courseList = getElementById("courses");
   courseList.replaceChildren();
 
   courses.forEach((course) => courseList.append(createCourseCard(course)));
@@ -233,8 +299,8 @@ function createCourseMarker(type) {
 
 function startCourse(course, mode = "basic") {
   selectedCourse = course.id;
-  data.course = selectedCourse;
-  save();
+  learningData.course = selectedCourse;
+  saveLearningData();
   renderCourses();
   renderStats();
   setupQuiz(mode);
@@ -245,7 +311,7 @@ function renderCourseProgress() {
 }
 
 function updateCourseProgress(course) {
-  const card = get("courses").querySelector(`[data-course="${course.id}"]`);
+  const card = getElementById("courses").querySelector(`[data-course="${course.id}"]`);
   if (!card) return;
 
   const stats = getCourseStats(course.id);
@@ -258,7 +324,7 @@ function updateCourseProgress(course) {
 }
 
 function getCourseStats(courseId) {
-  return data.stats[courseId] || { streak: 0, attempts: 0, best: null };
+  return learningData.stats[courseId] || { streak: 0, attempts: 0, best: null };
 }
 
 function updatePassPin(card, streak) {
@@ -327,7 +393,7 @@ function updateCourseStart(card, course, streak) {
 
 function updateCourseLogButton(card, course) {
   const button = card.querySelector(".course-log");
-  const mistakeCount = data.wrong.filter((entry) => entry.courseId === course.id).length;
+  const mistakeCount = learningData.wrong.filter((entry) => entry.courseId === course.id).length;
   const label = document.createElement("span");
   label.textContent = "📜 ログ";
   const record = document.createElement("span");
@@ -345,12 +411,12 @@ function renderStats() {
 }
 
 function showCourseLog(course) {
-  get("coursesPanel").classList.add("hidden");
-  get("reviewPanel").classList.remove("hidden");
-  get("reviewTitle").textContent = `📜 ログ：${course.name}`;
-  const reviewList = get("reviewList");
+  getElementById("coursesPanel").classList.add("hidden");
+  getElementById("reviewPanel").classList.remove("hidden");
+  getElementById("reviewTitle").textContent = `📜 ログ：${course.name}`;
+  const reviewList = getElementById("reviewList");
   reviewList.replaceChildren();
-  const courseMistakes = data.wrong.filter((entry) => entry.courseId === course.id);
+  const courseMistakes = learningData.wrong.filter((entry) => entry.courseId === course.id);
   if (courseMistakes.length === 0) {
     const emptyMessage = document.createElement("p");
     emptyMessage.textContent = "このコースのまちがいはまだありません。挑戦してみよう！";
@@ -387,7 +453,7 @@ function createReviewCheckButton(entry, item) {
   button.className = "review-check";
   button.addEventListener("click", () => {
     entry.checked = !entry.checked;
-    save();
+    saveLearningData();
     syncReviewCheck(entry, item, button);
   });
   return button;
@@ -419,7 +485,12 @@ function makeProblem(problemIndex) {
   const [dividend, divisor, remainder = 0] = operands;
 
   if (isStoryCourse(course.type)) {
-    return makeStoryProblem(dividend, divisor, remainder, Math.random() < 0.5);
+    return makeStoryProblem(
+      dividend,
+      divisor,
+      remainder,
+      Math.random() < STORY_SHARING_CHANCE,
+    );
   }
   return makeDivisionProblem(dividend, divisor, remainder);
 }
@@ -448,8 +519,14 @@ function getProblemOperands(courseType, level) {
 
 function getMeaningOperands(level) {
   const pairs = [];
-  const maxDivisor = Math.min(5, MIN_DIVISOR + Math.floor(level / 2));
-  const maxQuotient = Math.min(MAX_SINGLE_DIGIT, 3 + level);
+  const maxDivisor = Math.min(
+    MAX_MEANING_DIVISOR,
+    MIN_DIVISOR + Math.floor(level / 2),
+  );
+  const maxQuotient = Math.min(
+    MAX_SINGLE_DIGIT,
+    INITIAL_MEANING_QUOTIENT_LIMIT + level,
+  );
   for (let divisor = MIN_DIVISOR; divisor <= maxDivisor; divisor += 1) {
     for (let quotient = MIN_DIVISOR; quotient <= maxQuotient; quotient += 1) {
       pairs.push([divisor * quotient, divisor]);
@@ -460,7 +537,7 @@ function getMeaningOperands(level) {
 
 function getOneDigitExactOperands(level) {
   const pairs = [];
-  const maxDivisor = Math.min(MAX_SINGLE_DIGIT, 3 + level);
+  const maxDivisor = Math.min(MAX_SINGLE_DIGIT, INITIAL_DIVISOR_LIMIT + level);
   for (let divisor = MIN_DIVISOR; divisor <= maxDivisor; divisor += 1) {
     for (let quotient = 1; quotient <= MAX_SINGLE_DIGIT; quotient += 1) {
       const dividend = divisor * quotient;
@@ -472,8 +549,8 @@ function getOneDigitExactOperands(level) {
 
 function getTwoDigitExactOperands(level) {
   const pairs = [];
-  const maxDivisor = Math.min(MAX_SINGLE_DIGIT, 3 + level);
-  const maxQuotient = Math.min(MAX_SINGLE_DIGIT, 4 + level);
+  const maxDivisor = Math.min(MAX_SINGLE_DIGIT, INITIAL_DIVISOR_LIMIT + level);
+  const maxQuotient = Math.min(INITIAL_EXACT_QUOTIENT_LIMIT + level, MAX_SINGLE_DIGIT);
   for (let divisor = MIN_DIVISOR; divisor <= maxDivisor; divisor += 1) {
     for (let quotient = MIN_DIVISOR; quotient <= maxQuotient; quotient += 1) {
       const dividend = divisor * quotient;
@@ -488,7 +565,7 @@ function getTwoDigitExactOperands(level) {
 function getRemainderOperands(courseType, level) {
   const pairs = [];
   const isSingleDigit = courseType === "one-digit-remainder";
-  const maxDivisor = Math.min(MAX_SINGLE_DIGIT, 3 + level);
+  const maxDivisor = Math.min(MAX_SINGLE_DIGIT, INITIAL_DIVISOR_LIMIT + level);
   for (let divisor = MIN_DIVISOR; divisor <= maxDivisor; divisor += 1) {
     addRemainderPairs(pairs, divisor, isSingleDigit);
   }
@@ -512,7 +589,7 @@ function getZeroOneOperands(level) {
   for (let divisor = MIN_DIVISOR; divisor <= MAX_SINGLE_DIGIT; divisor += 1) {
     pairs.push([0, divisor]);
   }
-  const maxDividend = 10 + level * MAX_SINGLE_DIGIT;
+  const maxDividend = MIN_TWO_DIGIT + level * MAX_SINGLE_DIGIT;
   for (let dividend = 1; dividend <= maxDividend; dividend += 1) {
     pairs.push([dividend, 1]);
   }
@@ -524,7 +601,7 @@ function getMentalDivisionOperands(level) {
   for (let divisor = MIN_DIVISOR; divisor <= MAX_SINGLE_DIGIT; divisor += 1) {
     const maxQuotient = Math.min(
       Math.floor(MAX_TWO_DIGIT / divisor),
-      12 + level * 2,
+      INITIAL_MENTAL_QUOTIENT_LIMIT + level * MENTAL_QUOTIENT_LEVEL_STEP,
     );
     addMentalDivisionPairs(pairs, divisor, maxQuotient);
   }
@@ -532,7 +609,7 @@ function getMentalDivisionOperands(level) {
 }
 
 function addMentalDivisionPairs(pairs, divisor, maxQuotient) {
-  for (let quotient = 10; quotient <= maxQuotient; quotient += 1) {
+  for (let quotient = MIN_MENTAL_QUOTIENT; quotient <= maxQuotient; quotient += 1) {
     for (let remainder = 0; remainder < divisor; remainder += 1) {
       const dividend = divisor * quotient + remainder;
       if (dividend <= MAX_TWO_DIGIT) pairs.push([dividend, divisor, remainder]);
@@ -559,38 +636,69 @@ function chooseProblemOperands(items) {
   return picked;
 }
 
-function makeDivisionProblem(dividend, divisor, remainder, text = `${dividend} ÷ ${divisor} =`, unit = "") {
+function makeDivisionProblem(dividend, divisor, remainder, text, unit) {
   const quotient = Math.floor(dividend / divisor);
   const answer = remainder ? `${quotient}あまり${remainder}` : String(quotient);
-  const explanation = remainder
-    ? `${divisor}×${quotient}=${divisor * quotient}、${dividend}-${divisor * quotient}=${remainder}。答えは${answer}です。`
-    : `${divisor}×${quotient}=${dividend}。答えは${quotient}です。`;
-
+  const problemText = text === undefined ? `${dividend} ÷ ${divisor} =` : text;
   return {
-    text,
+    text: problemText,
     answer,
-    unit: unit ? (remainder ? `${unit}（あまりも入力）` : unit) : "",
-    hint: remainder
-      ? "わる数の九九で、わられる数をこえないいちばん大きな数を見つけよう。残りも考えてみよう。"
-      : "わる数を何倍すると、わられる数になるかな？",
-    explanation,
+    unit: getProblemUnit(unit, remainder),
+    hint: getProblemHint(remainder),
+    explanation: createDivisionExplanation(
+      dividend,
+      divisor,
+      quotient,
+      remainder,
+      answer,
+    ),
   };
 }
 
+function getProblemUnit(unit, remainder) {
+  if (!unit) return "";
+  return remainder ? `${unit}（あまりも入力）` : unit;
+}
+
+function getProblemHint(remainder) {
+  if (remainder) {
+    return "わる数の九九で、わられる数をこえないいちばん大きな数を見つけよう。残りも考えてみよう。";
+  }
+  return "わる数を何倍すると、わられる数になるかな？";
+}
+
+function createDivisionExplanation(dividend, divisor, quotient, remainder, answer) {
+  const product = divisor * quotient;
+  if (!remainder) return `${divisor}×${quotient}=${dividend}。答えは${quotient}です。`;
+  const multiplication = `${divisor}×${quotient}=${product}`;
+  const remainderCalculation = `${dividend}-${product}=${remainder}`;
+  return `${multiplication}、${remainderCalculation}。答えは${answer}です。`;
+}
+
 function makeStoryProblem(dividend, divisor, remainder, sharing) {
-  const text = sharing
-    ? remainder
-      ? `${dividend}このりんごを${divisor}人で同じ数ずつ分けると、1人分は何こで、何こあまる？`
-      : `${dividend}このりんごを${divisor}人で同じ数ずつ分けると、1人分は何こ？`
-    : remainder
-      ? `${dividend}このりんごを${divisor}こずつふくろに入れると、何ふくろできて、何こあまる？`
-      : `${dividend}このりんごを${divisor}こずつふくろに入れると、何ふくろできる？`;
-  return makeDivisionProblem(dividend, divisor, remainder, text, sharing ? "こ" : "ふくろ");
+  const text = getStoryQuestion(dividend, divisor, remainder, sharing);
+  const unit = sharing ? "こ" : "ふくろ";
+  return makeDivisionProblem(dividend, divisor, remainder, text, unit);
+}
+
+function getStoryQuestion(dividend, divisor, remainder, sharing) {
+  if (sharing) return getSharingQuestion(dividend, divisor, remainder);
+  return getGroupingQuestion(dividend, divisor, remainder);
+}
+
+function getSharingQuestion(dividend, divisor, remainder) {
+  const result = remainder ? "1人分は何こで、何こあまる？" : "1人分は何こ？";
+  return `${dividend}このりんごを${divisor}人で同じ数ずつ分けると、${result}`;
+}
+
+function getGroupingQuestion(dividend, divisor, remainder) {
+  const result = remainder ? "何ふくろできて、何こあまる？" : "何ふくろできる？";
+  return `${dividend}このりんごを${divisor}こずつふくろに入れると、${result}`;
 }
 
 function setupQuiz(mode = "basic") {
   clearTimeout(advanceTimer);
-  if (get("feedback").open) get("feedback").close();
+  if (getElementById("feedback").open) getElementById("feedback").close();
   quiz = createQuiz(mode);
   locked = false;
   startModeTimer(mode);
@@ -621,23 +729,23 @@ function startModeTimer(mode) {
 }
 
 function renderModeTitle(mode) {
-  const title = get("modeTitle");
+  const title = getElementById("modeTitle");
   const modeTitles = { time: "⏱ タイムアタック", chain: "🔥 連続正解" };
   title.classList.toggle("hidden", !modeTitles[mode]);
   title.textContent = modeTitles[mode] || "";
 }
 
 function showQuizScreen() {
-  get("home").classList.add("hidden");
-  get("result").classList.add("hidden");
-  get("quiz").classList.remove("hidden");
+  getElementById("home").classList.add("hidden");
+  getElementById("result").classList.add("hidden");
+  getElementById("quiz").classList.remove("hidden");
   requestAnimationFrame(resizeCanvases);
   nextProblem();
 }
 
 let modeTimer = null;
 function updateModeStatus() {
-  const status = get("modeStatus");
+  const status = getElementById("modeStatus");
   if (!quiz || quiz.mode === "basic") {
     status.classList.add("hidden");
     return;
@@ -670,24 +778,24 @@ function nextProblem() {
 
 function renderProblem(problem) {
   const course = courses.find((item) => item.id === selectedCourse);
-  get("problem").classList.toggle("story", isStoryCourse(course.type));
-  get("questionNo").textContent = quiz.mode === "chain"
+  getElementById("problem").classList.toggle("story", isStoryCourse(course.type));
+  getElementById("questionNo").textContent = quiz.mode === "chain"
     ? `${quiz.index + 1}問目`
     : `${quiz.index + 1} / ${QUIZ_LENGTH}`;
-  get("progress").style.width = quiz.mode === "chain"
+  getElementById("progress").style.width = quiz.mode === "chain"
     ? "100%"
     : `${(quiz.index / QUIZ_LENGTH) * 100}%`;
-  get("problem").textContent = problem.text;
-  get("unit").textContent = problem.unit;
-  get("unit").hidden = !problem.unit;
+  getElementById("problem").textContent = problem.text;
+  getElementById("unit").textContent = problem.unit;
+  getElementById("unit").hidden = !problem.unit;
 }
 
 function resetAnswerInput() {
-  get("answer").value = "";
-  get("answer").disabled = false;
-  get("check").disabled = false;
+  getElementById("answer").value = "";
+  getElementById("answer").disabled = false;
+  getElementById("check").disabled = false;
   locked = false;
-  get("answer").focus();
+  getElementById("answer").focus();
 }
 
 function nextAfterFeedback() {
@@ -703,33 +811,42 @@ function playFeedbackTone(isCorrect) {
   if (!soundEnabled) return;
 
   try {
-    const AudioContextClass = window.AudioContext || window.webkitAudioContext;
-    if (!AudioContextClass) return;
-    audioContext ||= new AudioContextClass();
-    if (audioContext.state === "suspended") void audioContext.resume();
-
-    const oscillator = audioContext.createOscillator();
-    const volume = audioContext.createGain();
-    const now = audioContext.currentTime;
-    oscillator.type = "sine";
-    oscillator.frequency.setValueAtTime(isCorrect ? 660 : 330, now);
-    oscillator.frequency.setTargetAtTime(isCorrect ? 880 : 220, now + 0.06, 0.04);
-    volume.gain.setValueAtTime(0.0001, now);
-    volume.gain.exponentialRampToValueAtTime(0.08, now + 0.02);
-    volume.gain.exponentialRampToValueAtTime(0.0001, now + 0.22);
-    oscillator.connect(volume);
-    volume.connect(audioContext.destination);
-    oscillator.start(now);
-    oscillator.stop(now + 0.24);
+    const context = getAudioContext();
+    if (!context) return;
+    playTone(context, isCorrect);
   } catch {
-    // Audio is an optional enhancement; keep answer checking available if the browser blocks it.
+    // Audio is optional; answer checking remains available if the browser blocks it.
   }
 }
 
+function getAudioContext() {
+  const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+  if (!AudioContextClass) return null;
+  audioContext ||= new AudioContextClass();
+  if (audioContext.state === "suspended") void audioContext.resume();
+  return audioContext;
+}
+
+function playTone(context, isCorrect) {
+  const oscillator = context.createOscillator();
+  const volume = context.createGain();
+  const now = context.currentTime;
+  oscillator.type = "sine";
+  oscillator.frequency.setValueAtTime(isCorrect ? 660 : 330, now);
+  oscillator.frequency.setTargetAtTime(isCorrect ? 880 : 220, now + 0.06, 0.04);
+  volume.gain.setValueAtTime(0.0001, now);
+  volume.gain.exponentialRampToValueAtTime(0.08, now + 0.02);
+  volume.gain.exponentialRampToValueAtTime(0.0001, now + 0.22);
+  oscillator.connect(volume);
+  volume.connect(context.destination);
+  oscillator.start(now);
+  oscillator.stop(now + 0.24);
+}
+
 function showFeedback(isCorrect, problem, submittedAnswer) {
-  const dialog = get("feedback");
-  const content = get("feedbackContent");
-  const actions = get("feedbackActions");
+  const dialog = getElementById("feedback");
+  const content = getElementById("feedbackContent");
+  const actions = getElementById("feedbackActions");
   content.replaceChildren();
   actions.replaceChildren();
   dialog.className = `feedback-dialog ${isCorrect ? "ok" : "no"}`;
@@ -754,7 +871,7 @@ function createFeedbackMessage(isCorrect, problem) {
 
 function recordWrongAnswer(problem, submittedAnswer) {
   const entry = {
-    grade: 3,
+    grade: STUDENT_GRADE,
     courseId: selectedCourse,
     problem: problem.text,
     answer: submittedAnswer,
@@ -763,9 +880,9 @@ function recordWrongAnswer(problem, submittedAnswer) {
   };
   const work = captureWork();
   if (work) entry.work = work;
-  data.wrong.push(entry);
-  data.wrong = data.wrong.slice(-MAX_WRONG_ENTRIES);
-  save();
+  learningData.wrong.push(entry);
+  learningData.wrong = learningData.wrong.slice(-MAX_WRONG_ENTRIES);
+  saveLearningData();
 }
 
 function addFeedbackActions(actions, isCorrect, problem) {
@@ -797,35 +914,41 @@ function createRevealAnswerAction(problem) {
 }
 
 function revealAnswer(problem) {
-  const content = get("feedbackContent");
-  const actions = get("feedbackActions");
+  const content = getElementById("feedbackContent");
+  const actions = getElementById("feedbackActions");
   const title = content.querySelector("h2");
+  renderRevealedAnswer(content, title, problem);
+  const nextButton = createFeedbackNextButton();
+  actions.replaceChildren(nextButton);
+  nextButton.focus();
+}
+
+function renderRevealedAnswer(content, title, problem) {
   title.textContent = "答えを確認しよう";
   content.replaceChildren(title);
-
   const answer = document.createElement("p");
   answer.className = "feedback-answer";
   answer.textContent = `正解は「${problem.answer}」です。`;
   const explanation = document.createElement("p");
   explanation.textContent = problem.explanation;
   content.append(answer, explanation);
+}
 
-  actions.replaceChildren();
-  const next = document.createElement("button");
-  next.type = "button";
-  next.textContent = quiz.mode === "chain" ? "結果を見る ↵" : "次へ ↵";
-  next.addEventListener("click", nextAfterFeedback);
-  actions.append(next);
-  next.focus();
+function createFeedbackNextButton() {
+  const nextButton = document.createElement("button");
+  nextButton.type = "button";
+  nextButton.textContent = quiz.mode === "chain" ? "結果を見る ↵" : "次へ ↵";
+  nextButton.addEventListener("click", nextAfterFeedback);
+  return nextButton;
 }
 
 function judgeAnswer() {
   if (locked || !quiz) return;
-  const submittedAnswer = get("answer").value.trim();
+  const submittedAnswer = getElementById("answer").value.trim();
   if (!submittedAnswer) return;
 
   locked = true;
-  get("check").disabled = true;
+  getElementById("check").disabled = true;
   const problem = quiz.problems[quiz.index];
   const normalizedAnswer = submittedAnswer.replace(/\s/g, "");
   const isCorrect = problem.answer === normalizedAnswer;
@@ -837,7 +960,7 @@ function showAnswerFeedback(isCorrect, problem, submittedAnswer) {
   if (!isCorrect) {
     quiz.missed = true;
     quiz.failed = true;
-    get("answer").disabled = true;
+    getElementById("answer").disabled = true;
     showFeedback(false, problem, submittedAnswer);
     return;
   }
@@ -849,7 +972,7 @@ function showAnswerFeedback(isCorrect, problem, submittedAnswer) {
 
 function closeFeedback() {
   clearTimeout(advanceTimer);
-  if (get("feedback").open) get("feedback").close();
+  if (getElementById("feedback").open) getElementById("feedback").close();
 }
 
 function advanceQuiz() {
@@ -861,10 +984,10 @@ function advanceQuiz() {
 function retryQuestion() {
   closeFeedback();
   locked = false;
-  get("answer").disabled = false;
-  get("answer").value = "";
-  get("check").disabled = false;
-  get("answer").focus();
+  getElementById("answer").disabled = false;
+  getElementById("answer").value = "";
+  getElementById("check").disabled = false;
+  getElementById("answer").focus();
 }
 
 function finishQuiz() {
@@ -874,9 +997,9 @@ function finishQuiz() {
     (Date.now() - quiz.started) / MILLISECONDS_PER_SECOND,
   );
   updateCourseStats(stats, elapsedSeconds);
-  data.stats[selectedCourse] = stats;
-  save();
-  quiz.backToCourses = hasPassedCourse(stats);
+  learningData.stats[selectedCourse] = stats;
+  saveLearningData();
+  quiz.backToCourses = quiz.mode === "basic" && hasPassedCourse(stats);
   renderQuizResult(stats, elapsedSeconds);
 }
 
@@ -914,9 +1037,9 @@ function hasPassedCourse(stats) {
 }
 
 function renderQuizResult(stats, elapsedSeconds) {
-  get("quiz").classList.add("hidden");
-  get("result").classList.remove("hidden");
-  const again = get("again");
+  getElementById("quiz").classList.add("hidden");
+  getElementById("result").classList.remove("hidden");
+  const again = getElementById("again");
   if (quiz.mode === "basic") renderBasicResult(stats, again);
   if (quiz.mode === "time") renderTimeAttackResult(stats, again, elapsedSeconds);
   if (quiz.mode === "chain") renderChainResult(stats, again);
@@ -927,14 +1050,14 @@ function renderQuizResult(stats, elapsedSeconds) {
 
 function renderBasicResult(stats, again) {
   const isPerfect = quiz.correct === QUIZ_LENGTH;
-  get("score").textContent = `${quiz.correct} / ${QUIZ_LENGTH} 問 正解`;
+  getElementById("score").textContent = `${quiz.correct} / ${QUIZ_LENGTH} 問 正解`;
   again.textContent = quiz.backToCourses
     ? "コースに戻る ↵"
     : quiz.missed ? "もう一度挑戦する ↵" : "続けて挑戦する ↵";
-  get("resultTitle").textContent = isPerfect
+  getElementById("resultTitle").textContent = isPerfect
     ? (quiz.missed ? "ぜんもん正解！" : "パーフェクト！")
     : "よくがんばったね！";
-  get("resultMessage").textContent = getBasicResultMessage(stats, isPerfect);
+  getElementById("resultMessage").textContent = getBasicResultMessage(stats, isPerfect);
 }
 
 function getBasicResultMessage(stats, isPerfect) {
@@ -949,38 +1072,38 @@ function getBasicResultMessage(stats, isPerfect) {
 }
 
 function renderTimeAttackResult(stats, again, elapsedSeconds) {
-  get("score").textContent = `${elapsedSeconds} 秒`;
+  getElementById("score").textContent = `${elapsedSeconds} 秒`;
   again.textContent = "もう一度挑戦する ↵";
-  get("resultTitle").textContent = "⏱ タイムアタック";
+  getElementById("resultTitle").textContent = "⏱ タイムアタック";
   const missedMessage = quiz.missed ? "（ミスがあったので記録は更新されないよ）" : "";
-  get("resultMessage").textContent =
+  getElementById("resultMessage").textContent =
     `${QUIZ_LENGTH}問クリア！ベスト記録：${stats.timeBest ?? "-"}秒${missedMessage}`;
 }
 
 function renderChainResult(stats, again) {
-  get("score").textContent = `${quiz.correct} 問`;
+  getElementById("score").textContent = `${quiz.correct} 問`;
   again.textContent = "もう一度挑戦する ↵";
-  get("resultTitle").textContent = "🔥 連続正解";
-  get("resultMessage").textContent = `最高記録：${stats.chainBest || 0}問`;
+  getElementById("resultTitle").textContent = "🔥 連続正解";
+  getElementById("resultMessage").textContent = `最高記録：${stats.chainBest || 0}問`;
 }
 
 function updateResultChallenges(stats) {
-  get("chainBest").textContent = String(stats.chainBest || 0);
+  getElementById("chainBest").textContent = String(stats.chainBest || 0);
   const canChallenge = stats.streak >= PASS_STREAK;
-  get("timeAttack").disabled = !canChallenge;
-  get("chainAttack").disabled = !canChallenge;
+  getElementById("timeAttack").disabled = !canChallenge;
+  getElementById("chainAttack").disabled = !canChallenge;
   const challengeTitle = canChallenge
     ? "チャレンジに挑戦できます"
     : `あと${PASS_STREAK - stats.streak}回で解放`;
   ["timeAttack", "chainAttack"].forEach((id) => {
-    get(id).title = challengeTitle;
-    get(id).parentElement.title = challengeTitle;
+    getElementById(id).title = challengeTitle;
+    getElementById(id).parentElement.title = challengeTitle;
   });
 }
 
 function buildKeypad() {
   const keys = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "⌫", "0", "あまり", "クリア"];
-  const keypad = get("keypad");
+  const keypad = getElementById("keypad");
   keys.forEach((key) => keypad.append(createKeypadButton(key)));
 }
 
@@ -993,7 +1116,7 @@ function createKeypadButton(key) {
 }
 
 function enterKeypadValue(key) {
-  const answer = get("answer");
+  const answer = getElementById("answer");
   if (answer.disabled) return;
   if (key === "⌫") answer.value = answer.value.slice(0, -1);
   else if (key === "クリア") answer.value = "";
@@ -1004,12 +1127,20 @@ function enterKeypadValue(key) {
 }
 
 function setupCanvas(id) {
-  const canvas = get(id);
+  const canvas = getElementById(id);
   const context = canvas.getContext("2d");
   const drawingState = { isDrawing: false, hasInk: false };
   const resize = () => resizeCanvas(canvas, context);
   resize();
   canvasResizers.push(resize);
+  registerCanvasEvents(canvas, context, drawingState);
+  return {
+    clear: () => clearCanvas(canvas, context, drawingState),
+    snapshot: () => createCanvasSnapshot(canvas, drawingState.hasInk),
+  };
+}
+
+function registerCanvasEvents(canvas, context, drawingState) {
   canvas.addEventListener("pointerdown", (event) => {
     startCanvasStroke(canvas, context, drawingState, event);
   });
@@ -1018,10 +1149,6 @@ function setupCanvas(id) {
   });
   canvas.addEventListener("pointerup", () => stopCanvasStroke(drawingState));
   canvas.addEventListener("pointercancel", () => stopCanvasStroke(drawingState));
-  return {
-    clear: () => clearCanvas(canvas, context, drawingState),
-    snapshot: () => createCanvasSnapshot(canvas, drawingState.hasInk),
-  };
 }
 
 function resizeCanvas(canvas, context) {
@@ -1073,9 +1200,9 @@ function createCanvasSnapshot(canvas, hasInk) {
 
 function returnToCourses() {
   clearInterval(modeTimer);
-  get("quiz").classList.add("hidden");
-  get("result").classList.add("hidden");
-  get("home").classList.remove("hidden");
+  getElementById("quiz").classList.add("hidden");
+  getElementById("result").classList.add("hidden");
+  getElementById("home").classList.remove("hidden");
   renderStats();
 }
 
@@ -1114,8 +1241,8 @@ function registerEventHandlers() {
 }
 
 function registerAnswerHandlers() {
-  get("check").addEventListener("click", judgeAnswer);
-  get("answer").addEventListener("keydown", handleAnswerKeydown);
+  getElementById("check").addEventListener("click", judgeAnswer);
+  getElementById("answer").addEventListener("keydown", handleAnswerKeydown);
 }
 
 function handleAnswerKeydown(event) {
@@ -1128,15 +1255,16 @@ function handleAnswerKeydown(event) {
 function registerKeyboardHandlers() {
   document.addEventListener("keydown", advanceFeedbackOnEnter);
   document.addEventListener("keydown", moveButtonFocus);
-  get("feedback").addEventListener("cancel", (event) => event.preventDefault());
+  getElementById("feedback").addEventListener("cancel", (event) => event.preventDefault());
 }
 
 function advanceFeedbackOnEnter(event) {
-  if (event.key !== "Enter" || !get("feedback").open || event.target === get("answer")) {
-    return;
-  }
+  const isEnterKey = event.key === "Enter";
+  const feedbackIsOpen = getElementById("feedback").open;
+  const answerHasFocus = event.target === getElementById("answer");
+  if (!isEnterKey || !feedbackIsOpen || answerHasFocus) return;
   event.preventDefault();
-  get("feedbackActions").querySelector("button")?.click();
+  getElementById("feedbackActions").querySelector("button")?.click();
 }
 
 function moveButtonFocus(event) {
@@ -1163,11 +1291,11 @@ function focusAdjacentButton(event, scope, currentButton, direction) {
 }
 
 function registerQuizControls() {
-  get("quit").addEventListener("click", confirmQuitQuiz);
-  get("again").addEventListener("click", restartQuiz);
-  get("timeAttack").addEventListener("click", () => setupQuiz("time"));
-  get("chainAttack").addEventListener("click", () => setupQuiz("chain"));
-  get("homeButton").addEventListener("click", returnToCoursesFromLink);
+  getElementById("quit").addEventListener("click", confirmQuitQuiz);
+  getElementById("again").addEventListener("click", restartQuiz);
+  getElementById("timeAttack").addEventListener("click", () => setupQuiz("time"));
+  getElementById("chainAttack").addEventListener("click", () => setupQuiz("chain"));
+  getElementById("homeButton").addEventListener("click", returnToCoursesFromLink);
 }
 
 function confirmQuitQuiz() {
@@ -1185,21 +1313,22 @@ function returnToCoursesFromLink(event) {
 }
 
 function registerReviewControls() {
-  get("reviewBack").addEventListener("click", returnToCourseList);
+  getElementById("reviewBack").addEventListener("click", returnToCourseList);
 }
 
 function returnToCourseList() {
-  get("reviewPanel").classList.add("hidden");
-  get("coursesPanel").classList.remove("hidden");
+  getElementById("reviewPanel").classList.add("hidden");
+  getElementById("coursesPanel").classList.remove("hidden");
 }
 
 function registerDataControls() {
-  get("resetData").addEventListener("click", resetLearningData);
+  getElementById("resetData").addEventListener("click", resetLearningData);
 }
 
 function resetLearningData() {
   if (!confirm("学習記録、進捗、復習ノートを初期化します。よろしいですか？")) return;
   clearTimeout(advanceTimer);
+  clearInterval(modeTimer);
   closeFeedback();
   localStorage.removeItem(STORAGE_KEY);
   resetApplicationState();
@@ -1207,30 +1336,30 @@ function resetLearningData() {
 }
 
 function resetApplicationState() {
-  data = defaultData();
-  selectedCourse = data.course;
+  learningData = defaultData();
+  selectedCourse = learningData.course;
   quiz = null;
   locked = false;
 }
 
 function showCourseSelection() {
-  get("quiz").classList.add("hidden");
-  get("result").classList.add("hidden");
-  get("home").classList.remove("hidden");
+  getElementById("quiz").classList.add("hidden");
+  getElementById("result").classList.add("hidden");
+  getElementById("home").classList.remove("hidden");
   renderCourses();
   renderStats();
-  get("courses").querySelector(".course-start")?.focus();
+  getElementById("courses").querySelector(".course-start")?.focus();
 }
 
 function updateSoundControl() {
-  get("sound").setAttribute("aria-pressed", String(soundEnabled));
-  get("sound").setAttribute("aria-label", soundEnabled ? "音あり" : "消音");
-  get("sound").title = soundEnabled ? "音あり" : "消音";
-  get("sound").textContent = soundEnabled ? "🔊" : "🔇";
+  getElementById("sound").setAttribute("aria-pressed", String(soundEnabled));
+  getElementById("sound").setAttribute("aria-label", soundEnabled ? "音あり" : "消音");
+  getElementById("sound").title = soundEnabled ? "音あり" : "消音";
+  getElementById("sound").textContent = soundEnabled ? "🔊" : "🔇";
 }
 
 function registerSoundControl() {
-  get("sound").addEventListener("click", toggleSound);
+  getElementById("sound").addEventListener("click", toggleSound);
 }
 
 function toggleSound() {
