@@ -247,6 +247,10 @@ main { padding-block: 4px 80px; }
   transition: background-color 140ms ease, transform 140ms ease;
 }
 .answer-choice:hover { transform: translateY(-2px); border-color: #9ab98d; background: #f7fbf3; }
+.phonics-pronunciation { white-space: nowrap; }
+.phonics-kana { font-weight: 800; }
+.phonics-ipa { margin-left: 2px; color: #788278; font-size: 0.72em; font-weight: 500; }
+.answer-choice .phonics-kana { font-size: 1.05em; }
 .writing-area { margin-top: 24px; }
 .writing-heading { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 6px 12px; margin-bottom: 8px; font-size: 0.85rem; font-weight: 750; }
 .writing-note { color: #778177; font-size: 0.75rem; font-weight: 500; }

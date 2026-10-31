@@ -11,6 +11,60 @@ const FEEDBACK_AUTO_ADVANCE_MS = 3000;
 const CANVAS_BRUSH_WIDTH = 3;
 const MAX_CANVAS_SNAPSHOT_WIDTH = 360;
 
+const phonicsSounds = {
+  "/s/": "ス",
+  "/m/": "ム",
+  "/f/": "フ",
+  "/d/": "ド",
+  "/b/": "ブ",
+  "/n/": "ヌ",
+  "/p/": "プ",
+  "/g/": "グ",
+  "/k/": "ク",
+  "/h/": "ハ行",
+  "/v/": "ヴ",
+  "/z/": "ズ",
+  "/kw/": "クゥ",
+  "/ks/": "クス",
+  "/t/": "ト",
+  "/dʒ/": "ジ",
+  "/j/": "ヤ行",
+  "/w/": "ウ",
+  "/ŋg/": "ング",
+  "/ŋ/": "ング",
+  "/ʃ/": "シ",
+  "/ʒ/": "ジュ",
+  "/tʃ/": "チ",
+  "/θ/": "ス（舌先を歯の間に）",
+  "/ð/": "ズ（舌先を歯の間に）",
+  "/æ/": "ア",
+  "/e/": "エ",
+  "/ɪ/": "イ",
+  "/i/": "イ",
+  "/ɒ/": "オ",
+  "/ʌ/": "ア",
+  "/ɑː/": "アー",
+  "/ɔː/": "オー",
+  "/ʊ/": "ウ",
+  "/uː/": "ウー",
+  "/iː/": "イー",
+  "/eɪ/": "エイ",
+  "/aɪ/": "アイ",
+  "/oʊ/": "オウ",
+  "/əʊ/": "オウ",
+  "/juː/": "ユー",
+  "/ɔɪ/": "オイ",
+  "/aʊ/": "アウ",
+  "/ə/": "ア（弱く）",
+};
+const phonicsSoundPattern = new RegExp(
+  Object.keys(phonicsSounds)
+    .sort((left, right) => right.length - left.length)
+    .map((symbol) => symbol.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"))
+    .join("|"),
+  "g",
+);
+
 const courses = [
   { id: "alphabet", title: "アルファベットの音", icon: "🔤", summary: "26文字の基本音と、その音で始まる単語" },
   { id: "short-vowels", title: "短母音とCVC", icon: "🍎", summary: "短い母音の音と、子音・母音・子音の単語" },
@@ -33,8 +87,8 @@ const questionBank = {
     { level: 3, prompt: "box の最後の音はどれ？", word: "box", answer: "/ks/", choices: ["/ks/", "/s/", "/z/", "/k/"], explanation: "box の x は語尾で /ks/ の音を表すよ。" },
     { level: 0, prompt: "red の最初の音を表す文字は？", word: "red", answer: "r", choices: ["r", "l", "w", "d"], explanation: "red は r の音で始まる単語だよ。" },
     { level: 1, prompt: "top の最初の音はどれ？", word: "top", answer: "/t/", choices: ["/t/", "/d/", "/p/", "/k/"], explanation: "top は /t/ の音で始まるよ。" },
-    { level: 2, prompt: "jam の最初の音を表す文字は？", word: "jam", answer: "j", choices: ["j", "g", "y", "c"], explanation: "jam は /j/（/dʒ/）の音で始まるよ。文字 j が使われるね。" },
-    { level: 3, prompt: "yes の最初の音はどれ？", word: "yes", answer: "/y/", choices: ["/y/", "/j/", "/i/", "/w/"], explanation: "yes の y は、ここでは /y/ の音だよ。" },
+    { level: 2, prompt: "jam の最初の音を表す文字は？", word: "jam", answer: "j", choices: ["j", "g", "y", "c"], explanation: "jam は /dʒ/ の音で始まるよ。文字 j が使われるね。" },
+    { level: 3, prompt: "yes の最初の音はどれ？", word: "yes", answer: "/j/", choices: ["/j/", "/dʒ/", "/i/", "/w/"], explanation: "yes の y はヤ行の音 /j/ だよ。" },
   ],
   "short-vowels": [
     { level: 0, prompt: "cat の母音 a の音はどれ？", word: "cat", answer: "/æ/", choices: ["/æ/", "/e/", "/ɪ/", "/ʌ/"], explanation: "cat の a は短い /æ/ の音だよ。" },
@@ -127,6 +181,31 @@ function loadLearningData() {
   } catch {
     return defaultData();
   }
+}
+
+function getPhonicsText(text) {
+  return text.replace(phonicsSoundPattern, (symbol) => `${phonicsSounds[symbol]}（${symbol}）`);
+}
+
+function appendPhonicsText(element, text) {
+  let lastIndex = 0;
+  for (const match of text.matchAll(phonicsSoundPattern)) {
+    const symbol = match[0];
+    const index = match.index;
+    if (index > lastIndex) element.append(text.slice(lastIndex, index));
+    const pronunciation = document.createElement("span");
+    pronunciation.className = "phonics-pronunciation";
+    const kana = document.createElement("span");
+    kana.className = "phonics-kana";
+    kana.textContent = phonicsSounds[symbol];
+    const ipa = document.createElement("small");
+    ipa.className = "phonics-ipa";
+    ipa.textContent = `（${symbol}）`;
+    pronunciation.append(kana, ipa);
+    element.append(pronunciation);
+    lastIndex = index + symbol.length;
+  }
+  if (lastIndex < text.length) element.append(text.slice(lastIndex));
 }
 
 function saveData() {
@@ -248,14 +327,17 @@ function createReviewItem(entry) {
   const item = document.createElement("article");
   item.className = "review-item";
   const question = document.createElement("strong");
-  question.textContent = entry.prompt;
+  appendPhonicsText(question, entry.prompt);
   const word = document.createElement("p");
   word.textContent = entry.word;
   const mistake = document.createElement("p");
   mistake.className = "mistake";
-  mistake.textContent = `あなたの答え：${entry.answer} / 正解：${entry.correct}`;
+  mistake.append("あなたの答え：");
+  appendPhonicsText(mistake, entry.answer);
+  mistake.append(" / 正解：");
+  appendPhonicsText(mistake, entry.correct);
   const explanation = document.createElement("p");
-  explanation.textContent = entry.explanation;
+  appendPhonicsText(explanation, entry.explanation);
   item.append(question, word, mistake, explanation);
   if (entry.reviewed) {
     const reviewed = document.createElement("small");
@@ -346,11 +428,17 @@ function renderProblem() {
   getElement("progress").style.width = quiz.mode === "review"
     ? "100%" : `${quiz.index / QUIZ_LENGTH * 100}%`;
   getElement("questionCategory").textContent = `STEP ${Math.min(4, Math.floor(quiz.index / 3) + 1)} · ${courses.find((course) => course.id === selectedCourse).title}`;
-  getElement("problem").textContent = question.prompt;
+  const problem = getElement("problem");
+  problem.replaceChildren();
+  appendPhonicsText(problem, question.prompt);
   getElement("wordCard").textContent = question.word;
-  getElement("previousAnswer").textContent = quiz.previousAnswer
-    ? `前回の答え：${quiz.previousAnswer}` : "";
-  getElement("previousAnswer").classList.toggle("hidden", !quiz.previousAnswer);
+  const previousAnswer = getElement("previousAnswer");
+  previousAnswer.replaceChildren();
+  if (quiz.previousAnswer) {
+    previousAnswer.append("前回の答え：");
+    appendPhonicsText(previousAnswer, quiz.previousAnswer);
+  }
+  previousAnswer.classList.toggle("hidden", !quiz.previousAnswer);
   renderChoices(question);
   updateModeStatus();
   clearWritingCanvas();
@@ -363,7 +451,8 @@ function renderChoices(question) {
     const button = document.createElement("button");
     button.type = "button";
     button.className = "answer-choice";
-    button.textContent = choice;
+    appendPhonicsText(button, choice);
+    if (phonicsSounds[choice]) button.setAttribute("aria-label", getPhonicsText(choice));
     button.addEventListener("click", () => judgeAnswer(choice));
     answers.append(button);
   });
@@ -430,9 +519,12 @@ function showFeedback(isCorrect, question, answer) {
   title.id = "feedbackTitle";
   title.textContent = isCorrect ? "せいかい！ 🎉" : "もう一度考えてみよう";
   const message = document.createElement("p");
-  message.textContent = isCorrect
-    ? "いい調子！音と文字のつながりが見えてきたね。"
-    : `ヒント：${question.explanation}`;
+  if (isCorrect) {
+    message.textContent = "いい調子！音と文字のつながりが見えてきたね。";
+  } else {
+    message.append("ヒント：");
+    appendPhonicsText(message, question.explanation);
+  }
   content.append(title, message);
 
   const primary = createFeedbackButton(
@@ -443,7 +535,9 @@ function showFeedback(isCorrect, question, answer) {
   if (!isCorrect) {
     const answer = document.createElement("p");
     answer.className = "feedback-answer";
-    answer.textContent = `正解：「${question.answer}」`;
+    answer.append("正解：「");
+    appendPhonicsText(answer, question.answer);
+    answer.append("」");
     content.append(answer);
     actions.append(createFeedbackButton("次へ", advanceQuiz, "secondary"));
   }
@@ -553,11 +647,14 @@ function renderAnswerSummary() {
   quiz.questions.forEach((question, index) => {
     const item = document.createElement("article");
     const prompt = document.createElement("strong");
-    prompt.textContent = `${index + 1}. ${question.prompt} (${question.word})`;
+    appendPhonicsText(prompt, `${index + 1}. ${question.prompt} (${question.word})`);
     const answer = document.createElement("small");
-    answer.textContent = `あなたの答え：${quiz.submitted[index] || "未回答"} / 正解：${question.answer}`;
+    answer.append("あなたの答え：");
+    appendPhonicsText(answer, quiz.submitted[index] || "未回答");
+    answer.append(" / 正解：");
+    appendPhonicsText(answer, question.answer);
     const explanation = document.createElement("small");
-    explanation.textContent = question.explanation;
+    appendPhonicsText(explanation, question.explanation);
     item.append(prompt, answer, explanation);
     summary.append(item);
   });
