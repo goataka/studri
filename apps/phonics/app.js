@@ -6,10 +6,7 @@ const QUIZ_LENGTH = 10;
 const PASS_STREAK = 3;
 const MAX_WRONG_ENTRIES = 50;
 const MAX_HISTORY_ENTRIES = 50;
-const TRACE_RETENTION_MS = 2 * 24 * 60 * 60 * 1000;
 const FEEDBACK_AUTO_ADVANCE_MS = 3000;
-const CANVAS_BRUSH_WIDTH = 3;
-const MAX_CANVAS_SNAPSHOT_WIDTH = 360;
 
 const phonicsSounds = {
   "/s/": "ス",
@@ -70,8 +67,50 @@ const phonicsSoundPattern = new RegExp(
   "g",
 );
 
+const alphabetLetterCourses = [
+  { id: "alphabet-1", title: "アルファベットの音①", icon: "🔤", summary: "b・c・d・f・g・h の音", letters: ["b", "c", "d", "f", "g", "h"] },
+  { id: "alphabet-2", title: "アルファベットの音②", icon: "🔤", summary: "j・k・l・m・n・p の音", letters: ["j", "k", "l", "m", "n", "p"] },
+  { id: "alphabet-3", title: "アルファベットの音③", icon: "🔤", summary: "r・s・t・v・w・y・z の音", letters: ["r", "s", "t", "v", "w", "y", "z"] },
+  { id: "alphabet-4", title: "アルファベットの母音", icon: "🔤", summary: "a・e・i・o・u の音", letters: ["a", "e", "i", "o", "u"] },
+];
+
+// 既存の alphabet の問題を、その単語の文字が属するコースへ振り分ける
+const legacyAlphabetCourse = {
+  fish: "alphabet-1", dog: "alphabet-1", bag: "alphabet-1",
+  map: "alphabet-2", kite: "alphabet-2", jam: "alphabet-2",
+  sun: "alphabet-3", van: "alphabet-3", zip: "alphabet-3", queen: "alphabet-3",
+  box: "alphabet-3", red: "alphabet-3", top: "alphabet-3", yes: "alphabet-3",
+};
+
+// 文字ごとの例単語（一覧表の例の単語・単語カナに基づく）
+const letterExampleWords = {
+  a: { word: "apple", split: "ア・ッ・プ・ル", joined: "アップル", meaning: "りんご" },
+  b: { word: "bus", split: "バ・ス", joined: "バス", meaning: "乗り物" },
+  c: { word: "cat", split: "キャ・ット", joined: "キャット", meaning: "猫" },
+  d: { word: "dog", split: "ド・オ・グ", joined: "ドッグ", meaning: "犬" },
+  e: { word: "egg", split: "エ・ッ・グ", joined: "エッグ", meaning: "たまご" },
+  f: { word: "fish", split: "フ・ィッ・シュ", joined: "フィッシュ", meaning: "魚" },
+  g: { word: "gorilla", split: "ゴ・リ・ラ", joined: "ゴリラ", meaning: "動物" },
+  h: { word: "hat", split: "ハ・ット", joined: "ハット", meaning: "帽子" },
+  i: { word: "ink", split: "イ・ン・ク", joined: "インク", meaning: "インク" },
+  j: { word: "juice", split: "ジュ・ース", joined: "ジュース", meaning: "飲み物" },
+  k: { word: "king", split: "キ・ン・グ", joined: "キング", meaning: "王様" },
+  l: { word: "lemon", split: "レ・モ・ン", joined: "レモン", meaning: "果物" },
+  m: { word: "milk", split: "ミ・ル・ク", joined: "ミルク", meaning: "牛乳" },
+  n: { word: "nut", split: "ナ・ッ・ツ", joined: "ナッツ", meaning: "木の実" },
+  o: { word: "orange", split: "オ・レ・ン・ジ", joined: "オレンジ", meaning: "果物" },
+  p: { word: "pen", split: "ペ・ン", joined: "ペン", meaning: "書くもの" },
+  r: { word: "robot", split: "ロ・ボ・ッ・ト", joined: "ロボット", meaning: "機械人形" },
+  s: { word: "sun", split: "ス・ア・ン", joined: "サン", meaning: "太陽" },
+  t: { word: "tomato", split: "ト・マ・ト", joined: "トマト", meaning: "野菜" },
+  u: { word: "umbrella", split: "ア・ン・ブ・レ・ラ", joined: "アンブレラ", meaning: "傘" },
+  v: { word: "violin", split: "バ・イ・オ・リ・ン", joined: "バイオリン", meaning: "楽器" },
+  w: { word: "watch", split: "ウォ・ッ・チ", joined: "ウォッチ", meaning: "腕時計" },
+  y: { word: "yo-yo", split: "ヨ・ー・ヨ・ー", joined: "ヨーヨー", meaning: "おもちゃ" },
+  z: { word: "zoo", split: "ズ・ー", joined: "ズー", meaning: "動物園" },
+};
 const courses = [
-  { id: "alphabet", title: "アルファベットの音", icon: "🔤", summary: "26文字の基本音と、その音で始まる単語" },
+  ...alphabetLetterCourses,
   { id: "short-vowels", title: "短母音とCVC", icon: "🍎", summary: "短い母音の音と、子音・母音・子音の単語" },
   { id: "consonant-teams", title: "子音の組み合わせ", icon: "🐚", summary: "sh・ch・th・ph・wh などのつづり" },
   { id: "silent-e", title: "サイレントe", icon: "✨", summary: "語尾のeで母音の音が変わる単語" },
@@ -82,10 +121,10 @@ const questionBank = {
   alphabet: [
     { level: 0, prompt: "sun の最初の音はどれ？", word: "sun", display: "？・ア・ン", answer: "/s/", choices: ["/s/", "/m/", "/t/", "/f/"], explanation: "sun は /s/ の音で始まるよ。S の音を思い出そう。" },
     { level: 0, prompt: "map の最初の音はどれ？", word: "map", display: "？・ア・プ", answer: "/m/", choices: ["/m/", "/n/", "/b/", "/p/"], explanation: "map は /m/ の音で始まるよ。唇を閉じて出す音だよ。" },
-    { level: 0, prompt: "fish の最初の音はどれ？", word: "fish", display: "？・イ・シ", answer: "/f/", choices: ["/f/", "/v/", "/s/", "/h/"], explanation: "fish は /f/ の音で始まるよ。" },
+    { level: 0, prompt: "fish の最初の音はどれ？", word: "fish", display: "？・ィッ・シュ", answer: "/f/", choices: ["/f/", "/v/", "/s/", "/h/"], explanation: "fish は /f/ の音で始まるよ。" },
     { level: 0, prompt: "dog の最初の音はどれ？", word: "dog", display: "？・オ・グ", answer: "/d/", choices: ["/d/", "/b/", "/g/", "/t/"], explanation: "dog は /d/ の音で始まるよ。" },
     { level: 1, prompt: "bag の最初の音を表す文字は？", word: "bag", display: "？・ア・グ", answer: "b", choices: ["b", "d", "p", "g"], explanation: "bag は b の音で始まる単語。文字 b が /b/ を表すよ。" },
-    { level: 1, prompt: "kite の最初の音を表す文字は？", word: "kite", display: "？・アイ・ト", answer: "k", choices: ["k", "c", "t", "g"], explanation: "kite は /k/ の音で始まるよ。ここでは k がその音を表すよ。" },
+    { level: 1, prompt: "kite の最初の音を表す文字は？", word: "kite", display: "？・アイ・ト", answer: "k", choices: ["k", "h", "t", "g"], explanation: "kite は /k/ の音で始まるよ。ここでは k がその音を表すよ。" },
     { level: 2, prompt: "van の最初の音はどれ？", word: "van", display: "？・ア・ン", answer: "/v/", choices: ["/v/", "/f/", "/w/", "/b/"], explanation: "van は /v/ の音で始まるよ。f の音と区別してみよう。" },
     { level: 2, prompt: "zip の最初の音を表す文字は？", word: "zip", display: "？・イ・プ", answer: "z", choices: ["z", "s", "j", "x"], explanation: "zip は /z/ の音で始まるよ。文字 z の音だね。" },
     { level: 3, prompt: "queen の最初の音の組み合わせは？", word: "queen", display: "？・イー・ン", answer: "qu", choices: ["qu", "kw", "q", "ch"], explanation: "queen の最初の音は /kw/。つづりでは qu がその音を表すよ。" },
@@ -96,18 +135,18 @@ const questionBank = {
     { level: 3, prompt: "yes の最初の音はどれ？", word: "yes", display: "？・エ・ス", answer: "/j/", choices: ["/j/", "/dʒ/", "/i/", "/w/"], explanation: "yes の y はヤ行の音 /j/ だよ。" },
   ],
   "short-vowels": [
-    { level: 0, prompt: "cat の母音 a の音はどれ？", word: "cat", display: "ク・？・ト", answer: "/æ/", choices: ["/æ/", "/e/", "/ɪ/", "/ʌ/"], explanation: "cat の a は短い /æ/ の音だよ。" },
+    { level: 0, prompt: "cat の母音 a の音はどれ？", word: "cat", display: "ク・？・ト", answer: "/æ/", choices: ["/æ/", "/e/", "/ɪ/", "/ʊ/"], explanation: "cat の a は短い /æ/ の音だよ。" },
     { level: 0, prompt: "bed の母音 e の音はどれ？", word: "bed", display: "ブ・？・ド", answer: "/e/", choices: ["/e/", "/æ/", "/iː/", "/ɒ/"], explanation: "bed の e は短い /e/ の音だよ。" },
     { level: 0, prompt: "pig の母音 i の音はどれ？", word: "pig", display: "プ・？・グ", answer: "/ɪ/", choices: ["/ɪ/", "/aɪ/", "/e/", "/uː/"], explanation: "pig の i は短い /ɪ/ の音だよ。" },
     { level: 1, prompt: "hot の母音 o の音はどれ？", word: "hot", display: "ハ・？・ト", answer: "/ɒ/", choices: ["/ɒ/", "/oʊ/", "/ʌ/", "/ɔɪ/"], explanation: "hot の o は短い /ɒ/ の音だよ。" },
-    { level: 1, prompt: "sun の母音 u の音はどれ？", word: "sun", display: "ス・？・ン", answer: "/ʌ/", choices: ["/ʌ/", "/uː/", "/ʊ/", "/æ/"], explanation: "sun の u は短い /ʌ/ の音だよ。" },
-    { level: 1, prompt: "map のまんなかの音に合う文字は？", word: "m_p", display: "ム・？・プ", answer: "a", choices: ["a", "e", "i", "u"], explanation: "map は m-a-p。まんなかの a が短い /æ/ の音を表すよ。" },
+    { level: 1, prompt: "sun の母音 u の音はどれ？", word: "sun", display: "ス・？・ン", answer: "/ʌ/", choices: ["/ʌ/", "/uː/", "/ʊ/", "/ɒ/"], explanation: "sun の u は短い /ʌ/ の音だよ。" },
+    { level: 1, prompt: "map のまんなかの音に合う文字は？", word: "m_p", display: "ム・？・プ", answer: "a", choices: ["a", "e", "i", "o"], explanation: "map は m-a-p。まんなかの a が短い /æ/ の音を表すよ。" },
     { level: 2, prompt: "hen のまんなかの音に合う文字は？", word: "h_n", display: "ハ・？・ン", answer: "e", choices: ["e", "a", "o", "i"], explanation: "hen は h-e-n。e が短い /e/ の音を表すよ。" },
-    { level: 2, prompt: "cup のまんなかの音はどれ？", word: "cup", display: "ク・？・プ", answer: "/ʌ/", choices: ["/ʌ/", "/ɪ/", "/æ/", "/iː/"], explanation: "cup の u は短い /ʌ/ の音だよ。" },
-    { level: 3, prompt: "fox のまんなかの音に合う文字は？", word: "f_x", display: "フ・？・クス", answer: "o", choices: ["o", "a", "u", "e"], explanation: "fox は f-o-x。o が短い /ɒ/ の音を表すよ。" },
+    { level: 2, prompt: "cup のまんなかの音はどれ？", word: "cup", display: "ク・？・プ", answer: "/ʌ/", choices: ["/ʌ/", "/ɪ/", "/e/", "/iː/"], explanation: "cup の u は短い /ʌ/ の音だよ。" },
+    { level: 3, prompt: "fox のまんなかの音に合う文字は？", word: "f_x", display: "フ・？・クス", answer: "o", choices: ["o", "a", "i", "e"], explanation: "fox は f-o-x。o が短い /ɒ/ の音を表すよ。" },
     { level: 3, prompt: "web のまんなかの音はどれ？", word: "web", display: "ウ・？・ブ", answer: "/e/", choices: ["/e/", "/æ/", "/ɒ/", "/ʊ/"], explanation: "web の e は短い /e/ の音だよ。" },
     { level: 0, prompt: "fin の母音 i の音はどれ？", word: "fin", display: "フ・？・ン", answer: "/ɪ/", choices: ["/ɪ/", "/iː/", "/e/", "/ʌ/"], explanation: "fin の i は短い /ɪ/ の音だよ。" },
-    { level: 2, prompt: "bag の母音 a の音はどれ？", word: "bag", display: "ブ・？・グ", answer: "/æ/", choices: ["/æ/", "/e/", "/ɑː/", "/ʌ/"], explanation: "bag の a は短い /æ/ の音だよ。" },
+    { level: 2, prompt: "bag の母音 a の音はどれ？", word: "bag", display: "ブ・？・グ", answer: "/æ/", choices: ["/æ/", "/e/", "/ɑː/", "/ɒ/"], explanation: "bag の a は短い /æ/ の音だよ。" },
   ],
   "consonant-teams": [
     { level: 0, prompt: "ship の sh が表す最初の音は？", word: "ship", display: "？・イ・プ", answer: "/ʃ/", choices: ["/ʃ/", "/s/", "/tʃ/", "/h/"], explanation: "sh は2文字で /ʃ/ の音を表すよ。" },
@@ -116,7 +155,7 @@ const questionBank = {
     { level: 1, prompt: "this の th が表す最初の音は？", word: "this", display: "？・イ・ス", answer: "/ð/", choices: ["/ð/", "/θ/", "/d/", "/z/"], explanation: "this の th は声を出す /ð/ の音だよ。" },
     { level: 1, prompt: "phone の ph が表す最初の音は？", word: "phone", display: "？・オ・ン", answer: "/f/", choices: ["/f/", "/p/", "/h/", "/v/"], explanation: "ph は /f/ の音を表すつづりだよ。" },
     { level: 1, prompt: "whale の wh が表す最初の音は？", word: "whale", display: "？・エイ・ル", answer: "/w/", choices: ["/w/", "/h/", "/v/", "/f/"], explanation: "whale の wh は /w/ の音で始まるよ。" },
-    { level: 2, prompt: "ring の ng が表す最後の音は？", word: "ring", display: "ラ・イ・？", answer: "/ŋ/", choices: ["/ŋ/", "/n/", "/g/", "/ŋg/"], explanation: "ng は語尾で /ŋ/ の音を表すことがあるよ。" },
+    { level: 2, prompt: "ring の ng が表す最後の音は？", word: "ring", display: "ラ・イ・？", answer: "/ŋ/", choices: ["/ŋ/", "/n/", "/g/", "/k/"], explanation: "ng は語尾で /ŋ/ の音を表すことがあるよ。" },
     { level: 2, prompt: "duck の ck が表す最後の音は？", word: "duck", display: "ド・ア・？", answer: "/k/", choices: ["/k/", "/s/", "/tʃ/", "/g/"], explanation: "ck は2文字で /k/ の音を表すよ。" },
     { level: 3, prompt: "shop の sh が表す最初の音は？", word: "shop", display: "？・オ・プ", answer: "/ʃ/", choices: ["/ʃ/", "/tʃ/", "/ʒ/", "/s/"], explanation: "shop の sh は /ʃ/ の音だよ。" },
     { level: 3, prompt: "chat の ch が表す最初の音は？", word: "chat", display: "？・ア・ト", answer: "/tʃ/", choices: ["/tʃ/", "/ʃ/", "/k/", "/h/"], explanation: "chat の ch は /tʃ/ の音だよ。" },
@@ -156,7 +195,7 @@ const questionBank = {
 const wordInfo = {
   "sun": { split: "ス・ア・ン", joined: "サン", meaning: "太陽" },
   "map": { split: "ム・ア・ップ", joined: "マップ", meaning: "地図" },
-  "fish": { split: "フ・イ・シ", joined: "フィッシュ", meaning: "魚" },
+  "fish": { split: "フ・ィッ・シュ", joined: "フィッシュ", meaning: "魚" },
   "dog": { split: "ド・オ・グ", joined: "ドッグ", meaning: "犬" },
   "bag": { split: "バ・ア・グ", joined: "バッグ", meaning: "かばん" },
   "kite": { split: "ク・アイ・ト", joined: "カイト", meaning: "凧" },
@@ -215,6 +254,103 @@ const wordInfo = {
   "s__d": { split: "ス・イー・ド", joined: "シード", meaning: "種" },
 };
 
+for (const example of Object.values(letterExampleWords)) {
+  if (!wordInfo[example.word]) {
+    wordInfo[example.word] = { split: example.split, joined: example.joined, meaning: example.meaning };
+  }
+}
+
+function pickDistinct(candidates, count, keyOf) {
+  const picked = [];
+  const keys = new Set();
+  for (const candidate of candidates) {
+    const key = keyOf(candidate);
+    if (keys.has(key)) continue;
+    keys.add(key);
+    picked.push(candidate);
+    if (picked.length === count) break;
+  }
+  return picked;
+}
+
+function buildLetterQuestions(course) {
+  const questions = [];
+  course.letters.forEach((letter) => {
+    const example = letterExampleWords[letter];
+    const kana = phonicsLetterSounds[letter];
+    const display = ["？", ...example.split.split("・").slice(1)].join("・");
+    const candidates = Object.keys(phonicsLetterSounds)
+      .filter((other) => other !== letter && phonicsLetterSounds[other] !== kana)
+      .sort((left, right) => Number(course.letters.includes(right)) - Number(course.letters.includes(left)));
+    const distractors = pickDistinct(candidates, 3, (other) => phonicsLetterSounds[other]);
+    questions.push({
+      level: 0,
+      prompt: `${example.word} の最初の音を表す文字は？`,
+      word: example.word,
+      display,
+      answer: letter,
+      choices: [letter, ...distractors],
+      explanation: `${example.word} は ${letter} の音で始まる単語だよ。`,
+    });
+    questions.push({
+      level: 1,
+      prompt: `文字 ${letter} の音はどれ？`,
+      word: example.word,
+      display,
+      answer: kana,
+      choices: [kana, ...distractors.map((other) => phonicsLetterSounds[other])],
+      explanation: `${letter} の音は ${kana} だよ。例：${example.word}。`,
+    });
+  });
+  return questions;
+}
+
+for (const course of alphabetLetterCourses) {
+  questionBank[course.id] = [
+    ...questionBank.alphabet.filter((question) => legacyAlphabetCourse[question.word] === course.id),
+    ...buildLetterQuestions(course),
+  ];
+}
+delete questionBank.alphabet;
+
+// ヒント：読みごとに、日本で身近なカタカナ英語の例と音節を示す
+const soundExampleWords = {
+  "ア": "アップル", "エ": "エッグタルト", "イ": "インターネット", "オ": "オレンジ",
+  "ウ": "ウィンナー", "アイ": "アイス", "エイ": "ケーキ", "オウ": "ホーム",
+  "オイ": "コイン", "アウ": "カウンター", "イー": "ティー", "ウー": "スープ",
+  "ユー": "ユーモア", "ア（弱く）": "アップル",
+  "ブ": "ブログ", "ク": "クッキー", "グ": "グッズ", "ドゥ": "ドリンク",
+  "ヌ": "ヌードル", "プ": "プレゼント", "ス": "スマホ", "ズ": "ズーム",
+  "フ": "フィレオフィッシュ", "ハ": "ハンバーガー", "ム": "ムービー", "ル": "ルール",
+  "ヴ": "ヴァイオリン", "ジュ": "ジュース", "シュ": "シュークリーム", "チ": "チキン",
+  "ユ": "ユニフォーム", "トゥ": "トゥモロー", "ング": "リング", "クゥ": "クイズ",
+  "クス": "ボックス", "ス（舌先を歯の間に）": "サンクス", "ズ（舌先を歯の間に）": "ブラザー",
+};
+const exampleSyllables = {
+  "アップル": "ア・ッ・プ・ル", "エッグタルト": "エッ・グ・タ・ル・ト",
+  "インターネット": "イン・ター・ネ・ッ・ト", "オレンジ": "オ・レ・ン・ジ",
+  "ウィンナー": "ウィ・ン・ナ・ー", "アイス": "ア・イ・ス", "ケーキ": "ケ・ー・キ",
+  "ホーム": "ホ・ー・ム", "コイン": "コ・イ・ン", "カウンター": "カ・ウ・ン・タ・ー",
+  "ティー": "ティ・ー", "スープ": "ス・ー・プ", "ユーモア": "ユ・ー・モ・ア",
+  "ブログ": "ブ・ロ・グ", "クッキー": "ク・ッ・キ・ー", "グッズ": "グ・ッ・ズ",
+  "ドリンク": "ド・リ・ン・ク", "ヌードル": "ヌ・ー・ド・ル", "プレゼント": "プ・レ・ゼ・ン・ト",
+  "スマホ": "ス・マ・ホ", "ズーム": "ズ・ー・ム", "フィレオフィッシュ": "フィ・レ・オ・フィッ・シュ",
+  "ハンバーガー": "ハ・ン・バ・ー・ガ・ー", "ムービー": "ム・ー・ビ・ー", "ルール": "ル・ー・ル",
+  "ヴァイオリン": "ヴァ・イ・オ・リ・ン", "ジュース": "ジュ・ー・ス", "シュークリーム": "シュー・ク・リ・ー・ム",
+  "チキン": "チ・キ・ン", "ユニフォーム": "ユ・ニ・フォ・ー・ム", "トゥモロー": "ト・ゥ・モ・ロ・ー",
+  "リング": "リ・ン・グ", "クイズ": "ク・イ・ズ", "ボックス": "ボ・ッ・ク・ス",
+  "サンクス": "サ・ン・クス", "ブラザー": "ブ・ラ・ザ・ー",
+};
+const kanaOfAnswer = (answer) => phonicsLetterSounds[answer] || phonicsSounds[answer] || answer;
+for (const pool of Object.values(questionBank)) {
+  for (const question of pool) {
+    const example = soundExampleWords[kanaOfAnswer(question.answer)];
+    question.explanation = example
+      ? `${example}（${exampleSyllables[example]}）`
+      : question.explanation.replace(/の音/g, "");
+  }
+}
+
 const defaultData = () => ({ stats: {}, wrong: [], history: [] });
 const getElement = (id) => document.getElementById(id);
 let learningData = loadLearningData();
@@ -225,10 +361,6 @@ let advanceTimer = null;
 let modeTimer = null;
 let soundEnabled = localStorage.getItem(SOUND_KEY) !== "false";
 let audioContext = null;
-let writingCanvas = null;
-let resizeCanvas = null;
-let hasInk = false;
-let isDrawing = false;
 
 function loadLearningData() {
   try {
@@ -273,6 +405,14 @@ function appendPhonicsText(element, text) {
     lastIndex = index + symbol.length;
   }
   if (lastIndex < text.length) element.append(text.slice(lastIndex));
+}
+
+function appendAnswerText(element, value) {
+  if (phonicsLetterSounds[value]) {
+    appendLetterChoice(element, value);
+  } else {
+    appendPhonicsText(element, value);
+  }
 }
 
 function appendLetterChoice(element, letter) {
@@ -322,7 +462,6 @@ function createCourseCard(course) {
   actions.className = "course-actions";
   actions.append(createCourseButton("学習する", "start-course", () => startQuiz(course.id)));
   actions.append(createCourseButton("誤答ログ", "outline", () => showCourseLog(course)));
-  actions.append(createCourseButton("手書き記録", "outline", () => showTraceLog(course)));
 
   const challenges = createChallenges(course, stats);
   card.append(copy, actions, challenges);
@@ -379,24 +518,6 @@ function showCourseLog(course) {
   entries.slice(-12).reverse().forEach((entry) => list.append(createReviewItem(entry)));
 }
 
-function showTraceLog(course) {
-  hidePanels();
-  getElement("courses").classList.add("hidden");
-  const panel = getElement("tracePanel");
-  panel.classList.remove("hidden");
-  getElement("traceTitle").textContent = `手書きの見直し：${course.title}`;
-  const list = getElement("traceList");
-  list.replaceChildren();
-  const entries = learningData.wrong.filter((entry) =>
-    entry.courseId === course.id && entry.trace && Date.now() - entry.createdAt < TRACE_RETENTION_MS,
-  );
-  if (!entries.length) {
-    list.append(createEmptyMessage("2日以内の手書き記録はありません。"));
-    return;
-  }
-  entries.slice().reverse().forEach((entry) => list.append(createReviewItem(entry)));
-}
-
 function createEmptyMessage(text) {
   const message = document.createElement("p");
   message.textContent = text;
@@ -412,10 +533,10 @@ function createReviewItem(entry) {
   word.textContent = entry.word;
   const mistake = document.createElement("p");
   mistake.className = "mistake";
-  mistake.append("あなたの答え：");
-  appendPhonicsText(mistake, entry.answer);
-  mistake.append(" / 正解：");
-  appendPhonicsText(mistake, entry.correct);
+  mistake.append("正解：");
+  appendAnswerText(mistake, entry.correct);
+  mistake.append(" / あなたの答え：");
+  appendAnswerText(mistake, entry.answer);
   const explanation = document.createElement("p");
   appendPhonicsText(explanation, entry.explanation);
   item.append(question, word, mistake, explanation);
@@ -424,19 +545,12 @@ function createReviewItem(entry) {
     reviewed.textContent = "✅ 解き直し済み";
     item.append(reviewed);
   }
-  if (entry.trace) {
-    const image = document.createElement("img");
-    image.src = entry.trace;
-    image.alt = "この問題に取り組んだときの手書き記録";
-    item.append(image);
-  }
   item.append(createCourseButton("この問題を解き直す", "outline", () => startReview(entry)));
   return item;
 }
 
 function hidePanels() {
   getElement("reviewPanel").classList.add("hidden");
-  getElement("tracePanel").classList.add("hidden");
   getElement("courses").classList.remove("hidden");
 }
 
@@ -485,7 +599,6 @@ function startReview(entry) {
 
 function showScreen(screen) {
   ["home", "quiz", "result"].forEach((id) => getElement(id).classList.toggle("hidden", id !== screen));
-  if (screen === "quiz") requestAnimationFrame(() => resizeCanvas?.());
 }
 
 function selectQuestion(index) {
@@ -514,31 +627,44 @@ function renderProblem() {
   const wordCard = getElement("wordCard");
   wordCard.textContent = question.display || question.word;
   wordCard.dataset.word = question.word;
+  const meaningHint = getElement("meaningHint");
+  const info = wordInfo[question.word];
+  meaningHint.textContent = info ? `意味：${info.meaning}` : "";
+  meaningHint.classList.toggle("hidden", !info);
   const previousAnswer = getElement("previousAnswer");
   previousAnswer.replaceChildren();
   if (quiz.previousAnswer) {
     previousAnswer.append("前回の答え：");
-    appendPhonicsText(previousAnswer, quiz.previousAnswer);
+    appendAnswerText(previousAnswer, quiz.previousAnswer);
   }
   previousAnswer.classList.toggle("hidden", !quiz.previousAnswer);
   renderChoices(question);
   updateModeStatus();
-  clearWritingCanvas();
+}
+
+function shuffled(items) {
+  const copy = [...items];
+  for (let index = copy.length - 1; index > 0; index -= 1) {
+    const other = Math.floor(Math.random() * (index + 1));
+    [copy[index], copy[other]] = [copy[other], copy[index]];
+  }
+  return copy;
 }
 
 function renderChoices(question) {
   const answers = getElement("answers");
   answers.replaceChildren();
-  question.choices.forEach((choice) => {
+  shuffled(question.choices).forEach((choice) => {
     const button = document.createElement("button");
     button.type = "button";
     button.className = "answer-choice";
     if (phonicsLetterSounds[choice]) {
       appendLetterChoice(button, choice);
       button.setAttribute("aria-label", `${phonicsLetterSounds[choice]}（${choice}）`);
+    } else if (phonicsSounds[choice]) {
+      button.textContent = phonicsSounds[choice];
     } else {
       appendPhonicsText(button, choice);
-      if (phonicsSounds[choice]) button.setAttribute("aria-label", getPhonicsText(choice));
     }
     button.addEventListener("click", () => judgeAnswer(choice));
     answers.append(button);
@@ -588,8 +714,6 @@ function recordMistake(question, answer) {
     explanation: question.explanation,
     createdAt: Date.now(),
   };
-  const trace = captureWriting();
-  if (trace) entry.trace = trace;
   learningData.wrong.push(entry);
   learningData.wrong = learningData.wrong.slice(-MAX_WRONG_ENTRIES);
   saveData();
@@ -612,24 +736,20 @@ function showFeedback(isCorrect, question, answer) {
     message.append("ヒント：");
     appendPhonicsText(message, question.explanation);
   }
-  content.append(title, message, createWordInfo(question.word));
-
   const primary = createFeedbackButton(
     isCorrect ? "つぎへ ↵" : "再回答",
     isCorrect ? advanceQuiz : retryQuestion,
   );
   actions.append(primary);
-  if (!isCorrect) {
+  if (isCorrect) {
+    content.append(title, createWordInfo(question.word), message);
+  } else {
     const answer = document.createElement("p");
     answer.className = "feedback-answer";
     answer.append("正解：「");
-    if (phonicsLetterSounds[question.answer]) {
-      appendLetterChoice(answer, question.answer);
-    } else {
-      appendPhonicsText(answer, question.answer);
-    }
+    appendAnswerText(answer, question.answer);
     answer.append("」");
-    content.append(answer);
+    content.append(title, answer, createWordInfo(question.word), message);
     actions.append(createFeedbackButton("次へ", advanceQuiz, "secondary"));
   }
   dialog.showModal();
@@ -642,7 +762,7 @@ function createWordInfo(word) {
   const box = document.createElement("p");
   box.className = "word-info";
   if (!info) return box;
-  box.textContent = `音節：${info.split} ／ 1語：${info.joined} ／ 意味：${info.meaning}`;
+  box.textContent = `音節：${info.split} ／ 1語：${info.joined}`;
   return box;
 }
 
@@ -749,10 +869,10 @@ function renderAnswerSummary() {
     const prompt = document.createElement("strong");
     appendPhonicsText(prompt, `${index + 1}. ${question.prompt} (${question.word})`);
     const answer = document.createElement("small");
-    answer.append("あなたの答え：");
-    appendPhonicsText(answer, quiz.submitted[index] || "未回答");
-    answer.append(" / 正解：");
-    appendPhonicsText(answer, question.answer);
+    answer.append("正解：");
+    appendAnswerText(answer, question.answer);
+    answer.append(" / あなたの答え：");
+    appendAnswerText(answer, quiz.submitted[index] || "未回答");
     const explanation = document.createElement("small");
     appendPhonicsText(explanation, question.explanation);
     item.append(prompt, answer, explanation);
@@ -776,57 +896,6 @@ function returnToCourses() {
   showScreen("home");
   hidePanels();
   renderCourses();
-}
-
-function initializeCanvas() {
-  writingCanvas = getElement("writingCanvas");
-  const context = writingCanvas.getContext("2d");
-  resizeCanvas = () => {
-    const bounds = writingCanvas.getBoundingClientRect();
-    const scale = window.devicePixelRatio || 1;
-    writingCanvas.width = Math.max(1, Math.round(bounds.width * scale));
-    writingCanvas.height = Math.max(1, Math.round(bounds.height * scale));
-    context.setTransform(scale, 0, 0, scale, 0, 0);
-    context.lineWidth = CANVAS_BRUSH_WIDTH;
-    context.lineCap = "round";
-    context.strokeStyle = "#53795d";
-  };
-  resizeCanvas();
-  writingCanvas.addEventListener("pointerdown", (event) => {
-    isDrawing = true;
-    writingCanvas.setPointerCapture(event.pointerId);
-    context.beginPath();
-    context.moveTo(event.offsetX, event.offsetY);
-  });
-  writingCanvas.addEventListener("pointermove", (event) => {
-    if (!isDrawing) return;
-    context.lineTo(event.offsetX, event.offsetY);
-    context.stroke();
-    hasInk = true;
-  });
-  writingCanvas.addEventListener("pointerup", () => { isDrawing = false; });
-  writingCanvas.addEventListener("pointercancel", () => { isDrawing = false; });
-  window.addEventListener("resize", resizeCanvas);
-}
-
-function clearWritingCanvas() {
-  if (!writingCanvas) return;
-  const context = writingCanvas.getContext("2d");
-  context.clearRect(0, 0, writingCanvas.width, writingCanvas.height);
-  hasInk = false;
-}
-
-function captureWriting() {
-  if (!hasInk) return "";
-  const width = Math.min(MAX_CANVAS_SNAPSHOT_WIDTH, writingCanvas.width);
-  const snapshot = document.createElement("canvas");
-  snapshot.width = width;
-  snapshot.height = Math.max(1, Math.round(writingCanvas.height * width / writingCanvas.width));
-  const context = snapshot.getContext("2d");
-  context.fillStyle = "#fff";
-  context.fillRect(0, 0, snapshot.width, snapshot.height);
-  context.drawImage(writingCanvas, 0, 0, snapshot.width, snapshot.height);
-  return snapshot.toDataURL("image/png");
 }
 
 function playFeedbackTone(isCorrect) {
@@ -861,11 +930,6 @@ function registerEvents() {
     getElement("reviewPanel").classList.add("hidden");
     getElement("courses").classList.remove("hidden");
   });
-  getElement("traceBack").addEventListener("click", () => {
-    getElement("tracePanel").classList.add("hidden");
-    getElement("courses").classList.remove("hidden");
-  });
-  getElement("clearCanvas").addEventListener("click", clearWritingCanvas);
   getElement("resetData").addEventListener("click", resetLearningData);
   getElement("sound").addEventListener("click", toggleSound);
   getElement("again").addEventListener("click", () => startQuiz(selectedCourse));
@@ -897,18 +961,7 @@ function toggleSound() {
   getElement("sound").textContent = soundEnabled ? "🔊" : "🔇";
 }
 
-function removeExpiredTraces() {
-  learningData.wrong.forEach((entry) => {
-    if (entry.trace && Date.now() - entry.createdAt >= TRACE_RETENTION_MS) {
-      delete entry.trace;
-    }
-  });
-  saveData();
-}
-
 function initializeApplication() {
-  removeExpiredTraces();
-  initializeCanvas();
   registerEvents();
   toggleSoundState();
   renderCourses();
