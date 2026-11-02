@@ -273,6 +273,7 @@ main { padding-block: 4px 80px; }
 .feedback-dialog.ok h2 { color: #457a4c; }
 .feedback-dialog.no h2 { color: #a56c4b; }
 .feedback-answer { font-size: 1.15rem; font-weight: 800; }
+.word-info { margin: 0.4rem 0 0; font-weight: 700; }
 .feedback-actions { display: flex; flex-wrap: wrap; gap: 9px; margin-top: 18px; }
 .feedback-actions button {
   min-height: 44px;

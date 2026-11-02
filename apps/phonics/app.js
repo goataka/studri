@@ -75,77 +75,139 @@ const courses = [
 
 const questionBank = {
   alphabet: [
-    { level: 0, prompt: "sun の最初の音はどれ？", word: "sun", answer: "/s/", choices: ["/s/", "/m/", "/t/", "/f/"], explanation: "sun は /s/ の音で始まるよ。S の音を思い出そう。" },
-    { level: 0, prompt: "map の最初の音はどれ？", word: "map", answer: "/m/", choices: ["/m/", "/n/", "/b/", "/p/"], explanation: "map は /m/ の音で始まるよ。唇を閉じて出す音だよ。" },
-    { level: 0, prompt: "fish の最初の音はどれ？", word: "fish", answer: "/f/", choices: ["/f/", "/v/", "/s/", "/h/"], explanation: "fish は /f/ の音で始まるよ。" },
-    { level: 0, prompt: "dog の最初の音はどれ？", word: "dog", answer: "/d/", choices: ["/d/", "/b/", "/g/", "/t/"], explanation: "dog は /d/ の音で始まるよ。" },
-    { level: 1, prompt: "bag の最初の音を表す文字は？", word: "bag", answer: "b", choices: ["b", "d", "p", "g"], explanation: "bag は b の音で始まる単語。文字 b が /b/ を表すよ。" },
-    { level: 1, prompt: "kite の最初の音を表す文字は？", word: "kite", answer: "k", choices: ["k", "c", "t", "g"], explanation: "kite は /k/ の音で始まるよ。ここでは k がその音を表すよ。" },
-    { level: 2, prompt: "van の最初の音はどれ？", word: "van", answer: "/v/", choices: ["/v/", "/f/", "/w/", "/b/"], explanation: "van は /v/ の音で始まるよ。f の音と区別してみよう。" },
-    { level: 2, prompt: "zip の最初の音を表す文字は？", word: "zip", answer: "z", choices: ["z", "s", "j", "x"], explanation: "zip は /z/ の音で始まるよ。文字 z の音だね。" },
-    { level: 3, prompt: "queen の最初の音の組み合わせは？", word: "queen", answer: "qu", choices: ["qu", "kw", "q", "ch"], explanation: "queen の最初の音は /kw/。つづりでは qu がその音を表すよ。" },
-    { level: 3, prompt: "box の最後の音はどれ？", word: "box", answer: "/ks/", choices: ["/ks/", "/s/", "/z/", "/k/"], explanation: "box の x は語尾で /ks/ の音を表すよ。" },
-    { level: 0, prompt: "red の最初の音を表す文字は？", word: "red", answer: "r", choices: ["r", "l", "w", "d"], explanation: "red は r の音で始まる単語だよ。" },
-    { level: 1, prompt: "top の最初の音はどれ？", word: "top", answer: "/t/", choices: ["/t/", "/d/", "/p/", "/k/"], explanation: "top は /t/ の音で始まるよ。" },
-    { level: 2, prompt: "jam の最初の音を表す文字は？", word: "jam", answer: "j", choices: ["j", "g", "y", "c"], explanation: "jam は /dʒ/ の音で始まるよ。文字 j が使われるね。" },
-    { level: 3, prompt: "yes の最初の音はどれ？", word: "yes", answer: "/j/", choices: ["/j/", "/dʒ/", "/i/", "/w/"], explanation: "yes の y はヤ行の音 /j/ だよ。" },
+    { level: 0, prompt: "sun の最初の音はどれ？", word: "sun", display: "？・ア・ン", answer: "/s/", choices: ["/s/", "/m/", "/t/", "/f/"], explanation: "sun は /s/ の音で始まるよ。S の音を思い出そう。" },
+    { level: 0, prompt: "map の最初の音はどれ？", word: "map", display: "？・ア・プ", answer: "/m/", choices: ["/m/", "/n/", "/b/", "/p/"], explanation: "map は /m/ の音で始まるよ。唇を閉じて出す音だよ。" },
+    { level: 0, prompt: "fish の最初の音はどれ？", word: "fish", display: "？・イ・シ", answer: "/f/", choices: ["/f/", "/v/", "/s/", "/h/"], explanation: "fish は /f/ の音で始まるよ。" },
+    { level: 0, prompt: "dog の最初の音はどれ？", word: "dog", display: "？・オ・グ", answer: "/d/", choices: ["/d/", "/b/", "/g/", "/t/"], explanation: "dog は /d/ の音で始まるよ。" },
+    { level: 1, prompt: "bag の最初の音を表す文字は？", word: "bag", display: "？・ア・グ", answer: "b", choices: ["b", "d", "p", "g"], explanation: "bag は b の音で始まる単語。文字 b が /b/ を表すよ。" },
+    { level: 1, prompt: "kite の最初の音を表す文字は？", word: "kite", display: "？・アイ・ト", answer: "k", choices: ["k", "c", "t", "g"], explanation: "kite は /k/ の音で始まるよ。ここでは k がその音を表すよ。" },
+    { level: 2, prompt: "van の最初の音はどれ？", word: "van", display: "？・ア・ン", answer: "/v/", choices: ["/v/", "/f/", "/w/", "/b/"], explanation: "van は /v/ の音で始まるよ。f の音と区別してみよう。" },
+    { level: 2, prompt: "zip の最初の音を表す文字は？", word: "zip", display: "？・イ・プ", answer: "z", choices: ["z", "s", "j", "x"], explanation: "zip は /z/ の音で始まるよ。文字 z の音だね。" },
+    { level: 3, prompt: "queen の最初の音の組み合わせは？", word: "queen", display: "？・イー・ン", answer: "qu", choices: ["qu", "kw", "q", "ch"], explanation: "queen の最初の音は /kw/。つづりでは qu がその音を表すよ。" },
+    { level: 3, prompt: "box の最後の音はどれ？", word: "box", display: "ブ・オ・？", answer: "/ks/", choices: ["/ks/", "/s/", "/z/", "/k/"], explanation: "box の x は語尾で /ks/ の音を表すよ。" },
+    { level: 0, prompt: "red の最初の音を表す文字は？", word: "red", display: "？・エ・ド", answer: "r", choices: ["r", "l", "w", "d"], explanation: "red は r の音で始まる単語だよ。" },
+    { level: 1, prompt: "top の最初の音はどれ？", word: "top", display: "？・オ・プ", answer: "/t/", choices: ["/t/", "/d/", "/p/", "/k/"], explanation: "top は /t/ の音で始まるよ。" },
+    { level: 2, prompt: "jam の最初の音を表す文字は？", word: "jam", display: "？・ア・ム", answer: "j", choices: ["j", "g", "y", "c"], explanation: "jam は /dʒ/ の音で始まるよ。文字 j が使われるね。" },
+    { level: 3, prompt: "yes の最初の音はどれ？", word: "yes", display: "？・エ・ス", answer: "/j/", choices: ["/j/", "/dʒ/", "/i/", "/w/"], explanation: "yes の y はヤ行の音 /j/ だよ。" },
   ],
   "short-vowels": [
-    { level: 0, prompt: "cat の母音 a の音はどれ？", word: "cat", answer: "/æ/", choices: ["/æ/", "/e/", "/ɪ/", "/ʌ/"], explanation: "cat の a は短い /æ/ の音だよ。" },
-    { level: 0, prompt: "bed の母音 e の音はどれ？", word: "bed", answer: "/e/", choices: ["/e/", "/æ/", "/iː/", "/ɒ/"], explanation: "bed の e は短い /e/ の音だよ。" },
-    { level: 0, prompt: "pig の母音 i の音はどれ？", word: "pig", answer: "/ɪ/", choices: ["/ɪ/", "/aɪ/", "/e/", "/uː/"], explanation: "pig の i は短い /ɪ/ の音だよ。" },
-    { level: 1, prompt: "hot の母音 o の音はどれ？", word: "hot", answer: "/ɒ/", choices: ["/ɒ/", "/oʊ/", "/ʌ/", "/ɔɪ/"], explanation: "hot の o は短い /ɒ/ の音だよ。" },
-    { level: 1, prompt: "sun の母音 u の音はどれ？", word: "sun", answer: "/ʌ/", choices: ["/ʌ/", "/uː/", "/ʊ/", "/æ/"], explanation: "sun の u は短い /ʌ/ の音だよ。" },
-    { level: 1, prompt: "map のまんなかの音に合う文字は？", word: "m_p", answer: "a", choices: ["a", "e", "i", "u"], explanation: "map は m-a-p。まんなかの a が短い /æ/ の音を表すよ。" },
-    { level: 2, prompt: "hen のまんなかの音に合う文字は？", word: "h_n", answer: "e", choices: ["e", "a", "o", "i"], explanation: "hen は h-e-n。e が短い /e/ の音を表すよ。" },
-    { level: 2, prompt: "cup のまんなかの音はどれ？", word: "cup", answer: "/ʌ/", choices: ["/ʌ/", "/ɪ/", "/æ/", "/iː/"], explanation: "cup の u は短い /ʌ/ の音だよ。" },
-    { level: 3, prompt: "fox のまんなかの音に合う文字は？", word: "f_x", answer: "o", choices: ["o", "a", "u", "e"], explanation: "fox は f-o-x。o が短い /ɒ/ の音を表すよ。" },
-    { level: 3, prompt: "web のまんなかの音はどれ？", word: "web", answer: "/e/", choices: ["/e/", "/æ/", "/ɒ/", "/ʊ/"], explanation: "web の e は短い /e/ の音だよ。" },
-    { level: 0, prompt: "fin の母音 i の音はどれ？", word: "fin", answer: "/ɪ/", choices: ["/ɪ/", "/iː/", "/e/", "/ʌ/"], explanation: "fin の i は短い /ɪ/ の音だよ。" },
-    { level: 2, prompt: "bag の母音 a の音はどれ？", word: "bag", answer: "/æ/", choices: ["/æ/", "/e/", "/ɑː/", "/ʌ/"], explanation: "bag の a は短い /æ/ の音だよ。" },
+    { level: 0, prompt: "cat の母音 a の音はどれ？", word: "cat", display: "ク・？・ト", answer: "/æ/", choices: ["/æ/", "/e/", "/ɪ/", "/ʌ/"], explanation: "cat の a は短い /æ/ の音だよ。" },
+    { level: 0, prompt: "bed の母音 e の音はどれ？", word: "bed", display: "ブ・？・ド", answer: "/e/", choices: ["/e/", "/æ/", "/iː/", "/ɒ/"], explanation: "bed の e は短い /e/ の音だよ。" },
+    { level: 0, prompt: "pig の母音 i の音はどれ？", word: "pig", display: "プ・？・グ", answer: "/ɪ/", choices: ["/ɪ/", "/aɪ/", "/e/", "/uː/"], explanation: "pig の i は短い /ɪ/ の音だよ。" },
+    { level: 1, prompt: "hot の母音 o の音はどれ？", word: "hot", display: "ハ・？・ト", answer: "/ɒ/", choices: ["/ɒ/", "/oʊ/", "/ʌ/", "/ɔɪ/"], explanation: "hot の o は短い /ɒ/ の音だよ。" },
+    { level: 1, prompt: "sun の母音 u の音はどれ？", word: "sun", display: "ス・？・ン", answer: "/ʌ/", choices: ["/ʌ/", "/uː/", "/ʊ/", "/æ/"], explanation: "sun の u は短い /ʌ/ の音だよ。" },
+    { level: 1, prompt: "map のまんなかの音に合う文字は？", word: "m_p", display: "ム・？・プ", answer: "a", choices: ["a", "e", "i", "u"], explanation: "map は m-a-p。まんなかの a が短い /æ/ の音を表すよ。" },
+    { level: 2, prompt: "hen のまんなかの音に合う文字は？", word: "h_n", display: "ハ・？・ン", answer: "e", choices: ["e", "a", "o", "i"], explanation: "hen は h-e-n。e が短い /e/ の音を表すよ。" },
+    { level: 2, prompt: "cup のまんなかの音はどれ？", word: "cup", display: "ク・？・プ", answer: "/ʌ/", choices: ["/ʌ/", "/ɪ/", "/æ/", "/iː/"], explanation: "cup の u は短い /ʌ/ の音だよ。" },
+    { level: 3, prompt: "fox のまんなかの音に合う文字は？", word: "f_x", display: "フ・？・クス", answer: "o", choices: ["o", "a", "u", "e"], explanation: "fox は f-o-x。o が短い /ɒ/ の音を表すよ。" },
+    { level: 3, prompt: "web のまんなかの音はどれ？", word: "web", display: "ウ・？・ブ", answer: "/e/", choices: ["/e/", "/æ/", "/ɒ/", "/ʊ/"], explanation: "web の e は短い /e/ の音だよ。" },
+    { level: 0, prompt: "fin の母音 i の音はどれ？", word: "fin", display: "フ・？・ン", answer: "/ɪ/", choices: ["/ɪ/", "/iː/", "/e/", "/ʌ/"], explanation: "fin の i は短い /ɪ/ の音だよ。" },
+    { level: 2, prompt: "bag の母音 a の音はどれ？", word: "bag", display: "ブ・？・グ", answer: "/æ/", choices: ["/æ/", "/e/", "/ɑː/", "/ʌ/"], explanation: "bag の a は短い /æ/ の音だよ。" },
   ],
   "consonant-teams": [
-    { level: 0, prompt: "ship の sh が表す最初の音は？", word: "ship", answer: "/ʃ/", choices: ["/ʃ/", "/s/", "/tʃ/", "/h/"], explanation: "sh は2文字で /ʃ/ の音を表すよ。" },
-    { level: 0, prompt: "chin の ch が表す最初の音は？", word: "chin", answer: "/tʃ/", choices: ["/tʃ/", "/ʃ/", "/k/", "/dʒ/"], explanation: "ch は2文字で /tʃ/ の音を表すよ。" },
-    { level: 0, prompt: "thin の th が表す最初の音は？", word: "thin", answer: "/θ/", choices: ["/θ/", "/ð/", "/f/", "/t/"], explanation: "thin の th は /θ/ の音。舌先を歯の間に軽く出すよ。" },
-    { level: 1, prompt: "this の th が表す最初の音は？", word: "this", answer: "/ð/", choices: ["/ð/", "/θ/", "/d/", "/z/"], explanation: "this の th は声を出す /ð/ の音だよ。" },
-    { level: 1, prompt: "phone の ph が表す最初の音は？", word: "phone", answer: "/f/", choices: ["/f/", "/p/", "/h/", "/v/"], explanation: "ph は /f/ の音を表すつづりだよ。" },
-    { level: 1, prompt: "whale の wh が表す最初の音は？", word: "whale", answer: "/w/", choices: ["/w/", "/h/", "/v/", "/f/"], explanation: "whale の wh は /w/ の音で始まるよ。" },
-    { level: 2, prompt: "ring の ng が表す最後の音は？", word: "ring", answer: "/ŋ/", choices: ["/ŋ/", "/n/", "/g/", "/ŋg/"], explanation: "ng は語尾で /ŋ/ の音を表すことがあるよ。" },
-    { level: 2, prompt: "duck の ck が表す最後の音は？", word: "duck", answer: "/k/", choices: ["/k/", "/s/", "/tʃ/", "/g/"], explanation: "ck は2文字で /k/ の音を表すよ。" },
-    { level: 3, prompt: "shop の sh が表す最初の音は？", word: "shop", answer: "/ʃ/", choices: ["/ʃ/", "/tʃ/", "/ʒ/", "/s/"], explanation: "shop の sh は /ʃ/ の音だよ。" },
-    { level: 3, prompt: "chat の ch が表す最初の音は？", word: "chat", answer: "/tʃ/", choices: ["/tʃ/", "/ʃ/", "/k/", "/h/"], explanation: "chat の ch は /tʃ/ の音だよ。" },
-    { level: 1, prompt: "bath の th が表す最後の音は？", word: "bath", answer: "/θ/", choices: ["/θ/", "/ð/", "/t/", "/f/"], explanation: "bath の th は声を出さない /θ/ の音だよ。" },
-    { level: 2, prompt: "sing の ng が表す最後の音は？", word: "sing", answer: "/ŋ/", choices: ["/ŋ/", "/n/", "/g/", "/dʒ/"], explanation: "sing の ng は /ŋ/ の音だよ。" },
+    { level: 0, prompt: "ship の sh が表す最初の音は？", word: "ship", display: "？・イ・プ", answer: "/ʃ/", choices: ["/ʃ/", "/s/", "/tʃ/", "/h/"], explanation: "sh は2文字で /ʃ/ の音を表すよ。" },
+    { level: 0, prompt: "chin の ch が表す最初の音は？", word: "chin", display: "？・イ・ン", answer: "/tʃ/", choices: ["/tʃ/", "/ʃ/", "/k/", "/dʒ/"], explanation: "ch は2文字で /tʃ/ の音を表すよ。" },
+    { level: 0, prompt: "thin の th が表す最初の音は？", word: "thin", display: "？・イ・ン", answer: "/θ/", choices: ["/θ/", "/ð/", "/f/", "/t/"], explanation: "thin の th は /θ/ の音。舌先を歯の間に軽く出すよ。" },
+    { level: 1, prompt: "this の th が表す最初の音は？", word: "this", display: "？・イ・ス", answer: "/ð/", choices: ["/ð/", "/θ/", "/d/", "/z/"], explanation: "this の th は声を出す /ð/ の音だよ。" },
+    { level: 1, prompt: "phone の ph が表す最初の音は？", word: "phone", display: "？・オ・ン", answer: "/f/", choices: ["/f/", "/p/", "/h/", "/v/"], explanation: "ph は /f/ の音を表すつづりだよ。" },
+    { level: 1, prompt: "whale の wh が表す最初の音は？", word: "whale", display: "？・エイ・ル", answer: "/w/", choices: ["/w/", "/h/", "/v/", "/f/"], explanation: "whale の wh は /w/ の音で始まるよ。" },
+    { level: 2, prompt: "ring の ng が表す最後の音は？", word: "ring", display: "ラ・イ・？", answer: "/ŋ/", choices: ["/ŋ/", "/n/", "/g/", "/ŋg/"], explanation: "ng は語尾で /ŋ/ の音を表すことがあるよ。" },
+    { level: 2, prompt: "duck の ck が表す最後の音は？", word: "duck", display: "ド・ア・？", answer: "/k/", choices: ["/k/", "/s/", "/tʃ/", "/g/"], explanation: "ck は2文字で /k/ の音を表すよ。" },
+    { level: 3, prompt: "shop の sh が表す最初の音は？", word: "shop", display: "？・オ・プ", answer: "/ʃ/", choices: ["/ʃ/", "/tʃ/", "/ʒ/", "/s/"], explanation: "shop の sh は /ʃ/ の音だよ。" },
+    { level: 3, prompt: "chat の ch が表す最初の音は？", word: "chat", display: "？・ア・ト", answer: "/tʃ/", choices: ["/tʃ/", "/ʃ/", "/k/", "/h/"], explanation: "chat の ch は /tʃ/ の音だよ。" },
+    { level: 1, prompt: "bath の th が表す最後の音は？", word: "bath", display: "ブ・ア・？", answer: "/θ/", choices: ["/θ/", "/ð/", "/t/", "/f/"], explanation: "bath の th は声を出さない /θ/ の音だよ。" },
+    { level: 2, prompt: "sing の ng が表す最後の音は？", word: "sing", display: "ス・イ・？", answer: "/ŋ/", choices: ["/ŋ/", "/n/", "/g/", "/dʒ/"], explanation: "sing の ng は /ŋ/ の音だよ。" },
   ],
   "silent-e": [
-    { level: 0, prompt: "cap に e をつけた cape の a はどの音？", word: "cape", answer: "/eɪ/", choices: ["/eɪ/", "/æ/", "/e/", "/ɑː/"], explanation: "語尾の e は発音しないけれど、a をアルファベットの名前に近い /eɪ/ にするよ。" },
-    { level: 0, prompt: "kit に e をつけた kite の i はどの音？", word: "kite", answer: "/aɪ/", choices: ["/aɪ/", "/ɪ/", "/iː/", "/eɪ/"], explanation: "語尾の e で i が /aɪ/ の音になるよ。" },
-    { level: 0, prompt: "hop に e をつけた hope の o はどの音？", word: "hope", answer: "/oʊ/", choices: ["/oʊ/", "/ɒ/", "/ɔː/", "/ʌ/"], explanation: "語尾の e で o が /oʊ/ の音になるよ。" },
-    { level: 1, prompt: "cub に e をつけた cube の u はどの音？", word: "cube", answer: "/juː/", choices: ["/juː/", "/ʌ/", "/ʊ/", "/uː/"], explanation: "語尾の e で u が /juː/ の音になる単語があるよ。" },
-    { level: 1, prompt: "mad と made。語尾で発音しない文字は？", word: "made", answer: "e", choices: ["e", "a", "d", "m"], explanation: "made の最後の e は発音しないサイレントeだよ。" },
-    { level: 1, prompt: "not と note。語尾で発音しない文字は？", word: "note", answer: "e", choices: ["e", "o", "t", "n"], explanation: "note の最後の e は発音しないよ。o の音が変わる合図だね。" },
-    { level: 2, prompt: "fin と fine。母音 i が変わる理由は？", word: "fine", answer: "最後のe", choices: ["最後のe", "最初のf", "語尾のn", "母音がない"], explanation: "語尾の e が i の音を /aɪ/ に変えるよ。" },
-    { level: 2, prompt: "pet と Pete。母音 e の音が変わる合図は？", word: "Pete", answer: "最後のe", choices: ["最後のe", "最初のP", "語尾のt", "文字が2つ"], explanation: "語尾の e によって、母音がアルファベットの名前の音になるよ。" },
-    { level: 3, prompt: "tap と tape。語尾の e の音は？", word: "tape", answer: "発音しない", choices: ["発音しない", "/e/", "/iː/", "/ə/"], explanation: "サイレントeは語尾で発音せず、前の母音の音に影響するよ。" },
-    { level: 3, prompt: "cut と cute。cute の u はどの音？", word: "cute", answer: "/juː/", choices: ["/juː/", "/ʌ/", "/ʊ/", "/aɪ/"], explanation: "cute の u は /juː/ の音。最後の e は発音しないよ。" },
-    { level: 2, prompt: "hop と hope。hope の o はどの音？", word: "hope", answer: "/oʊ/", choices: ["/oʊ/", "/ɒ/", "/ʌ/", "/ɔɪ/"], explanation: "hope の o は /oʊ/。語尾の e が合図だよ。" },
-    { level: 3, prompt: "rid と ride。ride の i はどの音？", word: "ride", answer: "/aɪ/", choices: ["/aɪ/", "/ɪ/", "/iː/", "/eɪ/"], explanation: "ride の i は /aɪ/ の音だよ。" },
+    { level: 0, prompt: "cap に e をつけた cape の a はどの音？", word: "cape", display: "ク・？・プ", answer: "/eɪ/", choices: ["/eɪ/", "/æ/", "/e/", "/ɑː/"], explanation: "語尾の e は発音しないけれど、a をアルファベットの名前に近い /eɪ/ にするよ。" },
+    { level: 0, prompt: "kit に e をつけた kite の i はどの音？", word: "kite", display: "ク・？・ト", answer: "/aɪ/", choices: ["/aɪ/", "/ɪ/", "/iː/", "/eɪ/"], explanation: "語尾の e で i が /aɪ/ の音になるよ。" },
+    { level: 0, prompt: "hop に e をつけた hope の o はどの音？", word: "hope", display: "ハ・？・プ", answer: "/oʊ/", choices: ["/oʊ/", "/ɒ/", "/ɔː/", "/ʌ/"], explanation: "語尾の e で o が /oʊ/ の音になるよ。" },
+    { level: 1, prompt: "cub に e をつけた cube の u はどの音？", word: "cube", display: "ク・？・ブ", answer: "/juː/", choices: ["/juː/", "/ʌ/", "/ʊ/", "/uː/"], explanation: "語尾の e で u が /juː/ の音になる単語があるよ。" },
+    { level: 1, prompt: "mad と made。語尾で発音しない文字は？", word: "made", display: "マ・ド・？", answer: "e", choices: ["e", "a", "d", "m"], explanation: "made の最後の e は発音しないサイレントeだよ。" },
+    { level: 1, prompt: "not と note。語尾で発音しない文字は？", word: "note", display: "ノ・ト・？", answer: "e", choices: ["e", "o", "t", "n"], explanation: "note の最後の e は発音しないよ。o の音が変わる合図だね。" },
+    { level: 2, prompt: "fin と fine。母音 i が変わる理由は？", word: "fine", display: "フ・イ・ン・？", answer: "最後のe", choices: ["最後のe", "最初のf", "語尾のn", "母音がない"], explanation: "語尾の e が i の音を /aɪ/ に変えるよ。" },
+    { level: 2, prompt: "pet と Pete。母音 e の音が変わる合図は？", word: "Pete", display: "ペ・ト・？", answer: "最後のe", choices: ["最後のe", "最初のP", "語尾のt", "文字が2つ"], explanation: "語尾の e によって、母音がアルファベットの名前の音になるよ。" },
+    { level: 3, prompt: "tap と tape。語尾の e の音は？", word: "tape", display: "ト・エイ・プ・？", answer: "発音しない", choices: ["発音しない", "/e/", "/iː/", "/ə/"], explanation: "サイレントeは語尾で発音せず、前の母音の音に影響するよ。" },
+    { level: 3, prompt: "cut と cute。cute の u はどの音？", word: "cute", display: "ク・？・ト", answer: "/juː/", choices: ["/juː/", "/ʌ/", "/ʊ/", "/aɪ/"], explanation: "cute の u は /juː/ の音。最後の e は発音しないよ。" },
+    { level: 2, prompt: "hop と hope。hope の o はどの音？", word: "hope", display: "ハ・？・プ", answer: "/oʊ/", choices: ["/oʊ/", "/ɒ/", "/ʌ/", "/ɔɪ/"], explanation: "hope の o は /oʊ/。語尾の e が合図だよ。" },
+    { level: 3, prompt: "rid と ride。ride の i はどの音？", word: "ride", display: "ラ・？・ド", answer: "/aɪ/", choices: ["/aɪ/", "/ɪ/", "/iː/", "/eɪ/"], explanation: "ride の i は /aɪ/ の音だよ。" },
   ],
   "vowel-teams": [
-    { level: 0, prompt: "rain の ai が表す母音の音は？", word: "rain", answer: "/eɪ/", choices: ["/eɪ/", "/æ/", "/iː/", "/aɪ/"], explanation: "rain の ai は /eɪ/ の音を表すよ。" },
-    { level: 0, prompt: "seed の ee が表す母音の音は？", word: "seed", answer: "/iː/", choices: ["/iː/", "/ɪ/", "/eɪ/", "/uː/"], explanation: "seed の ee は /iː/ の音を表すよ。" },
-    { level: 0, prompt: "boat の oa が表す母音の音は？", word: "boat", answer: "/oʊ/", choices: ["/oʊ/", "/ɒ/", "/ɔɪ/", "/aʊ/"], explanation: "boat の oa は /oʊ/ の音を表すよ。" },
-    { level: 1, prompt: "moon の oo が表す母音の音は？", word: "moon", answer: "/uː/", choices: ["/uː/", "/ʊ/", "/ʌ/", "/ɔː/"], explanation: "moon の oo は /uː/ の音だよ。" },
-    { level: 1, prompt: "book の oo が表す母音の音は？", word: "book", answer: "/ʊ/", choices: ["/ʊ/", "/uː/", "/oʊ/", "/ɒ/"], explanation: "book の oo は moon と違って、短い /ʊ/ の音だよ。" },
-    { level: 1, prompt: "seed のまんなかの音に合うつづりは？", word: "s__d", answer: "ee", choices: ["ee", "ea", "ai", "oa"], explanation: "seed は ee が /iː/ の音を表すよ。" },
-    { level: 2, prompt: "play の ay が表す母音の音は？", word: "play", answer: "/eɪ/", choices: ["/eɪ/", "/æ/", "/aɪ/", "/ɔɪ/"], explanation: "play の ay は /eɪ/ の音を表すよ。" },
-    { level: 2, prompt: "coin の oi が表す母音の音は？", word: "coin", answer: "/ɔɪ/", choices: ["/ɔɪ/", "/oʊ/", "/aɪ/", "/aʊ/"], explanation: "coin の oi は /ɔɪ/ の音だよ。" },
-    { level: 3, prompt: "cloud の ou が表す母音の音は？", word: "cloud", answer: "/aʊ/", choices: ["/aʊ/", "/oʊ/", "/uː/", "/ɔɪ/"], explanation: "cloud の ou は /aʊ/ の音を表すよ。" },
-    { level: 3, prompt: "train の ai が表す母音の音は？", word: "train", answer: "/eɪ/", choices: ["/eɪ/", "/aɪ/", "/æ/", "/e/"], explanation: "train の ai は /eɪ/ の音だよ。" },
-    { level: 2, prompt: "day の ay が表す母音の音は？", word: "day", answer: "/eɪ/", choices: ["/eɪ/", "/æ/", "/aɪ/", "/iː/"], explanation: "day の ay は /eɪ/ の音を表すよ。" },
-    { level: 3, prompt: "book の oo が表す母音の音は？", word: "book", answer: "/ʊ/", choices: ["/ʊ/", "/uː/", "/əʊ/", "/ɪ/"], explanation: "book の oo は短い /ʊ/ の音だよ。" },
+    { level: 0, prompt: "rain の ai が表す母音の音は？", word: "rain", display: "ラ・？・ン", answer: "/eɪ/", choices: ["/eɪ/", "/æ/", "/iː/", "/aɪ/"], explanation: "rain の ai は /eɪ/ の音を表すよ。" },
+    { level: 0, prompt: "seed の ee が表す母音の音は？", word: "seed", display: "ス・？・ド", answer: "/iː/", choices: ["/iː/", "/ɪ/", "/eɪ/", "/uː/"], explanation: "seed の ee は /iː/ の音を表すよ。" },
+    { level: 0, prompt: "boat の oa が表す母音の音は？", word: "boat", display: "ブ・？・ト", answer: "/oʊ/", choices: ["/oʊ/", "/ɒ/", "/ɔɪ/", "/aʊ/"], explanation: "boat の oa は /oʊ/ の音を表すよ。" },
+    { level: 1, prompt: "moon の oo が表す母音の音は？", word: "moon", display: "ム・？・ン", answer: "/uː/", choices: ["/uː/", "/ʊ/", "/ʌ/", "/ɔː/"], explanation: "moon の oo は /uː/ の音だよ。" },
+    { level: 1, prompt: "book の oo が表す母音の音は？", word: "book", display: "ブ・？・ク", answer: "/ʊ/", choices: ["/ʊ/", "/uː/", "/oʊ/", "/ɒ/"], explanation: "book の oo は moon と違って、短い /ʊ/ の音だよ。" },
+    { level: 1, prompt: "seed のまんなかの音に合うつづりは？", word: "s__d", display: "ス・？・ド", answer: "ee", choices: ["ee", "ea", "ai", "oa"], explanation: "seed は ee が /iː/ の音を表すよ。" },
+    { level: 2, prompt: "play の ay が表す母音の音は？", word: "play", display: "プ・ル・？", answer: "/eɪ/", choices: ["/eɪ/", "/æ/", "/aɪ/", "/ɔɪ/"], explanation: "play の ay は /eɪ/ の音を表すよ。" },
+    { level: 2, prompt: "coin の oi が表す母音の音は？", word: "coin", display: "ク・？・ン", answer: "/ɔɪ/", choices: ["/ɔɪ/", "/oʊ/", "/aɪ/", "/aʊ/"], explanation: "coin の oi は /ɔɪ/ の音だよ。" },
+    { level: 3, prompt: "cloud の ou が表す母音の音は？", word: "cloud", display: "ク・ル・？・ド", answer: "/aʊ/", choices: ["/aʊ/", "/oʊ/", "/uː/", "/ɔɪ/"], explanation: "cloud の ou は /aʊ/ の音を表すよ。" },
+    { level: 3, prompt: "train の ai が表す母音の音は？", word: "train", display: "ト・ラ・？・ン", answer: "/eɪ/", choices: ["/eɪ/", "/aɪ/", "/æ/", "/e/"], explanation: "train の ai は /eɪ/ の音だよ。" },
+    { level: 2, prompt: "day の ay が表す母音の音は？", word: "day", display: "ド・？", answer: "/eɪ/", choices: ["/eɪ/", "/æ/", "/aɪ/", "/iː/"], explanation: "day の ay は /eɪ/ の音を表すよ。" },
+    { level: 3, prompt: "book の oo が表す母音の音は？", word: "book", display: "ブ・？・ク", answer: "/ʊ/", choices: ["/ʊ/", "/uː/", "/əʊ/", "/ɪ/"], explanation: "book の oo は短い /ʊ/ の音だよ。" },
   ],
+};
+
+const wordInfo = {
+  "sun": { split: "ス・ア・ン", joined: "サン", meaning: "太陽" },
+  "map": { split: "ム・ア・ップ", joined: "マップ", meaning: "地図" },
+  "fish": { split: "フ・イ・シ", joined: "フィッシュ", meaning: "魚" },
+  "dog": { split: "ド・オ・グ", joined: "ドッグ", meaning: "犬" },
+  "bag": { split: "バ・ア・グ", joined: "バッグ", meaning: "かばん" },
+  "kite": { split: "ク・アイ・ト", joined: "カイト", meaning: "凧" },
+  "van": { split: "ヴ・ア・ン", joined: "ヴァン", meaning: "小型のバン" },
+  "zip": { split: "ズ・イ・プ", joined: "ジップ", meaning: "ファスナー" },
+  "queen": { split: "ク・イー・ン", joined: "クイーン", meaning: "女王" },
+  "box": { split: "ブ・オ・クス", joined: "ボックス", meaning: "箱" },
+  "red": { split: "ラ・エ・ド", joined: "レッド", meaning: "赤" },
+  "top": { split: "ト・オ・プ", joined: "トップ", meaning: "てっぺん" },
+  "jam": { split: "ジ・ア・ム", joined: "ジャム", meaning: "ジャム" },
+  "yes": { split: "イ・エ・ス", joined: "イエス", meaning: "はい" },
+  "cat": { split: "ク・ア・ト", joined: "キャット", meaning: "猫" },
+  "bed": { split: "ブ・エ・ド", joined: "ベッド", meaning: "ベッド" },
+  "pig": { split: "プ・イ・グ", joined: "ピッグ", meaning: "豚" },
+  "hot": { split: "ハ・オ・ト", joined: "ホット", meaning: "熱い" },
+  "hen": { split: "ハ・エ・ン", joined: "ヘン", meaning: "雌のニワトリ" },
+  "cup": { split: "ク・ア・プ", joined: "カップ", meaning: "カップ" },
+  "fox": { split: "フ・オ・クス", joined: "フォックス", meaning: "キツネ" },
+  "web": { split: "ウ・エ・ブ", joined: "ウェブ", meaning: "クモの巣" },
+  "fin": { split: "フ・イ・ン", joined: "フィン", meaning: "ひれ" },
+  "ship": { split: "シ・イ・プ", joined: "シップ", meaning: "船" },
+  "chin": { split: "チ・イ・ン", joined: "チン", meaning: "あご" },
+  "thin": { split: "ス・イ・ン", joined: "シン", meaning: "薄い、細い" },
+  "this": { split: "ズ・イ・ス", joined: "ディス", meaning: "これ" },
+  "phone": { split: "フ・オ・ン", joined: "フォン", meaning: "電話" },
+  "whale": { split: "ウ・エイ・ル", joined: "ウェイル", meaning: "クジラ" },
+  "ring": { split: "ラ・イ・ング", joined: "リング", meaning: "指輪" },
+  "duck": { split: "ダ・ア・ク", joined: "ダック", meaning: "アヒル" },
+  "shop": { split: "シ・オ・プ", joined: "ショップ", meaning: "店" },
+  "chat": { split: "チ・ア・ト", joined: "チャット", meaning: "おしゃべり" },
+  "bath": { split: "バ・ア・ス", joined: "バス", meaning: "風呂" },
+  "sing": { split: "ス・イ・ング", joined: "シング", meaning: "歌う" },
+  "cape": { split: "ク・エイ・プ", joined: "ケイプ", meaning: "マント" },
+  "hope": { split: "ハ・オウ・プ", joined: "ホープ", meaning: "希望" },
+  "cube": { split: "ク・ユー・ブ", joined: "キューブ", meaning: "立方体" },
+  "made": { split: "メ・エイ・ド", joined: "メイド", meaning: "作られた" },
+  "note": { split: "ノ・オウ・ト", joined: "ノート", meaning: "メモ" },
+  "fine": { split: "フ・アイ・ン", joined: "ファイン", meaning: "元気な、すばらしい" },
+  "Pete": { split: "プ・イー・ト", joined: "ピート", meaning: "人名" },
+  "tape": { split: "テ・エイ・プ", joined: "テープ", meaning: "テープ" },
+  "cute": { split: "ク・ユー・ト", joined: "キュート", meaning: "かわいい" },
+  "ride": { split: "ラ・アイ・ド", joined: "ライド", meaning: "乗る" },
+  "rain": { split: "ラ・エイ・ン", joined: "レイン", meaning: "雨" },
+  "seed": { split: "ス・イー・ド", joined: "シード", meaning: "種" },
+  "boat": { split: "ブ・オウ・ト", joined: "ボート", meaning: "ボート" },
+  "moon": { split: "ム・ウー・ン", joined: "ムーン", meaning: "月" },
+  "book": { split: "ブ・ウ・ク", joined: "ブック", meaning: "本" },
+  "play": { split: "プ・レ・イ", joined: "プレイ", meaning: "遊ぶ" },
+  "coin": { split: "ク・オイ・ン", joined: "コイン", meaning: "硬貨" },
+  "cloud": { split: "ク・ラ・アウ・ド", joined: "クラウド", meaning: "雲" },
+  "train": { split: "ト・レ・イ・ン", joined: "トレイン", meaning: "電車" },
+  "day": { split: "ド・エイ", joined: "デイ", meaning: "日" },
+  "m_p": { split: "ム・ア・ップ", joined: "マップ", meaning: "地図" },
+  "h_n": { split: "ハ・エ・ン", joined: "ヘン", meaning: "雌のニワトリ" },
+  "f_x": { split: "フ・オ・クス", joined: "フォックス", meaning: "キツネ" },
+  "s__d": { split: "ス・イー・ド", joined: "シード", meaning: "種" },
 };
 
 const defaultData = () => ({ stats: {}, wrong: [], history: [] });
@@ -431,7 +493,9 @@ function renderProblem() {
   const problem = getElement("problem");
   problem.replaceChildren();
   appendPhonicsText(problem, question.prompt);
-  getElement("wordCard").textContent = question.word;
+  const wordCard = getElement("wordCard");
+  wordCard.textContent = question.display || question.word;
+  wordCard.dataset.word = question.word;
   const previousAnswer = getElement("previousAnswer");
   previousAnswer.replaceChildren();
   if (quiz.previousAnswer) {
@@ -525,7 +589,7 @@ function showFeedback(isCorrect, question, answer) {
     message.append("ヒント：");
     appendPhonicsText(message, question.explanation);
   }
-  content.append(title, message);
+  content.append(title, message, createWordInfo(question.word));
 
   const primary = createFeedbackButton(
     isCorrect ? "つぎへ ↵" : "再回答",
@@ -544,6 +608,15 @@ function showFeedback(isCorrect, question, answer) {
   dialog.showModal();
   primary.focus();
   if (isCorrect) advanceTimer = setTimeout(advanceQuiz, FEEDBACK_AUTO_ADVANCE_MS);
+}
+
+function createWordInfo(word) {
+  const info = wordInfo[word];
+  const box = document.createElement("p");
+  box.className = "word-info";
+  if (!info) return box;
+  box.textContent = `音節：${info.split} ／ 1語：${info.joined} ／ 意味：${info.meaning}`;
+  return box;
 }
 
 function createFeedbackButton(label, action, className = "") {
