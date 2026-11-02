@@ -148,6 +148,68 @@ const questionBank = {
   ],
 };
 
+const wordInfo = {
+  "sun": { split: "サン", joined: "サン", meaning: "太陽" },
+  "map": { split: "マ・ップ", joined: "マップ", meaning: "地図" },
+  "fish": { split: "フィ・ッシュ", joined: "フィッシュ", meaning: "魚" },
+  "dog": { split: "ド・ッグ", joined: "ドッグ", meaning: "犬" },
+  "bag": { split: "バ・ッグ", joined: "バッグ", meaning: "かばん" },
+  "kite": { split: "カ・イ・ト", joined: "カイト", meaning: "凧" },
+  "van": { split: "ヴァ・ン", joined: "ヴァン", meaning: "小型のバン" },
+  "zip": { split: "ジ・ップ", joined: "ジップ", meaning: "ファスナー" },
+  "queen": { split: "ク・イー・ン", joined: "クイーン", meaning: "女王" },
+  "box": { split: "ボ・ックス", joined: "ボックス", meaning: "箱" },
+  "red": { split: "レ・ッド", joined: "レッド", meaning: "赤" },
+  "top": { split: "ト・ップ", joined: "トップ", meaning: "てっぺん" },
+  "jam": { split: "ジャ・ム", joined: "ジャム", meaning: "ジャム" },
+  "yes": { split: "イ・エス", joined: "イエス", meaning: "はい" },
+  "cat": { split: "キャ・ット", joined: "キャット", meaning: "猫" },
+  "bed": { split: "ベ・ッド", joined: "ベッド", meaning: "ベッド" },
+  "pig": { split: "ピ・ッグ", joined: "ピッグ", meaning: "豚" },
+  "hot": { split: "ホ・ット", joined: "ホット", meaning: "熱い" },
+  "hen": { split: "ヘ・ン", joined: "ヘン", meaning: "雌のニワトリ" },
+  "cup": { split: "カ・ップ", joined: "カップ", meaning: "カップ" },
+  "fox": { split: "フォ・ックス", joined: "フォックス", meaning: "キツネ" },
+  "web": { split: "ウェ・ブ", joined: "ウェブ", meaning: "クモの巣" },
+  "fin": { split: "フィ・ン", joined: "フィン", meaning: "ひれ" },
+  "ship": { split: "シ・ップ", joined: "シップ", meaning: "船" },
+  "chin": { split: "チ・ン", joined: "チン", meaning: "あご" },
+  "thin": { split: "シ・ン", joined: "シン", meaning: "薄い、細い" },
+  "this": { split: "ディ・ス", joined: "ディス", meaning: "これ" },
+  "phone": { split: "フォ・ン", joined: "フォン", meaning: "電話" },
+  "whale": { split: "ウェ・イル", joined: "ウェイル", meaning: "クジラ" },
+  "ring": { split: "リ・ング", joined: "リング", meaning: "指輪" },
+  "duck": { split: "ダ・ック", joined: "ダック", meaning: "アヒル" },
+  "shop": { split: "ショ・ップ", joined: "ショップ", meaning: "店" },
+  "chat": { split: "チャ・ット", joined: "チャット", meaning: "おしゃべり" },
+  "bath": { split: "バ・ス", joined: "バス", meaning: "風呂" },
+  "sing": { split: "シ・ング", joined: "シング", meaning: "歌う" },
+  "cape": { split: "ケ・イプ", joined: "ケイプ", meaning: "マント" },
+  "hope": { split: "ホ・ープ", joined: "ホープ", meaning: "希望" },
+  "cube": { split: "キュ・ーブ", joined: "キューブ", meaning: "立方体" },
+  "made": { split: "メ・イド", joined: "メイド", meaning: "作られた" },
+  "note": { split: "ノ・ート", joined: "ノート", meaning: "メモ" },
+  "fine": { split: "ファ・イン", joined: "ファイン", meaning: "元気な、すばらしい" },
+  "Pete": { split: "ピ・ート", joined: "ピート", meaning: "人名" },
+  "tape": { split: "テ・ープ", joined: "テープ", meaning: "テープ" },
+  "cute": { split: "キュ・ート", joined: "キュート", meaning: "かわいい" },
+  "ride": { split: "ラ・イド", joined: "ライド", meaning: "乗る" },
+  "rain": { split: "レ・イン", joined: "レイン", meaning: "雨" },
+  "seed": { split: "シ・ード", joined: "シード", meaning: "種" },
+  "boat": { split: "ボ・ート", joined: "ボート", meaning: "ボート" },
+  "moon": { split: "ム・ーン", joined: "ムーン", meaning: "月" },
+  "book": { split: "ブ・ック", joined: "ブック", meaning: "本" },
+  "play": { split: "プ・レイ", joined: "プレイ", meaning: "遊ぶ" },
+  "coin": { split: "コ・イン", joined: "コイン", meaning: "硬貨" },
+  "cloud": { split: "ク・ラ・ウド", joined: "クラウド", meaning: "雲" },
+  "train": { split: "ト・レイン", joined: "トレイン", meaning: "電車" },
+  "day": { split: "デ・イ", joined: "デイ", meaning: "日" },
+  "m_p": { split: "マ・ップ", joined: "マップ", meaning: "地図" },
+  "h_n": { split: "ヘ・ン", joined: "ヘン", meaning: "雌のニワトリ" },
+  "f_x": { split: "フォ・ックス", joined: "フォックス", meaning: "キツネ" },
+  "s__d": { split: "シ・ード", joined: "シード", meaning: "種" },
+};
+
 const defaultData = () => ({ stats: {}, wrong: [], history: [] });
 const getElement = (id) => document.getElementById(id);
 let learningData = loadLearningData();
@@ -527,7 +589,7 @@ function showFeedback(isCorrect, question, answer) {
     message.append("ヒント：");
     appendPhonicsText(message, question.explanation);
   }
-  content.append(title, message);
+  content.append(title, message, createWordInfo(question.word));
 
   const primary = createFeedbackButton(
     isCorrect ? "つぎへ ↵" : "再回答",
@@ -546,6 +608,15 @@ function showFeedback(isCorrect, question, answer) {
   dialog.showModal();
   primary.focus();
   if (isCorrect) advanceTimer = setTimeout(advanceQuiz, FEEDBACK_AUTO_ADVANCE_MS);
+}
+
+function createWordInfo(word) {
+  const info = wordInfo[word];
+  const box = document.createElement("p");
+  box.className = "word-info";
+  if (!info) return box;
+  box.textContent = `音節：${info.split} ／ 1語：${info.joined} ／ 意味：${info.meaning}`;
+  return box;
 }
 
 function createFeedbackButton(label, action, className = "") {
