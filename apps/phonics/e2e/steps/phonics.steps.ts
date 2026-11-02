@@ -192,7 +192,7 @@ async function answerTenKnownQuestions(page: import("@playwright/test").Page) {
     jam: "j", queen: "qu", box: "クス（/ks/）", yes: "ヤ行（/j/）",
   };
   for (let index = 0; index < 10; index += 1) {
-    const word = await page.locator("#wordCard").textContent();
+    const word = await page.locator("#wordCard").getAttribute("data-word");
     const answer = word ? answers[word] : undefined;
     if (!answer) throw new Error(`未登録のフォニックス問題: ${word}`);
     await page.getByRole("button", { name: answer, exact: true }).click();
