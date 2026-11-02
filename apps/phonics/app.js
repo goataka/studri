@@ -313,8 +313,8 @@ for (const course of alphabetLetterCourses) {
 }
 delete questionBank.alphabet;
 
-// ヒント：読みごとに、日本で身近なカタカナ英語を例にする
-const soundExamples = {
+// ヒント：読みごとに、日本で身近なカタカナ英語の例と音節を示す
+const soundExampleWords = {
   "ア": "アップル", "エ": "エッグタルト", "イ": "インターネット", "オ": "オレンジ",
   "ウ": "ウィンナー", "アイ": "アイス", "エイ": "ケーキ", "オウ": "ホーム",
   "オイ": "コイン", "アウ": "カウンター", "イー": "ティー", "ウー": "スープ",
@@ -326,16 +326,30 @@ const soundExamples = {
   "ユ": "ユニフォーム", "トゥ": "トゥモロー", "ング": "リング", "クゥ": "クイズ",
   "クス": "ボックス", "ス（舌先を歯の間に）": "サンクス", "ズ（舌先を歯の間に）": "ブラザー",
 };
+const exampleSyllables = {
+  "アップル": "ア・ッ・プ・ル", "エッグタルト": "エッ・グ・タ・ル・ト",
+  "インターネット": "イン・ター・ネ・ッ・ト", "オレンジ": "オ・レ・ン・ジ",
+  "ウィンナー": "ウィ・ン・ナ・ー", "アイス": "ア・イ・ス", "ケーキ": "ケ・ー・キ",
+  "ホーム": "ホ・ー・ム", "コイン": "コ・イ・ン", "カウンター": "カ・ウ・ン・タ・ー",
+  "ティー": "ティ・ー", "スープ": "ス・ー・プ", "ユーモア": "ユ・ー・モ・ア",
+  "ブログ": "ブ・ロ・グ", "クッキー": "ク・ッ・キ・ー", "グッズ": "グ・ッ・ズ",
+  "ドリンク": "ド・リ・ン・ク", "ヌードル": "ヌ・ー・ド・ル", "プレゼント": "プ・レ・ゼ・ン・ト",
+  "スマホ": "ス・マ・ホ", "ズーム": "ズ・ー・ム", "フィレオフィッシュ": "フィ・レ・オ・フィッ・シュ",
+  "ハンバーガー": "ハ・ン・バ・ー・ガ・ー", "ムービー": "ム・ー・ビ・ー", "ルール": "ル・ー・ル",
+  "ヴァイオリン": "ヴァ・イ・オ・リ・ン", "ジュース": "ジュ・ー・ス", "シュークリーム": "シュー・ク・リ・ー・ム",
+  "チキン": "チ・キ・ン", "ユニフォーム": "ユ・ニ・フォ・ー・ム", "トゥモロー": "ト・ゥ・モ・ロ・ー",
+  "リング": "リ・ン・グ", "クイズ": "ク・イ・ズ", "ボックス": "ボ・ッ・ク・ス",
+  "サンクス": "サ・ン・クス", "ブラザー": "ブ・ラ・ザ・ー",
+};
 const kanaOfAnswer = (answer) => phonicsLetterSounds[answer] || phonicsSounds[answer] || answer;
 for (const pool of Object.values(questionBank)) {
   for (const question of pool) {
-    const example = soundExamples[kanaOfAnswer(question.answer)];
-    if (example) {
-      question.explanation = `${kanaOfAnswer(question.answer)}の音は「${example}」などで使われるよ。`;
-    }
+    const example = soundExampleWords[kanaOfAnswer(question.answer)];
+    question.explanation = example
+      ? `${example}（${exampleSyllables[example]}）`
+      : question.explanation.replace(/の音/g, "");
   }
 }
-
 
 const defaultData = () => ({ stats: {}, wrong: [], history: [] });
 const getElement = (id) => document.getElementById(id);
@@ -728,14 +742,14 @@ function showFeedback(isCorrect, question, answer) {
   );
   actions.append(primary);
   if (isCorrect) {
-    content.append(title, message, createWordInfo(question.word));
+    content.append(title, createWordInfo(question.word), message);
   } else {
     const answer = document.createElement("p");
     answer.className = "feedback-answer";
     answer.append("正解：「");
     appendAnswerText(answer, question.answer);
     answer.append("」");
-    content.append(title, answer, message, createWordInfo(question.word));
+    content.append(title, answer, createWordInfo(question.word), message);
     actions.append(createFeedbackButton("次へ", advanceQuiz, "secondary"));
   }
   dialog.showModal();
