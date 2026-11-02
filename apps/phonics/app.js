@@ -15,24 +15,24 @@ const phonicsSounds = {
   "/s/": "ス",
   "/m/": "ム",
   "/f/": "フ",
-  "/d/": "ド",
+  "/d/": "ドゥ",
   "/b/": "ブ",
   "/n/": "ヌ",
   "/p/": "プ",
   "/g/": "グ",
   "/k/": "ク",
-  "/h/": "ハ行",
+  "/h/": "ハ",
   "/v/": "ヴ",
   "/z/": "ズ",
   "/kw/": "クゥ",
   "/ks/": "クス",
-  "/t/": "ト",
-  "/dʒ/": "ジ",
-  "/j/": "ヤ行",
+  "/t/": "トゥ",
+  "/dʒ/": "ジュ",
+  "/j/": "ユ",
   "/w/": "ウ",
   "/ŋg/": "ング",
   "/ŋ/": "ング",
-  "/ʃ/": "シ",
+  "/ʃ/": "シュ",
   "/ʒ/": "ジュ",
   "/tʃ/": "チ",
   "/θ/": "ス（舌先を歯の間に）",
@@ -56,6 +56,11 @@ const phonicsSounds = {
   "/ɔɪ/": "オイ",
   "/aʊ/": "アウ",
   "/ə/": "ア（弱く）",
+};
+const phonicsLetterSounds = {
+  a: "ア", b: "ブ", c: "ク", d: "ドゥ", e: "エ", f: "フ", g: "グ", h: "ハ", i: "イ",
+  j: "ジュ", k: "ク", l: "ル", m: "ム", n: "ヌ", o: "オ", p: "プ", qu: "クゥ", r: "ル",
+  s: "ス", t: "トゥ", u: "ア", v: "ヴ", w: "ウ", x: "クス", y: "ユ", z: "ズ",
 };
 const phonicsSoundPattern = new RegExp(
   Object.keys(phonicsSounds)
@@ -85,7 +90,7 @@ const questionBank = {
     { level: 2, prompt: "zip の最初の音を表す文字は？", word: "zip", display: "？・イ・プ", answer: "z", choices: ["z", "s", "j", "x"], explanation: "zip は /z/ の音で始まるよ。文字 z の音だね。" },
     { level: 3, prompt: "queen の最初の音の組み合わせは？", word: "queen", display: "？・イー・ン", answer: "qu", choices: ["qu", "kw", "q", "ch"], explanation: "queen の最初の音は /kw/。つづりでは qu がその音を表すよ。" },
     { level: 3, prompt: "box の最後の音はどれ？", word: "box", display: "ブ・オ・？", answer: "/ks/", choices: ["/ks/", "/s/", "/z/", "/k/"], explanation: "box の x は語尾で /ks/ の音を表すよ。" },
-    { level: 0, prompt: "red の最初の音を表す文字は？", word: "red", display: "？・エ・ド", answer: "r", choices: ["r", "l", "w", "d"], explanation: "red は r の音で始まる単語だよ。" },
+    { level: 0, prompt: "red の最初の音を表す文字は？", word: "red", display: "？・エ・ド", answer: "r", choices: ["r", "h", "w", "d"], explanation: "red は r の音で始まる単語だよ。" },
     { level: 1, prompt: "top の最初の音はどれ？", word: "top", display: "？・オ・プ", answer: "/t/", choices: ["/t/", "/d/", "/p/", "/k/"], explanation: "top は /t/ の音で始まるよ。" },
     { level: 2, prompt: "jam の最初の音を表す文字は？", word: "jam", display: "？・ア・ム", answer: "j", choices: ["j", "g", "y", "c"], explanation: "jam は /dʒ/ の音で始まるよ。文字 j が使われるね。" },
     { level: 3, prompt: "yes の最初の音はどれ？", word: "yes", display: "？・エ・ス", answer: "/j/", choices: ["/j/", "/dʒ/", "/i/", "/w/"], explanation: "yes の y はヤ行の音 /j/ だよ。" },
@@ -268,6 +273,19 @@ function appendPhonicsText(element, text) {
     lastIndex = index + symbol.length;
   }
   if (lastIndex < text.length) element.append(text.slice(lastIndex));
+}
+
+function appendLetterChoice(element, letter) {
+  const pronunciation = document.createElement("span");
+  pronunciation.className = "phonics-pronunciation";
+  const kana = document.createElement("span");
+  kana.className = "phonics-kana";
+  kana.textContent = phonicsLetterSounds[letter];
+  const symbol = document.createElement("small");
+  symbol.className = "phonics-ipa";
+  symbol.textContent = `（${letter}）`;
+  pronunciation.append(kana, symbol);
+  element.append(pronunciation);
 }
 
 function saveData() {
@@ -515,8 +533,13 @@ function renderChoices(question) {
     const button = document.createElement("button");
     button.type = "button";
     button.className = "answer-choice";
-    appendPhonicsText(button, choice);
-    if (phonicsSounds[choice]) button.setAttribute("aria-label", getPhonicsText(choice));
+    if (phonicsLetterSounds[choice]) {
+      appendLetterChoice(button, choice);
+      button.setAttribute("aria-label", `${phonicsLetterSounds[choice]}（${choice}）`);
+    } else {
+      appendPhonicsText(button, choice);
+      if (phonicsSounds[choice]) button.setAttribute("aria-label", getPhonicsText(choice));
+    }
     button.addEventListener("click", () => judgeAnswer(choice));
     answers.append(button);
   });
@@ -600,7 +623,11 @@ function showFeedback(isCorrect, question, answer) {
     const answer = document.createElement("p");
     answer.className = "feedback-answer";
     answer.append("正解：「");
-    appendPhonicsText(answer, question.answer);
+    if (phonicsLetterSounds[question.answer]) {
+      appendLetterChoice(answer, question.answer);
+    } else {
+      appendPhonicsText(answer, question.answer);
+    }
     answer.append("」");
     content.append(answer);
     actions.append(createFeedbackButton("次へ", advanceQuiz, "secondary"));
