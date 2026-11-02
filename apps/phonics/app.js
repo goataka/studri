@@ -89,7 +89,7 @@ const letterExampleWords = {
   c: { word: "cat", split: "キャ・ット", joined: "キャット", meaning: "猫" },
   d: { word: "dog", split: "ド・オ・グ", joined: "ドッグ", meaning: "犬" },
   e: { word: "egg", split: "エ・ッ・グ", joined: "エッグ", meaning: "たまご" },
-  f: { word: "fish", split: "フ・イ・シ", joined: "フィッシュ", meaning: "魚" },
+  f: { word: "fish", split: "フ・ィッ・シュ", joined: "フィッシュ", meaning: "魚" },
   g: { word: "gorilla", split: "ゴ・リ・ラ", joined: "ゴリラ", meaning: "動物" },
   h: { word: "hat", split: "ハ・ット", joined: "ハット", meaning: "帽子" },
   i: { word: "ink", split: "イ・ン・ク", joined: "インク", meaning: "インク" },
@@ -121,7 +121,7 @@ const questionBank = {
   alphabet: [
     { level: 0, prompt: "sun の最初の音はどれ？", word: "sun", display: "？・ア・ン", answer: "/s/", choices: ["/s/", "/m/", "/t/", "/f/"], explanation: "sun は /s/ の音で始まるよ。S の音を思い出そう。" },
     { level: 0, prompt: "map の最初の音はどれ？", word: "map", display: "？・ア・プ", answer: "/m/", choices: ["/m/", "/n/", "/b/", "/p/"], explanation: "map は /m/ の音で始まるよ。唇を閉じて出す音だよ。" },
-    { level: 0, prompt: "fish の最初の音はどれ？", word: "fish", display: "？・イ・シ", answer: "/f/", choices: ["/f/", "/v/", "/s/", "/h/"], explanation: "fish は /f/ の音で始まるよ。" },
+    { level: 0, prompt: "fish の最初の音はどれ？", word: "fish", display: "？・ィッ・シュ", answer: "/f/", choices: ["/f/", "/v/", "/s/", "/h/"], explanation: "fish は /f/ の音で始まるよ。" },
     { level: 0, prompt: "dog の最初の音はどれ？", word: "dog", display: "？・オ・グ", answer: "/d/", choices: ["/d/", "/b/", "/g/", "/t/"], explanation: "dog は /d/ の音で始まるよ。" },
     { level: 1, prompt: "bag の最初の音を表す文字は？", word: "bag", display: "？・ア・グ", answer: "b", choices: ["b", "d", "p", "g"], explanation: "bag は b の音で始まる単語。文字 b が /b/ を表すよ。" },
     { level: 1, prompt: "kite の最初の音を表す文字は？", word: "kite", display: "？・アイ・ト", answer: "k", choices: ["k", "h", "t", "g"], explanation: "kite は /k/ の音で始まるよ。ここでは k がその音を表すよ。" },
@@ -195,7 +195,7 @@ const questionBank = {
 const wordInfo = {
   "sun": { split: "ス・ア・ン", joined: "サン", meaning: "太陽" },
   "map": { split: "ム・ア・ップ", joined: "マップ", meaning: "地図" },
-  "fish": { split: "フ・イ・シ", joined: "フィッシュ", meaning: "魚" },
+  "fish": { split: "フ・ィッ・シュ", joined: "フィッシュ", meaning: "魚" },
   "dog": { split: "ド・オ・グ", joined: "ドッグ", meaning: "犬" },
   "bag": { split: "バ・ア・グ", joined: "バッグ", meaning: "かばん" },
   "kite": { split: "ク・アイ・ト", joined: "カイト", meaning: "凧" },
@@ -312,6 +312,30 @@ for (const course of alphabetLetterCourses) {
   ];
 }
 delete questionBank.alphabet;
+
+// ヒント：読みごとに、日本で身近なカタカナ英語を例にする
+const soundExamples = {
+  "ア": "アップル", "エ": "エッグタルト", "イ": "インターネット", "オ": "オレンジ",
+  "ウ": "ウィンナー", "アイ": "アイス", "エイ": "ケーキ", "オウ": "ホーム",
+  "オイ": "コイン", "アウ": "カウンター", "イー": "ティー", "ウー": "スープ",
+  "ユー": "ユーモア", "ア（弱く）": "アップル",
+  "ブ": "ブログ", "ク": "クッキー", "グ": "グッズ", "ドゥ": "ドリンク",
+  "ヌ": "ヌードル", "プ": "プレゼント", "ス": "スマホ", "ズ": "ズーム",
+  "フ": "フィレオフィッシュ", "ハ": "ハンバーガー", "ム": "ムービー", "ル": "ルール",
+  "ヴ": "ヴァイオリン", "ジュ": "ジュース", "シュ": "シュークリーム", "チ": "チキン",
+  "ユ": "ユニフォーム", "トゥ": "トゥモロー", "ング": "リング", "クゥ": "クイズ",
+  "クス": "ボックス", "ス（舌先を歯の間に）": "サンクス", "ズ（舌先を歯の間に）": "ブラザー",
+};
+const kanaOfAnswer = (answer) => phonicsLetterSounds[answer] || phonicsSounds[answer] || answer;
+for (const pool of Object.values(questionBank)) {
+  for (const question of pool) {
+    const example = soundExamples[kanaOfAnswer(question.answer)];
+    if (example) {
+      question.explanation = `${kanaOfAnswer(question.answer)}の音は「${example}」などで使われるよ。`;
+    }
+  }
+}
+
 
 const defaultData = () => ({ stats: {}, wrong: [], history: [] });
 const getElement = (id) => document.getElementById(id);
@@ -495,10 +519,10 @@ function createReviewItem(entry) {
   word.textContent = entry.word;
   const mistake = document.createElement("p");
   mistake.className = "mistake";
-  mistake.append("あなたの答え：");
-  appendAnswerText(mistake, entry.answer);
-  mistake.append(" / 正解：");
+  mistake.append("正解：");
   appendAnswerText(mistake, entry.correct);
+  mistake.append(" / あなたの答え：");
+  appendAnswerText(mistake, entry.answer);
   const explanation = document.createElement("p");
   appendPhonicsText(explanation, entry.explanation);
   item.append(question, word, mistake, explanation);
@@ -698,24 +722,20 @@ function showFeedback(isCorrect, question, answer) {
     message.append("ヒント：");
     appendPhonicsText(message, question.explanation);
   }
-  content.append(title, message, createWordInfo(question.word));
-
   const primary = createFeedbackButton(
     isCorrect ? "つぎへ ↵" : "再回答",
     isCorrect ? advanceQuiz : retryQuestion,
   );
   actions.append(primary);
-  if (!isCorrect) {
+  if (isCorrect) {
+    content.append(title, message, createWordInfo(question.word));
+  } else {
     const answer = document.createElement("p");
     answer.className = "feedback-answer";
     answer.append("正解：「");
-    if (phonicsLetterSounds[question.answer]) {
-      appendLetterChoice(answer, question.answer);
-    } else {
-      appendAnswerText(answer, question.answer);
-    }
+    appendAnswerText(answer, question.answer);
     answer.append("」");
-    content.append(answer);
+    content.append(title, answer, message, createWordInfo(question.word));
     actions.append(createFeedbackButton("次へ", advanceQuiz, "secondary"));
   }
   dialog.showModal();
@@ -835,10 +855,10 @@ function renderAnswerSummary() {
     const prompt = document.createElement("strong");
     appendPhonicsText(prompt, `${index + 1}. ${question.prompt} (${question.word})`);
     const answer = document.createElement("small");
-    answer.append("あなたの答え：");
-    appendAnswerText(answer, quiz.submitted[index] || "未回答");
-    answer.append(" / 正解：");
+    answer.append("正解：");
     appendAnswerText(answer, question.answer);
+    answer.append(" / あなたの答え：");
+    appendAnswerText(answer, quiz.submitted[index] || "未回答");
     const explanation = document.createElement("small");
     appendPhonicsText(explanation, question.explanation);
     item.append(prompt, answer, explanation);
