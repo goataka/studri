@@ -3,6 +3,8 @@ import { createBdd } from "playwright-bdd";
 
 const { Given, When, Then } = createBdd();
 
+const COURSE = "alphabet-1";
+
 Given("フォニックスアプリを開く", async ({ page }) => {
   await page.addInitScript(() => {
     localStorage.removeItem("studri-phonics-v1");
@@ -22,15 +24,10 @@ Given("固定された問題順のフォニックスアプリを開く", async (
 Then("フォニックスのコースと学習範囲が表示される", async ({ page }) => {
   await expect(page).toHaveTitle("スタドリ - フォニックス編");
   await expect(page.getByRole("heading", { name: "フォニックスを学ぼう！" })).toBeVisible();
-  await expect(page.locator("#courses .course")).toHaveCount(5);
+  await expect(page.locator("#courses .course")).toHaveCount(8);
   await expect(page.locator(".scope")).toContainText("短母音");
   await expect(page.locator(".site-footer")).toHaveText("Ver. 20261031.110349.451");
   await expect(page.locator(".mascot img")).toHaveJSProperty("naturalWidth", 1024);
-});
-
-Then("発音の答えはカタカナが先に表示され発音記号が添えられる", async ({ page }) => {
-  await expect(page.locator("#answers button").first()).toHaveText("ス（/s/）");
-  await expect(page.locator("#answers button").first()).toHaveAttribute("aria-label", "ス（/s/）");
 });
 
 When("画面をスマートフォン幅にする", async ({ page }) => {
@@ -39,36 +36,40 @@ When("画面をスマートフォン幅にする", async ({ page }) => {
 
 Then("横スクロールせずにコースを選べる", async ({ page }) => {
   await expect(page.locator("html")).toHaveJSProperty("scrollWidth", 320);
-  await expect(page.locator('#courses [data-course="alphabet"] button').first()).toBeVisible();
+  await expect(page.locator(`#courses [data-course="${COURSE}"] button`).first()).toBeVisible();
 });
 
-When("アルファベットの音コースで挑戦を始める", async ({ page }) => {
-  await page.locator('#courses [data-course="alphabet"] .start-course').click();
+When("アルファベットの音①コースで挑戦を始める", async ({ page }) => {
+  await page.locator(`#courses [data-course="${COURSE}"] .start-course`).click();
 });
 
-Then("問題とタッチ回答と手書き練習欄が表示される", async ({ page }) => {
+Then("選択肢に発音記号は表示されない", async ({ page }) => {
+  const texts = await page.locator("#answers button").allTextContents();
+  expect(texts).toHaveLength(4);
+  for (const text of texts) expect(text).not.toContain("/");
+});
+
+Then("問題文の下に意味のヒントが表示される", async ({ page }) => {
+  await expect(page.locator("#meaningHint")).toBeVisible();
+  await expect(page.locator("#meaningHint")).toContainText("意味：");
+});
+
+Then("問題と回答ボタンが表示される", async ({ page }) => {
   await expect(page.locator("#quiz")).toBeVisible();
   await expect(page.locator("#answers button")).toHaveCount(4);
-  await expect(page.locator("#writingCanvas")).toBeVisible();
-  await expect(page.locator(".writing-note")).toContainText("手書き認識はしません");
+  await expect(page.locator("#meaningHint")).toContainText("意味：");
+  await expect(page.locator("#writingCanvas")).toHaveCount(0);
 });
 
 When("まちがいを直しながら10問を終える", async ({ page }) => {
-  const canvas = page.locator("#writingCanvas");
-  const bounds = await canvas.boundingBox();
-  if (!bounds) throw new Error("手書きキャンバスが表示されていません");
-  await page.mouse.move(bounds.x + 30, bounds.y + 35);
-  await page.mouse.down();
-  await page.mouse.move(bounds.x + 120, bounds.y + 72);
-  await page.mouse.up();
-
   for (let index = 0; index < 10; index += 1) {
     await page.locator("#answers button").last().click();
     const feedback = page.locator("#feedback");
     await expect(feedback).toBeVisible();
     if (await feedback.getAttribute("class").then((value) => value?.includes("no"))) {
       const correctAnswer = (await feedback.locator(".feedback-answer").textContent())
-        ?.replace(/^正解：「|」$/g, "");
+        ?.replace(/^正解：「|」$/g, "")
+        .replace(/（\/[^）]*）$/, "");
       if (!correctAnswer) throw new Error("正解がフィードバックに表示されていません");
       await feedback.getByRole("button", { name: "再回答" }).click();
       await page.getByRole("button", { name: correctAnswer, exact: true }).click();
@@ -85,15 +86,14 @@ Then("全10問の結果と挑戦記録が保存される", async ({ page }) => {
   await expect(page.locator("#score")).toHaveText("10 / 10 問 正解");
   await expect(page.locator("#answerSummary article")).toHaveCount(10);
   const saved = await page.evaluate(() => JSON.parse(localStorage.getItem("studri-phonics-v1") || "{}"));
-  expect(saved.stats.alphabet.attempts).toBe(1);
+  expect(saved.stats[COURSE].attempts).toBe(1);
   expect(saved.history[0].completed).toBe(true);
   expect(saved.wrong.length).toBeGreaterThan(0);
-  expect(saved.wrong.some((entry: { trace?: string }) => entry.trace?.startsWith("data:image/png"))).toBe(true);
 });
 
 When("コースの誤答ログを開く", async ({ page }) => {
   await page.locator("#homeButton").click();
-  await page.locator('#courses [data-course="alphabet"] .outline').first().click();
+  await page.locator(`#courses [data-course="${COURSE}"] .outline`).first().click();
 });
 
 Then("誤答と正解と解説が表示される", async ({ page }) => {
@@ -106,7 +106,7 @@ Then("誤答と正解と解説が表示される", async ({ page }) => {
 When("最初の誤答を解き直して正解する", async ({ page }) => {
   const firstItem = page.locator("#reviewList .review-item").first();
   const savedCorrectAnswer = await firstItem.innerText()
-    .then((text) => text.match(/正解：(\S+)/)?.[1]);
+    .then((text) => text.match(/正解：(\S+)/)?.[1]?.replace(/（\/[^）]*）$/, ""));
   if (!savedCorrectAnswer) throw new Error("誤答ログに正解が表示されていません");
   await firstItem.getByRole("button", { name: "この問題を解き直す" }).click();
   await expect(page.locator("#quiz")).toBeVisible();
@@ -116,7 +116,7 @@ When("最初の誤答を解き直して正解する", async ({ page }) => {
   await expect(feedback).toHaveClass(/ok/);
   await feedback.locator(".feedback-actions button").first().click();
   await page.locator("#reviewBack").click();
-  await page.locator('#courses [data-course="alphabet"] .outline').first().click();
+  await page.locator(`#courses [data-course="${COURSE}"] .outline`).first().click();
 });
 
 Then("解き直しが完了扱いになる", async ({ page }) => {
@@ -128,11 +128,11 @@ When("学習データを確認して初期化する", async ({ page }) => {
   await page.locator("#resetData").click();
 });
 
-Then("学習記録と手書き記録が削除される", async ({ page }) => {
+Then("学習記録が削除される", async ({ page }) => {
   await expect(page.locator("#reviewPanel")).toBeHidden();
   const saved = await page.evaluate(() => localStorage.getItem("studri-phonics-v1"));
   expect(saved).toBeNull();
-  await expect(page.locator('#courses [data-course="alphabet"]')).toContainText("挑戦 0回");
+  await expect(page.locator(`#courses [data-course="${COURSE}"]`)).toContainText("挑戦 0回");
 });
 
 When("挑戦を確認して中断する", async ({ page }) => {
@@ -149,8 +149,8 @@ Then("中断した挑戦が保存される", async ({ page }) => {
 
 When("3回のミスなし合格を達成する", async ({ page }) => {
   for (let attempt = 0; attempt < 3; attempt += 1) {
-    await page.locator('#courses [data-course="alphabet"] .start-course').click();
-    await answerTenKnownQuestions(page);
+    await page.locator(`#courses [data-course="${COURSE}"] .start-course`).click();
+    await answerTenCorrectly(page);
     if (attempt < 2) await page.locator("#homeButton").click();
   }
 });
@@ -158,44 +158,43 @@ When("3回のミスなし合格を達成する", async ({ page }) => {
 Then("合格後のチャレンジが解放される", async ({ page }) => {
   await expect(page.locator("#result")).toBeVisible();
   const saved = await page.evaluate(() => JSON.parse(localStorage.getItem("studri-phonics-v1") || "{}"));
-  expect(saved.stats.alphabet.streak).toBe(3);
+  expect(saved.stats[COURSE].streak).toBe(3);
   await expect(page.locator("#timeAttack")).toBeEnabled();
   await expect(page.locator("#chainAttack")).toBeEnabled();
 });
 
 When("タイムアタックを完了する", async ({ page }) => {
   await page.locator("#timeAttack").click();
-  await answerTenKnownQuestions(page);
+  await answerTenCorrectly(page);
 });
 
 Then("タイムアタックの最高記録が保存される", async ({ page }) => {
   await expect(page.locator("#resultTitle")).toHaveText("⏱ タイムアタック");
   const saved = await page.evaluate(() => JSON.parse(localStorage.getItem("studri-phonics-v1") || "{}"));
-  expect(saved.stats.alphabet.timeBest).toBeGreaterThan(0);
+  expect(saved.stats[COURSE].timeBest).toBeGreaterThan(0);
 });
 
 When("連続正解チャレンジを完了する", async ({ page }) => {
   await page.locator("#chainAttack").click();
-  await answerTenKnownQuestions(page);
+  await answerTenCorrectly(page);
 });
 
 Then("連続正解の最高記録が保存される", async ({ page }) => {
   await expect(page.locator("#resultTitle")).toHaveText("🔥 連続正解チャレンジ");
   const saved = await page.evaluate(() => JSON.parse(localStorage.getItem("studri-phonics-v1") || "{}"));
-  expect(saved.stats.alphabet.chainBest).toBe(10);
+  expect(saved.stats[COURSE].chainBest).toBe(10);
 });
 
-async function answerTenKnownQuestions(page: import("@playwright/test").Page) {
-  const answers: Record<string, string> = {
-    sun: "ス（/s/）", map: "ム（/m/）", fish: "フ（/f/）", dog: "ドゥ（/d/）", bag: "ブ（b）",
-    kite: "ク（k）", top: "トゥ（/t/）", van: "ヴ（/v/）", zip: "ズ（z）", red: "ル（r）",
-    jam: "ジュ（j）", queen: "クゥ（qu）", box: "クス（/ks/）", yes: "ユ（/j/）",
-  };
+// 画面の状態から正解を読み取り、1回目で正解する
+async function answerTenCorrectly(page: import("@playwright/test").Page) {
   for (let index = 0; index < 10; index += 1) {
-    const word = await page.locator("#wordCard").getAttribute("data-word");
-    const answer = word ? answers[word] : undefined;
-    if (!answer) throw new Error(`未登録のフォニックス問題: ${word}`);
-    await page.getByRole("button", { name: answer, exact: true }).click();
+    const label = await page.evaluate<string>(`(() => {
+      const answer = quiz.questions[quiz.index].answer;
+      return phonicsLetterSounds[answer]
+        ? phonicsLetterSounds[answer] + "（" + answer + "）"
+        : (phonicsSounds[answer] || answer);
+    })()`);
+    await page.getByRole("button", { name: label, exact: true }).click();
     await expect(page.locator("#feedback")).toHaveClass(/ok/);
     await page.locator("#feedbackActions button").first().click();
   }

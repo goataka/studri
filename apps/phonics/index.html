@@ -58,13 +58,6 @@
             </div>
             <div class="review-list" id="reviewList"></div>
           </section>
-          <section class="review-panel hidden" id="tracePanel" aria-labelledby="traceTitle">
-            <div class="panel-title">
-              <h2 id="traceTitle">手書きの見直し</h2>
-              <button class="outline" id="traceBack" type="button">コース一覧へ</button>
-            </div>
-            <div class="review-list" id="traceList"></div>
-          </section>
         </section>
       </section>
 
@@ -81,20 +74,11 @@
             <p class="eyebrow" id="questionCategory">LISTEN &amp; CHOOSE</p>
             <h2 id="problem"></h2>
             <p class="word-card" id="wordCard"></p>
+            <p class="meaning-hint hidden" id="meaningHint"></p>
           </div>
           <p class="answer-instruction">カタカナを目安に答えをえらぼう（発音記号は参考）</p>
           <div class="answers" id="answers" aria-label="答えの選択肢"></div>
           <p class="previous-answer hidden" id="previousAnswer"></p>
-          <section class="writing-area" aria-label="手書き練習エリア">
-            <div class="writing-heading">
-              <span>✍️ 手書き練習エリア</span>
-              <span class="writing-note">文字や音を練習しよう（手書き認識はしません）</span>
-            </div>
-            <div class="canvas-box">
-              <canvas id="writingCanvas" aria-label="文字を書く練習キャンバス"></canvas>
-              <button class="clear" id="clearCanvas" type="button">消す</button>
-            </div>
-          </section>
         </div>
       </section>
 
