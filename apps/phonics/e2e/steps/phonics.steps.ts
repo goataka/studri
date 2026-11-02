@@ -187,9 +187,9 @@ Then("連続正解の最高記録が保存される", async ({ page }) => {
 
 async function answerTenKnownQuestions(page: import("@playwright/test").Page) {
   const answers: Record<string, string> = {
-    sun: "ス（/s/）", map: "ム（/m/）", fish: "フ（/f/）", dog: "ド（/d/）", bag: "b",
-    kite: "k", top: "ト（/t/）", van: "ヴ（/v/）", zip: "z", red: "r",
-    jam: "j", queen: "qu", box: "クス（/ks/）", yes: "ヤ行（/j/）",
+    sun: "ス（/s/）", map: "ム（/m/）", fish: "フ（/f/）", dog: "ドゥ（/d/）", bag: "ブ（b）",
+    kite: "ク（k）", top: "トゥ（/t/）", van: "ヴ（/v/）", zip: "ズ（z）", red: "ル（r）",
+    jam: "ジュ（j）", queen: "クゥ（qu）", box: "クス（/ks/）", yes: "ユ（/j/）",
   };
   for (let index = 0; index < 10; index += 1) {
     const word = await page.locator("#wordCard").getAttribute("data-word");
