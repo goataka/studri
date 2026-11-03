@@ -10,7 +10,7 @@ Given("フォニックスアプリを開く", async ({ page }) => {
     localStorage.removeItem("studri-phonics-v1");
     localStorage.removeItem("studri-phonics-v1-sound");
   });
-  await page.goto("/apps/phonics/");
+  await page.goto("/apps/english/phonics/");
 });
 
 Given("固定された問題順のフォニックスアプリを開く", async ({ page }) => {
@@ -18,7 +18,7 @@ Given("固定された問題順のフォニックスアプリを開く", async (
     localStorage.removeItem("studri-phonics-v1");
     Math.random = () => 0;
   });
-  await page.goto("/apps/phonics/");
+  await page.goto("/apps/english/phonics/");
 });
 
 Then("フォニックスのコースと学習範囲が表示される", async ({ page }) => {
