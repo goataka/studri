@@ -31,9 +31,9 @@ const patternLessons = [
   },
   {
     id: "consonant-exceptions",
-    title: "子音のよみ分けとれい外",
+    title: "子音のよみかたのちがい",
     icon: "🔁",
-    summary: "c・g のよみ分け、th・wh・kn・wr・tch など",
+    summary: "c・g の2つのよみかた、th・wh・kn・wr・tch など",
     rows: [
       { pattern: "c", sound: "ス", word: "city", kana: "シティ", split: "シュ・イ・トゥ・エ・ィ", meaning: "都市", display: "？・ティ" },
       { pattern: "g", sound: "ジュ", word: "giant", kana: "ジャイアント", split: "ジュ・ア・イ・ア・ン・トゥ・オ", meaning: "とても大きな", display: "？・イ・ア・ン・ト" },
@@ -52,7 +52,7 @@ const patternLessons = [
   },
   {
     id: "vowel-teams-2",
-    title: "母音チーム②",
+    title: "母音のペア②",
     icon: "🌤️",
     summary: "ea・ou・ow・oy・aw・all・ew・ie・igh など",
     rows: [
@@ -131,7 +131,7 @@ const trickyWordLessons = [
     id: "tricky-3",
     title: "トリッキーワーズ③（ときどき出る）",
     icon: "⭐",
-    summary: "発てん・中学レベルの重ようなれい外語",
+    summary: "もっとむずかしい、ルールどおりに読めないことば",
     words: [
       ["aunt", "アント"], ["blood", "ブラッド"], ["break", "ブレイク"], ["build", "ビルド"],
       ["eye", "アイ"], ["flood", "フラッド"], ["half", "ハーフ"], ["heart", "ハート"],
