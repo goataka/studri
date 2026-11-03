@@ -519,25 +519,83 @@ function getStats(courseId) {
   };
 }
 
+// ホームでは「つぎにやるコース」を大きく出し、ほかのコースはまとまりごとにたたむ
+const openSections = new Set();
+let sectionsInitialized = false;
+
+function sectionOf(course) {
+  if (course.section) return course.section;
+  return course.id.startsWith("tricky") ? "トリッキーワーズ" : "つづりのルール";
+}
+
+function findNextCourse() {
+  return courses.find((course) => getStats(course.id).streak < PASS_STREAK) || courses[0];
+}
+
 function renderCourses() {
   const list = getElement("courses");
   list.replaceChildren();
   getElement("courseCount").textContent = `全${courses.length}コース`;
-  list.append(createCourseMarker("begin"));
-  let currentSection = null;
+  const next = findNextCourse();
+  if (!sectionsInitialized) {
+    openSections.add(sectionOf(next));
+    sectionsInitialized = true;
+  }
+  list.append(createNextCourseCard(next), createCourseMarker("begin"));
+  const groups = new Map();
   courses.forEach((course) => {
-    const section = course.section ?? null;
-    if (section !== currentSection) {
-      currentSection = section;
-      if (section) list.append(createSectionHeading(section));
-    }
-    list.append(createCourseCard(course));
+    const section = sectionOf(course);
+    if (!groups.has(section)) groups.set(section, []);
+    groups.get(section).push(course);
   });
+  groups.forEach((items, section) => list.append(createSectionGroup(section, items)));
   list.append(createCourseMarker("goal"));
 }
 
+function createSectionGroup(section, items) {
+  const group = document.createElement("details");
+  group.className = "course-section-group";
+  group.open = openSections.has(section);
+  group.addEventListener("toggle", () => {
+    if (group.open) openSections.add(section);
+    else openSections.delete(section);
+  });
+  const passed = items.filter((course) => getStats(course.id).streak >= PASS_STREAK).length;
+  const summary = document.createElement("summary");
+  const heading = createSectionHeading(section);
+  const count = document.createElement("small");
+  count.className = "course-section-count";
+  count.textContent = `ごうかく ${passed} / ${items.length}`;
+  summary.append(heading, count);
+  const body = document.createElement("div");
+  body.className = "course-section-items";
+  items.forEach((course) => body.append(createCourseCard(course)));
+  group.append(summary, body);
+  return group;
+}
+
+function createNextCourseCard(course) {
+  const stats = getStats(course.id);
+  const card = document.createElement("section");
+  card.className = "next-course";
+  card.id = "nextCourse";
+  const label = document.createElement("p");
+  label.className = "eyebrow";
+  label.textContent = "つぎはこのコース";
+  const title = document.createElement("h3");
+  title.append(createIcon("course-icon", course.icon), document.createTextNode(` ${course.title}`));
+  const summary = document.createElement("p");
+  summary.textContent = course.summary;
+  const progress = document.createElement("p");
+  progress.className = "next-course-progress";
+  progress.textContent = `まちがえずにごうかく ${stats.streak} / ${PASS_STREAK}回`;
+  const button = createCourseButton("はじめる", "start next-course-start", () => startQuiz(course.id));
+  card.append(label, title, summary, progress, button);
+  return card;
+}
+
 function createSectionHeading(text) {
-  const heading = document.createElement("h3");
+  const heading = document.createElement("span");
   heading.className = "course-section";
   heading.textContent = text;
   return heading;
@@ -625,6 +683,12 @@ function createCourseProgress(stats) {
 }
 
 function createChallengeGroup(course, unlocked) {
+  if (!unlocked) {
+    const lock = document.createElement("p");
+    lock.className = "course-lock";
+    lock.textContent = `🔒 チャレンジ：まちがえずにごうかく あと${PASS_STREAK - getStats(course.id).streak}回でひらく`;
+    return lock;
+  }
   const group = document.createElement("div");
   group.className = "course-challenge-group";
   const label = document.createElement("span");
@@ -636,12 +700,6 @@ function createChallengeGroup(course, unlocked) {
   challenges.append(createChallengeButton(course, "time", "⏱", "タイムアタック", unlocked));
   challenges.append(createChallengeButton(course, "chain", "🔥", "れんぞくせいかい", unlocked));
   group.append(label, challenges);
-  if (!unlocked) {
-    const hint = document.createElement("small");
-    hint.className = "course-unlock-hint";
-    hint.textContent = `まちがえずにごうかく あと${PASS_STREAK - getStats(course.id).streak}回でひらく`;
-    group.append(hint);
-  }
   return group;
 }
 
@@ -662,16 +720,13 @@ function createChallengeButton(course, mode, emoji, label, unlocked) {
 function createCourseTools(course) {
   const group = document.createElement("div");
   group.className = "course-tools-group";
-  const label = document.createElement("span");
-  label.className = "course-group-label";
-  label.textContent = "🧰 ツール";
   const logButton = document.createElement("button");
   logButton.type = "button";
   logButton.className = "course-log";
   logButton.dataset.reviewCourse = course.id;
   logButton.textContent = "📜 まちがいログ";
   logButton.addEventListener("click", () => showCourseLog(course));
-  group.append(label, logButton);
+  group.append(logButton);
   return group;
 }
 
