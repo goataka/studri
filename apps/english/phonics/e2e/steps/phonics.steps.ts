@@ -73,8 +73,7 @@ When("まちがいを直しながら10問を終える", async ({ page }) => {
     await expect(feedback).toBeVisible();
     if (await feedback.getAttribute("class").then((value) => value?.includes("no"))) {
       const correctAnswer = (await feedback.locator(".feedback-answer").textContent())
-        ?.replace(/^せいかい：「|」$/g, "")
-        .replace(/（\/[^）]*）$/, "");
+        ?.replace(/^せいかい：「|」$/g, "");
       if (!correctAnswer) throw new Error("正解がフィードバックに表示されていません");
       await feedback.getByRole("button", { name: "もういちど答える" }).click();
       await page.getByRole("button", { name: correctAnswer, exact: true }).click();
