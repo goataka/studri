@@ -36,15 +36,17 @@ When("画面をスマートフォン幅にする", async ({ page }) => {
 
 Then("横スクロールせずにコースを選べる", async ({ page }) => {
   await expect(page.locator("html")).toHaveJSProperty("scrollWidth", 320);
+  await openCourseSection(page);
   await expect(page.locator(`#courses [data-course="${COURSE}"] button`).first()).toBeVisible();
 });
 
 When("アルファベットの子音①コースで挑戦を始める", async ({ page }) => {
+  await openCourseSection(page);
   await page.locator(`#courses [data-course="${COURSE}"] .course-start`).click();
 });
 
 Then("コース一覧に「母音」と「子音」の見出しが表示される", async ({ page }) => {
-  await expect(page.locator(".course-section")).toHaveText(["母音", "子音"]);
+  await expect(page.locator(".course-section")).toHaveText(["母音", "子音", "つづりのルール", "トリッキーワーズ"]);
   await expect(page.locator("#courses .course").first()).toHaveAttribute("data-course", "alphabet-4");
 });
 
@@ -93,6 +95,7 @@ Then("全10問の結果と挑戦記録が保存される", async ({ page }) => {
 
 When("コースの誤答ログを開く", async ({ page }) => {
   await page.locator("#homeButton").click();
+  await openCourseSection(page);
   await page.locator(`#courses [data-course="${COURSE}"] .course-log`).first().click();
 });
 
@@ -116,6 +119,7 @@ When("最初の誤答を解き直して正解する", async ({ page }) => {
   await expect(feedback).toHaveClass(/ok/);
   await feedback.locator(".feedback-actions button").first().click();
   await page.locator("#reviewBack").click();
+  await openCourseSection(page);
   await page.locator(`#courses [data-course="${COURSE}"] .course-log`).first().click();
 });
 
@@ -149,6 +153,7 @@ Then("中断した挑戦が保存される", async ({ page }) => {
 
 When("3回のミスなし合格を達成する", async ({ page }) => {
   for (let attempt = 0; attempt < 3; attempt += 1) {
+    await openCourseSection(page);
     await page.locator(`#courses [data-course="${COURSE}"] .course-start`).click();
     await answerTenCorrectly(page);
     if (attempt < 2) await page.locator("#homeButton").click();
@@ -198,4 +203,10 @@ async function answerTenCorrectly(page: import("@playwright/test").Page) {
     await page.locator("#feedbackActions button").first().click();
   }
   await expect(page.locator("#result")).toBeVisible();
+}
+
+// コースはまとまりごとにたためるので、使う前にそのまとまりを開く
+async function openCourseSection(page: import("@playwright/test").Page) {
+  await page.locator(`#courses details:has([data-course="${COURSE}"])`)
+    .evaluate((element) => { (element as HTMLDetailsElement).open = true; });
 }

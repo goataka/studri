@@ -1069,3 +1069,58 @@ main {
 .summary-first > summary { padding: 10px 12px; border: 1px dashed var(--line); border-radius: 12px; cursor: pointer; font-weight: 800; }
 
 .meaning-hint { margin: 6px 0 0; color: #778177; font-size: 0.8rem; font-weight: 500; }
+
+/* ホーム：つぎにやるコースと、たためるコースのまとまり */
+.next-course {
+  padding: 18px 20px;
+  border: 2px solid #9ab98d;
+  border-radius: 20px;
+  background: #f4f9ef;
+  text-align: center;
+}
+
+.next-course h3 { margin: 4px 0; font-size: 1.35rem; }
+
+.next-course p { margin: 4px 0; color: var(--muted); }
+
+.next-course-progress { font-weight: 800; }
+
+.next-course-start { margin-top: 10px; min-width: 180px; }
+
+.course-section-group > summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 12px 16px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: #fffdf8;
+  cursor: pointer;
+  list-style: none;
+}
+
+.course-section-group > summary::-webkit-details-marker { display: none; }
+
+.course-section-group > summary::before { content: "▶"; color: #5f7a63; font-size: 0.8rem; transition: transform 140ms ease; }
+
+.course-section-group[open] > summary::before { transform: rotate(90deg); }
+
+.course-section-group > summary .course-section { flex: 1; margin: 0; font-size: 1rem; }
+
+.course-section-count { color: var(--muted); font-weight: 700; }
+
+.course-section-items { display: grid; gap: 14px; margin-top: 12px; }
+
+.course-lock { margin: 6px 0 0; color: #899187; font-size: 0.8rem; }
+
+.reset-area { margin: 28px 0 0; text-align: center; }
+
+.reset-link {
+  border: 0;
+  background: none;
+  color: #899187;
+  font-size: 0.85rem;
+  text-decoration: underline;
+  cursor: pointer;
+}
