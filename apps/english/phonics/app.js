@@ -33,7 +33,7 @@ const phonicsSounds = {
   "/ʒ/": "ジュ",
   "/tʃ/": "チ",
   "/θ/": "ス（息の音）",
-  "/ð/": "ザ（声の音）",
+  "/ð/": "ズ（声の音）",
   "/æ/": "ア",
   "/e/": "エ",
   "/ɪ/": "イ",
@@ -154,7 +154,7 @@ const questionBank = {
     { level: 0, prompt: "ship の sh が表すはじめの音は？", word: "ship", display: "？・イ・プ", answer: "/ʃ/", choices: ["/ʃ/", "/s/", "/tʃ/", "/h/"], explanation: "sh は2文字で シュ の音を表すよ。" },
     { level: 0, prompt: "chin の ch が表すはじめの音は？", word: "chin", display: "？・イ・ン", answer: "/tʃ/", choices: ["/tʃ/", "/ʃ/", "/k/", "/dʒ/"], explanation: "ch は2文字で チ の音を表すよ。" },
     { level: 0, prompt: "thin の th が表すはじめの音は？", word: "thin", display: "？・イ・ン", answer: "/θ/", choices: ["/θ/", "/ð/", "/f/", "/t/"], explanation: "thin の th は ス（息の音） の音。したさきを歯のあいだに軽く出すよ。" },
-    { level: 1, prompt: "this の th が表すはじめの音は？", word: "this", display: "？・イ・ス", answer: "/ð/", choices: ["/ð/", "/θ/", "/d/", "/z/"], explanation: "this の th は声を出す ザ（声の音） の音だよ。" },
+    { level: 1, prompt: "this の th が表すはじめの音は？", word: "this", display: "？・イ・ス", answer: "/ð/", choices: ["/ð/", "/θ/", "/d/", "/z/"], explanation: "this の th は声を出す ズ（声の音） の音だよ。" },
     { level: 1, prompt: "phone の ph が表すはじめの音は？", word: "phone", display: "？・オ・ン", answer: "/f/", choices: ["/f/", "/p/", "/h/", "/v/"], explanation: "ph は フ の音を表すつづりだよ。" },
     { level: 1, prompt: "white の wh が表すはじめの音は？", word: "white", display: "？・ワ・イ・ト", answer: "ホ", choices: ["ホ", "ウ", "フ", "ハ"], explanation: "white の wh は「ホ」と読むよ。ホワイト（白）の音だね。" },
     { level: 2, prompt: "ring の ng が表すさいごの音は？", word: "ring", display: "リ・？", answer: "/ŋ/", choices: ["/ŋ/", "/n/", "/g/", "/k/"], explanation: "ng はおわりで ング の音を表すことがあるよ。" },
@@ -320,7 +320,7 @@ const soundExampleWords = {
   "ア": "アップル", "エ": "エッグタルト", "イ": "インターネット", "オ": "オレンジ",
   "ウ": "ウィンナー", "アイ": "アイス", "エイ": "ケーキ", "オウ": "ホーム",
   "オイ": "コイン", "アウ": "カウンター", "イー": "ティー", "ウー": "スープ",
-  "ユー": "ユーモア", "ア（弱く）": "アップル",
+  "ユー": "ユーモア", "ア（弱く）": "アバウト", "ア（弱い）": "カップ",
   "ブ": "ブログ", "ク": "クッキー", "グ": "グッズ", "ドゥ": "ドリンク",
   "ヌ": "ヌードル", "プ": "プレゼント", "ス": "スマホ", "ズ": "ズーム",
   "フ": "フィレオフィッシュ", "ハ": "ハンバーガー", "ム": "ムービー", "ル": "ルール",
@@ -340,10 +340,14 @@ const exampleSyllables = {
   "ハンバーガー": "ハ・ン・バ・ー・ガ・ー", "ムービー": "ム・ー・ビ・ー", "ルール": "ル・ー・ル",
   "ヴァイオリン": "ヴァ・イ・オ・リ・ン", "ジュース": "ジュ・ー・ス", "シュークリーム": "シュー・ク・リ・ー・ム",
   "チキン": "チ・キ・ン", "ユニフォーム": "ユ・ニ・フォ・ー・ム", "トゥモロー": "ト・ゥ・モ・ロ・ー",
-  "リング": "リ・ン・グ", "クイズ": "ク・イ・ズ", "ボックス": "ボ(ッ)・ク・ス",
+  "リング": "リ・ン・グ", "クイズ": "ク・イ・ズ", "カップ": "ク・ア(ッ)・プ", "アバウト": "ア・バ・ウ・ト", "ボックス": "ボ(ッ)・ク・ス",
   "サンクス": "サ・ン・クス", "ブラザー": "ブ・ラ・ザ・ー",
 };
-const kanaOfAnswer = (answer) => phonicsLetterSounds[answer] || phonicsSounds[answer] || answer;
+// 結果と説明では、弱い「ア」を「ア（弱い）」と書く（ボタンの選択肢は「ア」のまま）
+const phonicsResultSounds = { "/ʌ/": "ア（弱い）", "/ə/": "ア（弱い）" };
+const kanaOfAnswer = (answer) => answer === "/ʌ/"
+  ? "ア（弱い）"
+  : phonicsLetterSounds[answer] || phonicsSounds[answer] || answer;
 for (const pool of Object.values(questionBank)) {
   for (const question of pool) {
     const example = soundExampleWords[kanaOfAnswer(question.answer)];
@@ -449,7 +453,15 @@ function appendPhonicsText(element, text) {
 }
 
 function appendAnswerText(element, value) {
-  if (phonicsLetterSounds[value]) {
+  if (phonicsResultSounds[value]) {
+    const pronunciation = document.createElement("span");
+    pronunciation.className = "phonics-pronunciation";
+    const kana = document.createElement("span");
+    kana.className = "phonics-kana";
+    kana.textContent = phonicsResultSounds[value];
+    pronunciation.append(kana);
+    element.append(pronunciation);
+  } else if (phonicsLetterSounds[value]) {
     appendLetterChoice(element, value);
   } else {
     appendPhonicsText(element, value);
@@ -808,6 +820,7 @@ function renderChoices(question) {
     const button = document.createElement("button");
     button.type = "button";
     button.className = "answer-choice";
+    button.dataset.choice = choice;
     if (phonicsLetterSounds[choice]) {
       appendLetterChoice(button, choice);
       button.setAttribute("aria-label", `${phonicsLetterSounds[choice]}（${choice}）`);

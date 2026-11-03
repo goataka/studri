@@ -72,15 +72,10 @@ When("まちがいを直しながら10問を終える", async ({ page }) => {
     const feedback = page.locator("#feedback");
     await expect(feedback).toBeVisible();
     if (await feedback.getAttribute("class").then((value) => value?.includes("no"))) {
-      const correctAnswer = (await feedback.locator(".feedback-answer").textContent())
-        ?.replace(/^せいかい：「|」$/g, "");
-      if (!correctAnswer) throw new Error("正解がフィードバックに表示されていません");
       await feedback.getByRole("button", { name: "もういちど答える" }).click();
-      await page.getByRole("button", { name: correctAnswer, exact: true }).click();
-      await expect(feedback).toHaveClass(/ok/);
-    } else {
-      await expect(feedback).toHaveClass(/ok/);
+      await clickCorrectChoice(page);
     }
+    await expect(feedback).toHaveClass(/ok/);
     await feedback.locator(".feedback-actions button").first().click();
   }
 });
@@ -109,13 +104,13 @@ Then("誤答と正解と解説が表示される", async ({ page }) => {
 
 When("最初の誤答を解き直して正解する", async ({ page }) => {
   const firstItem = page.locator("#reviewList .review-item").first();
-  const savedCorrectAnswer = await firstItem.innerText()
-    .then((text) => text.match(/せいかい：(\S+)/)?.[1]?.replace(/（\/[^）]*）$/, ""));
-  if (!savedCorrectAnswer) throw new Error("誤答ログに正解が表示されていません");
+  const savedCorrectAnswer = await page.evaluate<string>(
+    `learningData.wrong.filter((entry) => entry.courseId === "${COURSE}").slice(-12).reverse()[0].correct`,
+  );
   await firstItem.getByRole("button", { name: "この問題をとき直す" }).click();
   await expect(page.locator("#quiz")).toBeVisible();
   await expect(page.locator("#answers button")).toHaveCount(4);
-  await page.getByRole("button", { name: savedCorrectAnswer, exact: true }).click();
+  await page.locator(`#answers button[data-choice="${savedCorrectAnswer}"]`).click();
   const feedback = page.locator("#feedback");
   await expect(feedback).toHaveClass(/ok/);
   await feedback.locator(".feedback-actions button").first().click();
@@ -189,16 +184,15 @@ Then("連続正解の最高記録が保存される", async ({ page }) => {
   expect(saved.stats[COURSE].chainBest).toBe(10);
 });
 
-// 画面の状態から正解を読み取り、1回目で正解する
+// 出題中の正解の選択肢を押す（同じ読みの選択肢があっても正しいものを選ぶ）
+async function clickCorrectChoice(page: import("@playwright/test").Page) {
+  const answer = await page.evaluate<string>("quiz.questions[quiz.index].answer");
+  await page.locator(`#answers button[data-choice="${answer}"]`).click();
+}
+
 async function answerTenCorrectly(page: import("@playwright/test").Page) {
   for (let index = 0; index < 10; index += 1) {
-    const label = await page.evaluate<string>(`(() => {
-      const answer = quiz.questions[quiz.index].answer;
-      return phonicsLetterSounds[answer]
-        ? phonicsLetterSounds[answer] + "（" + answer + "）"
-        : (phonicsSounds[answer] || answer);
-    })()`);
-    await page.getByRole("button", { name: label, exact: true }).click();
+    await clickCorrectChoice(page);
     await expect(page.locator("#feedback")).toHaveClass(/ok/);
     await page.locator("#feedbackActions button").first().click();
   }
