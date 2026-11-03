@@ -4,8 +4,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="theme-color" content="#f7f7ef">
-    <meta name="description" content="英語の音とつづりを楽しく練習するフォニックスアプリ。">
-    <title>スタドリ - フォニックス編</title>
+    <meta name="description" content="えいごの音とつづりを、たのしくれんしゅうするフォニックスのアプリ。">
+    <title>スタドリ - えいご・フォニックス編</title>
     <link rel="icon" href="../../../favicon.ico" sizes="any">
     <link rel="icon" type="image/png" sizes="32x32" href="../../../favicon-32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="../../../favicon-16.png">
@@ -19,13 +19,13 @@
       <nav aria-label="パンくずリスト">
         <ol class="breadcrumbs">
           <li><a href="../../../"><span class="brand-mark" aria-hidden="true">✳</span>スタドリ</a></li>
-          <li><a href="../">🔤 英語</a></li>
+          <li><a href="../">🔤 えいご</a></li>
           <li><span aria-current="page">フォニックス</span></li>
         </ol>
       </nav>
       <div class="header-actions">
         <button class="sound" id="sound" type="button" aria-pressed="true" aria-label="音あり">🔊</button>
-        <button class="reset" id="resetData" type="button" aria-label="学習データを初期化">🗑️</button>
+        <button class="reset" id="resetData" type="button" aria-label="がくしゅうデータをリセット">🗑️</button>
       </div>
     </header>
 
@@ -38,7 +38,7 @@
           <div class="hero-copy">
             <p class="eyebrow">まいにち、ひとつずつ</p>
             <h1>フォニックスを学ぼう！</h1>
-            <p>英語の文字と音のつながりを、ゲーム感覚で練習しよう。<br>
+            <p>えいごのもじと音のつながりを、ゲームみたいにれんしゅうしよう。<br>
               アルファベット音から母音のつづりまで、少しずつステップアップ！</p>
           </div>
         </div>
@@ -52,15 +52,15 @@
             <span class="badge" id="courseCount"></span>
           </div>
           <p class="scope">
-            学習範囲：アルファベットの基本音・短母音・子音の組み合わせ・
-            サイレントe・母音チーム。発音はカタカナを目安にし、発音記号は補助として表示します。音には地域差があります。
+            がくしゅうはんい：アルファベットの音・みじかい母音・子音のくみあわせ・
+            サイレントe・母音チーム。カタカナを目安にして、おぼえよう。
           </p>
-          <p class="course-instruction">各コース10問。ミスなし合格を3回達成するとチャレンジが開くよ。記録はこのブラウザー内に保存されます。</p>
+          <p class="course-instruction">コースごとに10もん。まちがえずに3回ごうかくすると、チャレンジがひらくよ。きろくはこのブラウザーにのこるよ。</p>
           <div class="courses" id="courses" aria-label="フォニックス学習コース"></div>
           <section class="review-panel hidden" id="reviewPanel" aria-labelledby="reviewTitle">
             <div class="panel-title">
               <h2 id="reviewTitle">まちがいノート</h2>
-              <button class="outline" id="reviewBack" type="button">コース一覧へ</button>
+              <button class="outline" id="reviewBack" type="button">コースにもどる</button>
             </div>
             <div class="review-list" id="reviewList"></div>
           </section>
@@ -70,12 +70,12 @@
       <section id="quiz" class="hidden" aria-label="フォニックスの問題">
         <div class="panel quiz-panel">
           <div class="quiz-head panel-title">
-            <button class="outline" id="quit" type="button">← コース選択へ</button>
+            <button class="outline" id="quit" type="button">← コースにもどる</button>
             <span id="questionNo"></span>
             <strong class="mode-title hidden" id="modeTitle"></strong>
             <span class="mode-status" id="modeStatus" aria-live="polite"></span>
           </div>
-          <div class="progress" aria-label="挑戦の進み具合"><span id="progress"></span></div>
+          <div class="progress" aria-label="ちょうせんのすすみぐあい"><span id="progress"></span></div>
           <div class="quiz-question">
             <p class="eyebrow" id="questionCategory">LISTEN &amp; CHOOSE</p>
             <h2 id="problem"></h2>
@@ -83,34 +83,34 @@
             <p class="meaning-hint hidden" id="meaningHint"></p>
           </div>
           <p class="answer-instruction">カタカナを目安に答えをえらぼう</p>
-          <div class="answers" id="answers" aria-label="答えの選択肢"></div>
+          <div class="answers" id="answers" aria-label="こたえのえらび"></div>
           <p class="previous-answer hidden" id="previousAnswer"></p>
         </div>
       </section>
 
-      <section id="result" class="hidden" aria-label="挑戦結果">
+      <section id="result" class="hidden" aria-label="ちょうせんのけっか">
         <div class="panel result">
           <p class="eyebrow">CHALLENGE COMPLETE</p>
           <h1 id="resultTitle">おつかれさま！</h1>
           <div class="score" id="score"></div>
           <p id="resultMessage"></p>
-          <section class="answer-summary" id="answerSummary" aria-label="全問の解答"></section>
+          <section class="answer-summary" id="answerSummary" aria-label="ぜんもんのこたえ"></section>
           <div class="result-actions">
-            <button class="start" id="again" type="button">もう一度挑戦する</button>
-            <button class="outline" id="homeButton" type="button">コース選択へ</button>
+            <button class="start" id="again" type="button">もういちどちょうせんする</button>
+            <button class="outline" id="homeButton" type="button">コースにもどる</button>
           </div>
           <div class="challenge-grid">
             <article class="challenge">
               <b>⏱ タイムアタック</b>
-              <small>ミスなし合格3回で解放</small>
+              <small>まちがえずにごうかく3回でひらく</small>
               <span>ベスト：<strong id="timeBest">--</strong></span>
-              <button id="timeAttack" type="button">挑戦する</button>
+              <button id="timeAttack" type="button">ちょうせんする</button>
             </article>
             <article class="challenge">
-              <b>🔥 連続正解チャレンジ</b>
-              <small>ミスなし合格3回で解放</small>
+              <b>🔥 れんぞくせいかいチャレンジ</b>
+              <small>まちがえずにごうかく3回でひらく</small>
               <span>ベスト：<strong id="chainBest">0問</strong></span>
-              <button id="chainAttack" type="button">挑戦する</button>
+              <button id="chainAttack" type="button">ちょうせんする</button>
             </article>
           </div>
         </div>

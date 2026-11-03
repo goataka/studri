@@ -1,12 +1,12 @@
-// フォニックスのつづり課題（添付の一覧表に基づく）
-// row: pattern=つづり, sound=発音（カナ）, word=例の単語, kana=単語（カナ）,
-//      split=音節, meaning=意味, display=問題表示（答えの音を「？」にする）
+// フォニックスのつづりかだい（てんつきの一覧表に基づく）
+// row: pattern=つづり, sound=発音（カナ）, word=れいのことば, kana=ことば（カナ）,
+//      split=音のくぎり, meaning=意味, display=問題表示（答えの音を「？」にする）
 const patternLessons = [
   {
     id: "consonant-blends",
     title: "子音のかたまり",
     icon: "🫧",
-    summary: "bl・br・st など、子音が2つ続くつづり",
+    summary: "bl・br・st など、子音が2つつづくつづり",
     rows: [
       { pattern: "bl", sound: "ブル", word: "blue", kana: "ブルー", split: "ブ・ルー", meaning: "青", display: "？・ー" },
       { pattern: "br", sound: "ブル", word: "bread", kana: "ブレッド", split: "ブ・ル・エ(ッ)・ドゥ・オ", meaning: "パン", display: "？・ッ・ド" },
@@ -18,10 +18,10 @@ const patternLessons = [
       { pattern: "gl", sound: "グル", word: "glass", kana: "グラス", split: "グ・ル・ア・ス", meaning: "ガラス", display: "？・ス" },
       { pattern: "gr", sound: "グル", word: "green", kana: "グリーン", split: "グ・ル・イー・ン", meaning: "緑", display: "？・ー・ン" },
       { pattern: "pl", sound: "プル", word: "plus", kana: "プラス", split: "プ・ル・ア・ス", meaning: "たす", display: "？・ス" },
-      { pattern: "pr", sound: "プル", word: "present", kana: "プレゼント", split: "プ・ル・エ・ズ・エ・ン・トゥ・オ", meaning: "贈り物", display: "？・ゼ・ン・ト" },
+      { pattern: "pr", sound: "プル", word: "present", kana: "プレゼント", split: "プ・ル・エ・ズ・エ・ン・トゥ・オ", meaning: "プレゼント", display: "？・ゼ・ン・ト" },
       { pattern: "sk", sound: "スク", word: "skate", kana: "スケート", split: "ス・ク・エー・トゥ・オ", meaning: "スケート", display: "？・ケ・ー・ト" },
       { pattern: "sl", sound: "スル", word: "slide", kana: "スライド", split: "ス・ル・ア・イ・ドゥ・オ", meaning: "すべり台", display: "？・ラ・イ・ド" },
-      { pattern: "sm", sound: "スム", word: "smile", kana: "スマイル", split: "ス・ム・ア・イ・ル", meaning: "笑顔", display: "？・マ・イ・ル" },
+      { pattern: "sm", sound: "スム", word: "smile", kana: "スマイル", split: "ス・ム・ア・イ・ル", meaning: "えがお", display: "？・マ・イ・ル" },
       { pattern: "sn", sound: "スヌ", word: "snow", kana: "スノー", split: "ス・ヌ・オー", meaning: "雪", display: "？・ノ・ー" },
       { pattern: "sp", sound: "スプ", word: "spoon", kana: "スプーン", split: "ス・プー・ン", meaning: "スプーン", display: "？・ー・ン" },
       { pattern: "st", sound: "スト", word: "star", kana: "スター", split: "ス・トゥ・アー", meaning: "星", display: "？・ター" },
@@ -31,20 +31,20 @@ const patternLessons = [
   },
   {
     id: "consonant-exceptions",
-    title: "子音の読み分けと例外",
+    title: "子音のよみ分けとれい外",
     icon: "🔁",
-    summary: "c・g の読み分け、th・wh・kn・wr・tch など",
+    summary: "c・g のよみ分け、th・wh・kn・wr・tch など",
     rows: [
       { pattern: "c", sound: "ス", word: "city", kana: "シティ", split: "シュ・イ・トゥ・エ・ィ", meaning: "都市", display: "？・ティ" },
-      { pattern: "g", sound: "ジュ", word: "giant", kana: "ジャイアント", split: "ジュ・ア・イ・ア・ン・トゥ・オ", meaning: "巨大な", display: "？・イ・ア・ン・ト" },
+      { pattern: "g", sound: "ジュ", word: "giant", kana: "ジャイアント", split: "ジュ・ア・イ・ア・ン・トゥ・オ", meaning: "とても大きな", display: "？・イ・ア・ン・ト" },
       { pattern: "th", sound: "/θ/", word: "thank", kana: "サンク", split: "ス・ア・ン・ク", meaning: "ありがとう", display: "？・ン・ク" },
       { pattern: "th", sound: "/ð/", word: "this", kana: "ディス", split: "ドゥ・エ・ィ・ス", meaning: "これ", display: "？・ィ・ス" },
       { pattern: "wh", sound: "ホ", word: "white", kana: "ホワイト", split: "ハ・オ・ウ・ア・イ・トゥ・オ", meaning: "白", display: "？・ワ・イ・ト" },
       { pattern: "wr", sound: "ル", word: "write", kana: "ライト", split: "ル・ア・イ・トゥ・オ", meaning: "書く", display: "？・イ・ト" },
       { pattern: "kn", sound: "ン", word: "knife", kana: "ナイフ", split: "ヌ・ア・イ・フ", meaning: "ナイフ", display: "？・イ・フ" },
-      { pattern: "tch", sound: "ッチ", word: "watch", kana: "ウォッチ", split: "ウ・ォ(ッ)・チ", meaning: "腕時計", display: "ウォ・？" },
+      { pattern: "tch", sound: "ッチ", word: "watch", kana: "ウォッチ", split: "ウ・ォ(ッ)・チ", meaning: "うでどけい", display: "ウォ・？" },
       { pattern: "ght", sound: "イト", word: "night", kana: "ナイト", split: "ヌ・ア・イ・トゥ・オ", meaning: "夜", display: "ナ・？" },
-      { pattern: "y", sound: "アイ", word: "my", kana: "マイ", split: "ム・ア・イ", meaning: "私の", display: "マ・？" },
+      { pattern: "y", sound: "アイ", word: "my", kana: "マイ", split: "ム・ア・イ", meaning: "わたしの", display: "マ・？" },
       { pattern: "y", sound: "イー", word: "happy", kana: "ハッピー", split: "ハ(ッ)・プ・イー", meaning: "うれしい", display: "ハ・ッ・ピ・？" },
       { pattern: "s", sound: "ズ", word: "rose", kana: "ローズ", split: "ル・オー・ズ", meaning: "バラ", display: "ロ・ー・？" },
       { pattern: "ch", sound: "チ", word: "chair", kana: "チェアー", split: "チ・ェ・アー", meaning: "いす", display: "？・アー" },
@@ -81,7 +81,7 @@ const patternLessons = [
       { pattern: "or", sound: "オー", word: "door", kana: "ドア", split: "ドゥ・オ・ア", meaning: "ドア", display: "ド・？" },
       { pattern: "er", sound: "アー", word: "teacher", kana: "ティーチャー", split: "トゥ・エ・ィー・チ・アー", meaning: "先生", display: "ティ・ー・チャ・？" },
       { pattern: "ir", sound: "アー", word: "bird", kana: "バード", split: "ブ・アー・ドゥ・オ", meaning: "鳥", display: "バ・？・ド" },
-      { pattern: "ur", sound: "アー", word: "nurse", kana: "ナース", split: "ヌ・アー・ス", meaning: "看護師", display: "ナ・？・ス" },
+      { pattern: "ur", sound: "アー", word: "nurse", kana: "ナース", split: "ヌ・アー・ス", meaning: "かんごし", display: "ナ・？・ス" },
       { pattern: "air", sound: "エア", word: "air", kana: "エア", split: "エ・ア", meaning: "空気", display: "？" },
       { pattern: "are", sound: "エア", word: "care", kana: "ケア", split: "ク・エ・ア", meaning: "お世話", display: "ケ・？" },
     ],
@@ -90,7 +90,7 @@ const patternLessons = [
     id: "silent-e-2",
     title: "サイレントe②",
     icon: "✨",
-    summary: "a_e・i_e・o_e の、語尾のeで変わる母音",
+    summary: "a_e・i_e・o_e の、おわりのeでかわる母音",
     rows: [
       { pattern: "a_e", sound: "エイ", word: "cake", kana: "ケーキ", split: "ク・エー・ク・イ", meaning: "ケーキ", display: "ケ・？・キ" },
       { pattern: "i_e", sound: "アイ", word: "bike", kana: "バイク", split: "ブ・ア・イ・ク", meaning: "自転車", display: "バ・？・ク" },
@@ -102,9 +102,9 @@ const patternLessons = [
 const trickyWordLessons = [
   {
     id: "tricky-1",
-    title: "トリッキーワーズ①（超頻出）",
+    title: "トリッキーワーズ①（とてもよく出る）",
     icon: "⭐",
-    summary: "ルール通りには読めない、最優先で覚える語",
+    summary: "ルールどおりには読めない、いちばん先におぼえることば",
     words: [
       ["are", "アー"], ["come", "カム"], ["do", "ドゥー"], ["does", "ダズ"],
       ["give", "ギヴ"], ["have", "ハヴ"], ["live", "リヴ"], ["love", "ラブ"],
@@ -116,9 +116,9 @@ const trickyWordLessons = [
   },
   {
     id: "tricky-2",
-    title: "トリッキーワーズ②（高頻出）",
+    title: "トリッキーワーズ②（よく出る）",
     icon: "⭐",
-    summary: "日常会話や教科書によく出る語",
+    summary: "にちじょうかいわや教科書によく出ることば",
     words: [
       ["answer", "アンサー"], ["busy", "ビジー"], ["buy", "バイ"], ["could", "クッド"],
       ["done", "ダン"], ["door", "ドア"], ["friend", "フレンド"], ["great", "グレイト"],
@@ -129,9 +129,9 @@ const trickyWordLessons = [
   },
   {
     id: "tricky-3",
-    title: "トリッキーワーズ③（中頻出）",
+    title: "トリッキーワーズ③（ときどき出る）",
     icon: "⭐",
-    summary: "発展・中学レベルの重要な例外語",
+    summary: "発てん・中学レベルの重ようなれい外語",
     words: [
       ["aunt", "アント"], ["blood", "ブラッド"], ["break", "ブレイク"], ["build", "ビルド"],
       ["eye", "アイ"], ["flood", "フラッド"], ["half", "ハーフ"], ["heart", "ハート"],
