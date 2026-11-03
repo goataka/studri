@@ -22,7 +22,7 @@ Given("固定された問題順のフォニックスアプリを開く", async (
 });
 
 Then("フォニックスのコースと学習範囲が表示される", async ({ page }) => {
-  await expect(page).toHaveTitle("スタドリ - フォニックス・カタカナ");
+  await expect(page).toHaveTitle("スタドリ - 英語・フォニックス・カタカナ");
   await expect(page.getByRole("heading", { name: "フォニックスを学ぼう！" })).toBeVisible();
   await expect(page.locator("#courses .course")).toHaveCount(16);
   await expect(page.locator(".scope")).toContainText("母音");

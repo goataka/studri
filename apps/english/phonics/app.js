@@ -298,7 +298,6 @@ function buildLetterQuestions(course) {
       level: 1,
       prompt: `文字 ${letter} の音はどれ？`,
       word: example.word,
-      display,
       answer: kana,
       choices: [kana, ...distractors.map((other) => phonicsLetterSounds[other])],
       explanation: `${letter} の音は ${kana} だよ。れい：${example.word}。`,
@@ -452,17 +451,21 @@ function appendPhonicsText(element, text) {
   if (lastIndex < text.length) element.append(text.slice(lastIndex));
 }
 
+// 結果の画面では、カタカナと発音記号を並べて表示する
 function appendAnswerText(element, value) {
-  if (phonicsResultSounds[value]) {
+  if (phonicsLetterSounds[value]) {
+    appendLetterChoice(element, value);
+  } else if (phonicsSounds[value] || phonicsResultSounds[value]) {
     const pronunciation = document.createElement("span");
     pronunciation.className = "phonics-pronunciation";
     const kana = document.createElement("span");
     kana.className = "phonics-kana";
-    kana.textContent = phonicsResultSounds[value];
-    pronunciation.append(kana);
+    kana.textContent = phonicsResultSounds[value] || phonicsSounds[value];
+    const symbol = document.createElement("small");
+    symbol.className = "phonics-letter";
+    symbol.textContent = `（${value}）`;
+    pronunciation.append(kana, symbol);
     element.append(pronunciation);
-  } else if (phonicsLetterSounds[value]) {
-    appendLetterChoice(element, value);
   } else {
     appendPhonicsText(element, value);
   }
