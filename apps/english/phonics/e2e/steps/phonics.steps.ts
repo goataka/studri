@@ -39,8 +39,13 @@ Then("横スクロールせずにコースを選べる", async ({ page }) => {
   await expect(page.locator(`#courses [data-course="${COURSE}"] button`).first()).toBeVisible();
 });
 
-When("アルファベットの音①コースで挑戦を始める", async ({ page }) => {
+When("アルファベットの子音①コースで挑戦を始める", async ({ page }) => {
   await page.locator(`#courses [data-course="${COURSE}"] .start-course`).click();
+});
+
+Then("コース一覧に「母音」と「子音」の見出しが表示される", async ({ page }) => {
+  await expect(page.locator(".course-section")).toHaveText(["母音", "子音"]);
+  await expect(page.locator("#courses .course").first()).toHaveAttribute("data-course", "alphabet-4");
 });
 
 Then("選択肢に発音記号は表示されない", async ({ page }) => {

@@ -162,6 +162,7 @@ main { padding-block: 4px 80px; }
 .scope { margin: -4px 0 4px; }
 .course-instruction { margin: 0 0 16px; font-size: 0.9rem; }
 .courses { display: grid; gap: 14px; }
+.course-section { grid-column: 1 / -1; margin: 6px 0 -4px; color: #5f7a63; font-size: 0.85rem; font-weight: 750; }
 .course {
   position: relative;
   display: grid;

@@ -68,10 +68,10 @@ const phonicsSoundPattern = new RegExp(
 );
 
 const alphabetLetterCourses = [
-  { id: "alphabet-1", title: "アルファベットの音①", icon: "🔤", summary: "b・c・d・f・g・h の音", letters: ["b", "c", "d", "f", "g", "h"] },
-  { id: "alphabet-2", title: "アルファベットの音②", icon: "🔤", summary: "j・k・l・m・n・p の音", letters: ["j", "k", "l", "m", "n", "p"] },
-  { id: "alphabet-3", title: "アルファベットの音③", icon: "🔤", summary: "r・s・t・v・w・y・z の音", letters: ["r", "s", "t", "v", "w", "y", "z"] },
-  { id: "alphabet-4", title: "アルファベットの母音", icon: "🔤", summary: "a・e・i・o・u の音", letters: ["a", "e", "i", "o", "u"] },
+  { id: "alphabet-4", section: "母音", title: "アルファベットの母音", icon: "🔤", summary: "a・e・i・o・u の音", letters: ["a", "e", "i", "o", "u"] },
+  { id: "alphabet-1", section: "子音", title: "アルファベットの子音①", icon: "🔤", summary: "b・c・d・f・g・h の音", letters: ["b", "c", "d", "f", "g", "h"] },
+  { id: "alphabet-2", section: "子音", title: "アルファベットの子音②", icon: "🔤", summary: "j・k・l・m・n・p の音", letters: ["j", "k", "l", "m", "n", "p"] },
+  { id: "alphabet-3", section: "子音", title: "アルファベットの子音③", icon: "🔤", summary: "r・s・t・v・w・y・z の音", letters: ["r", "s", "t", "v", "w", "y", "z"] },
 ];
 
 // 既存の alphabet の問題を、その単語の文字が属するコースへ振り分ける
@@ -441,7 +441,23 @@ function getStats(courseId) {
 function renderCourses() {
   const list = getElement("courses");
   list.replaceChildren();
-  courses.forEach((course) => list.append(createCourseCard(course)));
+  getElement("courseCount").textContent = `全${courses.length}コース`;
+  let currentSection = null;
+  courses.forEach((course) => {
+    const section = course.section ?? null;
+    if (section !== currentSection) {
+      currentSection = section;
+      if (section) list.append(createSectionHeading(section));
+    }
+    list.append(createCourseCard(course));
+  });
+}
+
+function createSectionHeading(text) {
+  const heading = document.createElement("h3");
+  heading.className = "course-section";
+  heading.textContent = text;
+  return heading;
 }
 
 function createCourseCard(course) {
