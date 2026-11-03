@@ -6,7 +6,6 @@ const QUIZ_LENGTH = 10;
 const PASS_STREAK = 3;
 const MAX_WRONG_ENTRIES = 50;
 const MAX_HISTORY_ENTRIES = 50;
-const FEEDBACK_AUTO_ADVANCE_MS = 3000;
 
 const phonicsSounds = {
   "/s/": "ス",
@@ -262,6 +261,21 @@ for (const example of Object.values(letterExampleWords)) {
   }
 }
 
+// 結果と説明では、弱い「ア」を「ア（弱い）」と書く（ボタンの選択肢は「ア」のまま）
+const phonicsResultSounds = { "/ʌ/": "ア（弱い）", "/ə/": "ア（弱い）" };
+const phonicsLetterResultSounds = { u: "ア（弱い）" };
+const kanaOfAnswer = (answer) => answer === "/ʌ/"
+  ? "ア（弱い）"
+  : phonicsLetterSounds[answer] || phonicsSounds[answer] || answer;
+function kanaOfLetter(letter) {
+  return phonicsLetterResultSounds[letter] || phonicsLetterSounds[letter];
+}
+// 正解したときに出す「おなじ音のほかのことば」のための見出し
+function soundLabelOf(answer) {
+  return phonicsLetterResultSounds[answer] || phonicsResultSounds[answer]
+    || phonicsSounds[answer] || phonicsLetterSounds[answer] || answer;
+}
+
 function pickDistinct(candidates, count, keyOf) {
   const picked = [];
   const keys = new Set();
@@ -285,6 +299,8 @@ function buildLetterQuestions(course) {
       .filter((other) => other !== letter && phonicsLetterSounds[other] !== kana)
       .sort((left, right) => Number(course.letters.includes(right)) - Number(course.letters.includes(left)));
     const distractors = pickDistinct(candidates, 3, (other) => phonicsLetterSounds[other]);
+    // u の音は弱い「ア」。ボタンは「ア」のまま、結果では「ア（弱い）」と出すため記号で持つ
+    const soundAnswer = letter === "u" ? "/ʌ/" : kana;
     questions.push({
       level: 0,
       prompt: `${example.word} のはじめの音を表す文字は？`,
@@ -293,14 +309,17 @@ function buildLetterQuestions(course) {
       answer: letter,
       choices: [letter, ...distractors],
       explanation: `${example.word} は ${letter} の音で始まることばだよ。`,
+      hint: `${example.word}（${example.joined}）のはじめの音を、ローマ字で考えてみよう。`,
+      letterSound: true,
     });
     questions.push({
       level: 1,
       prompt: `文字 ${letter} の音はどれ？`,
       word: example.word,
-      answer: kana,
-      choices: [kana, ...distractors.map((other) => phonicsLetterSounds[other])],
-      explanation: `${letter} の音は ${kana} だよ。れい：${example.word}。`,
+      answer: soundAnswer,
+      choices: [soundAnswer, ...distractors.map((other) => phonicsLetterSounds[other])],
+      explanation: `${letter} の音は ${kanaOfLetter(letter)} だよ。れい：${example.word}（${example.joined}）。`,
+      hint: `${example.word}（${example.joined}）のはじめの音だよ。`,
     });
   });
   return questions;
@@ -328,32 +347,26 @@ const soundExampleWords = {
   "クス": "ボックス", "ス（したさきを歯のあいだに）": "サンクス", "ズ（したさきを歯のあいだに）": "ブラザー",
 };
 const exampleSyllables = {
-  "アップル": "ア(ッ)・プ・ル", "エッグタルト": "エ(ッ)・グ・タ・ル・ト",
-  "インターネット": "イン・ター・ネ(ッ)・ト", "オレンジ": "オ・レ・ン・ジ",
-  "ウィンナー": "ウィ・ン・ナ・ー", "アイス": "ア・イ・ス", "ケーキ": "ケ・ー・キ",
-  "ホーム": "ホ・ー・ム", "コイン": "コ・イ・ン", "カウンター": "カ・ウ・ン・タ・ー",
-  "ティー": "ティ・ー", "スープ": "ス・ー・プ", "ユーモア": "ユ・ー・モ・ア",
-  "ブログ": "ブ・ロ・グ", "クッキー": "ク(ッ)・キ・ー", "グッズ": "グ(ッ)・ズ",
-  "ドリンク": "ド・リ・ン・ク", "ヌードル": "ヌ・ー・ド・ル", "プレゼント": "プ・レ・ゼ・ン・ト",
-  "スマホ": "ス・マ・ホ", "ズーム": "ズ・ー・ム", "フィレオフィッシュ": "フィ・レ・オ・フィ(ッ)・シュ",
-  "ハンバーガー": "ハ・ン・バ・ー・ガ・ー", "ムービー": "ム・ー・ビ・ー", "ルール": "ル・ー・ル",
-  "ヴァイオリン": "ヴァ・イ・オ・リ・ン", "ジュース": "ジュ・ー・ス", "シュークリーム": "シュー・ク・リ・ー・ム",
-  "チキン": "チ・キ・ン", "ユニフォーム": "ユ・ニ・フォ・ー・ム", "トゥモロー": "ト・ゥ・モ・ロ・ー",
-  "リング": "リ・ン・グ", "クイズ": "ク・イ・ズ", "カップ": "ク・ア(ッ)・プ", "アバウト": "ア・バ・ウ・ト", "ボックス": "ボ(ッ)・ク・ス",
-  "サンクス": "サ・ン・クス", "ブラザー": "ブ・ラ・ザ・ー",
+  "アップル": "ア(ッ)・プ・ル", "エッグタルト": "エ(ッ)・グ・トゥ・ア・ル・トゥ・オ",
+  "インターネット": "イ・ン・トゥ・アー・ヌ・エ(ッ)・トゥ・オ", "オレンジ": "オ・ル・エ・ン・ジュ・イ",
+  "ウィンナー": "ウ・ィ・ン・ヌ・アー", "アイス": "ア・イ・ス", "ケーキ": "ク・エー・ク・イ",
+  "ホーム": "ハ・オー・ム", "コイン": "ク・オ・イ・ン", "カウンター": "ク・ア・ウ・ン・トゥ・アー",
+  "ティー": "トゥ・イー", "スープ": "スー・プ", "ユーモア": "ユー・ム・オ・ア",
+  "ブログ": "ブ・ル・オ・グ", "クッキー": "ク(ッ)・ク・イー", "グッズ": "グ(ッ)・ズ",
+  "ドリンク": "ドゥ・オ・ル・イ・ン・ク", "ヌードル": "ヌー・ドゥ・オ・ル", "プレゼント": "プ・ル・エ・ズ・エ・ン・トゥ・オ",
+  "スマホ": "ス・ム・ア・ハ・オ", "ズーム": "ズー・ム", "フィレオフィッシュ": "フ・ィ・ル・エ・オ・フ・ィ(ッ)・シュ",
+  "ハンバーガー": "ハ・ン・ブ・アー・グ・アー", "ムービー": "ムー・ブ・イー", "ルール": "ルー・ル",
+  "ヴァイオリン": "ヴ・ア・イ・オ・ル・イ・ン", "ジュース": "ジュー・ス", "シュークリーム": "シュー・ク・ル・イー・ム",
+  "チキン": "チ・ク・イ・ン", "ユニフォーム": "ユ・ヌ・イ・フ・ォー・ム", "トゥモロー": "トゥ・ム・オ・ル・オー",
+  "リング": "ル・イ・ン・グ", "クイズ": "ク・イ・ズ", "カップ": "ク・ア(ッ)・プ", "アバウト": "ア・ブ・ア・ウ・トゥ・オ",
+  "ボックス": "ブ・オ(ッ)・ク・ス", "サンクス": "ス・ア・ン・ク・ス", "ブラザー": "ブ・ル・ア・ズ・アー",
 };
-// 結果と説明では、弱い「ア」を「ア（弱い）」と書く（ボタンの選択肢は「ア」のまま）
-const phonicsResultSounds = { "/ʌ/": "ア（弱い）", "/ə/": "ア（弱い）" };
-const kanaOfAnswer = (answer) => answer === "/ʌ/"
-  ? "ア（弱い）"
-  : phonicsLetterSounds[answer] || phonicsSounds[answer] || answer;
-for (const pool of Object.values(questionBank)) {
-  for (const question of pool) {
-    const example = soundExampleWords[kanaOfAnswer(question.answer)];
-    question.explanation = example
-      ? `${example}（${exampleSyllables[example]}）`
-      : question.explanation.replace(/の音/g, "");
-  }
+// まちがえたときのヒント（答えのカタカナそのものは書かない）
+function buildHint(question) {
+  if (question.hint) return question.hint;
+  const example = soundExampleWords[kanaOfAnswer(question.answer)];
+  if (example) return `「${example}」（${exampleSyllables[example]}）にも出てくる音だよ。`;
+  return "つづりと意味をよく見て、もういちど考えてみよう。";
 }
 
 // かだいのことばは、音のくぎり・意味をよみじょうほう（wordInfo）にも登録する
@@ -400,6 +413,18 @@ for (const lesson of patternLessons) {
 }
 for (const lesson of trickyWordLessons) {
   questionBank[lesson.id] = buildTrickyQuestions(lesson);
+}
+
+const wordsBySound = new Map();
+for (const pool of Object.values(questionBank)) {
+  for (const question of pool) {
+    if (!wordInfo[question.word] || question.word.includes("_")) continue;
+    // 「まんなかの文字」「発音しない文字」などの文字の問題は、音の例にふくめない
+    if (phonicsLetterSounds[question.answer] && !question.letterSound) continue;
+    const key = soundLabelOf(question.answer);
+    if (!wordsBySound.has(key)) wordsBySound.set(key, new Set());
+    wordsBySound.get(key).add(question.word);
+  }
 }
 
 const defaultData = () => ({ stats: {}, wrong: [], history: [] });
@@ -476,7 +501,7 @@ function appendLetterChoice(element, letter) {
   pronunciation.className = "phonics-pronunciation";
   const kana = document.createElement("span");
   kana.className = "phonics-kana";
-  kana.textContent = phonicsLetterSounds[letter];
+  kana.textContent = kanaOfLetter(letter);
   const symbol = document.createElement("small");
   symbol.className = "phonics-letter";
   symbol.textContent = `（${letter}）`;
@@ -779,6 +804,7 @@ function selectQuestion(index) {
 function renderProblem() {
   clearTimeout(advanceTimer);
   locked = false;
+  quiz.wrongCount = 0;
   const question = quiz.questions[quiz.index] || selectQuestion(quiz.index);
   quiz.questions[quiz.index] = question;
   getElement("questionNo").textContent = quiz.mode === "review"
@@ -825,8 +851,8 @@ function renderChoices(question) {
     button.className = "answer-choice";
     button.dataset.choice = choice;
     if (phonicsLetterSounds[choice]) {
-      appendLetterChoice(button, choice);
-      button.setAttribute("aria-label", `${phonicsLetterSounds[choice]}（${choice}）`);
+      button.textContent = choice;
+      button.classList.add("letter-choice");
     } else if (phonicsSounds[choice]) {
       button.textContent = phonicsSounds[choice];
     } else {
@@ -855,7 +881,10 @@ function judgeAnswer(answer) {
   const isCorrect = answer === question.answer;
   quiz.previousAnswer = answer;
   quiz.submitted[quiz.index] = answer;
-  if (!isCorrect) recordMistake(question, answer);
+  if (!isCorrect) {
+    quiz.wrongCount = (quiz.wrongCount || 0) + 1;
+    if (quiz.wrongCount === 1) recordMistake(question, answer);
+  }
   if (isCorrect) {
     if (quiz.mode === "review") quiz.reviewSolved = true;
     quiz.correct += 1;
@@ -866,7 +895,7 @@ function judgeAnswer(answer) {
     quiz.chainRun = 0;
   }
   playFeedbackTone(isCorrect);
-  showFeedback(isCorrect, question, answer);
+  showFeedback(isCorrect, question);
 }
 
 function recordMistake(question, answer) {
@@ -885,42 +914,64 @@ function recordMistake(question, answer) {
   saveData();
 }
 
-function showFeedback(isCorrect, question, answer) {
+// まちがえた1回目はヒントだけ、2回目か「答えを見る」で答えを出す
+function showFeedback(isCorrect, question) {
+  if (isCorrect) renderFeedback("correct", question);
+  else renderFeedback(quiz.wrongCount >= 2 ? "reveal" : "hint", question);
+}
+
+function renderFeedback(state, question) {
   const dialog = getElement("feedback");
   const content = getElement("feedbackContent");
   const actions = getElement("feedbackActions");
   content.replaceChildren();
   actions.replaceChildren();
-  dialog.className = `feedback-dialog ${isCorrect ? "ok" : "no"}`;
+  dialog.className = `feedback-dialog ${state === "correct" ? "ok" : "no"}`;
   const title = document.createElement("h2");
   title.id = "feedbackTitle";
-  title.textContent = isCorrect ? "せいかい！ 🎉" : "おしい！もういちど考えてみよう";
-  const message = document.createElement("p");
-  if (isCorrect) {
-    message.textContent = "いい調子！音と文字のつながりが見えてきたね。";
+  const titles = { correct: "せいかい！ 🎉", hint: "おしい！もういちど考えてみよう", reveal: "答えをかくにんしよう" };
+  title.textContent = titles[state];
+  content.append(title);
+  let primary;
+  if (state === "hint") {
+    const hint = document.createElement("p");
+    hint.className = "feedback-hint";
+    hint.append("ヒント：");
+    appendPhonicsText(hint, buildHint(question));
+    content.append(hint);
+    primary = createFeedbackButton("もういちど答える", retryQuestion);
+    actions.append(primary, createFeedbackButton("答えを見る", () => renderFeedback("reveal", question), "secondary"));
   } else {
-    message.append("ヒント：");
-    appendPhonicsText(message, question.explanation);
+    if (state === "reveal") {
+      const answer = document.createElement("p");
+      answer.className = "feedback-answer";
+      answer.append("せいかい：「");
+      appendAnswerText(answer, question.answer);
+      answer.append("」");
+      content.append(answer);
+    }
+    const explanation = document.createElement("p");
+    explanation.className = "feedback-explanation";
+    appendPhonicsText(explanation, question.explanation);
+    content.append(createWordInfo(question.word), explanation);
+    const examples = createSoundExamples(question);
+    if (examples) content.append(examples);
+    primary = createFeedbackButton("つぎへ", advanceQuiz);
+    actions.append(primary);
   }
-  const primary = createFeedbackButton(
-    isCorrect ? "つぎへ" : "もういちど答える",
-    isCorrect ? advanceQuiz : retryQuestion,
-  );
-  actions.append(primary);
-  if (isCorrect) {
-    content.append(title, createWordInfo(question.word), message);
-  } else {
-    const answer = document.createElement("p");
-    answer.className = "feedback-answer";
-    answer.append("せいかい：「");
-    appendAnswerText(answer, question.answer);
-    answer.append("」");
-    content.append(title, answer, createWordInfo(question.word), message);
-    actions.append(createFeedbackButton("つぎへ", advanceQuiz, "secondary"));
-  }
-  dialog.showModal();
+  if (!dialog.open) dialog.showModal();
   primary.focus();
-  if (isCorrect) advanceTimer = setTimeout(advanceQuiz, FEEDBACK_AUTO_ADVANCE_MS);
+}
+
+function createSoundExamples(question) {
+  const words = [...(wordsBySound.get(soundLabelOf(question.answer)) || [])]
+    .filter((word) => word !== question.word)
+    .slice(0, 3);
+  if (!words.length) return null;
+  const examples = document.createElement("p");
+  examples.className = "sound-examples";
+  examples.textContent = `おなじ音のほかのことば：${words.map((word) => `${word}（${wordInfo[word].joined}）`).join("・")}`;
+  return examples;
 }
 
 function createWordInfo(word) {
@@ -928,7 +979,7 @@ function createWordInfo(word) {
   const box = document.createElement("p");
   box.className = "word-info";
   if (!info) return box;
-  box.textContent = `音のくぎり：${info.split} ／ つなげると：${info.joined}`;
+  box.append(`音のくぎり：${info.split}`, document.createElement("br"), `つなげると：${info.joined}`);
   return box;
 }
 
