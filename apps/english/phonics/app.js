@@ -32,8 +32,8 @@ const phonicsSounds = {
   "/ʃ/": "シュ",
   "/ʒ/": "ジュ",
   "/tʃ/": "チ",
-  "/θ/": "ス（舌先を歯の間に）",
-  "/ð/": "ズ（舌先を歯の間に）",
+  "/θ/": "ス（清音）",
+  "/ð/": "ザ（濁音）",
   "/æ/": "ア",
   "/e/": "エ",
   "/ɪ/": "イ",
@@ -87,7 +87,7 @@ const letterExampleWords = {
   a: { word: "apple", split: "ア・ッ・プ・ル", joined: "アップル", meaning: "りんご" },
   b: { word: "bus", split: "バ・ス", joined: "バス", meaning: "乗り物" },
   c: { word: "cat", split: "キャ・ット", joined: "キャット", meaning: "猫" },
-  d: { word: "dog", split: "ド・オ・グ", joined: "ドッグ", meaning: "犬" },
+  d: { word: "dog", split: "ド・ッ・グ", joined: "ドッグ", meaning: "犬" },
   e: { word: "egg", split: "エ・ッ・グ", joined: "エッグ", meaning: "たまご" },
   f: { word: "fish", split: "フ・ィッ・シュ", joined: "フィッシュ", meaning: "魚" },
   g: { word: "gorilla", split: "ゴ・リ・ラ", joined: "ゴリラ", meaning: "動物" },
@@ -115,14 +115,16 @@ const courses = [
   { id: "consonant-teams", title: "子音の組み合わせ", icon: "🐚", summary: "sh・ch・th・ph・wh などのつづり" },
   { id: "silent-e", title: "サイレントe", icon: "✨", summary: "語尾のeで母音の音が変わる単語" },
   { id: "vowel-teams", title: "母音チーム", icon: "🌈", summary: "ai・ee・oa・oo などの母音の組み合わせ" },
+  ...patternLessons,
+  ...trickyWordLessons,
 ];
 
 const questionBank = {
   alphabet: [
     { level: 0, prompt: "sun の最初の音はどれ？", word: "sun", display: "？・ア・ン", answer: "/s/", choices: ["/s/", "/m/", "/t/", "/f/"], explanation: "sun は /s/ の音で始まるよ。S の音を思い出そう。" },
     { level: 0, prompt: "map の最初の音はどれ？", word: "map", display: "？・ア・プ", answer: "/m/", choices: ["/m/", "/n/", "/b/", "/p/"], explanation: "map は /m/ の音で始まるよ。唇を閉じて出す音だよ。" },
-    { level: 0, prompt: "fish の最初の音はどれ？", word: "fish", display: "？・ィッ・シュ", answer: "/f/", choices: ["/f/", "/v/", "/s/", "/h/"], explanation: "fish は /f/ の音で始まるよ。" },
-    { level: 0, prompt: "dog の最初の音はどれ？", word: "dog", display: "？・オ・グ", answer: "/d/", choices: ["/d/", "/b/", "/g/", "/t/"], explanation: "dog は /d/ の音で始まるよ。" },
+    { level: 0, prompt: "fish の最初の音はどれ？", word: "fish", display: "？・ッ・シュ", answer: "/f/", choices: ["/f/", "/v/", "/s/", "/h/"], explanation: "fish は /f/ の音で始まるよ。" },
+    { level: 0, prompt: "dog の最初の音はどれ？", word: "dog", display: "？・ッ・グ", answer: "/d/", choices: ["/d/", "/b/", "/g/", "/t/"], explanation: "dog は /d/ の音で始まるよ。" },
     { level: 1, prompt: "bag の最初の音を表す文字は？", word: "bag", display: "？・ア・グ", answer: "b", choices: ["b", "d", "p", "g"], explanation: "bag は b の音で始まる単語。文字 b が /b/ を表すよ。" },
     { level: 1, prompt: "kite の最初の音を表す文字は？", word: "kite", display: "？・アイ・ト", answer: "k", choices: ["k", "h", "t", "g"], explanation: "kite は /k/ の音で始まるよ。ここでは k がその音を表すよ。" },
     { level: 2, prompt: "van の最初の音はどれ？", word: "van", display: "？・ア・ン", answer: "/v/", choices: ["/v/", "/f/", "/w/", "/b/"], explanation: "van は /v/ の音で始まるよ。f の音と区別してみよう。" },
@@ -154,8 +156,8 @@ const questionBank = {
     { level: 0, prompt: "thin の th が表す最初の音は？", word: "thin", display: "？・イ・ン", answer: "/θ/", choices: ["/θ/", "/ð/", "/f/", "/t/"], explanation: "thin の th は /θ/ の音。舌先を歯の間に軽く出すよ。" },
     { level: 1, prompt: "this の th が表す最初の音は？", word: "this", display: "？・イ・ス", answer: "/ð/", choices: ["/ð/", "/θ/", "/d/", "/z/"], explanation: "this の th は声を出す /ð/ の音だよ。" },
     { level: 1, prompt: "phone の ph が表す最初の音は？", word: "phone", display: "？・オ・ン", answer: "/f/", choices: ["/f/", "/p/", "/h/", "/v/"], explanation: "ph は /f/ の音を表すつづりだよ。" },
-    { level: 1, prompt: "whale の wh が表す最初の音は？", word: "whale", display: "？・エイ・ル", answer: "/w/", choices: ["/w/", "/h/", "/v/", "/f/"], explanation: "whale の wh は /w/ の音で始まるよ。" },
-    { level: 2, prompt: "ring の ng が表す最後の音は？", word: "ring", display: "ラ・イ・？", answer: "/ŋ/", choices: ["/ŋ/", "/n/", "/g/", "/k/"], explanation: "ng は語尾で /ŋ/ の音を表すことがあるよ。" },
+    { level: 1, prompt: "white の wh が表す最初の音は？", word: "white", display: "？・ワ・イ・ト", answer: "ホ", choices: ["ホ", "ウ", "フ", "ハ"], explanation: "white の wh は「ホ」と読むよ。ホワイト（白）の音だね。" },
+    { level: 2, prompt: "ring の ng が表す最後の音は？", word: "ring", display: "リ・？", answer: "/ŋ/", choices: ["/ŋ/", "/n/", "/g/", "/k/"], explanation: "ng は語尾で /ŋ/ の音を表すことがあるよ。" },
     { level: 2, prompt: "duck の ck が表す最後の音は？", word: "duck", display: "ド・ア・？", answer: "/k/", choices: ["/k/", "/s/", "/tʃ/", "/g/"], explanation: "ck は2文字で /k/ の音を表すよ。" },
     { level: 3, prompt: "shop の sh が表す最初の音は？", word: "shop", display: "？・オ・プ", answer: "/ʃ/", choices: ["/ʃ/", "/tʃ/", "/ʒ/", "/s/"], explanation: "shop の sh は /ʃ/ の音だよ。" },
     { level: 3, prompt: "chat の ch が表す最初の音は？", word: "chat", display: "？・ア・ト", answer: "/tʃ/", choices: ["/tʃ/", "/ʃ/", "/k/", "/h/"], explanation: "chat の ch は /tʃ/ の音だよ。" },
@@ -172,12 +174,12 @@ const questionBank = {
     { level: 2, prompt: "fin と fine。母音 i が変わる理由は？", word: "fine", display: "フ・イ・ン・？", answer: "最後のe", choices: ["最後のe", "最初のf", "語尾のn", "母音がない"], explanation: "語尾の e が i の音を /aɪ/ に変えるよ。" },
     { level: 2, prompt: "pet と Pete。母音 e の音が変わる合図は？", word: "Pete", display: "ペ・ト・？", answer: "最後のe", choices: ["最後のe", "最初のP", "語尾のt", "文字が2つ"], explanation: "語尾の e によって、母音がアルファベットの名前の音になるよ。" },
     { level: 3, prompt: "tap と tape。語尾の e の音は？", word: "tape", display: "ト・エイ・プ・？", answer: "発音しない", choices: ["発音しない", "/e/", "/iː/", "/ə/"], explanation: "サイレントeは語尾で発音せず、前の母音の音に影響するよ。" },
-    { level: 3, prompt: "cut と cute。cute の u はどの音？", word: "cute", display: "ク・？・ト", answer: "/juː/", choices: ["/juː/", "/ʌ/", "/ʊ/", "/aɪ/"], explanation: "cute の u は /juː/ の音。最後の e は発音しないよ。" },
+    { level: 3, prompt: "cut と cute。cute の u はどの音？", word: "cute", display: "キュ・？・ト", answer: "/juː/", choices: ["/juː/", "/ʌ/", "/ʊ/", "/aɪ/"], explanation: "cute の u は /juː/ の音。最後の e は発音しないよ。" },
     { level: 2, prompt: "hop と hope。hope の o はどの音？", word: "hope", display: "ハ・？・プ", answer: "/oʊ/", choices: ["/oʊ/", "/ɒ/", "/ʌ/", "/ɔɪ/"], explanation: "hope の o は /oʊ/。語尾の e が合図だよ。" },
     { level: 3, prompt: "rid と ride。ride の i はどの音？", word: "ride", display: "ラ・？・ド", answer: "/aɪ/", choices: ["/aɪ/", "/ɪ/", "/iː/", "/eɪ/"], explanation: "ride の i は /aɪ/ の音だよ。" },
   ],
   "vowel-teams": [
-    { level: 0, prompt: "rain の ai が表す母音の音は？", word: "rain", display: "ラ・？・ン", answer: "/eɪ/", choices: ["/eɪ/", "/æ/", "/iː/", "/aɪ/"], explanation: "rain の ai は /eɪ/ の音を表すよ。" },
+    { level: 0, prompt: "rain の ai が表す母音の音は？", word: "rain", display: "レ・？・ン", answer: "/eɪ/", choices: ["/eɪ/", "/æ/", "/iː/", "/aɪ/"], explanation: "rain の ai は /eɪ/ の音を表すよ。" },
     { level: 0, prompt: "seed の ee が表す母音の音は？", word: "seed", display: "ス・？・ド", answer: "/iː/", choices: ["/iː/", "/ɪ/", "/eɪ/", "/uː/"], explanation: "seed の ee は /iː/ の音を表すよ。" },
     { level: 0, prompt: "boat の oa が表す母音の音は？", word: "boat", display: "ブ・？・ト", answer: "/oʊ/", choices: ["/oʊ/", "/ɒ/", "/ɔɪ/", "/aʊ/"], explanation: "boat の oa は /oʊ/ の音を表すよ。" },
     { level: 1, prompt: "moon の oo が表す母音の音は？", word: "moon", display: "ム・？・ン", answer: "/uː/", choices: ["/uː/", "/ʊ/", "/ʌ/", "/ɔː/"], explanation: "moon の oo は /uː/ の音だよ。" },
@@ -196,7 +198,7 @@ const wordInfo = {
   "sun": { split: "ス・ア・ン", joined: "サン", meaning: "太陽" },
   "map": { split: "ム・ア・ップ", joined: "マップ", meaning: "地図" },
   "fish": { split: "フ・ィッ・シュ", joined: "フィッシュ", meaning: "魚" },
-  "dog": { split: "ド・オ・グ", joined: "ドッグ", meaning: "犬" },
+  "dog": { split: "ド・ッ・グ", joined: "ドッグ", meaning: "犬" },
   "bag": { split: "バ・ア・グ", joined: "バッグ", meaning: "かばん" },
   "kite": { split: "ク・アイ・ト", joined: "カイト", meaning: "凧" },
   "van": { split: "ヴ・ア・ン", joined: "ヴァン", meaning: "小型のバン" },
@@ -349,6 +351,52 @@ for (const pool of Object.values(questionBank)) {
       ? `${example}（${exampleSyllables[example]}）`
       : question.explanation.replace(/の音/g, "");
   }
+}
+
+// 課題の単語は、音節・意味を読み情報（wordInfo）にも登録する
+for (const lesson of patternLessons) {
+  for (const row of lesson.rows) {
+    if (!wordInfo[row.word]) {
+      wordInfo[row.word] = { split: row.split, joined: row.kana, meaning: row.meaning };
+    }
+  }
+}
+
+function soundChoicesExcept(sounds, answer) {
+  return pickDistinct(sounds.filter((sound) => sound !== answer), 3, (sound) => sound);
+}
+
+function buildPatternQuestions(lesson) {
+  const sounds = lesson.rows.map((row) => row.sound);
+  return lesson.rows.map((row, index) => ({
+    level: Math.min(3, Math.floor((index * 4) / lesson.rows.length)),
+    prompt: `${row.word} の ${row.pattern} の音はどれ？`,
+    word: row.word,
+    display: row.display,
+    answer: row.sound,
+    choices: [row.sound, ...soundChoicesExcept(sounds, row.sound)],
+    explanation: `${row.word}（${row.kana}）の ${row.pattern} は「${row.sound}」と読むよ。`,
+  }));
+}
+
+function buildTrickyQuestions(lesson) {
+  const readings = lesson.words.map(([, reading]) => reading);
+  return lesson.words.map(([word, reading], index) => ({
+    level: Math.min(3, Math.floor((index * 4) / lesson.words.length)),
+    prompt: `${word} の読み方はどれ？`,
+    word,
+    display: word,
+    answer: reading,
+    choices: [reading, ...soundChoicesExcept(readings, reading)],
+    explanation: `${word} は「${reading}」と読むよ。ルール通りには読めない単語だよ。`,
+  }));
+}
+
+for (const lesson of patternLessons) {
+  questionBank[lesson.id] = buildPatternQuestions(lesson);
+}
+for (const lesson of trickyWordLessons) {
+  questionBank[lesson.id] = buildTrickyQuestions(lesson);
 }
 
 const defaultData = () => ({ stats: {}, wrong: [], history: [] });
