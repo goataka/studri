@@ -40,7 +40,7 @@ Then("横スクロールせずにコースを選べる", async ({ page }) => {
 });
 
 When("アルファベットの子音①コースで挑戦を始める", async ({ page }) => {
-  await page.locator(`#courses [data-course="${COURSE}"] .start-course`).click();
+  await page.locator(`#courses [data-course="${COURSE}"] .course-start`).click();
 });
 
 Then("コース一覧に「母音」と「子音」の見出しが表示される", async ({ page }) => {
@@ -97,7 +97,7 @@ Then("全10問の結果と挑戦記録が保存される", async ({ page }) => {
 
 When("コースの誤答ログを開く", async ({ page }) => {
   await page.locator("#homeButton").click();
-  await page.locator(`#courses [data-course="${COURSE}"] .outline`).first().click();
+  await page.locator(`#courses [data-course="${COURSE}"] .course-log`).first().click();
 });
 
 Then("誤答と正解と解説が表示される", async ({ page }) => {
@@ -120,7 +120,7 @@ When("最初の誤答を解き直して正解する", async ({ page }) => {
   await expect(feedback).toHaveClass(/ok/);
   await feedback.locator(".feedback-actions button").first().click();
   await page.locator("#reviewBack").click();
-  await page.locator(`#courses [data-course="${COURSE}"] .outline`).first().click();
+  await page.locator(`#courses [data-course="${COURSE}"] .course-log`).first().click();
 });
 
 Then("解き直しが完了扱いになる", async ({ page }) => {
@@ -153,7 +153,7 @@ Then("中断した挑戦が保存される", async ({ page }) => {
 
 When("3回のミスなし合格を達成する", async ({ page }) => {
   for (let attempt = 0; attempt < 3; attempt += 1) {
-    await page.locator(`#courses [data-course="${COURSE}"] .start-course`).click();
+    await page.locator(`#courses [data-course="${COURSE}"] .course-start`).click();
     await answerTenCorrectly(page);
     if (attempt < 2) await page.locator("#homeButton").click();
   }

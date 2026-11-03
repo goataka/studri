@@ -483,6 +483,7 @@ function renderCourses() {
   const list = getElement("courses");
   list.replaceChildren();
   getElement("courseCount").textContent = `全${courses.length}コース`;
+  list.append(createCourseMarker("begin"));
   let currentSection = null;
   courses.forEach((course) => {
     const section = course.section ?? null;
@@ -492,6 +493,7 @@ function renderCourses() {
     }
     list.append(createCourseCard(course));
   });
+  list.append(createCourseMarker("goal"));
 }
 
 function createSectionHeading(text) {
@@ -503,33 +505,23 @@ function createSectionHeading(text) {
 
 function createCourseCard(course) {
   const stats = getStats(course.id);
+  const unlocked = stats.streak >= PASS_STREAK;
   const card = document.createElement("article");
-  card.className = `course${stats.streak >= PASS_STREAK ? " is-complete" : ""}`;
+  card.className = `course${unlocked ? " is-complete" : ""}`;
   card.dataset.course = course.id;
 
-  const copy = document.createElement("div");
-  copy.className = "course-copy";
-  const title = document.createElement("strong");
-  title.textContent = `${course.icon} ${course.title}`;
-  const summary = document.createElement("small");
-  summary.textContent = course.summary;
-  copy.append(title, summary, createCourseStats(stats));
+  const startButton = document.createElement("button");
+  startButton.type = "button";
+  startButton.className = "course-start";
+  startButton.append(createCourseCopy(course, stats), createCourseProgress(stats));
+  startButton.addEventListener("click", () => startQuiz(course.id));
 
-  const actions = document.createElement("div");
-  actions.className = "course-actions";
-  actions.append(createCourseButton("学習する", "start-course", () => startQuiz(course.id)));
-  actions.append(createCourseButton("まちがいログ", "outline", () => showCourseLog(course)));
+  const side = document.createElement("div");
+  side.className = "course-side";
+  side.append(createChallengeGroup(course, unlocked));
 
-  const challenges = createChallenges(course, stats);
-  card.append(copy, actions, challenges);
+  card.append(startButton, side, createCourseTools(course));
   return card;
-}
-
-function createCourseStats(stats) {
-  const meta = document.createElement("span");
-  meta.className = "course-meta";
-  meta.textContent = `ごうかくステップ ${Math.min(stats.streak, PASS_STREAK)}/${PASS_STREAK}　ちょうせん ${stats.attempts}回　ベスト ${stats.best ? `${stats.best}秒` : "--"}`;
-  return meta;
 }
 
 function createCourseButton(label, className, action) {
@@ -541,22 +533,123 @@ function createCourseButton(label, className, action) {
   return button;
 }
 
-function createChallenges(course, stats) {
-  const group = document.createElement("div");
-  group.className = "course-challenges";
-  const label = document.createElement("span");
-  label.textContent = "チャレンジ";
-  const unlocked = stats.streak >= PASS_STREAK;
-  const hint = document.createElement("small");
-  hint.textContent = unlocked ? "ひらいています" : `まちがえずにごうかく あと${PASS_STREAK - stats.streak}回でひらく`;
-  group.append(label, hint);
+function createIcon(className, symbol) {
+  const icon = document.createElement("span");
+  icon.className = className;
+  icon.setAttribute("aria-hidden", "true");
+  icon.textContent = symbol;
+  return icon;
+}
 
-  const timeButton = createCourseButton("⏱ タイムアタック", "outline", () => startQuiz(course.id, "time"));
-  const chainButton = createCourseButton("🔥 れんぞくせいかい", "outline", () => startQuiz(course.id, "chain"));
-  timeButton.disabled = !unlocked;
-  chainButton.disabled = !unlocked;
-  group.append(timeButton, chainButton);
+function createCourseCopy(course, stats) {
+  const copy = document.createElement("span");
+  copy.className = "course-copy";
+  const name = document.createElement("strong");
+  name.append(createIcon("course-icon", course.icon), document.createTextNode(` ${course.title}`));
+  const summary = document.createElement("small");
+  summary.textContent = course.summary;
+  const record = document.createElement("small");
+  record.className = "course-meta";
+  record.textContent = `ちょうせん ${stats.attempts}回・ベスト ${stats.best ? `${stats.best}秒` : "--"}`;
+  copy.append(name, summary, record);
+  return copy;
+}
+
+function createCourseProgress(stats) {
+  const details = document.createElement("span");
+  details.className = "course-details";
+  const progress = document.createElement("span");
+  progress.className = "course-progress";
+  const group = document.createElement("span");
+  group.className = "course-group";
+  const label = document.createElement("span");
+  label.className = "course-group-label";
+  label.append(createIcon("course-group-icon", "🌱"), document.createTextNode(" ごうかく"));
+  const steps = document.createElement("span");
+  steps.className = "course-steps";
+  steps.setAttribute("aria-hidden", "true");
+  const medals = ["🥇", "🥈", "🥉"];
+  const start = document.createElement("span");
+  start.className = "course-step start-dot";
+  steps.append(start);
+  medals.forEach((medal, index) => {
+    const step = document.createElement("span");
+    step.className = `course-step${index === medals.length - 1 ? " final" : ""}${index < stats.streak ? " complete" : ""}`;
+    step.textContent = medal;
+    steps.append(step);
+  });
+  group.append(label, steps);
+  progress.append(group);
+  details.append(progress);
+  return details;
+}
+
+function createChallengeGroup(course, unlocked) {
+  const group = document.createElement("div");
+  group.className = "course-challenge-group";
+  const label = document.createElement("span");
+  label.className = "course-group-label";
+  label.append(createIcon("course-group-icon", "🌳"), document.createTextNode(" チャレンジ"));
+  const challenges = document.createElement("div");
+  challenges.className = "course-challenges";
+  challenges.setAttribute("aria-label", "合格後のチャレンジ");
+  challenges.append(createChallengeButton(course, "time", "⏱", "タイムアタック", unlocked));
+  challenges.append(createChallengeButton(course, "chain", "🔥", "れんぞくせいかい", unlocked));
+  group.append(label, challenges);
+  if (!unlocked) {
+    const hint = document.createElement("small");
+    hint.className = "course-unlock-hint";
+    hint.textContent = `まちがえずにごうかく あと${PASS_STREAK - getStats(course.id).streak}回でひらく`;
+    group.append(hint);
+  }
   return group;
+}
+
+function createChallengeButton(course, mode, emoji, label, unlocked) {
+  const control = document.createElement("span");
+  control.className = "course-challenge-control";
+  const button = document.createElement("button");
+  button.type = "button";
+  button.className = "course-challenge";
+  button.dataset.mode = mode;
+  button.disabled = !unlocked;
+  button.append(createIcon("course-challenge-icon", emoji), document.createTextNode(` ${label}`));
+  button.addEventListener("click", () => startQuiz(course.id, mode));
+  control.append(button);
+  return control;
+}
+
+function createCourseTools(course) {
+  const group = document.createElement("div");
+  group.className = "course-tools-group";
+  const label = document.createElement("span");
+  label.className = "course-group-label";
+  label.textContent = "🧰 ツール";
+  const logButton = document.createElement("button");
+  logButton.type = "button";
+  logButton.className = "course-log";
+  logButton.dataset.reviewCourse = course.id;
+  logButton.textContent = "📜 まちがいログ";
+  logButton.addEventListener("click", () => showCourseLog(course));
+  group.append(label, logButton);
+  return group;
+}
+
+function createCourseMarker(type) {
+  const isStart = type === "begin";
+  const marker = document.createElement("div");
+  marker.className = isStart ? "course-begin" : "course-goal";
+  const copy = document.createElement("span");
+  copy.className = "course-copy";
+  const label = document.createElement("strong");
+  label.append(createIcon("course-icon", isStart ? "🧭" : "🚩"), document.createTextNode(isStart ? " スタート" : " ゴール"));
+  const message = document.createElement("small");
+  message.textContent = isStart
+    ? `${PASS_STREAK}回ごうかくすると、チャレンジがひらくよ♪`
+    : "おめでとう！つぎのコースもすすもう♪";
+  copy.append(label, message);
+  marker.append(copy);
+  return marker;
 }
 
 function showCourseLog(course) {
