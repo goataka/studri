@@ -66,6 +66,7 @@ Then("問題と回答ボタンが表示される", async ({ page }) => {
   await expect(page.locator("#answers button")).toHaveCount(4);
   await expect(page.locator("#meaningHint")).toContainText("意味：");
   await expect(page.locator("#writingCanvas")).toHaveCount(0);
+  await expect(page.locator("#speakWord")).toBeVisible();
 });
 
 When("まちがいを直しながら10問を終える", async ({ page }) => {
