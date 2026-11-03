@@ -123,8 +123,8 @@ const questionBank = {
   alphabet: [
     { level: 0, prompt: "sun のはじめの音はどれ？", word: "sun", display: "？・ア・ン", answer: "/s/", choices: ["/s/", "/m/", "/t/", "/f/"], explanation: "sun は ス の音で始まるよ。S の音を思い出そう。" },
     { level: 0, prompt: "map のはじめの音はどれ？", word: "map", display: "？・ア・プ", answer: "/m/", choices: ["/m/", "/n/", "/b/", "/p/"], explanation: "map は ム の音で始まるよ。くちびるをとじて出す音だよ。" },
-    { level: 0, prompt: "fish のはじめの音はどれ？", word: "fish", display: "？・ッ・シュ", answer: "/f/", choices: ["/f/", "/v/", "/s/", "/h/"], explanation: "fish は フ の音で始まるよ。" },
-    { level: 0, prompt: "dog のはじめの音はどれ？", word: "dog", display: "？・ッ・グ", answer: "/d/", choices: ["/d/", "/b/", "/g/", "/t/"], explanation: "dog は ドゥ の音で始まるよ。" },
+    { level: 0, prompt: "fish のはじめの音はどれ？", word: "fish", display: "？(ッ)・シュ", answer: "/f/", choices: ["/f/", "/v/", "/s/", "/h/"], explanation: "fish は フ の音で始まるよ。" },
+    { level: 0, prompt: "dog のはじめの音はどれ？", word: "dog", display: "？(ッ)・グ", answer: "/d/", choices: ["/d/", "/b/", "/g/", "/t/"], explanation: "dog は ドゥ の音で始まるよ。" },
     { level: 1, prompt: "bag のはじめの音を表す文字は？", word: "bag", display: "？・ア・グ", answer: "b", choices: ["b", "d", "p", "g"], explanation: "bag は b の音で始まることば。文字 b が ブ を表すよ。" },
     { level: 1, prompt: "kite のはじめの音を表す文字は？", word: "kite", display: "？・アイ・ト", answer: "k", choices: ["k", "h", "t", "g"], explanation: "kite は ク の音で始まるよ。ここでは k がその音を表すよ。" },
     { level: 2, prompt: "van のはじめの音はどれ？", word: "van", display: "？・ア・ン", answer: "/v/", choices: ["/v/", "/f/", "/w/", "/b/"], explanation: "van は ヴ の音で始まるよ。f の音と区べつしてみよう。" },
@@ -201,8 +201,8 @@ const wordInfo = {
   "dog": { split: "ドゥ・オ(ッ)・グ", joined: "ドッグ", meaning: "犬" },
   "bag": { split: "ブ・ア(ッ)・グ", joined: "バッグ", meaning: "かばん" },
   "kite": { split: "ク・ア・イ・トゥ・オ", joined: "カイト", meaning: "たこ" },
-  "van": { split: "ヴ・ァ・ン", joined: "ヴァン", meaning: "ちいさなバン" },
-  "zip": { split: "ジュ・イ(ッ)・プ", joined: "ジップ", meaning: "ファスナー" },
+  "van": { split: "ヴ・ア・ン", joined: "ヴァン", meaning: "ちいさなバン" },
+  "zip": { split: "ズ・イ(ッ)・プ", joined: "ジップ", meaning: "ファスナー" },
   "queen": { split: "ク・イー・ン", joined: "クイーン", meaning: "女王" },
   "box": { split: "ブ・オ(ッ)・ク・ス", joined: "ボックス", meaning: "箱" },
   "red": { split: "ル・エ(ッ)・ドゥ・オ", joined: "レッド", meaning: "赤" },
@@ -220,8 +220,8 @@ const wordInfo = {
   "fin": { split: "フ・ィ・ン", joined: "フィン", meaning: "ひれ" },
   "ship": { split: "シュ・イ(ッ)・プ", joined: "シップ", meaning: "船" },
   "chin": { split: "チ・ン", joined: "チン", meaning: "あご" },
-  "thin": { split: "シュ・イ・ン", joined: "シン", meaning: "うすい、ほそい" },
-  "this": { split: "ドゥ・エ・ィ・ス", joined: "ディス", meaning: "これ" },
+  "thin": { split: "ス・イ・ン", joined: "シン", meaning: "うすい、ほそい" },
+  "this": { split: "ズ・イ・ス", joined: "ディス", meaning: "これ" },
   "phone": { split: "フ・ォ・ン", joined: "フォン", meaning: "電話" },
   "whale": { split: "ウ・ェ・イ・ル", joined: "ウェイル", meaning: "クジラ" },
   "ring": { split: "ル・イ・ン・グ", joined: "リング", meaning: "ゆびわ" },
@@ -241,7 +241,7 @@ const wordInfo = {
   "cute": { split: "ク・ユー・トゥ・オ", joined: "キュート", meaning: "かわいい" },
   "ride": { split: "ル・ア・イ・ドゥ・オ", joined: "ライド", meaning: "乗る" },
   "rain": { split: "ル・エ・イ・ン", joined: "レイン", meaning: "雨" },
-  "seed": { split: "シュ・イー・ドゥ・オ", joined: "シード", meaning: "たね" },
+  "seed": { split: "ス・イー・ドゥ・オ", joined: "シード", meaning: "たね" },
   "boat": { split: "ブ・オー・トゥ・オ", joined: "ボート", meaning: "ボート" },
   "moon": { split: "ムー・ン", joined: "ムーン", meaning: "月" },
   "book": { split: "ブ(ッ)・ク", joined: "ブック", meaning: "本" },
@@ -329,18 +329,18 @@ const soundExampleWords = {
   "クス": "ボックス", "ス（したさきを歯のあいだに）": "サンクス", "ズ（したさきを歯のあいだに）": "ブラザー",
 };
 const exampleSyllables = {
-  "アップル": "ア・ッ・プ・ル", "エッグタルト": "エッ・グ・タ・ル・ト",
-  "インターネット": "イン・ター・ネ・ッ・ト", "オレンジ": "オ・レ・ン・ジ",
+  "アップル": "ア(ッ)・プ・ル", "エッグタルト": "エ(ッ)・グ・タ・ル・ト",
+  "インターネット": "イン・ター・ネ(ッ)・ト", "オレンジ": "オ・レ・ン・ジ",
   "ウィンナー": "ウィ・ン・ナ・ー", "アイス": "ア・イ・ス", "ケーキ": "ケ・ー・キ",
   "ホーム": "ホ・ー・ム", "コイン": "コ・イ・ン", "カウンター": "カ・ウ・ン・タ・ー",
   "ティー": "ティ・ー", "スープ": "ス・ー・プ", "ユーモア": "ユ・ー・モ・ア",
-  "ブログ": "ブ・ロ・グ", "クッキー": "ク・ッ・キ・ー", "グッズ": "グ・ッ・ズ",
+  "ブログ": "ブ・ロ・グ", "クッキー": "ク(ッ)・キ・ー", "グッズ": "グ(ッ)・ズ",
   "ドリンク": "ド・リ・ン・ク", "ヌードル": "ヌ・ー・ド・ル", "プレゼント": "プ・レ・ゼ・ン・ト",
-  "スマホ": "ス・マ・ホ", "ズーム": "ズ・ー・ム", "フィレオフィッシュ": "フィ・レ・オ・フィッ・シュ",
+  "スマホ": "ス・マ・ホ", "ズーム": "ズ・ー・ム", "フィレオフィッシュ": "フィ・レ・オ・フィ(ッ)・シュ",
   "ハンバーガー": "ハ・ン・バ・ー・ガ・ー", "ムービー": "ム・ー・ビ・ー", "ルール": "ル・ー・ル",
   "ヴァイオリン": "ヴァ・イ・オ・リ・ン", "ジュース": "ジュ・ー・ス", "シュークリーム": "シュー・ク・リ・ー・ム",
   "チキン": "チ・キ・ン", "ユニフォーム": "ユ・ニ・フォ・ー・ム", "トゥモロー": "ト・ゥ・モ・ロ・ー",
-  "リング": "リ・ン・グ", "クイズ": "ク・イ・ズ", "ボックス": "ボ・ッ・ク・ス",
+  "リング": "リ・ン・グ", "クイズ": "ク・イ・ズ", "ボックス": "ボ(ッ)・ク・ス",
   "サンクス": "サ・ン・クス", "ブラザー": "ブ・ラ・ザ・ー",
 };
 const kanaOfAnswer = (answer) => phonicsLetterSounds[answer] || phonicsSounds[answer] || answer;
@@ -483,6 +483,7 @@ function renderCourses() {
   const list = getElement("courses");
   list.replaceChildren();
   getElement("courseCount").textContent = `全${courses.length}コース`;
+  list.append(createCourseMarker("begin"));
   let currentSection = null;
   courses.forEach((course) => {
     const section = course.section ?? null;
@@ -492,6 +493,7 @@ function renderCourses() {
     }
     list.append(createCourseCard(course));
   });
+  list.append(createCourseMarker("goal"));
 }
 
 function createSectionHeading(text) {
@@ -503,33 +505,23 @@ function createSectionHeading(text) {
 
 function createCourseCard(course) {
   const stats = getStats(course.id);
+  const unlocked = stats.streak >= PASS_STREAK;
   const card = document.createElement("article");
-  card.className = `course${stats.streak >= PASS_STREAK ? " is-complete" : ""}`;
+  card.className = `course${unlocked ? " is-complete" : ""}`;
   card.dataset.course = course.id;
 
-  const copy = document.createElement("div");
-  copy.className = "course-copy";
-  const title = document.createElement("strong");
-  title.textContent = `${course.icon} ${course.title}`;
-  const summary = document.createElement("small");
-  summary.textContent = course.summary;
-  copy.append(title, summary, createCourseStats(stats));
+  const startButton = document.createElement("button");
+  startButton.type = "button";
+  startButton.className = "course-start";
+  startButton.append(createCourseCopy(course, stats), createCourseProgress(stats));
+  startButton.addEventListener("click", () => startQuiz(course.id));
 
-  const actions = document.createElement("div");
-  actions.className = "course-actions";
-  actions.append(createCourseButton("学習する", "start-course", () => startQuiz(course.id)));
-  actions.append(createCourseButton("まちがいログ", "outline", () => showCourseLog(course)));
+  const side = document.createElement("div");
+  side.className = "course-side";
+  side.append(createChallengeGroup(course, unlocked));
 
-  const challenges = createChallenges(course, stats);
-  card.append(copy, actions, challenges);
+  card.append(startButton, side, createCourseTools(course));
   return card;
-}
-
-function createCourseStats(stats) {
-  const meta = document.createElement("span");
-  meta.className = "course-meta";
-  meta.textContent = `ごうかくステップ ${Math.min(stats.streak, PASS_STREAK)}/${PASS_STREAK}　ちょうせん ${stats.attempts}回　ベスト ${stats.best ? `${stats.best}秒` : "--"}`;
-  return meta;
 }
 
 function createCourseButton(label, className, action) {
@@ -541,22 +533,123 @@ function createCourseButton(label, className, action) {
   return button;
 }
 
-function createChallenges(course, stats) {
-  const group = document.createElement("div");
-  group.className = "course-challenges";
-  const label = document.createElement("span");
-  label.textContent = "チャレンジ";
-  const unlocked = stats.streak >= PASS_STREAK;
-  const hint = document.createElement("small");
-  hint.textContent = unlocked ? "ひらいています" : `まちがえずにごうかく あと${PASS_STREAK - stats.streak}回でひらく`;
-  group.append(label, hint);
+function createIcon(className, symbol) {
+  const icon = document.createElement("span");
+  icon.className = className;
+  icon.setAttribute("aria-hidden", "true");
+  icon.textContent = symbol;
+  return icon;
+}
 
-  const timeButton = createCourseButton("⏱ タイムアタック", "outline", () => startQuiz(course.id, "time"));
-  const chainButton = createCourseButton("🔥 れんぞくせいかい", "outline", () => startQuiz(course.id, "chain"));
-  timeButton.disabled = !unlocked;
-  chainButton.disabled = !unlocked;
-  group.append(timeButton, chainButton);
+function createCourseCopy(course, stats) {
+  const copy = document.createElement("span");
+  copy.className = "course-copy";
+  const name = document.createElement("strong");
+  name.append(createIcon("course-icon", course.icon), document.createTextNode(` ${course.title}`));
+  const summary = document.createElement("small");
+  summary.textContent = course.summary;
+  const record = document.createElement("small");
+  record.className = "course-meta";
+  record.textContent = `ちょうせん ${stats.attempts}回・ベスト ${stats.best ? `${stats.best}秒` : "--"}`;
+  copy.append(name, summary, record);
+  return copy;
+}
+
+function createCourseProgress(stats) {
+  const details = document.createElement("span");
+  details.className = "course-details";
+  const progress = document.createElement("span");
+  progress.className = "course-progress";
+  const group = document.createElement("span");
+  group.className = "course-group";
+  const label = document.createElement("span");
+  label.className = "course-group-label";
+  label.append(createIcon("course-group-icon", "🌱"), document.createTextNode(" ごうかく"));
+  const steps = document.createElement("span");
+  steps.className = "course-steps";
+  steps.setAttribute("aria-hidden", "true");
+  const medals = ["🥇", "🥈", "🥉"];
+  const start = document.createElement("span");
+  start.className = "course-step start-dot";
+  steps.append(start);
+  medals.forEach((medal, index) => {
+    const step = document.createElement("span");
+    step.className = `course-step${index === medals.length - 1 ? " final" : ""}${index < stats.streak ? " complete" : ""}`;
+    step.textContent = medal;
+    steps.append(step);
+  });
+  group.append(label, steps);
+  progress.append(group);
+  details.append(progress);
+  return details;
+}
+
+function createChallengeGroup(course, unlocked) {
+  const group = document.createElement("div");
+  group.className = "course-challenge-group";
+  const label = document.createElement("span");
+  label.className = "course-group-label";
+  label.append(createIcon("course-group-icon", "🌳"), document.createTextNode(" チャレンジ"));
+  const challenges = document.createElement("div");
+  challenges.className = "course-challenges";
+  challenges.setAttribute("aria-label", "合格後のチャレンジ");
+  challenges.append(createChallengeButton(course, "time", "⏱", "タイムアタック", unlocked));
+  challenges.append(createChallengeButton(course, "chain", "🔥", "れんぞくせいかい", unlocked));
+  group.append(label, challenges);
+  if (!unlocked) {
+    const hint = document.createElement("small");
+    hint.className = "course-unlock-hint";
+    hint.textContent = `まちがえずにごうかく あと${PASS_STREAK - getStats(course.id).streak}回でひらく`;
+    group.append(hint);
+  }
   return group;
+}
+
+function createChallengeButton(course, mode, emoji, label, unlocked) {
+  const control = document.createElement("span");
+  control.className = "course-challenge-control";
+  const button = document.createElement("button");
+  button.type = "button";
+  button.className = "course-challenge";
+  button.dataset.mode = mode;
+  button.disabled = !unlocked;
+  button.append(createIcon("course-challenge-icon", emoji), document.createTextNode(` ${label}`));
+  button.addEventListener("click", () => startQuiz(course.id, mode));
+  control.append(button);
+  return control;
+}
+
+function createCourseTools(course) {
+  const group = document.createElement("div");
+  group.className = "course-tools-group";
+  const label = document.createElement("span");
+  label.className = "course-group-label";
+  label.textContent = "🧰 ツール";
+  const logButton = document.createElement("button");
+  logButton.type = "button";
+  logButton.className = "course-log";
+  logButton.dataset.reviewCourse = course.id;
+  logButton.textContent = "📜 まちがいログ";
+  logButton.addEventListener("click", () => showCourseLog(course));
+  group.append(label, logButton);
+  return group;
+}
+
+function createCourseMarker(type) {
+  const isStart = type === "begin";
+  const marker = document.createElement("div");
+  marker.className = isStart ? "course-begin" : "course-goal";
+  const copy = document.createElement("span");
+  copy.className = "course-copy";
+  const label = document.createElement("strong");
+  label.append(createIcon("course-icon", isStart ? "🧭" : "🚩"), document.createTextNode(isStart ? " スタート" : " ゴール"));
+  const message = document.createElement("small");
+  message.textContent = isStart
+    ? `${PASS_STREAK}回ごうかくすると、チャレンジがひらくよ♪`
+    : "おめでとう！つぎのコースもすすもう♪";
+  copy.append(label, message);
+  marker.append(copy);
+  return marker;
 }
 
 function showCourseLog(course) {
