@@ -250,7 +250,7 @@ main { padding-block: 4px 80px; }
 .answer-choice:hover { transform: translateY(-2px); border-color: #9ab98d; background: #f7fbf3; }
 .phonics-pronunciation { white-space: nowrap; }
 .phonics-kana { font-weight: 800; }
-.phonics-ipa { margin-left: 2px; color: #788278; font-size: 0.72em; font-weight: 500; }
+.phonics-letter { margin-left: 2px; color: #788278; font-size: 0.72em; font-weight: 500; }
 .answer-choice .phonics-kana { font-size: 1.05em; }
 .clear { position: absolute; right: 9px; bottom: 9px; padding: 6px 10px; border: 1px solid var(--line); border-radius: 999px; background: #fffdf8; font-size: 0.78rem; }
 .previous-answer { color: #899187; font-size: 0.86rem; text-align: center; }

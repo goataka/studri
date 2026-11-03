@@ -430,10 +430,6 @@ function loadLearningData() {
   }
 }
 
-function getPhonicsText(text) {
-  return text.replace(phonicsSoundPattern, (symbol) => `${phonicsSounds[symbol]}（${symbol}）`);
-}
-
 function appendPhonicsText(element, text) {
   let lastIndex = 0;
   for (const match of text.matchAll(phonicsSoundPattern)) {
@@ -445,10 +441,7 @@ function appendPhonicsText(element, text) {
     const kana = document.createElement("span");
     kana.className = "phonics-kana";
     kana.textContent = phonicsSounds[symbol];
-    const ipa = document.createElement("small");
-    ipa.className = "phonics-ipa";
-    ipa.textContent = `（${symbol}）`;
-    pronunciation.append(kana, ipa);
+    pronunciation.append(kana);
     element.append(pronunciation);
     lastIndex = index + symbol.length;
   }
@@ -470,7 +463,7 @@ function appendLetterChoice(element, letter) {
   kana.className = "phonics-kana";
   kana.textContent = phonicsLetterSounds[letter];
   const symbol = document.createElement("small");
-  symbol.className = "phonics-ipa";
+  symbol.className = "phonics-letter";
   symbol.textContent = `（${letter}）`;
   pronunciation.append(kana, symbol);
   element.append(pronunciation);
