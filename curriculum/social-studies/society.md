@@ -20,7 +20,7 @@
 - **子ども向け**：地域の工場や農家、店の人たちの仕事のくふうを、見学して調べられる
 - **前提**：soc-g3-local-area
 - **根拠**
-  - 学習指導要領：[(2) 地域に見られる生産や販売の仕事](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/social-studies/grade-3.md) [ア(ア)](https://w3id.org/jp-cos/8220233211000000)、[ア(イ)](https://w3id.org/jp-cos/8220233212000000)、[ア(ウ)](https://w3id.org/jp-cos/8220233213000000)
+  - 学習指導要領：[(2) 地域に見られる生産や販売の仕事](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/social-studies/grade-3.md)：[ア(ア)](https://w3id.org/jp-cos/8220233211000000)、[ア(イ)](https://w3id.org/jp-cos/8220233212000000)、[ア(ウ)](https://w3id.org/jp-cos/8220233213000000)
   - 解説：[３学年の目標及び内容 ２ 第３学年の内容 (2) 地域に見られる生産や販売の仕事](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/social-studies/commentary/03-01-02-02.md)
   - 評価規準：[第3学年の評価規準](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/social-studies/assessment/grade-3.md)
 
@@ -31,7 +31,7 @@
 - **子ども向け**：消防署や警察署が協力して、火事や事故から地域を守っていることが分かる
 - **前提**：soc-g3-local-area
 - **根拠**
-  - 学習指導要領：[(3) 地域の安全を守る働き](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/social-studies/grade-3.md) [ア(ア)](https://w3id.org/jp-cos/8220233311000000)、[ア(イ)](https://w3id.org/jp-cos/8220233312000000)
+  - 学習指導要領：[(3) 地域の安全を守る働き](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/social-studies/grade-3.md)：[ア(ア)](https://w3id.org/jp-cos/8220233311000000)、[ア(イ)](https://w3id.org/jp-cos/8220233312000000)
   - 解説：[第1節第３学年の目標及び内容 ２ 第３学年の内容 (3) 地域の安全を守る働き](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/social-studies/commentary/03-01-02-03.md)
   - 評価規準：[第3学年の評価規準](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/social-studies/assessment/grade-3.md)
 
@@ -44,7 +44,7 @@
 - **子ども向け**：水道、電気、ガスやごみの処理が、安全で安定したくらしのために進められていることが分かる
 - **前提**：soc-g3-safety
 - **根拠**
-  - 学習指導要領：[(2) 人々の健康や生活環境を支える事業](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/social-studies/grade-4.md) [ア(ア)](https://w3id.org/jp-cos/8220243211000000)、[ア(イ)](https://w3id.org/jp-cos/8220243212000000)、[ア(ウ)](https://w3id.org/jp-cos/8220243213000000)
+  - 学習指導要領：[(2) 人々の健康や生活環境を支える事業](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/social-studies/grade-4.md)：[ア(ア)](https://w3id.org/jp-cos/8220243211000000)、[ア(イ)](https://w3id.org/jp-cos/8220243212000000)、[ア(ウ)](https://w3id.org/jp-cos/8220243213000000)
   - 解説：[学年の目標及び内容 ２ 第４学年の内容 (2) 人々の健康や生活環境を支える事業](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/social-studies/commentary/03-02-02-02.md)
   - 評価規準：[第4学年の評価規準](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/social-studies/assessment/grade-4.md)
 
@@ -55,7 +55,7 @@
 - **子ども向け**：地域の人や関係機関が協力して、自然災害に備えていることが分かる
 - **前提**：soc-g3-safety
 - **根拠**
-  - 学習指導要領：[(3) 自然災害から人々を守る活動](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/social-studies/grade-4.md) [ア(ア)](https://w3id.org/jp-cos/8220243311000000)、[ア(イ)](https://w3id.org/jp-cos/8220243312000000)
+  - 学習指導要領：[(3) 自然災害から人々を守る活動](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/social-studies/grade-4.md)：[ア(ア)](https://w3id.org/jp-cos/8220243311000000)、[ア(イ)](https://w3id.org/jp-cos/8220243312000000)
   - 解説：[節第４学年の目標及び内容 ２ 第４学年の内容 (3) 自然災害から人々を守る活動](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/social-studies/commentary/03-02-02-03.md)
   - 評価規準：[第4学年の評価規準](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/social-studies/assessment/grade-4.md)
 
@@ -68,7 +68,7 @@
 - **子ども向け**：米づくりや水産業などの食料生産のくふうと、食料を届ける仕組みが分かる
 - **前提**：soc-g3-production、soc-g5-territory
 - **根拠**
-  - 学習指導要領：[(2) 我が国の農業や水産業における食料生産](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/social-studies/grade-5.md) [ア(ア)](https://w3id.org/jp-cos/8220253211000000)、[ア(イ)](https://w3id.org/jp-cos/8220253212000000)、[ア(ウ)](https://w3id.org/jp-cos/8220253213000000)
+  - 学習指導要領：[(2) 我が国の農業や水産業における食料生産](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/social-studies/grade-5.md)：[ア(ア)](https://w3id.org/jp-cos/8220253211000000)、[ア(イ)](https://w3id.org/jp-cos/8220253212000000)、[ア(ウ)](https://w3id.org/jp-cos/8220253213000000)
   - 解説：[の目標及び内容 ２ 第５学年の内容 (2) 我が国の農業や水産業における食料生産](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/social-studies/commentary/03-03-02-02.md)
   - 評価規準：[第5学年の評価規準](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/social-studies/assessment/grade-5.md)
 
@@ -79,7 +79,7 @@
 - **子ども向け**：日本の工業の種類や工業の盛んな地域、ものづくりのくふう、貿易や運輸の役割が分かる
 - **前提**：soc-g3-production、soc-g5-territory
 - **根拠**
-  - 学習指導要領：[(3) 我が国の工業生産](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/social-studies/grade-5.md) [ア(ア)](https://w3id.org/jp-cos/8220253311000000)、[ア(イ)](https://w3id.org/jp-cos/8220253312000000)、[ア(ウ)](https://w3id.org/jp-cos/8220253313000000)、[ア(エ)](https://w3id.org/jp-cos/8220253314000000)
+  - 学習指導要領：[(3) 我が国の工業生産](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/social-studies/grade-5.md)：[ア(ア)](https://w3id.org/jp-cos/8220253311000000)、[ア(イ)](https://w3id.org/jp-cos/8220253312000000)、[ア(ウ)](https://w3id.org/jp-cos/8220253313000000)、[ア(エ)](https://w3id.org/jp-cos/8220253314000000)
   - 解説：[第3節第５学年の目標及び内容 ２ 第５学年の内容 (3) 我が国の工業生産](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/social-studies/commentary/03-03-02-03.md)
   - 評価規準：[第5学年の評価規準](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/social-studies/assessment/grade-5.md)
 
@@ -90,7 +90,7 @@
 - **子ども向け**：放送や新聞の働きや、情報通信技術が産業やくらしを変えていることが分かる
 - **前提**：soc-g5-industry
 - **根拠**
-  - 学習指導要領：[(4) 我が国の産業と情報との関わり](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/social-studies/grade-5.md) [ア(ア)](https://w3id.org/jp-cos/8220253411000000)、[ア(イ)](https://w3id.org/jp-cos/8220253412000000)、[ア(ウ)](https://w3id.org/jp-cos/8220253413000000)
+  - 学習指導要領：[(4) 我が国の産業と情報との関わり](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/social-studies/grade-5.md)：[ア(ア)](https://w3id.org/jp-cos/8220253411000000)、[ア(イ)](https://w3id.org/jp-cos/8220253412000000)、[ア(ウ)](https://w3id.org/jp-cos/8220253413000000)
   - 解説：[第５学年の目標及び内容 ２ 第５学年の内容 (4) 我が国の産業と情報との関わり](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/social-studies/commentary/03-03-02-04.md)
   - 評価規準：[第5学年の評価規準](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/social-studies/assessment/grade-5.md)
 
@@ -103,6 +103,6 @@
 - **子ども向け**：日本国憲法の考え方や、国や市の政治がくらしを支える働きが分かる
 - **前提**：soc-g4-utilities
 - **根拠**
-  - 学習指導要領：[(1) 我が国の政治の働き](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/social-studies/grade-6.md) [ア(ア)](https://w3id.org/jp-cos/8220263111000000)、[ア(イ)](https://w3id.org/jp-cos/8220263112000000)、[ア(ウ)](https://w3id.org/jp-cos/8220263113000000)
+  - 学習指導要領：[(1) 我が国の政治の働き](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/social-studies/grade-6.md)：[ア(ア)](https://w3id.org/jp-cos/8220263111000000)、[ア(イ)](https://w3id.org/jp-cos/8220263112000000)、[ア(ウ)](https://w3id.org/jp-cos/8220263113000000)
   - 解説：[第4節第６学年の目標及び内容 ２ 第６学年の内容 (1) 我が国の政治の働き](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/social-studies/commentary/03-04-02-01.md)
   - 評価規準：[第6学年の評価規準](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/social-studies/assessment/grade-6.md)

@@ -18,7 +18,7 @@
 - **目標**：昔話や神話、伝承などの読み聞かせを聞くなどして、我が国の伝統的な言語文化に親しむ
 - **子ども向け**：昔話や神話の読み聞かせを聞いて、昔から伝わるお話に親しめる
 - **根拠**
-  - 学習指導要領：[(3) 我が国の言語文化に関する事項](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/japanese/grade-1-2.md) [ア](https://w3id.org/jp-cos/82102A3131000000)
+  - 学習指導要領：[(3) 我が国の言語文化に関する事項](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/japanese/grade-1-2.md)：[ア](https://w3id.org/jp-cos/82102A3131000000)
   - 解説：[第1節第１学年及び第２学年の内容 1 〔知識及び技能〕](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/japanese/commentary/03-01-01.md)
   - 評価規準：[第1学年及び第2学年の評価規準](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/japanese/assessment/grade-1-2.md)
 
@@ -28,7 +28,7 @@
 - **目標**：長く親しまれている言葉遊びを通して、言葉の豊かさに気付く
 - **子ども向け**：しりとりや早口言葉などの言葉遊びで、言葉のおもしろさに気づける
 - **根拠**
-  - 学習指導要領：[(3) 我が国の言語文化に関する事項](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/japanese/grade-1-2.md) [イ](https://w3id.org/jp-cos/82102A3132000000)
+  - 学習指導要領：[(3) 我が国の言語文化に関する事項](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/japanese/grade-1-2.md)：[イ](https://w3id.org/jp-cos/82102A3132000000)
   - 解説：[第1節第１学年及び第２学年の内容 1 〔知識及び技能〕](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/japanese/commentary/03-01-01.md)
   - 評価規準：[第1学年及び第2学年の評価規準](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/japanese/assessment/grade-1-2.md)
 
@@ -38,7 +38,7 @@
 - **目標**：読書に親しみ、いろいろな本があることを知る
 - **子ども向け**：本に親しみ、いろいろな本があることを知る
 - **根拠**
-  - 学習指導要領：[(3) 我が国の言語文化に関する事項](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/japanese/grade-1-2.md) [エ](https://w3id.org/jp-cos/82102A3134000000)
+  - 学習指導要領：[(3) 我が国の言語文化に関する事項](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/japanese/grade-1-2.md)：[エ](https://w3id.org/jp-cos/82102A3134000000)
   - 解説：[第1節第１学年及び第２学年の内容 1 〔知識及び技能〕](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/japanese/commentary/03-01-01.md)
   - 評価規準：[第1学年及び第2学年の評価規準](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/japanese/assessment/grade-1-2.md)
 
@@ -51,7 +51,7 @@
 - **子ども向け**：やさしい短歌や俳句を音読したり暗唱したりして、言葉の響きやリズムに親しめる
 - **前提**：jp-culture-g12-tales
 - **根拠**
-  - 学習指導要領：[(3) 我が国の言語文化に関する事項](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/japanese/grade-3-4.md) [ア](https://w3id.org/jp-cos/82102C3131000000)
+  - 学習指導要領：[(3) 我が国の言語文化に関する事項](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/japanese/grade-3-4.md)：[ア](https://w3id.org/jp-cos/82102C3131000000)
   - 解説：[第2節第３学年及び第４学年の内容 1 〔知識及び技能〕](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/japanese/commentary/03-02-01.md)
   - 評価規準：[第3学年及び第4学年の評価規準](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/japanese/assessment/grade-3-4.md)
 
@@ -62,7 +62,7 @@
 - **子ども向け**：ことわざや慣用句、故事成語の意味を知り、使える
 - **前提**：jp-culture-g12-wordplay
 - **根拠**
-  - 学習指導要領：[(3) 我が国の言語文化に関する事項](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/japanese/grade-3-4.md) [イ](https://w3id.org/jp-cos/82102C3132000000)
+  - 学習指導要領：[(3) 我が国の言語文化に関する事項](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/japanese/grade-3-4.md)：[イ](https://w3id.org/jp-cos/82102C3132000000)
   - 解説：[第2節第３学年及び第４学年の内容 1 〔知識及び技能〕](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/japanese/commentary/03-02-01.md)
   - 評価規準：[第3学年及び第4学年の評価規準](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/japanese/assessment/grade-3-4.md)
 
@@ -73,7 +73,7 @@
 - **子ども向け**：いろいろな本を読み、読書が知りたいことを知るのに役立つと気づける
 - **前提**：jp-culture-g12-reading
 - **根拠**
-  - 学習指導要領：[(3) 我が国の言語文化に関する事項](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/japanese/grade-3-4.md) [オ](https://w3id.org/jp-cos/82102C3135000000)
+  - 学習指導要領：[(3) 我が国の言語文化に関する事項](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/japanese/grade-3-4.md)：[オ](https://w3id.org/jp-cos/82102C3135000000)
   - 解説：[第2節第３学年及び第４学年の内容 1 〔知識及び技能〕](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/japanese/commentary/03-02-01.md)
   - 評価規準：[第3学年及び第4学年の評価規準](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/japanese/assessment/grade-3-4.md)
 
@@ -86,7 +86,7 @@
 - **子ども向け**：親しみやすい古文や漢文を音読して、言葉の響きやリズムに親しめる
 - **前提**：jp-culture-g34-tanka-haiku
 - **根拠**
-  - 学習指導要領：[(3) 我が国の言語文化に関する事項](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/japanese/grade-5-6.md) [ア](https://w3id.org/jp-cos/82102D3131000000)
+  - 学習指導要領：[(3) 我が国の言語文化に関する事項](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/japanese/grade-5-6.md)：[ア](https://w3id.org/jp-cos/82102D3131000000)
   - 解説：[第3節第５学年及び第６学年の内容 1 〔知識及び技能〕](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/japanese/commentary/03-03-01.md)
   - 評価規準：[第5学年及び第6学年の評価規準](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/japanese/assessment/grade-5-6-1.md)
 
@@ -97,7 +97,7 @@
 - **子ども向け**：古典について書かれた文章を読んで、昔の人のものの見方や感じ方を知る
 - **前提**：jp-culture-g56-classics-aloud
 - **根拠**
-  - 学習指導要領：[(3) 我が国の言語文化に関する事項](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/japanese/grade-5-6.md) [イ](https://w3id.org/jp-cos/82102D3132000000)
+  - 学習指導要領：[(3) 我が国の言語文化に関する事項](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/japanese/grade-5-6.md)：[イ](https://w3id.org/jp-cos/82102D3132000000)
   - 解説：[第3節第５学年及び第６学年の内容 1 〔知識及び技能〕](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/japanese/commentary/03-03-01.md)
   - 評価規準：[第5学年及び第6学年の評価規準](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/japanese/assessment/grade-5-6-1.md)
 
@@ -108,7 +108,7 @@
 - **子ども向け**：言葉の由来や移り変わり、共通語と方言のちがい、仮名と漢字の成り立ちが分かる
 - **前提**：jp-culture-g34-proverbs
 - **根拠**
-  - 学習指導要領：[(3) 我が国の言語文化に関する事項](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/japanese/grade-5-6.md) [ウ](https://w3id.org/jp-cos/82102D3133000000)
+  - 学習指導要領：[(3) 我が国の言語文化に関する事項](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/japanese/grade-5-6.md)：[ウ](https://w3id.org/jp-cos/82102D3133000000)
   - 解説：[第3節第５学年及び第６学年の内容 1 〔知識及び技能〕](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/japanese/commentary/03-03-01.md)
   - 評価規準：[第5学年及び第6学年の評価規準](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/japanese/assessment/grade-5-6-1.md)
 
@@ -119,6 +119,6 @@
 - **子ども向け**：ふだんから本を読み、読書が自分の考えを広げることに気づける
 - **前提**：jp-culture-g34-reading
 - **根拠**
-  - 学習指導要領：[(3) 我が国の言語文化に関する事項](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/japanese/grade-5-6.md) [オ](https://w3id.org/jp-cos/82102D3135000000)
+  - 学習指導要領：[(3) 我が国の言語文化に関する事項](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/japanese/grade-5-6.md)：[オ](https://w3id.org/jp-cos/82102D3135000000)
   - 解説：[第3節第５学年及び第６学年の内容 1 〔知識及び技能〕](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/japanese/commentary/03-03-01.md)
   - 評価規準：[第5学年及び第6学年の評価規準](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/japanese/assessment/grade-5-6-1.md)

@@ -19,7 +19,7 @@
 - **目標**：生物は、色、形、大きさなど、姿に違いがある。周辺の環境と関わって生きている。昆虫の育ち方には一定の順序がある。成虫の体は頭、胸、腹からできている。植物の育ち方には一定の順序がある。その体は根、茎、葉からできている
 - **子ども向け**：生き物の姿のちがいや、昆虫と植物の育ち方の順序、体のつくりが分かる
 - **根拠**
-  - 学習指導要領：[B(1) 身の回りの生物](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/science/grade-3.md) [ア(ア)](https://w3id.org/jp-cos/8260233211100000)、[ア(イ)](https://w3id.org/jp-cos/8260233211200000)、[ア(ウ)](https://w3id.org/jp-cos/8260233211300000)
+  - 学習指導要領：[B(1) 身の回りの生物](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/science/grade-3.md)：[ア(ア)](https://w3id.org/jp-cos/8260233211100000)、[ア(イ)](https://w3id.org/jp-cos/8260233211200000)、[ア(ウ)](https://w3id.org/jp-cos/8260233211300000)
   - 解説：[３学年の目標及び内容 ２ 第３学年の内容 Ｂ 生命・地球 (1) 身の回りの生物](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/science/commentary/03-01-02-02-01.md)
   - 評価規準：[第3学年の評価規準](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/science/assessment/grade-3.md)
 
@@ -31,7 +31,7 @@
 - **目標**：人の体には骨と筋肉がある。人が体を動かすことができるのは、骨、筋肉の働きによる
 - **子ども向け**：体には骨と筋肉があり、その働きで体を動かせることが分かる
 - **根拠**
-  - 学習指導要領：[B(1) 人の体のつくりと運動](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/science/grade-4.md) [ア(ア)](https://w3id.org/jp-cos/8260243211100000)、[ア(イ)](https://w3id.org/jp-cos/8260243211200000)
+  - 学習指導要領：[B(1) 人の体のつくりと運動](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/science/grade-4.md)：[ア(ア)](https://w3id.org/jp-cos/8260243211100000)、[ア(イ)](https://w3id.org/jp-cos/8260243211200000)
   - 解説：[の目標及び内容 ２ 第４学年の内容 Ｂ 生命・地球 (1) 人の体のつくりと運動](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/science/commentary/03-02-02-02-01.md)
   - 評価規準：[第4学年の評価規準](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/science/assessment/grade-4.md)
 
@@ -42,7 +42,7 @@
 - **子ども向け**：動物の活動や植物の成長が、季節によってちがうことが分かる
 - **前提**：sci-g3-living-things
 - **根拠**
-  - 学習指導要領：[B(2) 季節と生物](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/science/grade-4.md) [ア(ア)](https://w3id.org/jp-cos/8260243221100000)、[ア(イ)](https://w3id.org/jp-cos/8260243221200000)
+  - 学習指導要領：[B(2) 季節と生物](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/science/grade-4.md)：[ア(ア)](https://w3id.org/jp-cos/8260243221100000)、[ア(イ)](https://w3id.org/jp-cos/8260243221200000)
   - 解説：[節第４学年の目標及び内容 ２ 第４学年の内容 Ｂ 生命・地球 (2) 季節と生物](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/science/commentary/03-02-02-02-02.md)
   - 評価規準：[第4学年の評価規準](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/science/assessment/grade-4.md)
 
@@ -55,7 +55,7 @@
 - **子ども向け**：発芽や成長に必要な条件や、花粉がめしべについて実ができることが分かる
 - **前提**：sci-g3-living-things、sci-g4-seasons
 - **根拠**
-  - 学習指導要領：[B(1) 植物の発芽、成長、結実](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/science/grade-5.md) [ア(ア)](https://w3id.org/jp-cos/8260253211100000)、[ア(イ)](https://w3id.org/jp-cos/8260253211200000)、[ア(ウ)](https://w3id.org/jp-cos/8260253211300000)、[ア(エ)](https://w3id.org/jp-cos/8260253211400000)
+  - 学習指導要領：[B(1) 植物の発芽、成長、結実](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/science/grade-5.md)：[ア(ア)](https://w3id.org/jp-cos/8260253211100000)、[ア(イ)](https://w3id.org/jp-cos/8260253211200000)、[ア(ウ)](https://w3id.org/jp-cos/8260253211300000)、[ア(エ)](https://w3id.org/jp-cos/8260253211400000)
   - 解説：[目標及び内容 ２ 第５学年の内容 Ｂ 生命・地球 (1) 植物の発芽，成長，結実](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/science/commentary/03-03-02-02-01.md)
   - 評価規準：[第5学年の評価規準](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/science/assessment/grade-5.md)
 
@@ -66,7 +66,7 @@
 - **子ども向け**：メダカの卵の中の変わり方や、人が母体内で育って生まれることが分かる
 - **前提**：sci-g3-living-things
 - **根拠**
-  - 学習指導要領：[B(2) 動物の誕生](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/science/grade-5.md) [ア(ア)](https://w3id.org/jp-cos/8260253221100000)、[ア(イ)](https://w3id.org/jp-cos/8260253221200000)
+  - 学習指導要領：[B(2) 動物の誕生](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/science/grade-5.md)：[ア(ア)](https://w3id.org/jp-cos/8260253221100000)、[ア(イ)](https://w3id.org/jp-cos/8260253221200000)
   - 解説：[節第５学年の目標及び内容 ２ 第５学年の内容 Ｂ 生命・地球 (2) 動物の誕生](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/science/commentary/03-03-02-02-02.md)
   - 評価規準：[第5学年の評価規準](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/science/assessment/grade-5.md)
 
@@ -79,7 +79,7 @@
 - **子ども向け**：呼吸、消化と吸収、血液の流れなど、体の中の臓器の働きが分かる
 - **前提**：sci-g4-body-movement
 - **根拠**
-  - 学習指導要領：[B(1) 人の体のつくりと働き](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/science/grade-6.md) [ア(ア)](https://w3id.org/jp-cos/8260263211100000)、[ア(イ)](https://w3id.org/jp-cos/8260263211200000)、[ア(ウ)](https://w3id.org/jp-cos/8260263211300000)、[ア(エ)](https://w3id.org/jp-cos/8260263211400000)
+  - 学習指導要領：[B(1) 人の体のつくりと働き](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/science/grade-6.md)：[ア(ア)](https://w3id.org/jp-cos/8260263211100000)、[ア(イ)](https://w3id.org/jp-cos/8260263211200000)、[ア(ウ)](https://w3id.org/jp-cos/8260263211300000)、[ア(エ)](https://w3id.org/jp-cos/8260263211400000)
   - 解説：[の目標及び内容 ２ 第６学年の内容 Ｂ 生命・地球 (1) 人の体のつくりと働き](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/science/commentary/03-04-02-02-01.md)
   - 評価規準：[第6学年の評価規準](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/science/assessment/grade-6.md)
 
@@ -90,7 +90,7 @@
 - **子ども向け**：葉に日光が当たるとでんぷんができることや、水の通り道と蒸散が分かる
 - **前提**：sci-g5-plants
 - **根拠**
-  - 学習指導要領：[B(2) 植物の養分と水の通り道](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/science/grade-6.md) [ア(ア)](https://w3id.org/jp-cos/8260263221100000)、[ア(イ)](https://w3id.org/jp-cos/8260263221200000)
+  - 学習指導要領：[B(2) 植物の養分と水の通り道](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/science/grade-6.md)：[ア(ア)](https://w3id.org/jp-cos/8260263221100000)、[ア(イ)](https://w3id.org/jp-cos/8260263221200000)
   - 解説：[目標及び内容 ２ 第６学年の内容 Ｂ 生命・地球 (2) 植物の養分と水の通り道](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/science/commentary/03-04-02-02-02.md)
   - 評価規準：[第6学年の評価規準](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/science/assessment/grade-6.md)
 
@@ -101,6 +101,6 @@
 - **子ども向け**：生き物は水や空気を通して環境と関わり、食べる・食べられるの関係でつながっていることが分かる
 - **前提**：sci-g6-plant-water、sci-g6-body-functions
 - **根拠**
-  - 学習指導要領：[B(3) 生物と環境](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/science/grade-6.md) [ア(ア)](https://w3id.org/jp-cos/8260263231100000)、[ア(イ)](https://w3id.org/jp-cos/8260263231200000)、[ア(ウ)](https://w3id.org/jp-cos/8260263231300000)
+  - 学習指導要領：[B(3) 生物と環境](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/science/grade-6.md)：[ア(ア)](https://w3id.org/jp-cos/8260263231100000)、[ア(イ)](https://w3id.org/jp-cos/8260263231200000)、[ア(ウ)](https://w3id.org/jp-cos/8260263231300000)
   - 解説：[節第６学年の目標及び内容 ２ 第６学年の内容 Ｂ 生命・地球 (3) 生物と環境](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/science/commentary/03-04-02-02-03.md)
   - 評価規準：[第6学年の評価規準](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/science/assessment/grade-6.md)

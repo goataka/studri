@@ -19,7 +19,7 @@
 - **子ども向け**：市や人々のくらしの様子が、時代とともに変わってきたことを、年表にまとめられる
 - **前提**：soc-g3-local-area
 - **根拠**
-  - 学習指導要領：[(4) 市の様子の移り変わり](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/social-studies/grade-3.md) [ア(ア)](https://w3id.org/jp-cos/8220233411000000)、[ア(イ)](https://w3id.org/jp-cos/8220233412000000)
+  - 学習指導要領：[(4) 市の様子の移り変わり](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/social-studies/grade-3.md)：[ア(ア)](https://w3id.org/jp-cos/8220233411000000)、[ア(イ)](https://w3id.org/jp-cos/8220233412000000)
   - 解説：[第1節第３学年の目標及び内容 ２ 第３学年の内容 (4) 市の様子の移り変わり](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/social-studies/commentary/03-01-02-04.md)
   - 評価規準：[第3学年の評価規準](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/social-studies/assessment/grade-3.md)
 
@@ -32,7 +32,7 @@
 - **子ども向け**：県内の文化財や年中行事が受けつがれてきたことや、地域の発展につくした先人の働きが分かる
 - **前提**：soc-g3-city-history
 - **根拠**
-  - 学習指導要領：[(4) 県内の伝統や文化、先人の働き](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/social-studies/grade-4.md) [ア(ア)](https://w3id.org/jp-cos/8220243411000000)、[ア(イ)](https://w3id.org/jp-cos/8220243412000000)、[ア(ウ)](https://w3id.org/jp-cos/8220243413000000)
+  - 学習指導要領：[(4) 県内の伝統や文化、先人の働き](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/social-studies/grade-4.md)：[ア(ア)](https://w3id.org/jp-cos/8220243411000000)、[ア(イ)](https://w3id.org/jp-cos/8220243412000000)、[ア(ウ)](https://w3id.org/jp-cos/8220243413000000)
   - 解説：[第2節第４学年の目標及び内容 ２ 第４学年の内容 (4) 県内の伝統や文化](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/social-studies/commentary/03-02-02-04.md)
   - 評価規準：[第4学年の評価規準](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/social-studies/assessment/grade-4.md)
 
@@ -45,7 +45,7 @@
 - **子ども向け**：狩りや米づくりのくらしから、大和朝廷による国の統一までの変化が分かる
 - **前提**：soc-g4-traditions
 - **根拠**
-  - 学習指導要領：[(2) 我が国の歴史上の主な事象](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/social-studies/grade-6.md) [ア(ア)](https://w3id.org/jp-cos/8220263211000000)
+  - 学習指導要領：[(2) 我が国の歴史上の主な事象](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/social-studies/grade-6.md)：[ア(ア)](https://w3id.org/jp-cos/8220263211000000)
   - 解説：[4節第６学年の目標及び内容 ２ 第６学年の内容 (2) 我が国の歴史上の主な事象](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/social-studies/commentary/03-04-02-02.md)
   - 評価規準：[第6学年の評価規準](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/social-studies/assessment/grade-6.md)
 
@@ -56,7 +56,7 @@
 - **子ども向け**：大化の改新や大仏づくりから、天皇を中心とした政治ができたことが分かる
 - **前提**：soc-g6-ancient
 - **根拠**
-  - 学習指導要領：[(2) 我が国の歴史上の主な事象](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/social-studies/grade-6.md) [ア(イ)](https://w3id.org/jp-cos/8220263212000000)
+  - 学習指導要領：[(2) 我が国の歴史上の主な事象](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/social-studies/grade-6.md)：[ア(イ)](https://w3id.org/jp-cos/8220263212000000)
   - 解説：[4節第６学年の目標及び内容 ２ 第６学年の内容 (2) 我が国の歴史上の主な事象](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/social-studies/commentary/03-04-02-02.md)
   - 評価規準：[第6学年の評価規準](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/social-studies/assessment/grade-6.md)
 
@@ -67,7 +67,7 @@
 - **子ども向け**：貴族のくらしや文化から、日本風の文化が生まれたことが分かる
 - **前提**：soc-g6-emperor
 - **根拠**
-  - 学習指導要領：[(2) 我が国の歴史上の主な事象](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/social-studies/grade-6.md) [ア(ウ)](https://w3id.org/jp-cos/8220263213000000)
+  - 学習指導要領：[(2) 我が国の歴史上の主な事象](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/social-studies/grade-6.md)：[ア(ウ)](https://w3id.org/jp-cos/8220263213000000)
   - 解説：[4節第６学年の目標及び内容 ２ 第６学年の内容 (2) 我が国の歴史上の主な事象](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/social-studies/commentary/03-04-02-02.md)
   - 評価規準：[第6学年の評価規準](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/social-studies/assessment/grade-6.md)
 
@@ -78,7 +78,7 @@
 - **子ども向け**：源平の戦いや鎌倉幕府、元との戦いから、武士の政治が始まったことが分かる
 - **前提**：soc-g6-heian
 - **根拠**
-  - 学習指導要領：[(2) 我が国の歴史上の主な事象](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/social-studies/grade-6.md) [ア(エ)](https://w3id.org/jp-cos/8220263214000000)
+  - 学習指導要領：[(2) 我が国の歴史上の主な事象](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/social-studies/grade-6.md)：[ア(エ)](https://w3id.org/jp-cos/8220263214000000)
   - 解説：[4節第６学年の目標及び内容 ２ 第６学年の内容 (2) 我が国の歴史上の主な事象](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/social-studies/commentary/03-04-02-02.md)
   - 評価規準：[第6学年の評価規準](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/social-studies/assessment/grade-6.md)
 
@@ -89,7 +89,7 @@
 - **子ども向け**：室町時代の建物や絵から、今のくらしにつながる文化が生まれたことが分かる
 - **前提**：soc-g6-samurai
 - **根拠**
-  - 学習指導要領：[(2) 我が国の歴史上の主な事象](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/social-studies/grade-6.md) [ア(オ)](https://w3id.org/jp-cos/8220263215000000)
+  - 学習指導要領：[(2) 我が国の歴史上の主な事象](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/social-studies/grade-6.md)：[ア(オ)](https://w3id.org/jp-cos/8220263215000000)
   - 解説：[4節第６学年の目標及び内容 ２ 第６学年の内容 (2) 我が国の歴史上の主な事象](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/social-studies/commentary/03-04-02-02.md)
   - 評価規準：[第6学年の評価規準](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/social-studies/assessment/grade-6.md)
 
@@ -100,7 +100,7 @@
 - **子ども向け**：キリスト教の伝来や織田・豊臣の天下統一が分かる
 - **前提**：soc-g6-muromachi
 - **根拠**
-  - 学習指導要領：[(2) 我が国の歴史上の主な事象](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/social-studies/grade-6.md) [ア(カ)](https://w3id.org/jp-cos/8220263216000000)
+  - 学習指導要領：[(2) 我が国の歴史上の主な事象](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/social-studies/grade-6.md)：[ア(カ)](https://w3id.org/jp-cos/8220263216000000)
   - 解説：[4節第６学年の目標及び内容 ２ 第６学年の内容 (2) 我が国の歴史上の主な事象](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/social-studies/commentary/03-04-02-02.md)
   - 評価規準：[第6学年の評価規準](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/social-studies/assessment/grade-6.md)
 
@@ -111,7 +111,7 @@
 - **子ども向け**：江戸幕府の始まりや参勤交代、鎖国、身分制から、武士の政治が安定したことが分かる
 - **前提**：soc-g6-unification
 - **根拠**
-  - 学習指導要領：[(2) 我が国の歴史上の主な事象](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/social-studies/grade-6.md) [ア(キ)](https://w3id.org/jp-cos/8220263217000000)
+  - 学習指導要領：[(2) 我が国の歴史上の主な事象](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/social-studies/grade-6.md)：[ア(キ)](https://w3id.org/jp-cos/8220263217000000)
   - 解説：[4節第６学年の目標及び内容 ２ 第６学年の内容 (2) 我が国の歴史上の主な事象](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/social-studies/commentary/03-04-02-02.md)
   - 評価規準：[第6学年の評価規準](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/social-studies/assessment/grade-6.md)
 
@@ -122,7 +122,7 @@
 - **子ども向け**：歌舞伎や浮世絵、国学や蘭学から、町人の文化と新しい学問が分かる
 - **前提**：soc-g6-edo
 - **根拠**
-  - 学習指導要領：[(2) 我が国の歴史上の主な事象](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/social-studies/grade-6.md) [ア(ク)](https://w3id.org/jp-cos/8220263218000000)
+  - 学習指導要領：[(2) 我が国の歴史上の主な事象](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/social-studies/grade-6.md)：[ア(ク)](https://w3id.org/jp-cos/8220263218000000)
   - 解説：[4節第６学年の目標及び内容 ２ 第６学年の内容 (2) 我が国の歴史上の主な事象](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/social-studies/commentary/03-04-02-02.md)
   - 評価規準：[第6学年の評価規準](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/social-studies/assessment/grade-6.md)
 
@@ -133,7 +133,7 @@
 - **子ども向け**：黒船の来航や明治維新、文明開化で、日本が近代化を進めたことが分かる
 - **前提**：soc-g6-edo-culture
 - **根拠**
-  - 学習指導要領：[(2) 我が国の歴史上の主な事象](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/social-studies/grade-6.md) [ア(ケ)](https://w3id.org/jp-cos/8220263219000000)
+  - 学習指導要領：[(2) 我が国の歴史上の主な事象](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/social-studies/grade-6.md)：[ア(ケ)](https://w3id.org/jp-cos/8220263219000000)
   - 解説：[4節第６学年の目標及び内容 ２ 第６学年の内容 (2) 我が国の歴史上の主な事象](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/social-studies/commentary/03-04-02-02.md)
   - 評価規準：[第6学年の評価規準](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/social-studies/assessment/grade-6.md)
 
@@ -144,7 +144,7 @@
 - **子ども向け**：大日本帝国憲法の発布や日清・日露の戦争、条約改正で、日本の国際的地位が上がったことが分かる
 - **前提**：soc-g6-meiji
 - **根拠**
-  - 学習指導要領：[(2) 我が国の歴史上の主な事象](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/social-studies/grade-6.md) [ア(コ)](https://w3id.org/jp-cos/822026321A000000)
+  - 学習指導要領：[(2) 我が国の歴史上の主な事象](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/social-studies/grade-6.md)：[ア(コ)](https://w3id.org/jp-cos/822026321A000000)
   - 解説：[4節第６学年の目標及び内容 ２ 第６学年の内容 (2) 我が国の歴史上の主な事象](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/social-studies/commentary/03-04-02-02.md)
   - 評価規準：[第6学年の評価規準](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/social-studies/assessment/grade-6.md)
 
@@ -155,7 +155,7 @@
 - **子ども向け**：戦争の時代と、日本国憲法の制定やオリンピック・パラリンピックなど戦後の発展が分かる
 - **前提**：soc-g6-modern
 - **根拠**
-  - 学習指導要領：[(2) 我が国の歴史上の主な事象](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/social-studies/grade-6.md) [ア(サ)](https://w3id.org/jp-cos/822026321B000000)
+  - 学習指導要領：[(2) 我が国の歴史上の主な事象](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/social-studies/grade-6.md)：[ア(サ)](https://w3id.org/jp-cos/822026321B000000)
   - 解説：[4節第６学年の目標及び内容 ２ 第６学年の内容 (2) 我が国の歴史上の主な事象](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/social-studies/commentary/03-04-02-02.md)
   - 評価規準：[第6学年の評価規準](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/social-studies/assessment/grade-6.md)
 
@@ -166,6 +166,6 @@
 - **子ども向け**：遺跡や文化財、地図や年表で調べて、まとめられる
 - **前提**：soc-g3-city-history
 - **根拠**
-  - 学習指導要領：[(2) 我が国の歴史上の主な事象](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/social-studies/grade-6.md) [ア(シ)](https://w3id.org/jp-cos/822026321C000000)
+  - 学習指導要領：[(2) 我が国の歴史上の主な事象](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/social-studies/grade-6.md)：[ア(シ)](https://w3id.org/jp-cos/822026321C000000)
   - 解説：[4節第６学年の目標及び内容 ２ 第６学年の内容 (2) 我が国の歴史上の主な事象](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/social-studies/commentary/03-04-02-02.md)
   - 評価規準：[第6学年の評価規準](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/social-studies/assessment/grade-6.md)

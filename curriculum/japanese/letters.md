@@ -18,7 +18,7 @@
 - **目標**：長音、拗音、促音、撥音などの表記、助詞の「は」、「へ」、「を」の使い方、句読点の打ち方、かぎの使い方を理解して、文や文章の中で使う。平仮名と片仮名を読み、書く。片仮名で書く語の種類を知り、文や文章の中で使う
 - **子ども向け**：のばす音や小さい「っ」「ゃ」の書き方、「は」「へ」「を」、句読点やかぎを正しく使い、平仮名と片仮名を読み書きできる
 - **根拠**
-  - 学習指導要領：[(1) 言葉の特徴や使い方に関する事項](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/japanese/grade-1-2.md) [ウ](https://w3id.org/jp-cos/82102A3113000000)
+  - 学習指導要領：[(1) 言葉の特徴や使い方に関する事項](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/japanese/grade-1-2.md)：[ウ](https://w3id.org/jp-cos/82102A3113000000)
   - 解説：[第1節第１学年及び第２学年の内容 1 〔知識及び技能〕](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/japanese/commentary/03-01-01.md)
   - 評価規準：[第1学年及び第2学年の評価規準](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/japanese/assessment/grade-1-2.md)
 
@@ -29,7 +29,7 @@
 - **子ども向け**：その学年で習う漢字を読み、前の学年までの漢字を文の中で書ける
 - **前提**：jp-letters-g12-kana
 - **根拠**
-  - 学習指導要領：[(1) 言葉の特徴や使い方に関する事項](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/japanese/grade-1-2.md) [エ](https://w3id.org/jp-cos/82102A3114000000)
+  - 学習指導要領：[(1) 言葉の特徴や使い方に関する事項](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/japanese/grade-1-2.md)：[エ](https://w3id.org/jp-cos/82102A3114000000)
   - 解説：[第1節第１学年及び第２学年の内容 1 〔知識及び技能〕](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/japanese/commentary/03-01-01.md)
   - 評価規準：[第1学年及び第2学年の評価規準](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/japanese/assessment/grade-1-2.md)
 
@@ -39,7 +39,7 @@
 - **目標**：姿勢や筆記具の持ち方を正しくして書く。点画の書き方や文字の形に注意しながら、筆順に従って丁寧に書く。点画相互の接し方や交わり方、長短や方向などに注意して、文字を正しく書く
 - **子ども向け**：よい姿勢と正しい持ち方で、筆順に気をつけて、ていねいに字を書ける
 - **根拠**
-  - 学習指導要領：[(3) 我が国の言語文化に関する事項](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/japanese/grade-1-2.md) [(ア)](https://w3id.org/jp-cos/82102A3133100000)、[(イ)](https://w3id.org/jp-cos/82102A3133200000)、[(ウ)](https://w3id.org/jp-cos/82102A3133300000)
+  - 学習指導要領：[(3) 我が国の言語文化に関する事項](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/japanese/grade-1-2.md)：[(ア)](https://w3id.org/jp-cos/82102A3133100000)、[(イ)](https://w3id.org/jp-cos/82102A3133200000)、[(ウ)](https://w3id.org/jp-cos/82102A3133300000)
   - 解説：[第1節第１学年及び第２学年の内容 1 〔知識及び技能〕](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/japanese/commentary/03-01-01.md)
   - 評価規準：[第1学年及び第2学年の評価規準](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/japanese/assessment/grade-1-2.md)
 
@@ -52,7 +52,7 @@
 - **子ども向け**：漢字と仮名をまぜて書き、送り仮名や句読点を正しく使える。ローマ字を読み書きできる
 - **前提**：jp-letters-g12-kana
 - **根拠**
-  - 学習指導要領：[(1) 言葉の特徴や使い方に関する事項](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/japanese/grade-3-4.md) [ウ](https://w3id.org/jp-cos/82102C3113000000)
+  - 学習指導要領：[(1) 言葉の特徴や使い方に関する事項](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/japanese/grade-3-4.md)：[ウ](https://w3id.org/jp-cos/82102C3113000000)
   - 解説：[第2節第３学年及び第４学年の内容 1 〔知識及び技能〕](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/japanese/commentary/03-02-01.md)
   - 評価規準：[第3学年及び第4学年の評価規準](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/japanese/assessment/grade-3-4.md)
 
@@ -63,7 +63,7 @@
 - **子ども向け**：その学年で習う漢字を読み、前の学年までの漢字を文の中で書ける
 - **前提**：jp-letters-g12-kanji
 - **根拠**
-  - 学習指導要領：[(1) 言葉の特徴や使い方に関する事項](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/japanese/grade-3-4.md) [エ](https://w3id.org/jp-cos/82102C3114000000)
+  - 学習指導要領：[(1) 言葉の特徴や使い方に関する事項](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/japanese/grade-3-4.md)：[エ](https://w3id.org/jp-cos/82102C3114000000)
   - 解説：[第2節第３学年及び第４学年の内容 1 〔知識及び技能〕](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/japanese/commentary/03-02-01.md)
   - 評価規準：[第3学年及び第4学年の評価規準](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/japanese/assessment/grade-3-4.md)
 
@@ -74,7 +74,7 @@
 - **子ども向け**：漢字が「へん」や「つくり」などからできていることが分かる
 - **前提**：jp-letters-g12-kanji
 - **根拠**
-  - 学習指導要領：[(3) 我が国の言語文化に関する事項](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/japanese/grade-3-4.md) [ウ](https://w3id.org/jp-cos/82102C3133000000)
+  - 学習指導要領：[(3) 我が国の言語文化に関する事項](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/japanese/grade-3-4.md)：[ウ](https://w3id.org/jp-cos/82102C3133000000)
   - 解説：[第2節第３学年及び第４学年の内容 1 〔知識及び技能〕](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/japanese/commentary/03-02-01.md)
   - 評価規準：[第3学年及び第4学年の評価規準](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/japanese/assessment/grade-3-4.md)
 
@@ -85,7 +85,7 @@
 - **子ども向け**：文字の組み立てや大きさに気をつけて書き、毛筆で点や画を書ける
 - **前提**：jp-letters-g12-writing
 - **根拠**
-  - 学習指導要領：[(3) 我が国の言語文化に関する事項](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/japanese/grade-3-4.md) [(ア)](https://w3id.org/jp-cos/82102C3134100000)、[(イ)](https://w3id.org/jp-cos/82102C3134200000)、[(ウ)](https://w3id.org/jp-cos/82102C3134300000)
+  - 学習指導要領：[(3) 我が国の言語文化に関する事項](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/japanese/grade-3-4.md)：[(ア)](https://w3id.org/jp-cos/82102C3134100000)、[(イ)](https://w3id.org/jp-cos/82102C3134200000)、[(ウ)](https://w3id.org/jp-cos/82102C3134300000)
   - 解説：[第2節第３学年及び第４学年の内容 1 〔知識及び技能〕](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/japanese/commentary/03-02-01.md)
   - 評価規準：[第3学年及び第4学年の評価規準](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/japanese/assessment/grade-3-4.md)
 
@@ -98,7 +98,7 @@
 - **子ども向け**：漢字と仮名を使い分け、送り仮名や仮名づかいに気をつけて正しく書ける
 - **前提**：jp-letters-g34-notation
 - **根拠**
-  - 学習指導要領：[(1) 言葉の特徴や使い方に関する事項](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/japanese/grade-5-6.md) [ウ](https://w3id.org/jp-cos/82102D3113000000)
+  - 学習指導要領：[(1) 言葉の特徴や使い方に関する事項](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/japanese/grade-5-6.md)：[ウ](https://w3id.org/jp-cos/82102D3113000000)
   - 解説：[第3節第５学年及び第６学年の内容 1 〔知識及び技能〕](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/japanese/commentary/03-03-01.md)
   - 評価規準：[第5学年及び第6学年の評価規準](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/japanese/assessment/grade-5-6-1.md)
 
@@ -109,7 +109,7 @@
 - **子ども向け**：その学年で習う漢字を読み、前の学年までの漢字を文の中で書ける
 - **前提**：jp-letters-g34-kanji
 - **根拠**
-  - 学習指導要領：[(1) 言葉の特徴や使い方に関する事項](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/japanese/grade-5-6.md) [エ](https://w3id.org/jp-cos/82102D3114000000)
+  - 学習指導要領：[(1) 言葉の特徴や使い方に関する事項](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/japanese/grade-5-6.md)：[エ](https://w3id.org/jp-cos/82102D3114000000)
   - 解説：[第3節第５学年及び第６学年の内容 1 〔知識及び技能〕](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/japanese/commentary/03-03-01.md)
   - 評価規準：[第5学年及び第6学年の評価規準](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/japanese/assessment/grade-5-6-1.md)
 
@@ -120,6 +120,6 @@
 - **子ども向け**：紙全体に合わせて字の大きさや並びを決め、目的に合った筆記具で書ける
 - **前提**：jp-letters-g34-writing
 - **根拠**
-  - 学習指導要領：[(3) 我が国の言語文化に関する事項](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/japanese/grade-5-6.md) [(ア)](https://w3id.org/jp-cos/82102D3134100000)、[(イ)](https://w3id.org/jp-cos/82102D3134200000)、[(ウ)](https://w3id.org/jp-cos/82102D3134300000)
+  - 学習指導要領：[(3) 我が国の言語文化に関する事項](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/japanese/grade-5-6.md)：[(ア)](https://w3id.org/jp-cos/82102D3134100000)、[(イ)](https://w3id.org/jp-cos/82102D3134200000)、[(ウ)](https://w3id.org/jp-cos/82102D3134300000)
   - 解説：[第3節第５学年及び第６学年の内容 1 〔知識及び技能〕](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/japanese/commentary/03-03-01.md)
   - 評価規準：[第5学年及び第6学年の評価規準](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/japanese/assessment/grade-5-6-1.md)

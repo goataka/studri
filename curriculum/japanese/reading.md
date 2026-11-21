@@ -19,7 +19,7 @@
 - **子ども向け**：時間やことがらの順序を考えながら、書いてあることの大体が分かる
 - **前提**：jp-info-g12-relation
 - **根拠**
-  - 学習指導要領：[C(1) 読むことに関する事項](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/japanese/grade-1-2.md) [ア](https://w3id.org/jp-cos/82102A3231100000)
+  - 学習指導要領：[C(1) 読むことに関する事項](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/japanese/grade-1-2.md)：[ア](https://w3id.org/jp-cos/82102A3231100000)
   - 解説：[第1節第１学年及び第２学年の内容 2 〔思考力，判断力，表現力等〕 Ｃ 読むこと](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/japanese/commentary/03-01-02-03.md)
   - 評価規準：[第1学年及び第2学年の評価規準](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/japanese/assessment/grade-1-2.md)
 
@@ -29,7 +29,7 @@
 - **目標**：場面の様子や登場人物の行動など、内容の大体を捉える
 - **子ども向け**：場面の様子や登場人物のしたことなど、お話の大体が分かる
 - **根拠**
-  - 学習指導要領：[C(1) 読むことに関する事項](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/japanese/grade-1-2.md) [イ](https://w3id.org/jp-cos/82102A3231200000)
+  - 学習指導要領：[C(1) 読むことに関する事項](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/japanese/grade-1-2.md)：[イ](https://w3id.org/jp-cos/82102A3231200000)
   - 解説：[第1節第１学年及び第２学年の内容 2 〔思考力，判断力，表現力等〕 Ｃ 読むこと](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/japanese/commentary/03-01-02-03.md)
   - 評価規準：[第1学年及び第2学年の評価規準](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/japanese/assessment/grade-1-2.md)
 
@@ -40,7 +40,7 @@
 - **子ども向け**：文章の中の大事な言葉や文を選び出せる
 - **前提**：jp-read-g12-order
 - **根拠**
-  - 学習指導要領：[C(1) 読むことに関する事項](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/japanese/grade-1-2.md) [ウ](https://w3id.org/jp-cos/82102A3231300000)
+  - 学習指導要領：[C(1) 読むことに関する事項](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/japanese/grade-1-2.md)：[ウ](https://w3id.org/jp-cos/82102A3231300000)
   - 解説：[第1節第１学年及び第２学年の内容 2 〔思考力，判断力，表現力等〕 Ｃ 読むこと](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/japanese/commentary/03-01-02-03.md)
   - 評価規準：[第1学年及び第2学年の評価規準](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/japanese/assessment/grade-1-2.md)
 
@@ -51,7 +51,7 @@
 - **子ども向け**：場面の様子から、登場人物がしたことを具体的に想像できる
 - **前提**：jp-read-g12-story
 - **根拠**
-  - 学習指導要領：[C(1) 読むことに関する事項](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/japanese/grade-1-2.md) [エ](https://w3id.org/jp-cos/82102A3231400000)
+  - 学習指導要領：[C(1) 読むことに関する事項](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/japanese/grade-1-2.md)：[エ](https://w3id.org/jp-cos/82102A3231400000)
   - 解説：[第1節第１学年及び第２学年の内容 2 〔思考力，判断力，表現力等〕 Ｃ 読むこと](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/japanese/commentary/03-01-02-03.md)
   - 評価規準：[第1学年及び第2学年の評価規準](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/japanese/assessment/grade-1-2.md)
 
@@ -61,7 +61,7 @@
 - **目標**：文章の内容と自分の体験とを結び付けて、感想をもつ
 - **子ども向け**：書いてあることと自分の経験を結び付けて、感想をもてる
 - **根拠**
-  - 学習指導要領：[C(1) 読むことに関する事項](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/japanese/grade-1-2.md) [オ](https://w3id.org/jp-cos/82102A3231500000)
+  - 学習指導要領：[C(1) 読むことに関する事項](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/japanese/grade-1-2.md)：[オ](https://w3id.org/jp-cos/82102A3231500000)
   - 解説：[第1節第１学年及び第２学年の内容 2 〔思考力，判断力，表現力等〕 Ｃ 読むこと](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/japanese/commentary/03-01-02-03.md)
   - 評価規準：[第1学年及び第2学年の評価規準](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/japanese/assessment/grade-1-2.md)
 
@@ -72,7 +72,7 @@
 - **子ども向け**：読んで感じたことや分かったことを伝え合える
 - **前提**：jp-read-g12-impression
 - **根拠**
-  - 学習指導要領：[C(1) 読むことに関する事項](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/japanese/grade-1-2.md) [カ](https://w3id.org/jp-cos/82102A3231600000)
+  - 学習指導要領：[C(1) 読むことに関する事項](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/japanese/grade-1-2.md)：[カ](https://w3id.org/jp-cos/82102A3231600000)
   - 解説：[第1節第１学年及び第２学年の内容 2 〔思考力，判断力，表現力等〕 Ｃ 読むこと](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/japanese/commentary/03-01-02-03.md)
   - 評価規準：[第1学年及び第2学年の評価規準](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/japanese/assessment/grade-1-2.md)
 
@@ -85,7 +85,7 @@
 - **子ども向け**：段落どうしの関係に気をつけて、考えとその理由や例をとらえられる
 - **前提**：jp-read-g12-order、jp-info-g34-relation
 - **根拠**
-  - 学習指導要領：[C(1) 読むことに関する事項](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/japanese/grade-3-4.md) [ア](https://w3id.org/jp-cos/82102C3231100000)
+  - 学習指導要領：[C(1) 読むことに関する事項](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/japanese/grade-3-4.md)：[ア](https://w3id.org/jp-cos/82102C3231100000)
   - 解説：[第2節第３学年及び第４学年の内容 2 〔思考力，判断力，表現力等〕 Ｃ 読むこと](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/japanese/commentary/03-02-02-03.md)
   - 評価規準：[第3学年及び第4学年の評価規準](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/japanese/assessment/grade-3-4.md)
 
@@ -96,7 +96,7 @@
 - **子ども向け**：書かれていることを基に、登場人物の行動や気持ちをとらえられる
 - **前提**：jp-read-g12-story
 - **根拠**
-  - 学習指導要領：[C(1) 読むことに関する事項](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/japanese/grade-3-4.md) [イ](https://w3id.org/jp-cos/82102C3231200000)
+  - 学習指導要領：[C(1) 読むことに関する事項](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/japanese/grade-3-4.md)：[イ](https://w3id.org/jp-cos/82102C3231200000)
   - 解説：[第2節第３学年及び第４学年の内容 2 〔思考力，判断力，表現力等〕 Ｃ 読むこと](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/japanese/commentary/03-02-02-03.md)
   - 評価規準：[第3学年及び第4学年の評価規準](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/japanese/assessment/grade-3-4.md)
 
@@ -107,7 +107,7 @@
 - **子ども向け**：目的に合わせて、中心となる言葉や文を見つけて要約できる
 - **前提**：jp-read-g12-key
 - **根拠**
-  - 学習指導要領：[C(1) 読むことに関する事項](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/japanese/grade-3-4.md) [ウ](https://w3id.org/jp-cos/82102C3231300000)
+  - 学習指導要領：[C(1) 読むことに関する事項](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/japanese/grade-3-4.md)：[ウ](https://w3id.org/jp-cos/82102C3231300000)
   - 解説：[第2節第３学年及び第４学年の内容 2 〔思考力，判断力，表現力等〕 Ｃ 読むこと](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/japanese/commentary/03-02-02-03.md)
   - 評価規準：[第3学年及び第4学年の評価規準](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/japanese/assessment/grade-3-4.md)
 
@@ -118,7 +118,7 @@
 - **子ども向け**：場面の移り変わりと結び付けて、登場人物の気持ちの変化や性格を想像できる
 - **前提**：jp-read-g12-imagine、jp-read-g34-feelings
 - **根拠**
-  - 学習指導要領：[C(1) 読むことに関する事項](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/japanese/grade-3-4.md) [エ](https://w3id.org/jp-cos/82102C3231400000)
+  - 学習指導要領：[C(1) 読むことに関する事項](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/japanese/grade-3-4.md)：[エ](https://w3id.org/jp-cos/82102C3231400000)
   - 解説：[第2節第３学年及び第４学年の内容 2 〔思考力，判断力，表現力等〕 Ｃ 読むこと](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/japanese/commentary/03-02-02-03.md)
   - 評価規準：[第3学年及び第4学年の評価規準](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/japanese/assessment/grade-3-4.md)
 
@@ -129,7 +129,7 @@
 - **子ども向け**：読んで分かったことを基に、感想や考えをもてる
 - **前提**：jp-read-g12-impression
 - **根拠**
-  - 学習指導要領：[C(1) 読むことに関する事項](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/japanese/grade-3-4.md) [オ](https://w3id.org/jp-cos/82102C3231500000)
+  - 学習指導要領：[C(1) 読むことに関する事項](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/japanese/grade-3-4.md)：[オ](https://w3id.org/jp-cos/82102C3231500000)
   - 解説：[第2節第３学年及び第４学年の内容 2 〔思考力，判断力，表現力等〕 Ｃ 読むこと](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/japanese/commentary/03-02-02-03.md)
   - 評価規準：[第3学年及び第4学年の評価規準](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/japanese/assessment/grade-3-4.md)
 
@@ -140,7 +140,7 @@
 - **子ども向け**：読んで感じたことを伝え合い、一人一人の感じ方のちがいに気づける
 - **前提**：jp-read-g12-share
 - **根拠**
-  - 学習指導要領：[C(1) 読むことに関する事項](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/japanese/grade-3-4.md) [カ](https://w3id.org/jp-cos/82102C3231600000)
+  - 学習指導要領：[C(1) 読むことに関する事項](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/japanese/grade-3-4.md)：[カ](https://w3id.org/jp-cos/82102C3231600000)
   - 解説：[第2節第３学年及び第４学年の内容 2 〔思考力，判断力，表現力等〕 Ｃ 読むこと](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/japanese/commentary/03-02-02-03.md)
   - 評価規準：[第3学年及び第4学年の評価規準](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/japanese/assessment/grade-3-4.md)
 
@@ -153,7 +153,7 @@
 - **子ども向け**：事実と感想や意見の関係をおさえて、文章全体の組み立てと要旨をとらえられる
 - **前提**：jp-read-g34-reasons、jp-read-g34-summary
 - **根拠**
-  - 学習指導要領：[C(1) 読むことに関する事項](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/japanese/grade-5-6.md) [ア](https://w3id.org/jp-cos/82102D3231100000)
+  - 学習指導要領：[C(1) 読むことに関する事項](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/japanese/grade-5-6.md)：[ア](https://w3id.org/jp-cos/82102D3231100000)
   - 解説：[第3節第５学年及び第６学年の内容 2 〔思考力，判断力，表現力等〕 Ｃ 読むこと](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/japanese/commentary/03-03-02-03.md)
   - 評価規準：[第5学年及び第6学年の評価規準](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/japanese/assessment/grade-5-6-2.md)
 
@@ -164,7 +164,7 @@
 - **子ども向け**：描写を基に、登場人物どうしの関係や心情をとらえられる
 - **前提**：jp-read-g34-feelings
 - **根拠**
-  - 学習指導要領：[C(1) 読むことに関する事項](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/japanese/grade-5-6.md) [イ](https://w3id.org/jp-cos/82102D3231200000)
+  - 学習指導要領：[C(1) 読むことに関する事項](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/japanese/grade-5-6.md)：[イ](https://w3id.org/jp-cos/82102D3231200000)
   - 解説：[第3節第５学年及び第６学年の内容 2 〔思考力，判断力，表現力等〕 Ｃ 読むこと](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/japanese/commentary/03-03-02-03.md)
   - 評価規準：[第5学年及び第6学年の評価規準](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/japanese/assessment/grade-5-6-2.md)
 
@@ -175,7 +175,7 @@
 - **子ども向け**：文章と図表を結び付けて必要な情報を見つけたり、論の進め方を考えたりできる
 - **前提**：jp-read-g34-reasons、jp-info-g56-organize
 - **根拠**
-  - 学習指導要領：[C(1) 読むことに関する事項](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/japanese/grade-5-6.md) [ウ](https://w3id.org/jp-cos/82102D3231300000)
+  - 学習指導要領：[C(1) 読むことに関する事項](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/japanese/grade-5-6.md)：[ウ](https://w3id.org/jp-cos/82102D3231300000)
   - 解説：[第3節第５学年及び第６学年の内容 2 〔思考力，判断力，表現力等〕 Ｃ 読むこと](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/japanese/commentary/03-03-02-03.md)
   - 評価規準：[第5学年及び第6学年の評価規準](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/japanese/assessment/grade-5-6-2.md)
 
@@ -186,7 +186,7 @@
 - **子ども向け**：人物像や物語の全体を想像したり、表現の効果を考えたりできる
 - **前提**：jp-read-g34-imagine、jp-words-g56-expression
 - **根拠**
-  - 学習指導要領：[C(1) 読むことに関する事項](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/japanese/grade-5-6.md) [エ](https://w3id.org/jp-cos/82102D3231400000)
+  - 学習指導要領：[C(1) 読むことに関する事項](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/japanese/grade-5-6.md)：[エ](https://w3id.org/jp-cos/82102D3231400000)
   - 解説：[第3節第５学年及び第６学年の内容 2 〔思考力，判断力，表現力等〕 Ｃ 読むこと](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/japanese/commentary/03-03-02-03.md)
   - 評価規準：[第5学年及び第6学年の評価規準](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/japanese/assessment/grade-5-6-2.md)
 
@@ -197,7 +197,7 @@
 - **子ども向け**：読んで分かったことを基に、自分の考えをまとめられる
 - **前提**：jp-read-g34-opinion
 - **根拠**
-  - 学習指導要領：[C(1) 読むことに関する事項](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/japanese/grade-5-6.md) [オ](https://w3id.org/jp-cos/82102D3231500000)
+  - 学習指導要領：[C(1) 読むことに関する事項](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/japanese/grade-5-6.md)：[オ](https://w3id.org/jp-cos/82102D3231500000)
   - 解説：[第3節第５学年及び第６学年の内容 2 〔思考力，判断力，表現力等〕 Ｃ 読むこと](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/japanese/commentary/03-03-02-03.md)
   - 評価規準：[第5学年及び第6学年の評価規準](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/japanese/assessment/grade-5-6-2.md)
 
@@ -208,6 +208,6 @@
 - **子ども向け**：まとめた意見や感想を伝え合い、自分の考えを広げられる
 - **前提**：jp-read-g34-share
 - **根拠**
-  - 学習指導要領：[C(1) 読むことに関する事項](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/japanese/grade-5-6.md) [カ](https://w3id.org/jp-cos/82102D3231600000)
+  - 学習指導要領：[C(1) 読むことに関する事項](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/japanese/grade-5-6.md)：[カ](https://w3id.org/jp-cos/82102D3231600000)
   - 解説：[第3節第５学年及び第６学年の内容 2 〔思考力，判断力，表現力等〕 Ｃ 読むこと](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/japanese/commentary/03-03-02-03.md)
   - 評価規準：[第5学年及び第6学年の評価規準](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/japanese/assessment/grade-5-6-2.md)

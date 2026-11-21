@@ -18,7 +18,7 @@
 - **目標**：言葉には、事物の内容を表す働きや、経験したことを伝える働きがあることに気付く
 - **子ども向け**：言葉には、ものの名前を表したり、したことを伝えたりする働きがあると分かる
 - **根拠**
-  - 学習指導要領：[(1) 言葉の特徴や使い方に関する事項](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/japanese/grade-1-2.md) [ア](https://w3id.org/jp-cos/82102A3111000000)
+  - 学習指導要領：[(1) 言葉の特徴や使い方に関する事項](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/japanese/grade-1-2.md)：[ア](https://w3id.org/jp-cos/82102A3111000000)
   - 解説：[第1節第１学年及び第２学年の内容 1 〔知識及び技能〕](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/japanese/commentary/03-01-01.md)
   - 評価規準：[第1学年及び第2学年の評価規準](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/japanese/assessment/grade-1-2.md)
 
@@ -28,7 +28,7 @@
 - **目標**：音節と文字との関係、アクセントによる語の意味の違いなどに気付く。姿勢や口形、発声や発音に注意して話す
 - **子ども向け**：音と文字の関係に気づき、姿勢や口の形、声の出し方に気をつけて話せる
 - **根拠**
-  - 学習指導要領：[(1) 言葉の特徴や使い方に関する事項](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/japanese/grade-1-2.md) [イ](https://w3id.org/jp-cos/82102A3112000000)
+  - 学習指導要領：[(1) 言葉の特徴や使い方に関する事項](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/japanese/grade-1-2.md)：[イ](https://w3id.org/jp-cos/82102A3112000000)
   - 解説：[第1節第１学年及び第２学年の内容 1 〔知識及び技能〕](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/japanese/commentary/03-01-01.md)
   - 評価規準：[第1学年及び第2学年の評価規準](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/japanese/assessment/grade-1-2.md)
 
@@ -38,7 +38,7 @@
 - **目標**：身近なことを表す語句の量を増し、話や文章の中で使う。言葉には意味による語句のまとまりがあることに気付き、語彙を豊かにする
 - **子ども向け**：身近なことを表す言葉をふやし、話や文の中で使える
 - **根拠**
-  - 学習指導要領：[(1) 言葉の特徴や使い方に関する事項](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/japanese/grade-1-2.md) [オ](https://w3id.org/jp-cos/82102A3115000000)
+  - 学習指導要領：[(1) 言葉の特徴や使い方に関する事項](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/japanese/grade-1-2.md)：[オ](https://w3id.org/jp-cos/82102A3115000000)
   - 解説：[第1節第１学年及び第２学年の内容 1 〔知識及び技能〕](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/japanese/commentary/03-01-01.md)
   - 評価規準：[第1学年及び第2学年の評価規準](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/japanese/assessment/grade-1-2.md)
 
@@ -48,7 +48,7 @@
 - **目標**：文の中における主語と述語との関係に気付く
 - **子ども向け**：「だれが」「どうした」の関係に気づける
 - **根拠**
-  - 学習指導要領：[(1) 言葉の特徴や使い方に関する事項](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/japanese/grade-1-2.md) [カ](https://w3id.org/jp-cos/82102A3116000000)
+  - 学習指導要領：[(1) 言葉の特徴や使い方に関する事項](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/japanese/grade-1-2.md)：[カ](https://w3id.org/jp-cos/82102A3116000000)
   - 解説：[第1節第１学年及び第２学年の内容 1 〔知識及び技能〕](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/japanese/commentary/03-01-01.md)
   - 評価規準：[第1学年及び第2学年の評価規準](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/japanese/assessment/grade-1-2.md)
 
@@ -58,7 +58,7 @@
 - **目標**：丁寧な言葉と普通の言葉との違いに気を付けて使う。敬体で書かれた文章に慣れる
 - **子ども向け**：ていねいな言葉と普通の言葉のちがいに気をつけて使える
 - **根拠**
-  - 学習指導要領：[(1) 言葉の特徴や使い方に関する事項](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/japanese/grade-1-2.md) [キ](https://w3id.org/jp-cos/82102A3117000000)
+  - 学習指導要領：[(1) 言葉の特徴や使い方に関する事項](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/japanese/grade-1-2.md)：[キ](https://w3id.org/jp-cos/82102A3117000000)
   - 解説：[第1節第１学年及び第２学年の内容 1 〔知識及び技能〕](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/japanese/commentary/03-01-01.md)
   - 評価規準：[第1学年及び第2学年の評価規準](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/japanese/assessment/grade-1-2.md)
 
@@ -69,7 +69,7 @@
 - **子ども向け**：言葉のまとまりや響きに気をつけて音読できる
 - **前提**：jp-letters-g12-kana
 - **根拠**
-  - 学習指導要領：[(1) 言葉の特徴や使い方に関する事項](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/japanese/grade-1-2.md) [ク](https://w3id.org/jp-cos/82102A3118000000)
+  - 学習指導要領：[(1) 言葉の特徴や使い方に関する事項](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/japanese/grade-1-2.md)：[ク](https://w3id.org/jp-cos/82102A3118000000)
   - 解説：[第1節第１学年及び第２学年の内容 1 〔知識及び技能〕](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/japanese/commentary/03-01-01.md)
   - 評価規準：[第1学年及び第2学年の評価規準](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/japanese/assessment/grade-1-2.md)
 
@@ -82,7 +82,7 @@
 - **子ども向け**：言葉には、考えたことや思ったことを表す働きがあると分かる
 - **前提**：jp-words-g12-function
 - **根拠**
-  - 学習指導要領：[(1) 言葉の特徴や使い方に関する事項](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/japanese/grade-3-4.md) [ア](https://w3id.org/jp-cos/82102C3111000000)
+  - 学習指導要領：[(1) 言葉の特徴や使い方に関する事項](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/japanese/grade-3-4.md)：[ア](https://w3id.org/jp-cos/82102C3111000000)
   - 解説：[第2節第３学年及び第４学年の内容 1 〔知識及び技能〕](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/japanese/commentary/03-02-01.md)
   - 評価規準：[第3学年及び第4学年の評価規準](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/japanese/assessment/grade-3-4.md)
 
@@ -93,7 +93,7 @@
 - **子ども向け**：相手を見て話したり聞いたりし、声の高さや強さ、間に気をつけて話せる
 - **前提**：jp-words-g12-voice
 - **根拠**
-  - 学習指導要領：[(1) 言葉の特徴や使い方に関する事項](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/japanese/grade-3-4.md) [イ](https://w3id.org/jp-cos/82102C3112000000)
+  - 学習指導要領：[(1) 言葉の特徴や使い方に関する事項](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/japanese/grade-3-4.md)：[イ](https://w3id.org/jp-cos/82102C3112000000)
   - 解説：[第2節第３学年及び第４学年の内容 1 〔知識及び技能〕](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/japanese/commentary/03-02-01.md)
   - 評価規準：[第3学年及び第4学年の評価規準](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/japanese/assessment/grade-3-4.md)
 
@@ -104,7 +104,7 @@
 - **子ども向け**：様子や気持ちを表す言葉をふやし、言葉のまとまりが分かる
 - **前提**：jp-words-g12-vocabulary
 - **根拠**
-  - 学習指導要領：[(1) 言葉の特徴や使い方に関する事項](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/japanese/grade-3-4.md) [オ](https://w3id.org/jp-cos/82102C3115000000)
+  - 学習指導要領：[(1) 言葉の特徴や使い方に関する事項](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/japanese/grade-3-4.md)：[オ](https://w3id.org/jp-cos/82102C3115000000)
   - 解説：[第2節第３学年及び第４学年の内容 1 〔知識及び技能〕](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/japanese/commentary/03-02-01.md)
   - 評価規準：[第3学年及び第4学年の評価規準](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/japanese/assessment/grade-3-4.md)
 
@@ -115,7 +115,7 @@
 - **子ども向け**：主語と述語、修飾語、こそあど言葉やつなぎ言葉、段落の役割が分かる
 - **前提**：jp-words-g12-subject
 - **根拠**
-  - 学習指導要領：[(1) 言葉の特徴や使い方に関する事項](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/japanese/grade-3-4.md) [カ](https://w3id.org/jp-cos/82102C3116000000)
+  - 学習指導要領：[(1) 言葉の特徴や使い方に関する事項](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/japanese/grade-3-4.md)：[カ](https://w3id.org/jp-cos/82102C3116000000)
   - 解説：[第2節第３学年及び第４学年の内容 1 〔知識及び技能〕](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/japanese/commentary/03-02-01.md)
   - 評価規準：[第3学年及び第4学年の評価規準](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/japanese/assessment/grade-3-4.md)
 
@@ -126,7 +126,7 @@
 - **子ども向け**：ていねいな言葉を使い、「です・ます」と「だ・である」のちがいに気をつけて書ける
 - **前提**：jp-words-g12-polite
 - **根拠**
-  - 学習指導要領：[(1) 言葉の特徴や使い方に関する事項](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/japanese/grade-3-4.md) [キ](https://w3id.org/jp-cos/82102C3117000000)
+  - 学習指導要領：[(1) 言葉の特徴や使い方に関する事項](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/japanese/grade-3-4.md)：[キ](https://w3id.org/jp-cos/82102C3117000000)
   - 解説：[第2節第３学年及び第４学年の内容 1 〔知識及び技能〕](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/japanese/commentary/03-02-01.md)
   - 評価規準：[第3学年及び第4学年の評価規準](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/japanese/assessment/grade-3-4.md)
 
@@ -137,7 +137,7 @@
 - **子ども向け**：文章全体の組み立てや内容を考えながら音読できる
 - **前提**：jp-words-g12-read-aloud
 - **根拠**
-  - 学習指導要領：[(1) 言葉の特徴や使い方に関する事項](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/japanese/grade-3-4.md) [ク](https://w3id.org/jp-cos/82102C3118000000)
+  - 学習指導要領：[(1) 言葉の特徴や使い方に関する事項](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/japanese/grade-3-4.md)：[ク](https://w3id.org/jp-cos/82102C3118000000)
   - 解説：[第2節第３学年及び第４学年の内容 1 〔知識及び技能〕](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/japanese/commentary/03-02-01.md)
   - 評価規準：[第3学年及び第4学年の評価規準](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/japanese/assessment/grade-3-4.md)
 
@@ -150,7 +150,7 @@
 - **子ども向け**：言葉には、相手とのつながりをつくる働きがあると分かる
 - **前提**：jp-words-g34-function
 - **根拠**
-  - 学習指導要領：[(1) 言葉の特徴や使い方に関する事項](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/japanese/grade-5-6.md) [ア](https://w3id.org/jp-cos/82102D3111000000)
+  - 学習指導要領：[(1) 言葉の特徴や使い方に関する事項](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/japanese/grade-5-6.md)：[ア](https://w3id.org/jp-cos/82102D3111000000)
   - 解説：[第3節第５学年及び第６学年の内容 1 〔知識及び技能〕](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/japanese/commentary/03-03-01.md)
   - 評価規準：[第5学年及び第6学年の評価規準](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/japanese/assessment/grade-5-6-1.md)
 
@@ -161,7 +161,7 @@
 - **子ども向け**：話し言葉と書き言葉のちがいに気づける
 - **前提**：jp-words-g34-voice
 - **根拠**
-  - 学習指導要領：[(1) 言葉の特徴や使い方に関する事項](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/japanese/grade-5-6.md) [イ](https://w3id.org/jp-cos/82102D3112000000)
+  - 学習指導要領：[(1) 言葉の特徴や使い方に関する事項](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/japanese/grade-5-6.md)：[イ](https://w3id.org/jp-cos/82102D3112000000)
   - 解説：[第3節第５学年及び第６学年の内容 1 〔知識及び技能〕](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/japanese/commentary/03-03-01.md)
   - 評価規準：[第5学年及び第6学年の評価規準](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/japanese/assessment/grade-5-6-1.md)
 
@@ -172,7 +172,7 @@
 - **子ども向け**：考えを表す言葉をふやし、言葉の関係や成り立ちが分かる
 - **前提**：jp-words-g34-vocabulary
 - **根拠**
-  - 学習指導要領：[(1) 言葉の特徴や使い方に関する事項](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/japanese/grade-5-6.md) [オ](https://w3id.org/jp-cos/82102D3115000000)
+  - 学習指導要領：[(1) 言葉の特徴や使い方に関する事項](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/japanese/grade-5-6.md)：[オ](https://w3id.org/jp-cos/82102D3115000000)
   - 解説：[第3節第５学年及び第６学年の内容 1 〔知識及び技能〕](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/japanese/commentary/03-03-01.md)
   - 評価規準：[第5学年及び第6学年の評価規準](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/japanese/assessment/grade-5-6-1.md)
 
@@ -183,7 +183,7 @@
 - **子ども向け**：言葉のかかり方や語順、文のつながり、文章の組み立てや種類が分かる
 - **前提**：jp-words-g34-sentence
 - **根拠**
-  - 学習指導要領：[(1) 言葉の特徴や使い方に関する事項](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/japanese/grade-5-6.md) [カ](https://w3id.org/jp-cos/82102D3116000000)
+  - 学習指導要領：[(1) 言葉の特徴や使い方に関する事項](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/japanese/grade-5-6.md)：[カ](https://w3id.org/jp-cos/82102D3116000000)
   - 解説：[第3節第５学年及び第６学年の内容 1 〔知識及び技能〕](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/japanese/commentary/03-03-01.md)
   - 評価規準：[第5学年及び第6学年の評価規準](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/japanese/assessment/grade-5-6-1.md)
 
@@ -194,7 +194,7 @@
 - **子ども向け**：よく使われる敬語が分かり、使える
 - **前提**：jp-words-g34-polite
 - **根拠**
-  - 学習指導要領：[(1) 言葉の特徴や使い方に関する事項](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/japanese/grade-5-6.md) [キ](https://w3id.org/jp-cos/82102D3117000000)
+  - 学習指導要領：[(1) 言葉の特徴や使い方に関する事項](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/japanese/grade-5-6.md)：[キ](https://w3id.org/jp-cos/82102D3117000000)
   - 解説：[第3節第５学年及び第６学年の内容 1 〔知識及び技能〕](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/japanese/commentary/03-03-01.md)
   - 評価規準：[第5学年及び第6学年の評価規準](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/japanese/assessment/grade-5-6-1.md)
 
@@ -205,7 +205,7 @@
 - **子ども向け**：たとえや繰り返しなどの表現の工夫に気づける
 - **前提**：jp-words-g34-vocabulary
 - **根拠**
-  - 学習指導要領：[(1) 言葉の特徴や使い方に関する事項](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/japanese/grade-5-6.md) [ク](https://w3id.org/jp-cos/82102D3118000000)
+  - 学習指導要領：[(1) 言葉の特徴や使い方に関する事項](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/japanese/grade-5-6.md)：[ク](https://w3id.org/jp-cos/82102D3118000000)
   - 解説：[第3節第５学年及び第６学年の内容 1 〔知識及び技能〕](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/japanese/commentary/03-03-01.md)
   - 評価規準：[第5学年及び第6学年の評価規準](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/japanese/assessment/grade-5-6-1.md)
 
@@ -216,6 +216,6 @@
 - **子ども向け**：文章を音読したり朗読したりできる
 - **前提**：jp-words-g34-read-aloud
 - **根拠**
-  - 学習指導要領：[(1) 言葉の特徴や使い方に関する事項](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/japanese/grade-5-6.md) [ケ](https://w3id.org/jp-cos/82102D3119000000)
+  - 学習指導要領：[(1) 言葉の特徴や使い方に関する事項](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/japanese/grade-5-6.md)：[ケ](https://w3id.org/jp-cos/82102D3119000000)
   - 解説：[第3節第５学年及び第６学年の内容 1 〔知識及び技能〕](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/japanese/commentary/03-03-01.md)
   - 評価規準：[第5学年及び第6学年の評価規準](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/japanese/assessment/grade-5-6-1.md)
