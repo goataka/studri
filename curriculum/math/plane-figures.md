@@ -23,7 +23,7 @@
 - **根拠**
   - 学習指導要領：第1学年 B(1) 身の回りにあるものの形 [ア(ア)](https://w3id.org/jp-cos/8250213211100000)、[ア(イ)](https://w3id.org/jp-cos/8250213211200000)
   - 解説：[第1学年 B(1) 身の回りにあるものの形](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/commentary/03-01-02-02-01.md)
-  - 評価規準：第1学年 (1)「図形についての理解の基礎」
+  - 評価規準：[第1学年 (1)「図形についての理解の基礎」](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/assessment/grade-1.md)
 
 ### plane-g1-position：位置を表すことば
 
@@ -33,7 +33,7 @@
 - **根拠**
   - 学習指導要領：第1学年 B(1) 身の回りにあるものの形 [ア(ウ)](https://w3id.org/jp-cos/8250213211300000)
   - 解説：[第1学年 B(1) 身の回りにあるものの形](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/commentary/03-01-02-02-01.md)
-  - 評価規準：第1学年 (1)「図形についての理解の基礎」
+  - 評価規準：[第1学年 (1)「図形についての理解の基礎」](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/assessment/grade-1.md)
 
 ## 第2学年
 
@@ -46,7 +46,7 @@
 - **根拠**
   - 学習指導要領：第2学年 B(1) 図形 [ア(ア)](https://w3id.org/jp-cos/8250223211100000)
   - 解説：[第2学年 B(1) 図形](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/commentary/03-02-02-02-01.md)
-  - 評価規準：第2学年 (1)「三角形や四角形などの図形」
+  - 評価規準：[第2学年 (1)「三角形や四角形などの図形」](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/assessment/grade-2.md)
 
 ### plane-g2-square-rect：正方形・長方形・直角三角形
 
@@ -57,7 +57,7 @@
 - **根拠**
   - 学習指導要領：第2学年 B(1) 図形 [ア(イ)](https://w3id.org/jp-cos/8250223211200000)
   - 解説：[第2学年 B(1) 図形](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/commentary/03-02-02-02-01.md)
-  - 評価規準：第2学年 (1)「三角形や四角形などの図形」
+  - 評価規準：[第2学年 (1)「三角形や四角形などの図形」](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/assessment/grade-2.md)
 
 ## 第3学年
 
@@ -70,7 +70,7 @@
 - **根拠**
   - 学習指導要領：第3学年 B(1) 図形 [ア(ア)](https://w3id.org/jp-cos/8250233211100000)
   - 解説：[第3学年 B(1) 図形](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/commentary/03-03-02-02-01.md)
-  - 評価規準：第3学年 (1)「二等辺三角形，正三角形などの図形」
+  - 評価規準：[第3学年 (1)「二等辺三角形，正三角形などの図形」](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/assessment/grade-3.md)
 
 ### plane-g3-angle：角
 
@@ -81,7 +81,7 @@
 - **根拠**
   - 学習指導要領：第3学年 B(1) 図形 [ア(イ)](https://w3id.org/jp-cos/8250233211200000)
   - 解説：[第3学年 B(1) 図形](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/commentary/03-03-02-02-01.md)
-  - 評価規準：第3学年 (1)「二等辺三角形，正三角形などの図形」
+  - 評価規準：[第3学年 (1)「二等辺三角形，正三角形などの図形」](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/assessment/grade-3.md)
 
 ### plane-g3-circle：円と球
 
@@ -92,7 +92,7 @@
 - **根拠**
   - 学習指導要領：第3学年 B(1) 図形 [ア(ウ)](https://w3id.org/jp-cos/8250233211300000)
   - 解説：[第3学年 B(1) 図形](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/commentary/03-03-02-02-01.md)
-  - 評価規準：第3学年 (1)「二等辺三角形，正三角形などの図形」
+  - 評価規準：[第3学年 (1)「二等辺三角形，正三角形などの図形」](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/assessment/grade-3.md)
 
 ## 第4学年
 
@@ -105,7 +105,7 @@
 - **根拠**
   - 学習指導要領：第4学年 B(1) 平面図形 [ア(ア)](https://w3id.org/jp-cos/8250243211100000)
   - 解説：[第4学年 B(1) 平面図形](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/commentary/03-04-02-02-01.md)
-  - 評価規準：第4学年 (1)「平行四辺形，ひし形，台形などの平面図形」
+  - 評価規準：[第4学年 (1)「平行四辺形，ひし形，台形などの平面図形」](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/assessment/grade-4.md)
 
 ### plane-g4-quadrilaterals：平行四辺形・ひし形・台形
 
@@ -116,7 +116,7 @@
 - **根拠**
   - 学習指導要領：第4学年 B(1) 平面図形 [ア(イ)](https://w3id.org/jp-cos/8250243211200000)
   - 解説：[第4学年 B(1) 平面図形](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/commentary/03-04-02-02-01.md)
-  - 評価規準：第4学年 (1)「平行四辺形，ひし形，台形などの平面図形」
+  - 評価規準：[第4学年 (1)「平行四辺形，ひし形，台形などの平面図形」](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/assessment/grade-4.md)
 
 ### plane-g4-angle-measure：角の大きさ
 
@@ -127,7 +127,7 @@
 - **根拠**
   - 学習指導要領：第4学年 B(5) 角の大きさ [ア(ア)](https://w3id.org/jp-cos/8250243251100000)、[ア(イ)](https://w3id.org/jp-cos/8250243251200000)
   - 解説：[第4学年 B(5) 角の大きさ](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/commentary/03-04-02-02-05.md)
-  - 評価規準：第4学年 (5)「角の大きさ」
+  - 評価規準：[第4学年 (5)「角の大きさ」](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/assessment/grade-4.md)
 
 ## 第5学年
 
@@ -140,7 +140,7 @@
 - **根拠**
   - 学習指導要領：第5学年 B(1) 平面図形 [ア(ア)](https://w3id.org/jp-cos/8250253211100000)
   - 解説：[第5学年 B(1) 平面図形](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/commentary/03-05-02-02-01.md)
-  - 評価規準：第5学年 (1)「平面図形の性質」
+  - 評価規準：[第5学年 (1)「平面図形の性質」](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/assessment/grade-5.md)
 
 ### plane-g5-polygon-angles：多角形の角の大きさの和
 
@@ -151,7 +151,7 @@
 - **根拠**
   - 学習指導要領：第5学年 B(1) 平面図形 [ア(イ)](https://w3id.org/jp-cos/8250253211200000)
   - 解説：[第5学年 B(1) 平面図形](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/commentary/03-05-02-02-01.md)
-  - 評価規準：第5学年 (1)「平面図形の性質」
+  - 評価規準：[第5学年 (1)「平面図形の性質」](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/assessment/grade-5.md)
 
 ### plane-g5-regular-polygon：正多角形
 
@@ -162,7 +162,7 @@
 - **根拠**
   - 学習指導要領：第5学年 B(1) 平面図形 [ア(ウ)](https://w3id.org/jp-cos/8250253211300000)
   - 解説：[第5学年 B(1) 平面図形](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/commentary/03-05-02-02-01.md)
-  - 評価規準：第5学年 (1)「平面図形の性質」
+  - 評価規準：[第5学年 (1)「平面図形の性質」](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/assessment/grade-5.md)
 
 ### plane-g5-pi：円周と円周率
 
@@ -173,7 +173,7 @@
 - **根拠**
   - 学習指導要領：第5学年 B(1) 平面図形 [ア(エ)](https://w3id.org/jp-cos/8250253211400000)
   - 解説：[第5学年 B(1) 平面図形](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/commentary/03-05-02-02-01.md)
-  - 評価規準：第5学年 (1)「平面図形の性質」
+  - 評価規準：[第5学年 (1)「平面図形の性質」](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/assessment/grade-5.md)
 
 ## 第6学年
 
@@ -186,7 +186,7 @@
 - **根拠**
   - 学習指導要領：第6学年 B(1) 平面図形 [ア(ア)](https://w3id.org/jp-cos/8250263211100000)
   - 解説：[第6学年 B(1) 平面図形](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/commentary/03-06-02-02-01.md)
-  - 評価規準：第6学年 (1)「縮図や拡大図，対称な図形」
+  - 評価規準：[第6学年 (1)「縮図や拡大図，対称な図形」](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/assessment/grade-6.md)
 
 ### plane-g6-symmetry：対称な図形
 
@@ -197,4 +197,4 @@
 - **根拠**
   - 学習指導要領：第6学年 B(1) 平面図形 [ア(イ)](https://w3id.org/jp-cos/8250263211200000)
   - 解説：[第6学年 B(1) 平面図形](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/commentary/03-06-02-02-01.md)
-  - 評価規準：第6学年 (1)「縮図や拡大図，対称な図形」
+  - 評価規準：[第6学年 (1)「縮図や拡大図，対称な図形」](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/assessment/grade-6.md)

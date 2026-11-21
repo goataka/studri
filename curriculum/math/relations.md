@@ -21,7 +21,7 @@
 - **根拠**
   - 学習指導要領：第4学年 C(1) 伴って変わる二つの数量 [ア(ア)](https://w3id.org/jp-cos/8250243311100000)
   - 解説：[第4学年 C(1) 伴って変わる二つの数量](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/commentary/03-04-02-03-01.md)
-  - 評価規準：第4学年 (1)「伴って変わる二つの数量」
+  - 評価規準：[第4学年 (1)「伴って変わる二つの数量」](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/assessment/grade-4.md)
 
 ### rel-g4-ratio-simple：かんたんな割合
 
@@ -32,7 +32,7 @@
 - **根拠**
   - 学習指導要領：第4学年 C(2) 二つの数量の関係 [ア(ア)](https://w3id.org/jp-cos/8250243321100000)
   - 解説：[第4学年 C(2) 二つの数量の関係](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/commentary/03-04-02-03-02.md)
-  - 評価規準：第4学年 (2)「簡単な場合についての割合」
+  - 評価規準：[第4学年 (2)「簡単な場合についての割合」](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/assessment/grade-4.md)
 
 ## 第5学年
 
@@ -45,7 +45,7 @@
 - **根拠**
   - 学習指導要領：第5学年 C(1) 伴って変わる二つの数量 [ア(ア)](https://w3id.org/jp-cos/8250253311100000)
   - 解説：[第5学年 C(1) 伴って変わる二つの数量](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/commentary/03-05-02-03-01.md)
-  - 評価規準：第5学年 (1)「伴って変わる二つの数量の関係」
+  - 評価規準：[第5学年 (1)「伴って変わる二つの数量の関係」](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/assessment/grade-5.md)
 
 ### rel-g5-per-unit：単位量あたりの大きさと速さ
 
@@ -56,7 +56,7 @@
 - **根拠**
   - 学習指導要領：第5学年 C(2) 異種の二つの量の割合として捉えられる数量 [ア(ア)](https://w3id.org/jp-cos/8250253321100000)
   - 解説：[第5学年 C(2) 異種の二つの量の割合として捉えられる数量](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/commentary/03-05-02-03-02.md)
-  - 評価規準：第5学年 (2)「異種の二つの量の割合」
+  - 評価規準：[第5学年 (2)「異種の二つの量の割合」](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/assessment/grade-5.md)
 
 ### rel-g5-ratio：割合
 
@@ -67,7 +67,7 @@
 - **根拠**
   - 学習指導要領：第5学年 C(3) 二つの数量の関係 [ア(ア)](https://w3id.org/jp-cos/8250253331100000)
   - 解説：[第5学年 C(3) 二つの数量の関係](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/commentary/03-05-02-03-03.md)
-  - 評価規準：第5学年 (3)「割合」
+  - 評価規準：[第5学年 (3)「割合」](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/assessment/grade-5.md)
 
 ### rel-g5-percent：百分率と歩合
 
@@ -78,7 +78,7 @@
 - **根拠**
   - 学習指導要領：第5学年 C(3) 二つの数量の関係 [ア(イ)](https://w3id.org/jp-cos/8250253331200000)
   - 解説：[第5学年 C(3) 二つの数量の関係](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/commentary/03-05-02-03-03.md)
-  - 評価規準：第5学年 (3)「割合」
+  - 評価規準：[第5学年 (3)「割合」](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/assessment/grade-5.md)
 
 ## 第6学年
 
@@ -91,7 +91,7 @@
 - **根拠**
   - 学習指導要領：第6学年 C(1) 伴って変わる二つの数量 [ア(ア)](https://w3id.org/jp-cos/8250263311100000)、[ア(イ)](https://w3id.org/jp-cos/8250263311200000)
   - 解説：[第6学年 C(1) 伴って変わる二つの数量](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/commentary/03-06-02-03-01.md)
-  - 評価規準：第6学年 (1)「比例」
+  - 評価規準：[第6学年 (1)「比例」](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/assessment/grade-6.md)
 
 ### rel-g6-inverse：反比例
 
@@ -102,7 +102,7 @@
 - **根拠**
   - 学習指導要領：第6学年 C(1) 伴って変わる二つの数量 [ア(ウ)](https://w3id.org/jp-cos/8250263311300000)
   - 解説：[第6学年 C(1) 伴って変わる二つの数量](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/commentary/03-06-02-03-01.md)
-  - 評価規準：第6学年 (1)「比例」
+  - 評価規準：[第6学年 (1)「比例」](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/assessment/grade-6.md)
 
 ### rel-g6-ratio：比
 
@@ -113,4 +113,4 @@
 - **根拠**
   - 学習指導要領：第6学年 C(2) 二つの数量の関係 [ア(ア)](https://w3id.org/jp-cos/8250263321100000)
   - 解説：[第6学年 C(2) 二つの数量の関係](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/commentary/03-06-02-03-02.md)
-  - 評価規準：第6学年 (2)「比」
+  - 評価規準：[第6学年 (2)「比」](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/assessment/grade-6.md)

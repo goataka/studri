@@ -24,7 +24,7 @@
 - **根拠**
   - 学習指導要領：[第3学年 A(4) ア(ア)](https://w3id.org/jp-cos/8250233141100000)
   - 解説：[第3学年 A(4) ア 除法が用いられる場合とその意味](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/commentary/03-03-02-01-04.md)
-  - 評価規準：第3学年 (4)「除法」知識・技能
+  - 評価規準：[第3学年 (4)「除法」](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/assessment/grade-3.md)知識・技能
 - **コース**：`g3-meaning-story`
 
 ### div-g3-expression：わり算の式
@@ -36,7 +36,7 @@
 - **根拠**
   - 学習指導要領：[第3学年 A(4) ア(イ)](https://w3id.org/jp-cos/8250233141200000)
   - 解説：[第3学年 A(4) イ 除法の式](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/commentary/03-03-02-01-04.md)
-  - 評価規準：第3学年 (4)「除法」知識・技能
+  - 評価規準：[第3学年 (4)「除法」](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/assessment/grade-3.md)知識・技能
 - **コース**：`g3-exact-story`
 
 ### div-g3-relation：かけ算やひき算とのつながり
@@ -48,7 +48,7 @@
 - **根拠**
   - 学習指導要領：[第3学年 A(4) ア(ウ)](https://w3id.org/jp-cos/8250233141300000)
   - 解説：[第3学年 A(4) ウ 除法と乗法，減法との関係](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/commentary/03-03-02-01-04.md)
-  - 評価規準：第3学年 (4)「除法」思考・判断・表現
+  - 評価規準：[第3学年 (4)「除法」](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/assessment/grade-3.md)思考・判断・表現
 
 ### div-g3-basic：九九1回で答えが出るわり算
 
@@ -59,7 +59,7 @@
 - **根拠**
   - 学習指導要領：[第3学年 A(4) ア(エ)](https://w3id.org/jp-cos/8250233141400000)
   - 解説：[第3学年 A(4) エ 除数と商が１位数の場合の除法の計算](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/commentary/03-03-02-01-04.md)
-  - 評価規準：第3学年 (4)「除法」知識・技能
+  - 評価規準：[第3学年 (4)「除法」](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/assessment/grade-3.md)知識・技能
 - **コース**：`g3-one-digit-exact`、`g3-two-digit-exact`
 
 ### div-g3-remainder：あまりのあるわり算
@@ -71,7 +71,7 @@
 - **根拠**
   - 学習指導要領：[第3学年 A(4) ア(ア)](https://w3id.org/jp-cos/8250233141100000)
   - 解説：[第3学年 A(4) ア](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/commentary/03-03-02-01-04.md)
-  - 評価規準：第3学年 (4)「除法」知識・技能
+  - 評価規準：[第3学年 (4)「除法」](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/assessment/grade-3.md)知識・技能
 - **コース**：`g3-one-digit-remainder`、`g3-two-digit-remainder`
 
 ### div-g3-remainder-life：あまりの考え方
@@ -83,7 +83,7 @@
 - **根拠**
   - 学習指導要領：[第3学年 A(4) イ(イ)](https://w3id.org/jp-cos/8250233142200000)
   - 解説：[第3学年 A(4) イ 数量の関係に着目し，計算を日常生活に生かすこと](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/commentary/03-03-02-01-04.md)
-  - 評価規準：第3学年 (4)「除法」思考・判断・表現
+  - 評価規準：[第3学年 (4)「除法」](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/assessment/grade-3.md)思考・判断・表現
 - **コース**：`g3-remainder-story`
 
 ### div-g3-two-digit-quotient：答えが2けたになる簡単なわり算
@@ -96,7 +96,7 @@
 - **根拠**
   - 学習指導要領：[第3学年 A(4) ア(オ)](https://w3id.org/jp-cos/8250233141500000)
   - 解説：[第3学年 A(4) オ 簡単な場合の除数が１位数で商が２位数の除法](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/commentary/03-03-02-01-04.md)
-  - 評価規準：第3学年 (4)「除法」知識・技能
+  - 評価規準：[第3学年 (4)「除法」](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/assessment/grade-3.md)知識・技能
 - **コース**：`g3-two-digit-mental`
 
 ## 第4学年
@@ -110,7 +110,7 @@
 - **根拠**
   - 学習指導要領：[第4学年 A(3) ア(ア)](https://w3id.org/jp-cos/8250243131100000)、[ア(イ)](https://w3id.org/jp-cos/8250243131200000)
   - 解説：[第4学年 A(3) ア](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/commentary/03-04-02-01-03.md)
-  - 評価規準：第4学年 (3)「整数の除法」知識・技能
+  - 評価規準：[第4学年 (3)「整数の除法」](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/assessment/grade-4.md)知識・技能
 
 ### div-g4-written-2：2けたでわる筆算
 
@@ -121,7 +121,7 @@
 - **根拠**
   - 学習指導要領：[第4学年 A(3) ア(ア)](https://w3id.org/jp-cos/8250243131100000)、[ア(イ)](https://w3id.org/jp-cos/8250243131200000)
   - 解説：[第4学年 A(3) ア](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/commentary/03-04-02-01-03.md)
-  - 評価規準：第4学年 (3)「整数の除法」知識・技能
+  - 評価規準：[第4学年 (3)「整数の除法」](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/assessment/grade-4.md)知識・技能
 
 ### div-g4-mental：わり算の暗算
 
@@ -132,7 +132,7 @@
 - **根拠**
   - 学習指導要領：[第4学年 内容の取扱い(2)](https://w3id.org/jp-cos/8250245200000000)
   - 解説：[第4学年 A(3) ア](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/commentary/03-04-02-01-03.md)
-  - 評価規準：第4学年 (3)「整数の除法」知識・技能
+  - 評価規準：[第4学年 (3)「整数の除法」](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/assessment/grade-4.md)知識・技能
 
 ### div-g4-check：わられる数、わる数、商、あまりの関係
 
@@ -143,7 +143,7 @@
 - **根拠**
   - 学習指導要領：[第4学年 A(3) ア(ウ)](https://w3id.org/jp-cos/8250243131300000)
   - 解説：[第4学年 A(3) ウ 被除数，除数，商及び余りの間の関係](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/commentary/03-04-02-01-03.md)
-  - 評価規準：第4学年 (3)「整数の除法」知識・技能
+  - 評価規準：[第4学年 (3)「整数の除法」](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/assessment/grade-4.md)知識・技能
 
 ### div-g4-property：わり算のきまり
 
@@ -154,7 +154,7 @@
 - **根拠**
   - 学習指導要領：[第4学年 A(3) ア(エ)](https://w3id.org/jp-cos/8250243131400000)、[内容の取扱い(4)](https://w3id.org/jp-cos/8250245400000000)
   - 解説：[第4学年 A(3) エ 除法に関して成り立つ性質](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/commentary/03-04-02-01-03.md)
-  - 評価規準：第4学年 (3)「整数の除法」知識・技能、思考・判断・表現
+  - 評価規準：[第4学年 (3)「整数の除法」](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/assessment/grade-4.md)知識・技能、思考・判断・表現
 
 ### div-g4-decimal-by-integer：小数÷整数
 
@@ -165,7 +165,7 @@
 - **根拠**
   - 学習指導要領：[第4学年 A(4) ア(エ)](https://w3id.org/jp-cos/8250243141400000)
   - 解説：[第4学年 A(4) 小数とその計算](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/commentary/03-04-02-01-04.md)
-  - 評価規準：第4学年 (4)「小数の仕組みとその計算」知識・技能
+  - 評価規準：[第4学年 (4)「小数の仕組みとその計算」](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/assessment/grade-4.md)知識・技能
 
 ### div-g4-decimal-quotient：商が小数になる整数のわり算
 
@@ -176,7 +176,7 @@
 - **根拠**
   - 学習指導要領：[第4学年 内容の取扱い(5)](https://w3id.org/jp-cos/8250245500000000)
   - 解説：[第4学年 A(4) 小数とその計算](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/commentary/03-04-02-01-04.md)
-  - 評価規準：第4学年 (4)「小数の仕組みとその計算」知識・技能
+  - 評価規準：[第4学年 (4)「小数の仕組みとその計算」](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/assessment/grade-4.md)知識・技能
 
 ## 第5学年
 
@@ -189,7 +189,7 @@
 - **根拠**
   - 学習指導要領：[第5学年 A(3) ア(ア)](https://w3id.org/jp-cos/8250253131100000)
   - 解説：[第5学年 A(3) 小数の乗法及び除法](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/commentary/03-05-02-01-03.md)
-  - 評価規準：第5学年 (3)「小数の乗法，除法」知識・技能
+  - 評価規準：[第5学年 (3)「小数の乗法，除法」](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/assessment/grade-5.md)知識・技能
 
 ### div-g5-decimal-calc：小数÷小数
 
@@ -200,7 +200,7 @@
 - **根拠**
   - 学習指導要領：[第5学年 A(3) ア(イ)](https://w3id.org/jp-cos/8250253131200000)
   - 解説：[第5学年 A(3) 小数の乗法及び除法](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/commentary/03-05-02-01-03.md)
-  - 評価規準：第5学年 (3)「小数の乗法，除法」知識・技能
+  - 評価規準：[第5学年 (3)「小数の乗法，除法」](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/assessment/grade-5.md)知識・技能
 
 ### div-g5-quotient-fraction：わり算の答えを分数で表す
 
@@ -211,7 +211,7 @@
 - **根拠**
   - 学習指導要領：[第5学年 A(4) ア(イ)](https://w3id.org/jp-cos/8250253141200000)
   - 解説：[第5学年 A(4) 分数](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/commentary/03-05-02-01-04.md)
-  - 評価規準：第5学年 (4)「分数の意味と表し方」知識・技能
+  - 評価規準：[第5学年 (4)「分数の意味と表し方」](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/assessment/grade-5.md)知識・技能
 
 ## 第6学年
 
@@ -224,7 +224,7 @@
 - **根拠**
   - 学習指導要領：[第6学年 A(1) ア(ア)](https://w3id.org/jp-cos/8250263111100000)
   - 解説：[第6学年 A(1) 分数の乗法及び除法](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/commentary/03-06-02-01-01.md)
-  - 評価規準：第6学年 (1)「分数の乗法，除法」知識・技能
+  - 評価規準：[第6学年 (1)「分数の乗法，除法」](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/assessment/grade-6.md)知識・技能
 
 ### div-g6-fraction-calc：分数のわり算の計算
 
@@ -235,7 +235,7 @@
 - **根拠**
   - 学習指導要領：[第6学年 A(1) ア(イ)](https://w3id.org/jp-cos/8250263111200000)、[内容の取扱い(1)](https://w3id.org/jp-cos/8250265100000000)
   - 解説：[第6学年 A(1) 分数の乗法及び除法](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/commentary/03-06-02-01-01.md)
-  - 評価規準：第6学年 (1)「分数の乗法，除法」知識・技能、思考・判断・表現
+  - 評価規準：[第6学年 (1)「分数の乗法，除法」](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/assessment/grade-6.md)知識・技能、思考・判断・表現
 
 ### div-g6-unify：整数や小数のわり算を分数にまとめる
 
@@ -246,7 +246,7 @@
 - **根拠**
   - 学習指導要領：[第6学年 内容の取扱い(1)](https://w3id.org/jp-cos/8250265100000000)
   - 解説：[第6学年 A(1) 分数の乗法及び除法](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/commentary/03-06-02-01-01.md)
-  - 評価規準：第6学年 (1)「分数の乗法，除法」思考・判断・表現
+  - 評価規準：[第6学年 (1)「分数の乗法，除法」](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/assessment/grade-6.md)思考・判断・表現
 
 ## 根拠が見つからないコース
 

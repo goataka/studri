@@ -22,7 +22,7 @@
 - **根拠**
   - 学習指導要領：第1学年 A(1) 数の構成と表し方 [ア(ア)](https://w3id.org/jp-cos/8250213111100000)
   - 解説：[第1学年 A(1) 数の構成と表し方](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/commentary/03-01-02-01-01.md)
-  - 評価規準：第1学年 (1)「数の構成と表し方」
+  - 評価規準：[第1学年 (1)「数の構成と表し方」](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/assessment/grade-1.md)
 
 ### num-g1-count：数を数える
 
@@ -33,7 +33,7 @@
 - **根拠**
   - 学習指導要領：第1学年 A(1) 数の構成と表し方 [ア(イ)](https://w3id.org/jp-cos/8250213111200000)
   - 解説：[第1学年 A(1) 数の構成と表し方](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/commentary/03-01-02-01-01.md)
-  - 評価規準：第1学年 (1)「数の構成と表し方」
+  - 評価規準：[第1学年 (1)「数の構成と表し方」](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/assessment/grade-1.md)
 
 ### num-g1-order：数の大小と数の線
 
@@ -44,7 +44,7 @@
 - **根拠**
   - 学習指導要領：第1学年 A(1) 数の構成と表し方 [ア(ウ)](https://w3id.org/jp-cos/8250213111300000)
   - 解説：[第1学年 A(1) 数の構成と表し方](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/commentary/03-01-02-01-01.md)
-  - 評価規準：第1学年 (1)「数の構成と表し方」
+  - 評価規準：[第1学年 (1)「数の構成と表し方」](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/assessment/grade-1.md)
 
 ### num-g1-compose：数の合成と分解
 
@@ -55,7 +55,7 @@
 - **根拠**
   - 学習指導要領：第1学年 A(1) 数の構成と表し方 [ア(エ)](https://w3id.org/jp-cos/8250213111400000)
   - 解説：[第1学年 A(1) 数の構成と表し方](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/commentary/03-01-02-01-01.md)
-  - 評価規準：第1学年 (1)「数の構成と表し方」
+  - 評価規準：[第1学年 (1)「数の構成と表し方」](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/assessment/grade-1.md)
 
 ### num-g1-two-digit：2けたの数
 
@@ -66,7 +66,7 @@
 - **根拠**
   - 学習指導要領：第1学年 A(1) 数の構成と表し方 [ア(オ)](https://w3id.org/jp-cos/8250213111500000)、[ア(キ)](https://w3id.org/jp-cos/8250213111700000)
   - 解説：[第1学年 A(1) 数の構成と表し方](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/commentary/03-01-02-01-01.md)
-  - 評価規準：第1学年 (1)「数の構成と表し方」
+  - 評価規準：[第1学年 (1)「数の構成と表し方」](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/assessment/grade-1.md)
 
 ### num-g1-three-digit：100より大きい数
 
@@ -77,7 +77,7 @@
 - **根拠**
   - 学習指導要領：第1学年 A(1) 数の構成と表し方 [ア(カ)](https://w3id.org/jp-cos/8250213111600000)
   - 解説：[第1学年 A(1) 数の構成と表し方](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/commentary/03-01-02-01-01.md)
-  - 評価規準：第1学年 (1)「数の構成と表し方」
+  - 評価規準：[第1学年 (1)「数の構成と表し方」](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/assessment/grade-1.md)
 
 ### num-g1-group：まとめて数える
 
@@ -88,7 +88,7 @@
 - **根拠**
   - 学習指導要領：第1学年 A(1) 数の構成と表し方 [ア(ク)](https://w3id.org/jp-cos/8250213111800000)
   - 解説：[第1学年 A(1) 数の構成と表し方](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/commentary/03-01-02-01-01.md)
-  - 評価規準：第1学年 (1)「数の構成と表し方」
+  - 評価規準：[第1学年 (1)「数の構成と表し方」](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/assessment/grade-1.md)
 
 ## 第2学年
 
@@ -101,7 +101,7 @@
 - **根拠**
   - 学習指導要領：第2学年 A(1) 数の構成と表し方 [ア(ア)](https://w3id.org/jp-cos/8250223111100000)
   - 解説：[第2学年 A(1) 数の構成と表し方](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/commentary/03-02-02-01-01.md)
-  - 評価規準：第2学年 (1)「数の構成と表し方」
+  - 評価規準：[第2学年 (1)「数の構成と表し方」](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/assessment/grade-2.md)
 
 ### num-g2-four-digit：4けたの数
 
@@ -112,7 +112,7 @@
 - **根拠**
   - 学習指導要領：第2学年 A(1) 数の構成と表し方 [ア(イ)](https://w3id.org/jp-cos/8250223111200000)
   - 解説：[第2学年 A(1) 数の構成と表し方](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/commentary/03-02-02-01-01.md)
-  - 評価規準：第2学年 (1)「数の構成と表し方」
+  - 評価規準：[第2学年 (1)「数の構成と表し方」](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/assessment/grade-2.md)
 
 ### num-g2-relative：十や百を単位に見る
 
@@ -123,7 +123,7 @@
 - **根拠**
   - 学習指導要領：第2学年 A(1) 数の構成と表し方 [ア(ウ)](https://w3id.org/jp-cos/8250223111300000)
   - 解説：[第2学年 A(1) 数の構成と表し方](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/commentary/03-02-02-01-01.md)
-  - 評価規準：第2学年 (1)「数の構成と表し方」
+  - 評価規準：[第2学年 (1)「数の構成と表し方」](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/assessment/grade-2.md)
 
 ### num-g2-product：数をかけ算で見る
 
@@ -134,7 +134,7 @@
 - **根拠**
   - 学習指導要領：第2学年 A(1) 数の構成と表し方 [ア(エ)](https://w3id.org/jp-cos/8250223111400000)
   - 解説：[第2学年 A(1) 数の構成と表し方](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/commentary/03-02-02-01-01.md)
-  - 評価規準：第2学年 (1)「数の構成と表し方」
+  - 評価規準：[第2学年 (1)「数の構成と表し方」](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/assessment/grade-2.md)
 
 ### num-g2-sort：分けて数を使って表す
 
@@ -145,7 +145,7 @@
 - **根拠**
   - 学習指導要領：第2学年 A(1) 数の構成と表し方 [ア(オ)](https://w3id.org/jp-cos/8250223111500000)
   - 解説：[第2学年 A(1) 数の構成と表し方](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/commentary/03-02-02-01-01.md)
-  - 評価規準：第2学年 (1)「数の構成と表し方」
+  - 評価規準：[第2学年 (1)「数の構成と表し方」](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/assessment/grade-2.md)
 
 ## 第3学年
 
@@ -158,7 +158,7 @@
 - **根拠**
   - 学習指導要領：第3学年 A(1) 整数の表し方 [ア(ア)](https://w3id.org/jp-cos/8250233111100000)
   - 解説：[第3学年 A(1) 整数の表し方](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/commentary/03-03-02-01-01.md)
-  - 評価規準：第3学年 (1)「数の表し方」
+  - 評価規準：[第3学年 (1)「数の表し方」](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/assessment/grade-3.md)
 
 ### num-g3-times：10倍・100倍・10でわった大きさ
 
@@ -169,7 +169,7 @@
 - **根拠**
   - 学習指導要領：第3学年 A(1) 整数の表し方 [ア(イ)](https://w3id.org/jp-cos/8250233111200000)
   - 解説：[第3学年 A(1) 整数の表し方](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/commentary/03-03-02-01-01.md)
-  - 評価規準：第3学年 (1)「数の表し方」
+  - 評価規準：[第3学年 (1)「数の表し方」](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/assessment/grade-3.md)
 
 ### num-g3-relative：数の相対的な大きさ
 
@@ -180,7 +180,7 @@
 - **根拠**
   - 学習指導要領：第3学年 A(1) 整数の表し方 [ア(ウ)](https://w3id.org/jp-cos/8250233111300000)
   - 解説：[第3学年 A(1) 整数の表し方](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/commentary/03-03-02-01-01.md)
-  - 評価規準：第3学年 (1)「数の表し方」
+  - 評価規準：[第3学年 (1)「数の表し方」](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/assessment/grade-3.md)
 
 ### num-g3-abacus：そろばんで数を表す・たし算ひき算
 
@@ -191,7 +191,7 @@
 - **根拠**
   - 学習指導要領：第3学年 A(8) そろばんを用いた数の表し方と計算 [ア(ア)](https://w3id.org/jp-cos/8250233181100000)、[ア(イ)](https://w3id.org/jp-cos/8250233181200000)
   - 解説：[第3学年 A(8) そろばんを用いた数の表し方と計算](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/commentary/03-03-02-01-08.md)
-  - 評価規準：第3学年 (8)「そろばん」
+  - 評価規準：[第3学年 (8)「そろばん」](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/assessment/grade-3.md)
 
 ## 第4学年
 
@@ -204,7 +204,7 @@
 - **根拠**
   - 学習指導要領：第4学年 A(1) 整数の表し方 [ア(ア)](https://w3id.org/jp-cos/8250243111100000)
   - 解説：[第4学年 A(1) 整数の表し方](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/commentary/03-04-02-01-01.md)
-  - 評価規準：第4学年 (1)「整数の表し方」
+  - 評価規準：[第4学年 (1)「整数の表し方」](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/assessment/grade-4.md)
 
 ### num-g4-rounding-use：がい数を使う場面
 
@@ -215,7 +215,7 @@
 - **根拠**
   - 学習指導要領：第4学年 A(2) 概数 [ア(ア)](https://w3id.org/jp-cos/8250243121100000)
   - 解説：[第4学年 A(2) 概数](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/commentary/03-04-02-01-02.md)
-  - 評価規準：第4学年 (2)「概数と四捨五入」
+  - 評価規準：[第4学年 (2)「概数と四捨五入」](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/assessment/grade-4.md)
 
 ### num-g4-rounding：四捨五入
 
@@ -226,7 +226,7 @@
 - **根拠**
   - 学習指導要領：第4学年 A(2) 概数 [ア(イ)](https://w3id.org/jp-cos/8250243121200000)
   - 解説：[第4学年 A(2) 概数](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/commentary/03-04-02-01-02.md)
-  - 評価規準：第4学年 (2)「概数と四捨五入」
+  - 評価規準：[第4学年 (2)「概数と四捨五入」](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/assessment/grade-4.md)
 
 ### num-g4-estimate：計算の見積もり
 
@@ -237,7 +237,7 @@
 - **根拠**
   - 学習指導要領：第4学年 A(2) 概数 [ア(ウ)](https://w3id.org/jp-cos/8250243121300000)
   - 解説：[第4学年 A(2) 概数](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/commentary/03-04-02-01-02.md)
-  - 評価規準：第4学年 (2)「概数と四捨五入」
+  - 評価規準：[第4学年 (2)「概数と四捨五入」](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/assessment/grade-4.md)
 
 ### num-g4-abacus：そろばんでたし算ひき算
 
@@ -248,7 +248,7 @@
 - **根拠**
   - 学習指導要領：第4学年 A(8) そろばんを用いた数の表し方と計算 [ア(ア)](https://w3id.org/jp-cos/8250243181100000)
   - 解説：[第4学年 A(8) そろばんを用いた数の表し方と計算](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/commentary/03-04-02-01-08.md)
-  - 評価規準：第4学年 (8)「そろばん」
+  - 評価規準：[第4学年 (8)「そろばん」](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/assessment/grade-4.md)
 
 ## 第5学年
 
@@ -261,7 +261,7 @@
 - **根拠**
   - 学習指導要領：第5学年 A(1) 整数の性質及び整数の構成 [ア(ア)](https://w3id.org/jp-cos/8250253111100000)
   - 解説：[第5学年 A(1) 整数の性質及び整数の構成](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/commentary/03-05-02-01-01.md)
-  - 評価規準：第5学年 (1)「整数の性質」
+  - 評価規準：[第5学年 (1)「整数の性質」](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/assessment/grade-5.md)
 
 ### num-g5-divisor-multiple：約数と倍数
 
@@ -272,7 +272,7 @@
 - **根拠**
   - 学習指導要領：第5学年 A(1) 整数の性質及び整数の構成 [ア(イ)](https://w3id.org/jp-cos/8250253111200000)
   - 解説：[第5学年 A(1) 整数の性質及び整数の構成](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/commentary/03-05-02-01-01.md)
-  - 評価規準：第5学年 (1)「整数の性質」
+  - 評価規準：[第5学年 (1)「整数の性質」](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/assessment/grade-5.md)
 
 ### num-g5-shift：10倍・1/10と小数点の移動
 
@@ -283,4 +283,4 @@
 - **根拠**
   - 学習指導要領：第5学年 A(2) 整数及び小数の表し方 [ア(ア)](https://w3id.org/jp-cos/8250253121100000)
   - 解説：[第5学年 A(2) 整数及び小数の表し方](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/commentary/03-05-02-01-02.md)
-  - 評価規準：第5学年 (2)「整数，小数の記数法」
+  - 評価規準：[第5学年 (2)「整数，小数の記数法」](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/assessment/grade-5.md)

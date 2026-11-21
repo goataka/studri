@@ -46,5 +46,4 @@
 - **解説**：小学校学習指導要領 平成29年告示 解説 算数編
   - リンク：courses-of-study の `commentary/` の転記
 - **評価規準**：国立教育政策研究所「『指導と評価の一体化』のための学習評価に関する参考資料」令和2年3月
-  - 場所：学年、内容のまとまり、観点で示す
-  - 転記：courses-of-study の `assessment/`
+  - リンク：courses-of-study の `assessment/` の転記

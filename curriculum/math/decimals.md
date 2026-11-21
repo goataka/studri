@@ -20,7 +20,7 @@
 - **根拠**
   - 学習指導要領：第3学年 A(5) 小数とその表し方 [ア(ア)](https://w3id.org/jp-cos/8250233151100000)
   - 解説：[第3学年 A(5) 小数とその表し方](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/commentary/03-03-02-01-05.md)
-  - 評価規準：第3学年 (5)「小数の意味と表し方」
+  - 評価規準：[第3学年 (5)「小数の意味と表し方」](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/assessment/grade-3.md)
 
 ### dec-g3-add-sub：小数のたし算とひき算（1/10の位まで）
 
@@ -31,7 +31,7 @@
 - **根拠**
   - 学習指導要領：第3学年 A(5) 小数とその表し方 [ア(イ)](https://w3id.org/jp-cos/8250233151200000)
   - 解説：[第3学年 A(5) 小数とその表し方](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/commentary/03-03-02-01-05.md)
-  - 評価規準：第3学年 (5)「小数の意味と表し方」
+  - 評価規準：[第3学年 (5)「小数の意味と表し方」](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/assessment/grade-3.md)
 
 ## 第4学年
 
@@ -44,7 +44,7 @@
 - **根拠**
   - 学習指導要領：第4学年 A(4) 小数とその計算 [ア(ア)](https://w3id.org/jp-cos/8250243141100000)
   - 解説：[第4学年 A(4) 小数とその計算](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/commentary/03-04-02-01-04.md)
-  - 評価規準：第4学年 (4)「小数の仕組みとその計算」
+  - 評価規準：[第4学年 (4)「小数の仕組みとその計算」](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/assessment/grade-4.md)
 
 ### dec-g4-structure：小数のしくみ
 
@@ -55,7 +55,7 @@
 - **根拠**
   - 学習指導要領：第4学年 A(4) 小数とその計算 [ア(イ)](https://w3id.org/jp-cos/8250243141200000)
   - 解説：[第4学年 A(4) 小数とその計算](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/commentary/03-04-02-01-04.md)
-  - 評価規準：第4学年 (4)「小数の仕組みとその計算」
+  - 評価規準：[第4学年 (4)「小数の仕組みとその計算」](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/assessment/grade-4.md)
 
 ### dec-g4-add-sub：小数のたし算とひき算（1/100の位まで）
 
@@ -66,4 +66,4 @@
 - **根拠**
   - 学習指導要領：第4学年 A(4) 小数とその計算 [ア(ウ)](https://w3id.org/jp-cos/8250243141300000)
   - 解説：[第4学年 A(4) 小数とその計算](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/commentary/03-04-02-01-04.md)
-  - 評価規準：第4学年 (4)「小数の仕組みとその計算」
+  - 評価規準：[第4学年 (4)「小数の仕組みとその計算」](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/assessment/grade-4.md)

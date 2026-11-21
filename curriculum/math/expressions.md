@@ -22,7 +22,7 @@
 - **根拠**
   - 学習指導要領：第3学年 A(7) 数量の関係を表す式 [ア(ア)](https://w3id.org/jp-cos/8250233171100000)
   - 解説：[第3学年 A(7) 数量の関係を表す式](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/commentary/03-03-02-01-07.md)
-  - 評価規準：第3学年 (7)「数量の関係を表す式」
+  - 評価規準：[第3学年 (7)「数量の関係を表す式」](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/assessment/grade-3.md)
 
 ## 第4学年
 
@@ -35,7 +35,7 @@
 - **根拠**
   - 学習指導要領：第4学年 A(6) 数量の関係を表す式 [ア(ア)](https://w3id.org/jp-cos/8250243161100000)
   - 解説：[第4学年 A(6) 数量の関係を表す式](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/commentary/03-04-02-01-06.md)
-  - 評価規準：第4学年 (6)「数量の関係を表す式」
+  - 評価規準：[第4学年 (6)「数量の関係を表す式」](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/assessment/grade-4.md)
 
 ### expr-g4-formula：公式
 
@@ -46,7 +46,7 @@
 - **根拠**
   - 学習指導要領：第4学年 A(6) 数量の関係を表す式 [ア(イ)](https://w3id.org/jp-cos/8250243161200000)
   - 解説：[第4学年 A(6) 数量の関係を表す式](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/commentary/03-04-02-01-06.md)
-  - 評価規準：第4学年 (6)「数量の関係を表す式」
+  - 評価規準：[第4学年 (6)「数量の関係を表す式」](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/assessment/grade-4.md)
 
 ### expr-g4-box-triangle：□と△を使った式
 
@@ -57,7 +57,7 @@
 - **根拠**
   - 学習指導要領：第4学年 A(6) 数量の関係を表す式 [ア(ウ)](https://w3id.org/jp-cos/8250243161300000)
   - 解説：[第4学年 A(6) 数量の関係を表す式](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/commentary/03-04-02-01-06.md)
-  - 評価規準：第4学年 (6)「数量の関係を表す式」
+  - 評価規準：[第4学年 (6)「数量の関係を表す式」](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/assessment/grade-4.md)
 
 ### expr-g4-property：計算のきまり
 
@@ -68,7 +68,7 @@
 - **根拠**
   - 学習指導要領：第4学年 A(7) 計算に関して成り立つ性質 [ア(ア)](https://w3id.org/jp-cos/8250243171100000)
   - 解説：[第4学年 A(7) 計算に関して成り立つ性質](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/commentary/03-04-02-01-07.md)
-  - 評価規準：第4学年 (7)「四則に関して成り立つ性質」
+  - 評価規準：[第4学年 (7)「四則に関して成り立つ性質」](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/assessment/grade-4.md)
 
 ## 第5学年
 
@@ -81,7 +81,7 @@
 - **根拠**
   - 学習指導要領：第5学年 A(6) 数量の関係を表す式 [ア(ア)](https://w3id.org/jp-cos/8250253161100000)
   - 解説：[第5学年 A(6) 数量の関係を表す式](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/commentary/03-05-02-01-06.md)
-  - 評価規準：第5学年 (6)「数量の関係を表す式」
+  - 評価規準：[第5学年 (6)「数量の関係を表す式」](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/assessment/grade-5.md)
 
 ## 第6学年
 
@@ -94,4 +94,4 @@
 - **根拠**
   - 学習指導要領：第6学年 A(2) 数量の関係を表す式 [ア(ア)](https://w3id.org/jp-cos/8250263121100000)
   - 解説：[第6学年 A(2) 数量の関係を表す式](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/commentary/03-06-02-01-02.md)
-  - 評価規準：第6学年 (2)「文字を用いた式」
+  - 評価規準：[第6学年 (2)「文字を用いた式」](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/assessment/grade-6.md)

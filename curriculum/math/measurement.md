@@ -20,7 +20,7 @@
 - **根拠**
   - 学習指導要領：第1学年 C(1) 身の回りのものの大きさ [ア(ア)](https://w3id.org/jp-cos/8250213311100000)
   - 解説：[第1学年 C(1) 身の回りのものの大きさ](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/commentary/03-01-02-03-01.md)
-  - 評価規準：第1学年 (1)「量と測定についての理解の基礎」
+  - 評価規準：[第1学年 (1)「量と測定についての理解の基礎」](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/assessment/grade-1.md)
 
 ### meas-g1-units：いくつ分で比べる
 
@@ -31,7 +31,7 @@
 - **根拠**
   - 学習指導要領：第1学年 C(1) 身の回りのものの大きさ [ア(イ)](https://w3id.org/jp-cos/8250213311200000)
   - 解説：[第1学年 C(1) 身の回りのものの大きさ](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/commentary/03-01-02-03-01.md)
-  - 評価規準：第1学年 (1)「量と測定についての理解の基礎」
+  - 評価規準：[第1学年 (1)「量と測定についての理解の基礎」](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/assessment/grade-1.md)
 
 ### meas-g1-clock：時計を読む
 
@@ -42,7 +42,7 @@
 - **根拠**
   - 学習指導要領：第1学年 C(2) 時刻 [ア(ア)](https://w3id.org/jp-cos/8250213321100000)
   - 解説：[第1学年 C(2) 時刻](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/commentary/03-01-02-03-02.md)
-  - 評価規準：第1学年 (2)「時刻の読み方」
+  - 評価規準：[第1学年 (2)「時刻の読み方」](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/assessment/grade-1.md)
 
 ## 第2学年
 
@@ -55,7 +55,7 @@
 - **根拠**
   - 学習指導要領：第2学年 C(1) 量の単位と測定 [ア(ア)](https://w3id.org/jp-cos/8250223311100000)、[ア(イ)](https://w3id.org/jp-cos/8250223311200000)
   - 解説：[第2学年 C(1) 量の単位と測定](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/commentary/03-02-02-03-01.md)
-  - 評価規準：第2学年 (1)「長さやかさの単位と測定」
+  - 評価規準：[第2学年 (1)「長さやかさの単位と測定」](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/assessment/grade-2.md)
 
 ### meas-g2-time：時こくと時間
 
@@ -66,7 +66,7 @@
 - **根拠**
   - 学習指導要領：第2学年 C(2) 時刻と時間 [ア(ア)](https://w3id.org/jp-cos/8250223321100000)
   - 解説：[第2学年 C(2) 時刻と時間](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/commentary/03-02-02-03-02.md)
-  - 評価規準：第2学年 (2)「時間の単位」
+  - 評価規準：[第2学年 (2)「時間の単位」](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/assessment/grade-2.md)
 
 ## 第3学年
 
@@ -79,7 +79,7 @@
 - **根拠**
   - 学習指導要領：第3学年 C(1) 量の単位と測定 [ア(ア)](https://w3id.org/jp-cos/8250233311100000)、[ア(イ)](https://w3id.org/jp-cos/8250233311200000)
   - 解説：[第3学年 C(1) 量の単位と測定](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/commentary/03-03-02-03-01.md)
-  - 評価規準：第3学年 (1)「長さ，重さの単位と測定」
+  - 評価規準：[第3学年 (1)「長さ，重さの単位と測定」](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/assessment/grade-3.md)
 
 ### meas-g3-time：時こくと時間の計算
 
@@ -90,4 +90,4 @@
 - **根拠**
   - 学習指導要領：第3学年 C(2) 時刻と時間 [ア(ア)](https://w3id.org/jp-cos/8250233321100000)、[ア(イ)](https://w3id.org/jp-cos/8250233321200000)
   - 解説：[第3学年 C(2) 時刻と時間](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/commentary/03-03-02-03-02.md)
-  - 評価規準：第3学年 (2)「時刻と時間」
+  - 評価規準：[第3学年 (2)「時刻と時間」](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/assessment/grade-3.md)

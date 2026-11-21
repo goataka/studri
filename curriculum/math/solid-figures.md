@@ -21,7 +21,7 @@
 - **根拠**
   - 学習指導要領：第2学年 B(1) 図形 [ア(ウ)](https://w3id.org/jp-cos/8250223211300000)
   - 解説：[第2学年 B(1) 図形](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/commentary/03-02-02-02-01.md)
-  - 評価規準：第2学年 (1)「三角形や四角形などの図形」
+  - 評価規準：[第2学年 (1)「三角形や四角形などの図形」](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/assessment/grade-2.md)
 
 ## 第4学年
 
@@ -34,7 +34,7 @@
 - **根拠**
   - 学習指導要領：第4学年 B(2) 立体図形 [ア(ア)](https://w3id.org/jp-cos/8250243221100000)
   - 解説：[第4学年 B(2) 立体図形](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/commentary/03-04-02-02-02.md)
-  - 評価規準：第4学年 (2)「立方体，直方体などの立体図形」
+  - 評価規準：[第4学年 (2)「立方体，直方体などの立体図形」](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/assessment/grade-4.md)
 
 ### solid-g4-parallel：面や辺の平行と垂直
 
@@ -45,7 +45,7 @@
 - **根拠**
   - 学習指導要領：第4学年 B(2) 立体図形 [ア(イ)](https://w3id.org/jp-cos/8250243221200000)
   - 解説：[第4学年 B(2) 立体図形](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/commentary/03-04-02-02-02.md)
-  - 評価規準：第4学年 (2)「立方体，直方体などの立体図形」
+  - 評価規準：[第4学年 (2)「立方体，直方体などの立体図形」](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/assessment/grade-4.md)
 
 ### solid-g4-nets：見取図と展開図
 
@@ -56,7 +56,7 @@
 - **根拠**
   - 学習指導要領：第4学年 B(2) 立体図形 [ア(ウ)](https://w3id.org/jp-cos/8250243221300000)
   - 解説：[第4学年 B(2) 立体図形](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/commentary/03-04-02-02-02.md)
-  - 評価規準：第4学年 (2)「立方体，直方体などの立体図形」
+  - 評価規準：[第4学年 (2)「立方体，直方体などの立体図形」](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/assessment/grade-4.md)
 
 ### solid-g4-position：ものの位置の表し方
 
@@ -67,7 +67,7 @@
 - **根拠**
   - 学習指導要領：第4学年 B(3) ものの位置 [ア(ア)](https://w3id.org/jp-cos/8250243231100000)
   - 解説：[第4学年 B(3) ものの位置](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/commentary/03-04-02-02-03.md)
-  - 評価規準：第4学年 (3)「ものの位置の表し方」
+  - 評価規準：[第4学年 (3)「ものの位置の表し方」](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/assessment/grade-4.md)
 
 ## 第5学年
 
@@ -80,4 +80,4 @@
 - **根拠**
   - 学習指導要領：第5学年 B(2) 立体図形 [ア(ア)](https://w3id.org/jp-cos/8250253221100000)
   - 解説：[第5学年 B(2) 立体図形](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/commentary/03-05-02-02-02.md)
-  - 評価規準：第5学年 (2)「立体図形の性質」
+  - 評価規準：[第5学年 (2)「立体図形の性質」](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/assessment/grade-5.md)

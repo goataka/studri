@@ -24,7 +24,7 @@
 - **根拠**
   - 学習指導要領：第1学年 D(1) 数量の整理 [ア(ア)](https://w3id.org/jp-cos/8250213411100000)
   - 解説：[第1学年 D(1) 数量の整理](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/commentary/03-01-02-04-01.md)
-  - 評価規準：第1学年 (1)「絵や図を用いた数量の表現」
+  - 評価規準：[第1学年 (1)「絵や図を用いた数量の表現」](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/assessment/grade-1.md)
 
 ## 第2学年
 
@@ -37,7 +37,7 @@
 - **根拠**
   - 学習指導要領：第2学年 D(1) データの分析 [ア(ア)](https://w3id.org/jp-cos/8250223411100000)
   - 解説：[第2学年 D(1) データの分析](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/commentary/03-02-02-04-01.md)
-  - 評価規準：第2学年 (1)「簡単な表やグラフ」
+  - 評価規準：[第2学年 (1)「簡単な表やグラフ」](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/assessment/grade-2.md)
 
 ## 第3学年
 
@@ -50,7 +50,7 @@
 - **根拠**
   - 学習指導要領：第3学年 D(1) データの分析 [ア(ア)](https://w3id.org/jp-cos/8250233411100000)
   - 解説：[第3学年 D(1) データの分析](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/commentary/03-03-02-04-01.md)
-  - 評価規準：第3学年 (1)「表と棒グラフ」
+  - 評価規準：[第3学年 (1)「表と棒グラフ」](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/assessment/grade-3.md)
 
 ### data-g3-bar-graph：棒グラフ
 
@@ -61,7 +61,7 @@
 - **根拠**
   - 学習指導要領：第3学年 D(1) データの分析 [ア(イ)](https://w3id.org/jp-cos/8250233411200000)
   - 解説：[第3学年 D(1) データの分析](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/commentary/03-03-02-04-01.md)
-  - 評価規準：第3学年 (1)「表と棒グラフ」
+  - 評価規準：[第3学年 (1)「表と棒グラフ」](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/assessment/grade-3.md)
 
 ## 第4学年
 
@@ -74,7 +74,7 @@
 - **根拠**
   - 学習指導要領：第4学年 D(1) データの収集とその分析 [ア(ア)](https://w3id.org/jp-cos/8250243411100000)
   - 解説：[第4学年 D(1) データの収集とその分析](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/commentary/03-04-02-04-01.md)
-  - 評価規準：第4学年 (1)「データの分類整理」
+  - 評価規準：[第4学年 (1)「データの分類整理」](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/assessment/grade-4.md)
 
 ### data-g4-line-graph：折れ線グラフ
 
@@ -85,7 +85,7 @@
 - **根拠**
   - 学習指導要領：第4学年 D(1) データの収集とその分析 [ア(イ)](https://w3id.org/jp-cos/8250243411200000)
   - 解説：[第4学年 D(1) データの収集とその分析](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/commentary/03-04-02-04-01.md)
-  - 評価規準：第4学年 (1)「データの分類整理」
+  - 評価規準：[第4学年 (1)「データの分類整理」](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/assessment/grade-4.md)
 
 ## 第5学年
 
@@ -98,7 +98,7 @@
 - **根拠**
   - 学習指導要領：第5学年 D(1) データの収集とその分析 [ア(ア)](https://w3id.org/jp-cos/8250253411100000)
   - 解説：[第5学年 D(1) データの収集とその分析](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/commentary/03-05-02-04-01.md)
-  - 評価規準：第5学年 (1)「円グラフと帯グラフ」
+  - 評価規準：[第5学年 (1)「円グラフと帯グラフ」](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/assessment/grade-5.md)
 
 ### data-g5-process：統計的な問題解決
 
@@ -109,7 +109,7 @@
 - **根拠**
   - 学習指導要領：第5学年 D(1) データの収集とその分析 [ア(イ)](https://w3id.org/jp-cos/8250253411200000)
   - 解説：[第5学年 D(1) データの収集とその分析](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/commentary/03-05-02-04-01.md)
-  - 評価規準：第5学年 (1)「円グラフと帯グラフ」
+  - 評価規準：[第5学年 (1)「円グラフと帯グラフ」](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/assessment/grade-5.md)
 
 ### data-g5-average：平均
 
@@ -120,7 +120,7 @@
 - **根拠**
   - 学習指導要領：第5学年 D(2) 測定した結果を平均する方法 [ア(ア)](https://w3id.org/jp-cos/8250253421100000)
   - 解説：[第5学年 D(2) 測定した結果を平均する方法](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/commentary/03-05-02-04-02.md)
-  - 評価規準：第5学年 (2)「測定値の平均」
+  - 評価規準：[第5学年 (2)「測定値の平均」](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/assessment/grade-5.md)
 
 ## 第6学年
 
@@ -133,7 +133,7 @@
 - **根拠**
   - 学習指導要領：第6学年 D(1) データの収集とその分析 [ア(ア)](https://w3id.org/jp-cos/8250263411100000)
   - 解説：[第6学年 D(1) データの収集とその分析](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/commentary/03-06-02-04-01.md)
-  - 評価規準：第6学年 (1)「データの考察」
+  - 評価規準：[第6学年 (1)「データの考察」](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/assessment/grade-6.md)
 
 ### data-g6-frequency：ドットプロットと度数分布
 
@@ -144,7 +144,7 @@
 - **根拠**
   - 学習指導要領：第6学年 D(1) データの収集とその分析 [ア(イ)](https://w3id.org/jp-cos/8250263411200000)
   - 解説：[第6学年 D(1) データの収集とその分析](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/commentary/03-06-02-04-01.md)
-  - 評価規準：第6学年 (1)「データの考察」
+  - 評価規準：[第6学年 (1)「データの考察」](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/assessment/grade-6.md)
 
 ### data-g6-process：目的に合わせて調べる
 
@@ -155,7 +155,7 @@
 - **根拠**
   - 学習指導要領：第6学年 D(1) データの収集とその分析 [ア(ウ)](https://w3id.org/jp-cos/8250263411300000)
   - 解説：[第6学年 D(1) データの収集とその分析](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/commentary/03-06-02-04-01.md)
-  - 評価規準：第6学年 (1)「データの考察」
+  - 評価規準：[第6学年 (1)「データの考察」](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/assessment/grade-6.md)
 
 ### data-g6-cases：起こり得る場合
 
@@ -166,4 +166,4 @@
 - **根拠**
   - 学習指導要領：第6学年 D(2) 起こり得る場合 [ア(ア)](https://w3id.org/jp-cos/8250263421100000)
   - 解説：[第6学年 D(2) 起こり得る場合](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/commentary/03-06-02-04-02.md)
-  - 評価規準：第6学年 (2)「起こり得る場合」
+  - 評価規準：[第6学年 (2)「起こり得る場合」](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/assessment/grade-6.md)

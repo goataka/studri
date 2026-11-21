@@ -21,7 +21,7 @@
 - **根拠**
   - 学習指導要領：第1学年 A(2) 加法及び減法 [ア(ア)](https://w3id.org/jp-cos/8250213121100000)
   - 解説：[第1学年 A(2) 加法及び減法](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/commentary/03-01-02-01-02.md)
-  - 評価規準：第1学年 (2)「加法，減法」
+  - 評価規準：[第1学年 (2)「加法，減法」](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/assessment/grade-1.md)
 
 ### add-g1-expression：たし算とひき算の式
 
@@ -32,7 +32,7 @@
 - **根拠**
   - 学習指導要領：第1学年 A(2) 加法及び減法 [ア(イ)](https://w3id.org/jp-cos/8250213121200000)
   - 解説：[第1学年 A(2) 加法及び減法](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/commentary/03-01-02-01-02.md)
-  - 評価規準：第1学年 (2)「加法，減法」
+  - 評価規準：[第1学年 (2)「加法，減法」](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/assessment/grade-1.md)
 
 ### add-g1-basic：1けたのたし算とひき算
 
@@ -43,7 +43,7 @@
 - **根拠**
   - 学習指導要領：第1学年 A(2) 加法及び減法 [ア(ウ)](https://w3id.org/jp-cos/8250213121300000)
   - 解説：[第1学年 A(2) 加法及び減法](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/commentary/03-01-02-01-02.md)
-  - 評価規準：第1学年 (2)「加法，減法」
+  - 評価規準：[第1学年 (2)「加法，減法」](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/assessment/grade-1.md)
 
 ### add-g1-two-digit：2けたのかんたんなたし算とひき算
 
@@ -54,7 +54,7 @@
 - **根拠**
   - 学習指導要領：第1学年 A(2) 加法及び減法 [ア(エ)](https://w3id.org/jp-cos/8250213121400000)
   - 解説：[第1学年 A(2) 加法及び減法](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/commentary/03-01-02-01-02.md)
-  - 評価規準：第1学年 (2)「加法，減法」
+  - 評価規準：[第1学年 (2)「加法，減法」](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/assessment/grade-1.md)
 
 ## 第2学年
 
@@ -67,7 +67,7 @@
 - **根拠**
   - 学習指導要領：第2学年 A(2) 加法及び減法 [ア(ア)](https://w3id.org/jp-cos/8250223121100000)
   - 解説：[第2学年 A(2) 加法及び減法](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/commentary/03-02-02-01-02.md)
-  - 評価規準：第2学年 (2)「加法，減法」
+  - 評価規準：[第2学年 (2)「加法，減法」](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/assessment/grade-2.md)
 
 ### add-g2-three-digit：3けたのかんたんなたし算とひき算
 
@@ -78,7 +78,7 @@
 - **根拠**
   - 学習指導要領：第2学年 A(2) 加法及び減法 [ア(イ)](https://w3id.org/jp-cos/8250223121200000)
   - 解説：[第2学年 A(2) 加法及び減法](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/commentary/03-02-02-01-02.md)
-  - 評価規準：第2学年 (2)「加法，減法」
+  - 評価規準：[第2学年 (2)「加法，減法」](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/assessment/grade-2.md)
 
 ### add-g2-property：たし算のきまり
 
@@ -89,7 +89,7 @@
 - **根拠**
   - 学習指導要領：第2学年 A(2) 加法及び減法 [ア(ウ)](https://w3id.org/jp-cos/8250223121300000)
   - 解説：[第2学年 A(2) 加法及び減法](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/commentary/03-02-02-01-02.md)
-  - 評価規準：第2学年 (2)「加法，減法」
+  - 評価規準：[第2学年 (2)「加法，減法」](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/assessment/grade-2.md)
 
 ### add-g2-inverse：たし算とひき算の関係
 
@@ -100,7 +100,7 @@
 - **根拠**
   - 学習指導要領：第2学年 A(2) 加法及び減法 [ア(エ)](https://w3id.org/jp-cos/8250223121400000)
   - 解説：[第2学年 A(2) 加法及び減法](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/commentary/03-02-02-01-02.md)
-  - 評価規準：第2学年 (2)「加法，減法」
+  - 評価規準：[第2学年 (2)「加法，減法」](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/assessment/grade-2.md)
 
 ## 第3学年
 
@@ -113,4 +113,4 @@
 - **根拠**
   - 学習指導要領：第3学年 A(2) 加法及び減法 [ア(ア)](https://w3id.org/jp-cos/8250233121100000)、[ア(イ)](https://w3id.org/jp-cos/8250233121200000)
   - 解説：[第3学年 A(2) 加法及び減法](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/commentary/03-03-02-01-02.md)
-  - 評価規準：第3学年 (2)「加法，減法」
+  - 評価規準：[第3学年 (2)「加法，減法」](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/assessment/grade-3.md)

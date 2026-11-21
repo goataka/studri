@@ -22,7 +22,7 @@
 - **根拠**
   - 学習指導要領：第2学年 A(1) 数の構成と表し方 [ア(カ)](https://w3id.org/jp-cos/8250223111600000)
   - 解説：[第2学年 A(1) 数の構成と表し方](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/commentary/03-02-02-01-01.md)
-  - 評価規準：第2学年 (1)「数の構成と表し方」
+  - 評価規準：[第2学年 (1)「数の構成と表し方」](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/assessment/grade-2.md)
 
 ## 第3学年
 
@@ -35,7 +35,7 @@
 - **根拠**
   - 学習指導要領：第3学年 A(6) 分数とその表し方 [ア(ア)](https://w3id.org/jp-cos/8250233161100000)
   - 解説：[第3学年 A(6) 分数とその表し方](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/commentary/03-03-02-01-06.md)
-  - 評価規準：第3学年 (6)「分数の意味と表し方」
+  - 評価規準：[第3学年 (6)「分数の意味と表し方」](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/assessment/grade-3.md)
 
 ### frac-g3-unit：単位分数のいくつ分
 
@@ -46,7 +46,7 @@
 - **根拠**
   - 学習指導要領：第3学年 A(6) 分数とその表し方 [ア(イ)](https://w3id.org/jp-cos/8250233161200000)
   - 解説：[第3学年 A(6) 分数とその表し方](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/commentary/03-03-02-01-06.md)
-  - 評価規準：第3学年 (6)「分数の意味と表し方」
+  - 評価規準：[第3学年 (6)「分数の意味と表し方」](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/assessment/grade-3.md)
 
 ### frac-g3-add-sub：かんたんな分数のたし算とひき算
 
@@ -57,7 +57,7 @@
 - **根拠**
   - 学習指導要領：第3学年 A(6) 分数とその表し方 [ア(ウ)](https://w3id.org/jp-cos/8250233161300000)
   - 解説：[第3学年 A(6) 分数とその表し方](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/commentary/03-03-02-01-06.md)
-  - 評価規準：第3学年 (6)「分数の意味と表し方」
+  - 評価規準：[第3学年 (6)「分数の意味と表し方」](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/assessment/grade-3.md)
 
 ## 第4学年
 
@@ -70,7 +70,7 @@
 - **根拠**
   - 学習指導要領：第4学年 A(5) 分数とその加法及び減法 [ア(ア)](https://w3id.org/jp-cos/8250243151100000)
   - 解説：[第4学年 A(5) 分数とその加法及び減法](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/commentary/03-04-02-01-05.md)
-  - 評価規準：第4学年 (5)「同分母の分数の加法，減法」
+  - 評価規準：[第4学年 (5)「同分母の分数の加法，減法」](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/assessment/grade-4.md)
 
 ### frac-g4-add-sub：分母が同じ分数のたし算とひき算
 
@@ -81,7 +81,7 @@
 - **根拠**
   - 学習指導要領：第4学年 A(5) 分数とその加法及び減法 [ア(イ)](https://w3id.org/jp-cos/8250243151200000)
   - 解説：[第4学年 A(5) 分数とその加法及び減法](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/commentary/03-04-02-01-05.md)
-  - 評価規準：第4学年 (5)「同分母の分数の加法，減法」
+  - 評価規準：[第4学年 (5)「同分母の分数の加法，減法」](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/assessment/grade-4.md)
 
 ## 第5学年
 
@@ -94,7 +94,7 @@
 - **根拠**
   - 学習指導要領：第5学年 A(4) 分数 [ア(ア)](https://w3id.org/jp-cos/8250253141100000)
   - 解説：[第5学年 A(4) 分数](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/commentary/03-05-02-01-04.md)
-  - 評価規準：第5学年 (4)「分数の意味と表し方」
+  - 評価規準：[第5学年 (4)「分数の意味と表し方」](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/assessment/grade-5.md)
 
 ### frac-g5-equivalent：約分と通分
 
@@ -105,7 +105,7 @@
 - **根拠**
   - 学習指導要領：第5学年 A(4) 分数 [ア(ウ)](https://w3id.org/jp-cos/8250253141300000)
   - 解説：[第5学年 A(4) 分数](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/commentary/03-05-02-01-04.md)
-  - 評価規準：第5学年 (4)「分数の意味と表し方」
+  - 評価規準：[第5学年 (4)「分数の意味と表し方」](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/assessment/grade-5.md)
 
 ### frac-g5-compare：分数の大きさ比べ
 
@@ -116,7 +116,7 @@
 - **根拠**
   - 学習指導要領：第5学年 A(4) 分数 [ア(エ)](https://w3id.org/jp-cos/8250253141400000)
   - 解説：[第5学年 A(4) 分数](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/commentary/03-05-02-01-04.md)
-  - 評価規準：第5学年 (4)「分数の意味と表し方」
+  - 評価規準：[第5学年 (4)「分数の意味と表し方」](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/assessment/grade-5.md)
 
 ### frac-g5-add-sub：分母がちがう分数のたし算とひき算
 
@@ -127,4 +127,4 @@
 - **根拠**
   - 学習指導要領：第5学年 A(5) 分数の加法及び減法 [ア(ア)](https://w3id.org/jp-cos/8250253151100000)
   - 解説：[第5学年 A(5) 分数の加法及び減法](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/commentary/03-05-02-01-05.md)
-  - 評価規準：第5学年 (5)「分数の加法，減法」
+  - 評価規準：[第5学年 (5)「分数の加法，減法」](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/assessment/grade-5.md)

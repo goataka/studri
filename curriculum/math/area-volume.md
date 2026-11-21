@@ -21,7 +21,7 @@
 - **根拠**
   - 学習指導要領：第4学年 B(4) 平面図形の面積 [ア(ア)](https://w3id.org/jp-cos/8250243241100000)
   - 解説：[第4学年 B(4) 平面図形の面積](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/commentary/03-04-02-02-04.md)
-  - 評価規準：第4学年 (4)「平面図形の面積」
+  - 評価規準：[第4学年 (4)「平面図形の面積」](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/assessment/grade-4.md)
 
 ### area-g4-rectangle：長方形と正方形の面積
 
@@ -32,7 +32,7 @@
 - **根拠**
   - 学習指導要領：第4学年 B(4) 平面図形の面積 [ア(イ)](https://w3id.org/jp-cos/8250243241200000)
   - 解説：[第4学年 B(4) 平面図形の面積](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/commentary/03-04-02-02-04.md)
-  - 評価規準：第4学年 (4)「平面図形の面積」
+  - 評価規準：[第4学年 (4)「平面図形の面積」](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/assessment/grade-4.md)
 
 ## 第5学年
 
@@ -45,7 +45,7 @@
 - **根拠**
   - 学習指導要領：第5学年 B(3) 平面図形の面積 [ア(ア)](https://w3id.org/jp-cos/8250253231100000)
   - 解説：[第5学年 B(3) 平面図形の面積](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/commentary/03-05-02-02-03.md)
-  - 評価規準：第5学年 (3)「平面図形の面積」
+  - 評価規準：[第5学年 (3)「平面図形の面積」](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/assessment/grade-5.md)
 
 ### area-g5-volume-unit：体積の単位
 
@@ -56,7 +56,7 @@
 - **根拠**
   - 学習指導要領：第5学年 B(4) 立体図形の体積 [ア(ア)](https://w3id.org/jp-cos/8250253241100000)
   - 解説：[第5学年 B(4) 立体図形の体積](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/commentary/03-05-02-02-04.md)
-  - 評価規準：第5学年 (4)「立体図形の体積」
+  - 評価規準：[第5学年 (4)「立体図形の体積」](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/assessment/grade-5.md)
 
 ### area-g5-cuboid-volume：直方体と立方体の体積
 
@@ -67,7 +67,7 @@
 - **根拠**
   - 学習指導要領：第5学年 B(4) 立体図形の体積 [ア(イ)](https://w3id.org/jp-cos/8250253241200000)
   - 解説：[第5学年 B(4) 立体図形の体積](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/commentary/03-05-02-02-04.md)
-  - 評価規準：第5学年 (4)「立体図形の体積」
+  - 評価規準：[第5学年 (4)「立体図形の体積」](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/assessment/grade-5.md)
 
 ## 第6学年
 
@@ -80,7 +80,7 @@
 - **根拠**
   - 学習指導要領：第6学年 B(2) 身の回りにある形の概形やおよその面積など [ア(ア)](https://w3id.org/jp-cos/8250263221100000)
   - 解説：[第6学年 B(2) 身の回りにある形の概形やおよその面積など](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/commentary/03-06-02-02-02.md)
-  - 評価規準：第6学年 (2)「概形とおよその面積」
+  - 評価規準：[第6学年 (2)「概形とおよその面積」](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/assessment/grade-6.md)
 
 ### area-g6-circle：円の面積
 
@@ -91,7 +91,7 @@
 - **根拠**
   - 学習指導要領：第6学年 B(3) 平面図形の面積 [ア(ア)](https://w3id.org/jp-cos/8250263231100000)
   - 解説：[第6学年 B(3) 平面図形の面積](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/commentary/03-06-02-02-03.md)
-  - 評価規準：第6学年 (3)「円の面積」
+  - 評価規準：[第6学年 (3)「円の面積」](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/assessment/grade-6.md)
 
 ### area-g6-prism-volume：角柱と円柱の体積
 
@@ -102,4 +102,4 @@
 - **根拠**
   - 学習指導要領：第6学年 B(4) 立体図形の体積 [ア(ア)](https://w3id.org/jp-cos/8250263241100000)
   - 解説：[第6学年 B(4) 立体図形の体積](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/commentary/03-06-02-02-04.md)
-  - 評価規準：第6学年 (4)「角柱及び円柱の体積」
+  - 評価規準：[第6学年 (4)「角柱及び円柱の体積」](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/assessment/grade-6.md)

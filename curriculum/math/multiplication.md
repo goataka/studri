@@ -23,7 +23,7 @@
 - **根拠**
   - 学習指導要領：第2学年 A(3) 乗法 [ア(ア)](https://w3id.org/jp-cos/8250223131100000)
   - 解説：[第2学年 A(3) 乗法](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/commentary/03-02-02-01-03.md)
-  - 評価規準：第2学年 (3)「乗法」
+  - 評価規準：[第2学年 (3)「乗法」](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/assessment/grade-2.md)
 
 ### mul-g2-expression：かけ算の式
 
@@ -34,7 +34,7 @@
 - **根拠**
   - 学習指導要領：第2学年 A(3) 乗法 [ア(イ)](https://w3id.org/jp-cos/8250223131200000)
   - 解説：[第2学年 A(3) 乗法](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/commentary/03-02-02-01-03.md)
-  - 評価規準：第2学年 (3)「乗法」
+  - 評価規準：[第2学年 (3)「乗法」](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/assessment/grade-2.md)
 
 ### mul-g2-property：かけ算のきまり
 
@@ -45,7 +45,7 @@
 - **根拠**
   - 学習指導要領：第2学年 A(3) 乗法 [ア(ウ)](https://w3id.org/jp-cos/8250223131300000)
   - 解説：[第2学年 A(3) 乗法](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/commentary/03-02-02-01-03.md)
-  - 評価規準：第2学年 (3)「乗法」
+  - 評価規準：[第2学年 (3)「乗法」](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/assessment/grade-2.md)
 
 ### mul-g2-kuku：かけ算九九
 
@@ -56,7 +56,7 @@
 - **根拠**
   - 学習指導要領：第2学年 A(3) 乗法 [ア(エ)](https://w3id.org/jp-cos/8250223131400000)
   - 解説：[第2学年 A(3) 乗法](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/commentary/03-02-02-01-03.md)
-  - 評価規準：第2学年 (3)「乗法」
+  - 評価規準：[第2学年 (3)「乗法」](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/assessment/grade-2.md)
 
 ### mul-g2-two-digit：2けた×1けたのかんたんなかけ算
 
@@ -67,7 +67,7 @@
 - **根拠**
   - 学習指導要領：第2学年 A(3) 乗法 [ア(オ)](https://w3id.org/jp-cos/8250223131500000)
   - 解説：[第2学年 A(3) 乗法](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/commentary/03-02-02-01-03.md)
-  - 評価規準：第2学年 (3)「乗法」
+  - 評価規準：[第2学年 (3)「乗法」](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/assessment/grade-2.md)
 
 ## 第3学年
 
@@ -80,7 +80,7 @@
 - **根拠**
   - 学習指導要領：第3学年 A(3) 乗法 [ア(ア)](https://w3id.org/jp-cos/8250233131100000)、[ア(イ)](https://w3id.org/jp-cos/8250233131200000)
   - 解説：[第3学年 A(3) 乗法](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/commentary/03-03-02-01-03.md)
-  - 評価規準：第3学年 (3)「乗法」
+  - 評価規準：[第3学年 (3)「乗法」](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/assessment/grade-3.md)
 
 ### mul-g3-property：かけ算のきまり（交換・結合・分配）
 
@@ -91,7 +91,7 @@
 - **根拠**
   - 学習指導要領：第3学年 A(3) 乗法 [ア(ウ)](https://w3id.org/jp-cos/8250233131300000)
   - 解説：[第3学年 A(3) 乗法](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/commentary/03-03-02-01-03.md)
-  - 評価規準：第3学年 (3)「乗法」
+  - 評価規準：[第3学年 (3)「乗法」](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/assessment/grade-3.md)
 
 ## 第4学年
 
@@ -104,7 +104,7 @@
 - **根拠**
   - 学習指導要領：第4学年 A(4) 小数とその計算 [ア(エ)](https://w3id.org/jp-cos/8250243141400000)
   - 解説：[第4学年 A(4) 小数とその計算](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/commentary/03-04-02-01-04.md)
-  - 評価規準：第4学年 (4)「小数の仕組みとその計算」
+  - 評価規準：[第4学年 (4)「小数の仕組みとその計算」](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/assessment/grade-4.md)
 
 ## 第5学年
 
@@ -117,7 +117,7 @@
 - **根拠**
   - 学習指導要領：第5学年 A(3) 小数の乗法及び除法 [ア(ア)](https://w3id.org/jp-cos/8250253131100000)
   - 解説：[第5学年 A(3) 小数の乗法及び除法](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/commentary/03-05-02-01-03.md)
-  - 評価規準：第5学年 (3)「小数の乗法，除法」
+  - 評価規準：[第5学年 (3)「小数の乗法，除法」](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/assessment/grade-5.md)
 
 ### mul-g5-decimal-calc：小数×小数
 
@@ -128,7 +128,7 @@
 - **根拠**
   - 学習指導要領：第5学年 A(3) 小数の乗法及び除法 [ア(イ)](https://w3id.org/jp-cos/8250253131200000)、[ア(ウ)](https://w3id.org/jp-cos/8250253131300000)
   - 解説：[第5学年 A(3) 小数の乗法及び除法](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/commentary/03-05-02-01-03.md)
-  - 評価規準：第5学年 (3)「小数の乗法，除法」
+  - 評価規準：[第5学年 (3)「小数の乗法，除法」](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/assessment/grade-5.md)
 
 ## 第6学年
 
@@ -141,7 +141,7 @@
 - **根拠**
   - 学習指導要領：第6学年 A(1) 分数の乗法及び除法 [ア(ア)](https://w3id.org/jp-cos/8250263111100000)
   - 解説：[第6学年 A(1) 分数の乗法及び除法](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/commentary/03-06-02-01-01.md)
-  - 評価規準：第6学年 (1)「分数の乗法，除法」
+  - 評価規準：[第6学年 (1)「分数の乗法，除法」](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/assessment/grade-6.md)
 
 ### mul-g6-fraction-calc：分数のかけ算の計算
 
@@ -152,4 +152,4 @@
 - **根拠**
   - 学習指導要領：第6学年 A(1) 分数の乗法及び除法 [ア(イ)](https://w3id.org/jp-cos/8250263111200000)、[ア(ウ)](https://w3id.org/jp-cos/8250263111300000)
   - 解説：[第6学年 A(1) 分数の乗法及び除法](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/commentary/03-06-02-01-01.md)
-  - 評価規準：第6学年 (1)「分数の乗法，除法」
+  - 評価規準：[第6学年 (1)「分数の乗法，除法」](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/assessment/grade-6.md)
