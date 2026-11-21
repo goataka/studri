@@ -27,7 +27,11 @@
   - **[理科](science/README.md)**
   - **[外国語（英語）](foreign-language/README.md)**
 - **中学校**
+  - **[国語](lower-secondary/japanese/README.md)**
+  - **[社会](lower-secondary/social-studies/README.md)**
   - **[数学](lower-secondary/math/README.md)**
+  - **[理科](lower-secondary/science/README.md)**
+  - **[外国語（英語）](lower-secondary/foreign-language/README.md)**
 
 ## 書き方
 
