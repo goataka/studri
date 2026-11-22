@@ -22,7 +22,7 @@
 
 | 目標 | 学年 | 区分 | 問題の形式 | 後に続く目標 | コース |
 | --- | --- | --- | --- | --- | --- |
-| [sci-g3-wind-rubber](../elementary/science/energy.md#sci-g3-wind-rubber風とゴムの力の働き) 風とゴムの力の働き | 3年 | △ | 選択 | 7 | － |
+| [sci-g3-wind-rubber](../elementary/science/energy.md#sci-g3-wind-rubber風とゴムの力の働き) 風とゴムの力の働き | 3年 | △ | 選択 | 8 | － |
 | [sci-g3-light-sound](../elementary/science/energy.md#sci-g3-light-sound光と音の性質) 光と音の性質 | 3年 | △ | 選択 | 1 | － |
 | [sci-g3-magnet](../elementary/science/energy.md#sci-g3-magnet磁石の性質) 磁石の性質 | 3年 | △ | 選択 | 7 | － |
 | [sci-g3-circuit](../elementary/science/energy.md#sci-g3-circuit電気の通り道) 電気の通り道 | 3年 | △ | 選択 | 8 | － |
@@ -36,7 +36,7 @@
 
 | 目標 | 学年 | 区分 | 問題の形式 | 後に続く目標 | コース |
 | --- | --- | --- | --- | --- | --- |
-| [sci-g3-living-things](../elementary/science/life.md#sci-g3-living-things身の回りの生物) 身の回りの生物 | 3年 | △ | 選択 | 15 | － |
+| [sci-g3-living-things](../elementary/science/life.md#sci-g3-living-things身の回りの生物) 身の回りの生物 | 3年 | △ | 選択 | 17 | － |
 | [sci-g4-body-movement](../elementary/science/life.md#sci-g4-body-movement人の体のつくりと運動) 人の体のつくりと運動 | 4年 | △ | 選択 | 5 | － |
 | [sci-g4-seasons](../elementary/science/life.md#sci-g4-seasons季節と生物) 季節と生物 | 4年 | △ | 選択 | 12 | － |
 | [sci-g5-plants](../elementary/science/life.md#sci-g5-plants植物の発芽成長結実) 植物の発芽、成長、結実 | 5年 | △ | 選択 | 11 | － |
