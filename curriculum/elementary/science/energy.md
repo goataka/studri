@@ -27,7 +27,7 @@
 
 - **学年**：第3学年
 - **目標**：日光は直進し、集めたり反射させたりできる。物に日光を当てると、物の明るさや暖かさが変わる。物から音が出たり伝わったりするとき、物は震えている。音の大きさが変わるとき、物の震え方が変わる
-- **子ども向け**：日光はまっすぐ進み、鏡ではね返せること、音が出る物はふるえていることが分かる
+- **子ども向け**：日光はまっすぐ進み、集めたりはね返したりできること、日光を当てると明るさや温かさが変わること、音が出る物はふるえていて、音の大きさでふるえ方が変わることが分かる
 - **根拠**
   - 学習指導要領：[A(3) 光と音の性質](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/science/grade-3.md)：[ア(ア)](https://w3id.org/jp-cos/8260233131100000)、[ア(イ)](https://w3id.org/jp-cos/8260233131200000)、[ア(ウ)](https://w3id.org/jp-cos/8260233131300000)
   - 解説：[年の目標及び内容 ２ 第３学年の内容 Ａ 物質・エネルギー (3) 光と音の性質](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/science/commentary/03-01-02-01-03.md)
@@ -37,7 +37,9 @@
 
 - **学年**：第3学年
 - **目標**：磁石に引き付けられる物と引き付けられない物がある。磁石に近付けると磁石になる物がある。磁石の異極は引き合い、同極は退け合う
-- **子ども向け**：磁石につく物とつかない物があり、同じ極は退け合い、ちがう極は引き合うことが分かる
+- **子ども向け**：磁石につく物とつかない物があり、磁石に近づけると磁石になる物もあること、同じ極は退け合い、ちがう極は引き合うことが分かる
+- **内容の取扱い**
+  - 磁石が物を引き付ける力は、磁石と物の距離によって変わることにも触れる（[第3学年の内容の取扱い(2)](https://w3id.org/jp-cos/8260235200000000)）
 - **根拠**
   - 学習指導要領：[A(4) 磁石の性質](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/science/grade-3.md)：[ア(ア)](https://w3id.org/jp-cos/8260233141100000)、[ア(イ)](https://w3id.org/jp-cos/8260233141200000)
   - 解説：[学年の目標及び内容 ２ 第３学年の内容 Ａ 物質・エネルギー (4) 磁石の性質](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/science/commentary/03-01-02-01-04.md)
@@ -59,8 +61,10 @@
 
 - **学年**：第4学年
 - **目標**：乾電池の数やつなぎ方を変えると、電流の大きさや向きが変わり、豆電球の明るさやモーターの回り方が変わる
-- **子ども向け**：乾電池の数やつなぎ方（直列・並列）を変えると、モーターの回り方が変わることが分かる
+- **子ども向け**：乾電池の数やつなぎ方（直列・並列）を変えると、電流の大きさや向きが変わり、豆電球の明るさやモーターの回り方が変わることが分かる
 - **前提**：sci-g3-circuit
+- **内容の取扱い**
+  - 直列つなぎと並列つなぎを扱う（[第4学年の内容の取扱い(1)](https://w3id.org/jp-cos/8260245100000000)）
 - **根拠**
   - 学習指導要領：[A(3) 電流の働き](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/science/grade-4.md)：[ア(ア)](https://w3id.org/jp-cos/8260243131100000)
   - 解説：[学年の目標及び内容 ２ 第４学年の内容 Ａ 物質・エネルギー (3) 電流の働き](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/science/commentary/03-02-02-01-03.md)
@@ -73,6 +77,7 @@
 - **学年**：第5学年
 - **目標**：振り子が1往復する時間は、おもりの重さなどによっては変わらないが、振り子の長さによって変わる
 - **子ども向け**：振り子が1往復する時間は、振り子の長さで変わり、おもりの重さでは変わらないことが分かる
+- **前提**：sci-g3-wind-rubber
 - **根拠**
   - 学習指導要領：[A(2) 振り子の運動](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/science/grade-5.md)：[ア(ア)](https://w3id.org/jp-cos/8260253121100000)
   - 解説：[年の目標及び内容 ２ 第５学年の内容 Ａ 物質・エネルギー (2) 振り子の運動](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/science/commentary/03-03-02-01-02.md)
@@ -106,8 +111,10 @@
 
 - **学年**：第6学年
 - **目標**：電気は、つくりだしたり蓄えたりすることができる。電気は、光、音、熱、運動などに変換することができる。身の回りには、電気の性質や働きを利用した道具がある
-- **子ども向け**：電気をつくったりためたりでき、光・音・熱・運動に変えられることが分かる
+- **子ども向け**：電気はつくったりためたりでき、光・音・熱・運動に変えられることや、身の回りには電気の働きを使った道具があることが分かる
 - **前提**：sci-g5-electromagnet
+- **内容の取扱い**
+  - 電気をつくりだす道具として、手回し発電機、光電池などを扱う（[第6学年の内容の取扱い(2)](https://w3id.org/jp-cos/8260265200000000)）
 - **根拠**
   - 学習指導要領：[A(4) 電気の利用](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/science/grade-6.md)：[ア(ア)](https://w3id.org/jp-cos/8260263141100000)、[ア(イ)](https://w3id.org/jp-cos/8260263141200000)、[ア(ウ)](https://w3id.org/jp-cos/8260263141300000)
   - 解説：[学年の目標及び内容 ２ 第６学年の内容 Ａ 物質・エネルギー (4) 電気の利用](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/science/commentary/03-04-02-01-04.md)

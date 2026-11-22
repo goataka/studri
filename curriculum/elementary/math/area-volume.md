@@ -18,6 +18,8 @@
 - **目標**：面積の単位の平方センチメートル cm²、平方メートル m²、平方キロメートル km² を知る
 - **子ども向け**：広さを cm²、m²、km² などの単位で表せる
 - **前提**：meas-g2-length
+- **内容の取扱い**
+  - アール a、ヘクタール ha の単位についても触れる（[第4学年の内容の取扱い(8)](https://w3id.org/jp-cos/8250245800000000)）
 - **根拠**
   - 学習指導要領：第4学年 B(4) 平面図形の面積 [ア(ア)](https://w3id.org/jp-cos/8250243241100000)
   - 解説：[第4学年 B(4) 平面図形の面積](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/commentary/03-04-02-02-04.md)
@@ -88,6 +90,8 @@
 - **目標**：円の面積の、計算による求め方を理解する
 - **子ども向け**：「半径×半径×3.14」で、円の面積を計算できる
 - **前提**：area-g5-polygons、plane-g5-pi
+- **内容の取扱い**
+  - 円周率は 3.14 を用いる（[第6学年の内容の取扱い(3)](https://w3id.org/jp-cos/8250265300000000)）
 - **根拠**
   - 学習指導要領：第6学年 B(3) 平面図形の面積 [ア(ア)](https://w3id.org/jp-cos/8250263231100000)
   - 解説：[第6学年 B(3) 平面図形の面積](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/commentary/03-06-02-02-03.md)

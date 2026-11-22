@@ -29,6 +29,8 @@
 - **目標**：簡単な一元一次方程式を解く
 - **子ども向け**：等式の性質を使って、3x＋5＝2x－1のような方程式を解ける
 - **前提**：eq-j1-meaning、expr-j1-linear-calc
+- **内容の取扱い**
+  - 内容の「A数と式」の(3)のアの(イ)とイの(イ)に関連して、簡単な比例式を解くことを取り扱う（[第1学年の内容の取扱い(4)](https://w3id.org/jp-cos/8350215400000000)）
 - **根拠**
   - 学習指導要領：[A(3) 一元一次方程式](https://github.com/goataka/courses-of-study/blob/main/docs/lower-secondary/math/grade-1.md)：[(イ)](https://w3id.org/jp-cos/8350213131200000)
   - 解説：[2 第1学年の内容 Ａ 数と式 (3) 一元一次方程式](https://github.com/goataka/courses-of-study/blob/main/docs/lower-secondary/math/commentary/03-01-02-01-03.md)
@@ -66,6 +68,8 @@
 - **目標**：二次方程式の必要性と意味及びその解の意味を理解する
 - **子ども向け**：二次方程式とその解の意味が分かる
 - **前提**：eq-j1-solve
+- **内容の取扱い**
+  - 内容の「A数と式」の(3)については、実数の解をもつ二次方程式を取り扱う（[第3学年の内容の取扱い(2)](https://w3id.org/jp-cos/8350235200000000)）
 - **根拠**
   - 学習指導要領：[A(3) 二次方程式](https://github.com/goataka/courses-of-study/blob/main/docs/lower-secondary/math/grade-3.md)：[(ア)](https://w3id.org/jp-cos/8350233131100000)
   - 解説：[2 第3学年の内容 Ａ 数と式 (3) 二次方程式](https://github.com/goataka/courses-of-study/blob/main/docs/lower-secondary/math/commentary/03-03-02-01-03.md)
@@ -77,6 +81,9 @@
 - **目標**：因数分解したり平方の形に変形したりして二次方程式を解く
 - **子ども向け**：x²－5x＋6＝0や（x－2）²＝3のような二次方程式を解ける
 - **前提**：eq-j3-meaning、expr-j3-factor、num-j3-sqrt-meaning
+- **内容の取扱い**
+  - 内容の「A数と式」の(3)については、実数の解をもつ二次方程式を取り扱う（[第3学年の内容の取扱い(2)](https://w3id.org/jp-cos/8350235200000000)）
+  - 内容の「A数と式」の(3)のアの(イ)とイの(ア)については、ax²＝b(a、bは有理数)の二次方程式及びx²＋px＋q＝0(p、qは整数)の二次方程式を取り扱う。因数分解して解くことの指導においては、内容の「A数と式」の(2)のアの(イ)に示した公式を用いることができるものを中心に取り扱う。平方の形に変形して解くことの指導においては、xの係数が偶数であるものを中心に取り扱う（[第3学年の内容の取扱い(3)](https://w3id.org/jp-cos/8350235300000000)）
 - **根拠**
   - 学習指導要領：[A(3) 二次方程式](https://github.com/goataka/courses-of-study/blob/main/docs/lower-secondary/math/grade-3.md)：[(イ)](https://w3id.org/jp-cos/8350233131200000)
   - 解説：[2 第3学年の内容 Ａ 数と式 (3) 二次方程式](https://github.com/goataka/courses-of-study/blob/main/docs/lower-secondary/math/commentary/03-03-02-01-03.md)
@@ -88,6 +95,8 @@
 - **目標**：解の公式を知り、それを用いて二次方程式を解く
 - **子ども向け**：解の公式を使って、二次方程式を解ける
 - **前提**：eq-j3-factor、num-j3-sqrt-calc
+- **内容の取扱い**
+  - 内容の「A数と式」の(3)については、実数の解をもつ二次方程式を取り扱う（[第3学年の内容の取扱い(2)](https://w3id.org/jp-cos/8350235200000000)）
 - **根拠**
   - 学習指導要領：[A(3) 二次方程式](https://github.com/goataka/courses-of-study/blob/main/docs/lower-secondary/math/grade-3.md)：[(ウ)](https://w3id.org/jp-cos/8350233131300000)
   - 解説：[2 第3学年の内容 Ａ 数と式 (3) 二次方程式](https://github.com/goataka/courses-of-study/blob/main/docs/lower-secondary/math/commentary/03-03-02-01-03.md)

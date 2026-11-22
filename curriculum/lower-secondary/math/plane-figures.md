@@ -18,6 +18,8 @@
 - **目標**：角の二等分線、線分の垂直二等分線、垂線などの基本的な作図の方法を理解する
 - **子ども向け**：定規とコンパスで、角の二等分線、垂直二等分線、垂線をかける
 - **前提**：plane-g4-parallel、plane-g3-circle
+- **内容の取扱い**
+  - 内容の「B図形」の(1)のイの(ウ)に関連して、円の接線はその接点を通る半径に垂直であることを取り扱う（[第1学年の内容の取扱い(5)](https://w3id.org/jp-cos/8350215500000000)）
 - **根拠**
   - 学習指導要領：[B(1) 平面図形](https://github.com/goataka/courses-of-study/blob/main/docs/lower-secondary/math/grade-1.md)：[(ア)](https://w3id.org/jp-cos/8350213211100000)
   - 解説：[2 第1学年の内容 Ｂ 図形 (1) 平面図形](https://github.com/goataka/courses-of-study/blob/main/docs/lower-secondary/math/commentary/03-01-02-02-01.md)
@@ -64,6 +66,8 @@
 - **目標**：平面図形の合同の意味及び三角形の合同条件について理解する
 - **子ども向け**：合同の意味と三角形の合同条件が分かる
 - **前提**：plane-g5-congruent
+- **内容の取扱い**
+  - 内容の「B図形」の(2)のイの(ア)に関連して、正方形、ひし形及び長方形が平行四辺形の特別な形であることを取り扱う（[第2学年の内容の取扱い(1)](https://w3id.org/jp-cos/8350225100000000)）
 - **根拠**
   - 学習指導要領：[B(2) 図形の合同](https://github.com/goataka/courses-of-study/blob/main/docs/lower-secondary/math/grade-2.md)：[(ア)](https://w3id.org/jp-cos/8350223221100000)
   - 解説：[2 第2学年の内容 Ｂ 図形 (2) 図形の合同](https://github.com/goataka/courses-of-study/blob/main/docs/lower-secondary/math/commentary/03-02-02-02-02.md)
@@ -75,6 +79,8 @@
 - **目標**：証明の必要性と意味及びその方法について理解する
 - **子ども向け**：仮定と結論を分けて、合同条件などを根拠に筋道を立てて証明できる
 - **前提**：plane-j2-congruence、plane-j2-parallel-angles
+- **内容の取扱い**
+  - 内容の「B図形」の(2)のイの(ア)に関連して、正方形、ひし形及び長方形が平行四辺形の特別な形であることを取り扱う（[第2学年の内容の取扱い(1)](https://w3id.org/jp-cos/8350225100000000)）
 - **根拠**
   - 学習指導要領：[B(2) 図形の合同](https://github.com/goataka/courses-of-study/blob/main/docs/lower-secondary/math/grade-2.md)：[(イ)](https://w3id.org/jp-cos/8350223221200000)
   - 解説：[2 第2学年の内容 Ｂ 図形 (2) 図形の合同](https://github.com/goataka/courses-of-study/blob/main/docs/lower-secondary/math/commentary/03-02-02-02-02.md)
@@ -99,6 +105,8 @@
 - **目標**：円周角と中心角の関係の意味を理解し、それが証明できることを知る
 - **子ども向け**：円周角は中心角の半分であることが分かり、それを証明できる
 - **前提**：plane-j2-proof、plane-g3-circle
+- **内容の取扱い**
+  - 内容の「B図形」の(2)に関連して、円周角の定理の逆を取り扱う（[第3学年の内容の取扱い(4)](https://w3id.org/jp-cos/8350235400000000)）
 - **根拠**
   - 学習指導要領：[B(2) 円周角と中心角の関係](https://github.com/goataka/courses-of-study/blob/main/docs/lower-secondary/math/grade-3.md)：[(ア)](https://w3id.org/jp-cos/8350233221100000)
   - 解説：[2 第3学年の内容 Ｂ 図形 (2) 円周角と中心角の関係](https://github.com/goataka/courses-of-study/blob/main/docs/lower-secondary/math/commentary/03-03-02-02-02.md)

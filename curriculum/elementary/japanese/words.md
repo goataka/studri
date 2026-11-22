@@ -26,7 +26,7 @@
 
 - **学年**：第1学年及び第2学年
 - **目標**：音節と文字との関係、アクセントによる語の意味の違いなどに気付く。姿勢や口形、発声や発音に注意して話す
-- **子ども向け**：音と文字の関係に気づき、姿勢や口の形、声の出し方に気をつけて話せる
+- **子ども向け**：音と文字の関係や、アクセントで言葉の意味が変わることに気づき、姿勢や口の形、声の出し方に気をつけて話せる
 - **根拠**
   - 学習指導要領：[(1) 言葉の特徴や使い方に関する事項](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/japanese/grade-1-2.md)：[イ](https://w3id.org/jp-cos/82102A3112000000)
   - 解説：[第1節第１学年及び第２学年の内容 1 〔知識及び技能〕](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/japanese/commentary/03-01-01.md)
@@ -36,7 +36,7 @@
 
 - **学年**：第1学年及び第2学年
 - **目標**：身近なことを表す語句の量を増し、話や文章の中で使う。言葉には意味による語句のまとまりがあることに気付き、語彙を豊かにする
-- **子ども向け**：身近なことを表す言葉をふやし、話や文の中で使える
+- **子ども向け**：身近なことを表す言葉をふやし、話や文の中で使える。意味の近い言葉のまとまりに気づける
 - **根拠**
   - 学習指導要領：[(1) 言葉の特徴や使い方に関する事項](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/japanese/grade-1-2.md)：[オ](https://w3id.org/jp-cos/82102A3115000000)
   - 解説：[第1節第１学年及び第２学年の内容 1 〔知識及び技能〕](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/japanese/commentary/03-01-01.md)
@@ -56,7 +56,7 @@
 
 - **学年**：第1学年及び第2学年
 - **目標**：丁寧な言葉と普通の言葉との違いに気を付けて使う。敬体で書かれた文章に慣れる
-- **子ども向け**：ていねいな言葉と普通の言葉のちがいに気をつけて使える
+- **子ども向け**：ていねいな言葉と普通の言葉のちがいに気をつけて使い、「です・ます」で書かれた文章に慣れる
 - **根拠**
   - 学習指導要領：[(1) 言葉の特徴や使い方に関する事項](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/japanese/grade-1-2.md)：[キ](https://w3id.org/jp-cos/82102A3117000000)
   - 解説：[第1節第１学年及び第２学年の内容 1 〔知識及び技能〕](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/japanese/commentary/03-01-01.md)
@@ -101,7 +101,7 @@
 
 - **学年**：第3学年及び第4学年
 - **目標**：様子や行動、気持ちや性格を表す語句の量を増し、話や文章の中で使う。言葉には性質や役割による語句のまとまりがあることを理解し、語彙を豊かにする
-- **子ども向け**：様子や気持ちを表す言葉をふやし、言葉のまとまりが分かる
+- **子ども向け**：様子や行動、気持ちや性格を表す言葉をふやして使い、言葉には性質や役割によるまとまりがあることが分かる
 - **前提**：jp-words-g12-vocabulary
 - **根拠**
   - 学習指導要領：[(1) 言葉の特徴や使い方に関する事項](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/japanese/grade-3-4.md)：[オ](https://w3id.org/jp-cos/82102C3115000000)

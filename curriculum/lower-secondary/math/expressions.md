@@ -40,6 +40,8 @@
 - **目標**：数量の関係や法則などを文字を用いた式に表すことができることを理解し、式を用いて表したり読み取ったりする
 - **子ども向け**：数量の関係や決まりを、等式や不等式などの文字の式で表したり読み取ったりできる
 - **前提**：expr-j1-letters、expr-g5-relation
+- **内容の取扱い**
+  - 内容の「A数と式」の(2)のアの(エ)に関連して、大小関係を不等式を用いて表すことを取り扱う（[第1学年の内容の取扱い(3)](https://w3id.org/jp-cos/8350215300000000)）
 - **根拠**
   - 学習指導要領：[A(2) 文字を用いた式](https://github.com/goataka/courses-of-study/blob/main/docs/lower-secondary/math/grade-1.md)：[(エ)](https://w3id.org/jp-cos/8350213121400000)
   - 解説：[2 第1学年の内容 Ａ 数と式 (2) 文字を用いた式](https://github.com/goataka/courses-of-study/blob/main/docs/lower-secondary/math/commentary/03-01-02-01-02.md)
