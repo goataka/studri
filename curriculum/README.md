@@ -32,6 +32,8 @@
   - **[数学](lower-secondary/math/README.md)**
   - **[理科](lower-secondary/science/README.md)**
   - **[外国語（英語）](lower-secondary/foreign-language/README.md)**
+- **アプリの準備**
+  - **[目標とコースの対応表](plan/README.md)**：アプリで練習できるかの区分と、作る順番
 
 ## 書き方
 
