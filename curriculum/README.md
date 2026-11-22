@@ -20,19 +20,24 @@
 
 ## 一覧
 
-- **[国語](japanese/README.md)**
-- **[社会](social-studies/README.md)**
-- **[算数](math/README.md)**
-- **[理科](science/README.md)**
-- **[外国語（英語）](foreign-language/README.md)**
+- **小学校**
+  - **[国語](japanese/README.md)**
+  - **[社会](social-studies/README.md)**
+  - **[算数](math/README.md)**
+  - **[理科](science/README.md)**
+  - **[外国語（英語）](foreign-language/README.md)**
+- **中学校**
+  - **[数学](lower-secondary/math/README.md)**
 
 ## 書き方
 
 - **ファイル**：教科ごとのフォルダに、系統ごとに1ファイル
+  - 中学校：`lower-secondary/` の下に教科ごとのフォルダを置く
   - 例：`math/division.md` はわり算の系統
 - **目標**：1つの目標を1つの見出しにし、その下に「項目：値」の箇条書きで書く
 - **ID**：`系統-学年-内容` の形の英小文字とハイフン
   - 例：`div-g3-meaning` はわり算、第3学年、意味。2学年まとまりの国語は `jp-read-g34-summary` のように書く
+  - 中学校：学年を `j1` のように書く。例：`eq-j1-solve`
   - 見出し：`### ID：目標の名前`
 - **項目**
   - 学年：その目標を学ぶ学年
@@ -45,9 +50,9 @@
 
 ## 根拠の資料
 
-- **学習指導要領**：小学校学習指導要領 平成29年告示
+- **学習指導要領**：小学校学習指導要領、中学校学習指導要領 平成29年告示
   - リンク：各項目の学習指導要領コード `https://w3id.org/jp-cos/<コード>`
-- **解説**：小学校学習指導要領 平成29年告示 解説（各教科編）
+- **解説**：小学校学習指導要領、中学校学習指導要領 平成29年告示 解説（各教科編）
   - リンク：courses-of-study の `commentary/` の転記
 - **評価規準**：国立教育政策研究所「『指導と評価の一体化』のための学習評価に関する参考資料」令和2年3月
   - リンク：courses-of-study の `assessment/` の転記
