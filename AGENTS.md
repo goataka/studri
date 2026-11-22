@@ -1,5 +1,10 @@
 # エージェント向け共通方針
 
+## 運用
+
+- 開発と運用は [specs/operations.md](specs/operations.md) に従う。
+- 何を学ぶかは [curriculum](curriculum/README.md)、どう作るかは [specs](specs/README.md) を正とする。
+
 ## 言語
 
 - ユーザー向けの回答・確認・質問・進捗報告は、別の言語を指定されない限り日本語にする。
