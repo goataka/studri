@@ -21,11 +21,11 @@
 ## 一覧
 
 - **小学校**
-  - **[国語](japanese/README.md)**
-  - **[社会](social-studies/README.md)**
-  - **[算数](math/README.md)**
-  - **[理科](science/README.md)**
-  - **[外国語（英語）](foreign-language/README.md)**
+  - **[国語](elementary/japanese/README.md)**
+  - **[社会](elementary/social-studies/README.md)**
+  - **[算数](elementary/math/README.md)**
+  - **[理科](elementary/science/README.md)**
+  - **[外国語（英語）](elementary/foreign-language/README.md)**
 - **中学校**
   - **[国語](lower-secondary/japanese/README.md)**
   - **[社会](lower-secondary/social-studies/README.md)**
@@ -36,7 +36,7 @@
 ## 書き方
 
 - **ファイル**：教科ごとのフォルダに、系統ごとに1ファイル
-  - 中学校：`lower-secondary/` の下に教科ごとのフォルダを置く
+  - 学校段階ごとに、小学校は `elementary/`、中学校は `lower-secondary/` の下に教科ごとのフォルダを置く
   - 例：`math/division.md` はわり算の系統
 - **目標**：1つの目標を1つの見出しにし、その下に「項目：値」の箇条書きで書く
 - **ID**：`系統-学年-内容` の形の英小文字とハイフン

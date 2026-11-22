@@ -3,7 +3,7 @@
 第3学年のわり算の意味から、第6学年の分数のわり算までの目標と前提のつながり。
 
 - **上位ページ**：[算数](README.md)
-- **アプリ**：[わり算](../../apps/math/division/index.html)
+- **アプリ**：[わり算](../../../apps/math/division/index.html)
 
 ## 目次
 
