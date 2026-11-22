@@ -41,10 +41,12 @@
 
 ## データの出典
 
-- **学年別漢字配当表**：[courses-of-study の国語：学年別漢字配当表](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/japanese/kanji.md)（1026字）
-- **音訓の割り振り**：[courses-of-study の音訓の割り振り](https://github.com/goataka/courses-of-study/blob/main/docs/reference/onkun/README.md)
+- **学年別漢字配当表**：[国語：学年別漢字配当表](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/japanese/kanji.md)
+  - courses-of-study の小学校国語の別表。1026字
+- **音訓の割り振り**：[音訓の割り振り](https://github.com/goataka/courses-of-study/blob/main/docs/reference/onkun/README.md)
   - 中学校に割り振られた漢字と、付表の語も含む
-- **使い方**：アプリでは、この二つから漢字ごとの配当学年を作り、上の決まりでふりがなを付けるかを判断する。データは courses-of-study を正とし、studri に写すときは生成元を書く
+- **使い方**：この二つから漢字ごとの配当学年と読みの段階を作り、上の決まりでふりがなを付けるかを判断する
+  - データは courses-of-study を正とし、studri に写すときは生成元を書く
 
 ## 今のアプリと系統の確認
 
