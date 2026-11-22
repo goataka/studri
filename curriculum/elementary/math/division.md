@@ -11,6 +11,7 @@
 - [第4学年](#第4学年)
 - [第5学年](#第5学年)
 - [第6学年](#第6学年)
+- [系統全体に関わる内容の取扱い](#系統全体に関わる内容の取扱い)
 
 ## 第3学年
 
@@ -163,6 +164,8 @@
 - **目標**：除数が整数である場合の小数の除法の意味を理解し、計算ができる
 - **子ども向け**：「7.2÷3」のように、小数を整数でわる計算ができる
 - **前提**：div-g4-written-1
+- **内容の取扱い**
+  - 整数を整数で割って商が小数になる場合も含める（[第4学年の内容の取扱い(5)](https://w3id.org/jp-cos/8250245500000000)）
 - **根拠**
   - 学習指導要領：[第4学年 A(4) ア(エ)](https://w3id.org/jp-cos/8250243141400000)
   - 解説：[第4学年 A(4) 小数とその計算](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/commentary/03-04-02-01-04.md)
@@ -222,6 +225,9 @@
 - **目標**：除数が整数や分数である場合も含めて、分数の除法の意味を、小数の除法の考え方を基にして理解する
 - **子ども向け**：「2/3mで3/4kgのぼう1mの重さ」を「3/4÷2/3」と表せる
 - **前提**：div-g5-decimal-meaning、div-g5-quotient-fraction
+- **内容の取扱い**
+  - 逆数を用いて除法を乗法の計算としてみることや、整数や小数の乗法や除法を分数の場合の計算にまとめることも取り扱う（[第6学年の内容の取扱い(1)](https://w3id.org/jp-cos/8250265100000000)）
+  - 第3学年から第6学年までに示す小数や分数の計算の能力を定着させ、それらを用いる能力を伸ばすことに配慮する（[第6学年の内容の取扱い(2)](https://w3id.org/jp-cos/8250265200000000)）
 - **根拠**
   - 学習指導要領：[第6学年 A(1) ア(ア)](https://w3id.org/jp-cos/8250263111100000)
   - 解説：[第6学年 A(1) 分数の乗法及び除法](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/commentary/03-06-02-01-01.md)
@@ -233,6 +239,8 @@
 - **目標**：分数の除法の計算ができる。逆数を用いて除法を乗法の計算としてみる
 - **子ども向け**：わる数の分母と分子を入れかえてかけると、分数のわり算ができる
 - **前提**：div-g6-fraction-meaning
+- **内容の取扱い**
+  - 第3学年から第6学年までに示す小数や分数の計算の能力を定着させ、それらを用いる能力を伸ばすことに配慮する（[第6学年の内容の取扱い(2)](https://w3id.org/jp-cos/8250265200000000)）
 - **根拠**
   - 学習指導要領：[第6学年 A(1) ア(イ)](https://w3id.org/jp-cos/8250263111200000)、[内容の取扱い(1)](https://w3id.org/jp-cos/8250265100000000)
   - 解説：[第6学年 A(1) 分数の乗法及び除法](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/commentary/03-06-02-01-01.md)
@@ -248,3 +256,10 @@
   - 学習指導要領：[第6学年 内容の取扱い(1)](https://w3id.org/jp-cos/8250265100000000)
   - 解説：[第6学年 A(1) 分数の乗法及び除法](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/commentary/03-06-02-01-01.md)
   - 評価規準：[第6学年 (1)「分数の乗法，除法」](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/assessment/grade-6.md)思考・判断・表現
+
+## 系統全体に関わる内容の取扱い
+
+複数の目標に関わる内容の取扱い。
+
+- 簡単な計算は暗算でできるよう配慮する。暗算を筆算や見積りに生かすよう配慮する（[第4学年の内容の取扱い(2)](https://w3id.org/jp-cos/8250245200000000)）：div-g4-written-1、div-g4-written-2、div-g4-check、div-g4-property
+- 第1学年から第4学年までに示す整数の計算の能力を定着させ、それを用いる能力を伸ばすことに配慮する（[第4学年の内容の取扱い(3)](https://w3id.org/jp-cos/8250245300000000)）：div-g4-written-1、div-g4-written-2、div-g4-check、div-g4-property

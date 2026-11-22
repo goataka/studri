@@ -24,7 +24,7 @@
 
 - **学年**：第5学年及び第6学年
 - **目標**：活字体の大文字、小文字。終止符や疑問符、コンマなどの基本的な符号
-- **子ども向け**：アルファベットの大文字と小文字、ピリオドやクエスチョンマークが分かる
+- **子ども向け**：アルファベットの活字体の大文字と小文字や、終止符（ピリオド）、疑問符（クエスチョンマーク）、コンマなどの符号が分かる
 - **根拠**
   - 学習指導要領：[(1) 英語の特徴やきまりに関する事項](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/foreign-language/english.md)：[(ア)](https://w3id.org/jp-cos/82H12D3112100000)、[(イ)](https://w3id.org/jp-cos/82H12D3112200000)
   - 解説：[内容 〔知識及び技能〕 （1）英語の特徴やきまりに関する事項 イ 文字及び符号](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/foreign-language/commentary/02-02-02-02-01-02.md)
@@ -45,8 +45,9 @@
 ### en-sentences：文と文構造
 
 - **学年**：第5学年及び第6学年
-- **目標**：
-- **子ども向け**：「I like ～.」「Do you ～?」などの文の形と、日本語と英語の語順のちがいに気づける
+<!-- markdownlint-disable-next-line MD013 -->
+- **目標**：文：単文。肯定、否定の平叙文。肯定、否定の命令文。疑問文のうち、be動詞で始まるものや助動詞(can、doなど)で始まるもの、疑問詞(who、what、when、where、why、how)で始まるもの。代名詞のうち、I、you、he、sheなどの基本的なものを含むもの。動名詞や過去形のうち、活用頻度の高い基本的なものを含むもの。文構造：(主語＋動詞)。(主語＋動詞＋補語)のうち、主語＋be動詞＋{名詞、代名詞、形容詞}。(主語＋動詞＋目的語)のうち、主語＋動詞＋{名詞、代名詞}
+- **子ども向け**：「I like ～.」「Do you ～?」「Let's ～.」のような、ふつうの文・否定の文・命令の文・疑問の文と、主語＋動詞（＋目的語など）の語順を知り、日本語と英語の語順のちがいに気づける
 - **前提**：en-words
 - **根拠**
   - 学習指導要領：[(1) 英語の特徴やきまりに関する事項](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/foreign-language/english.md)：[(ア)](https://w3id.org/jp-cos/82H12D3114100000)、[(イ)](https://w3id.org/jp-cos/82H12D3114200000)

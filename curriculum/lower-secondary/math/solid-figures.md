@@ -17,6 +17,8 @@
 - **目標**：空間における直線や平面の位置関係を知る
 - **子ども向け**：空間の中で、2つの直線や平面が平行か、交わるか、ねじれの位置かが分かる
 - **前提**：solid-g4-parallel
+- **内容の取扱い**
+  - 内容の「B図形」の(2)のイの(ア)については、見取図や展開図、投影図を取り扱う（[第1学年の内容の取扱い(6)](https://w3id.org/jp-cos/8350215600000000)）
 - **根拠**
   - 学習指導要領：[B(2) 空間図形](https://github.com/goataka/courses-of-study/blob/main/docs/lower-secondary/math/grade-1.md)：[(ア)](https://w3id.org/jp-cos/8350213221100000)
   - 解説：[2 第1学年の内容 Ｂ 図形 (2) 空間図形](https://github.com/goataka/courses-of-study/blob/main/docs/lower-secondary/math/commentary/03-01-02-02-02.md)
@@ -28,6 +30,8 @@
 - **目標**：扇形の弧の長さと面積、基本的な柱体や体、球の表面積と体積を求める
 - **子ども向け**：おうぎ形の弧の長さと面積、柱体・錐体・球の表面積と体積を求められる
 - **前提**：solid-j1-position、area-g6-circle、area-g6-prism-volume
+- **内容の取扱い**
+  - 内容の「B図形」の(2)のイの(ア)については、見取図や展開図、投影図を取り扱う（[第1学年の内容の取扱い(6)](https://w3id.org/jp-cos/8350215600000000)）
 - **根拠**
   - 学習指導要領：[B(2) 空間図形](https://github.com/goataka/courses-of-study/blob/main/docs/lower-secondary/math/grade-1.md)：[(イ)](https://w3id.org/jp-cos/8350213221200000)
   - 解説：[2 第1学年の内容 Ｂ 図形 (2) 空間図形](https://github.com/goataka/courses-of-study/blob/main/docs/lower-secondary/math/commentary/03-01-02-02-02.md)
