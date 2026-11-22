@@ -11,7 +11,6 @@
 - [第4学年](#第4学年)
 - [第5学年](#第5学年)
 - [第6学年](#第6学年)
-- [根拠が見つからないコース](#根拠が見つからないコース)
 
 ## 第3学年
 
@@ -60,7 +59,9 @@
   - 学習指導要領：[第3学年 A(4) ア(エ)](https://w3id.org/jp-cos/8250233141400000)
   - 解説：[第3学年 A(4) エ 除数と商が１位数の場合の除法の計算](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/commentary/03-03-02-01-04.md)
   - 評価規準：[第3学年 (4)「除法」](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/assessment/grade-3.md)知識・技能
-- **コース**：`g3-one-digit-exact`、`g3-two-digit-exact`
+- **コース**：`g3-one-digit-exact`、`g3-two-digit-exact`、`g3-zero-one`
+  - `g3-zero-one`（0 や 1 のわり算）：「0÷4」や「4÷1」は、0 の場合や 1 の段の九九を1回使って答えが出るので、この目標に含める
+  - 0 の場合の九九は、第3学年の乗法の[内容の取扱い(3)](https://w3id.org/jp-cos/8250235300000000)で扱う
 
 ### div-g3-remainder：あまりのあるわり算
 
@@ -247,9 +248,3 @@
   - 学習指導要領：[第6学年 内容の取扱い(1)](https://w3id.org/jp-cos/8250265100000000)
   - 解説：[第6学年 A(1) 分数の乗法及び除法](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/commentary/03-06-02-01-01.md)
   - 評価規準：[第6学年 (1)「分数の乗法，除法」](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/math/assessment/grade-6.md)思考・判断・表現
-
-## 根拠が見つからないコース
-
-- **`g3-zero-one`**：0 や 1 のわり算
-  - 学習指導要領、解説、評価規準の第3学年の除法に、0 をわる計算や 1 でわる計算の記述は見つからない
-  - 参考：第3学年の乗法では、乗数または被乗数が 0 の場合を扱う（[内容の取扱い(3)](https://w3id.org/jp-cos/8250235300000000)）
