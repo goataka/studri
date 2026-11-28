@@ -754,6 +754,7 @@ function startQuiz(courseId, mode = "basic") {
   quiz = {
     mode, index: 0, correct: 0, missed: false, started: Date.now(),
     previousAnswer: "", chainRun: 0, bestChain: 0, questions: [], submitted: [],
+    firstAnswers: [], outcomes: [],
   };
   if (mode === "time") modeTimer = setInterval(updateModeStatus, 1000);
   learningData.history.push({
@@ -881,6 +882,9 @@ function judgeAnswer(answer) {
   const isCorrect = answer === question.answer;
   quiz.previousAnswer = answer;
   quiz.submitted[quiz.index] = answer;
+  if (quiz.firstAnswers && quiz.firstAnswers[quiz.index] === undefined) quiz.firstAnswers[quiz.index] = answer;
+  // はじめから正解・直して正解を分けて記録する
+  if (isCorrect && quiz.outcomes) quiz.outcomes[quiz.index] = quiz.wrongCount ? "fixed" : "first";
   if (!isCorrect) {
     quiz.wrongCount = (quiz.wrongCount || 0) + 1;
     if (quiz.wrongCount === 1) recordMistake(question, answer);
@@ -1011,6 +1015,7 @@ function advanceQuiz() {
     finishReview();
     return;
   }
+  if (quiz.outcomes && !quiz.outcomes[quiz.index]) quiz.outcomes[quiz.index] = "revealed";
   quiz.previousAnswer = "";
   quiz.index += 1;
   if (quiz.index >= QUIZ_LENGTH) {
@@ -1058,14 +1063,31 @@ function completeHistory() {
   });
 }
 
+function countOutcomes() {
+  const counts = { first: 0, fixed: 0, revealed: 0 };
+  quiz.outcomes.forEach((outcome) => { counts[outcome] += 1; });
+  return counts;
+}
+
 function renderResult(stats, elapsedSeconds) {
   showScreen("result");
   const isPerfect = quiz.correct === QUIZ_LENGTH && !quiz.missed;
+  const counts = countOutcomes();
   const titles = { basic: isPerfect ? "まちがえずに！" : "よくがんばったね！", time: "⏱ タイムアタック", chain: "🔥 れんぞくせいかいチャレンジ" };
   getElement("resultTitle").textContent = titles[quiz.mode];
-  getElement("score").textContent = `${quiz.correct} / ${QUIZ_LENGTH} 問 せいかい`;
+  const score = getElement("score");
+  score.replaceChildren();
+  const main = document.createElement("span");
+  main.className = "score-main";
+  main.textContent = `はじめから正解 ${counts.first} / ${QUIZ_LENGTH} 問`;
+  const detail = document.createElement("span");
+  detail.className = "score-detail";
+  detail.textContent = `直して正解 ${counts.fixed}問・答えを見た ${counts.revealed}問`;
+  score.append(main, detail);
   getElement("resultMessage").textContent = quiz.mode === "basic"
-    ? `まちがえずにごうかく ${stats.streak}/${PASS_STREAK}回。${quiz.missed ? "まちがいノートでふくしゅうしてみよう。" : "その調子で進もう！"}`
+    ? isPerfect
+      ? `まちがえずにごうかく！（${stats.streak}/${PASS_STREAK}回）その調子ですすもう！`
+      : `ぜんぶ はじめから正解すると ごうかくだよ（いま ${stats.streak}/${PASS_STREAK}回）。まちがいノートでふくしゅうしてみよう。`
     : quiz.mode === "time"
       ? `${elapsedSeconds}秒。ベストきろく：${stats.timeBest ?? "--"}秒`
       : `今回いちばん多くつづいたせいかい：${quiz.bestChain}問。ベストきろく：${stats.chainBest}問`;
@@ -1078,23 +1100,47 @@ function renderResult(stats, elapsedSeconds) {
   renderCourses();
 }
 
+// まちがえた問題を上に出し、はじめから正解した問題はたたんでおく
 function renderAnswerSummary() {
   const summary = getElement("answerSummary");
   summary.replaceChildren();
-  quiz.questions.forEach((question, index) => {
+  const labels = { first: "✅ はじめから正解", fixed: "🔁 直して正解", revealed: "👀 答えを見た" };
+  const items = quiz.questions.map((question, index) => {
+    const outcome = quiz.outcomes[index] || "revealed";
     const item = document.createElement("article");
+    item.className = `summary-item ${outcome}`;
+    const status = document.createElement("span");
+    status.className = "summary-status";
+    status.textContent = labels[outcome];
     const prompt = document.createElement("strong");
-    appendPhonicsText(prompt, `${index + 1}. ${question.prompt} (${question.word})`);
-    const answer = document.createElement("small");
+    appendPhonicsText(prompt, `${index + 1}. ${question.prompt}`);
+    const answer = document.createElement("p");
+    answer.className = "summary-answer";
     answer.append("せいかい：");
     appendAnswerText(answer, question.answer);
-    answer.append(" / あなたの答え：");
-    appendAnswerText(answer, quiz.submitted[index] || "こたえなし");
-    const explanation = document.createElement("small");
+    if (outcome !== "first") {
+      answer.append(" / はじめの答え：");
+      appendAnswerText(answer, quiz.firstAnswers[index] || "こたえなし");
+    }
+    const explanation = document.createElement("p");
+    explanation.className = "summary-explanation";
     appendPhonicsText(explanation, question.explanation);
-    item.append(prompt, answer, explanation);
-    summary.append(item);
+    item.append(status, prompt, answer, explanation);
+    return { outcome, item };
   });
+  const missed = items.filter(({ outcome }) => outcome !== "first");
+  const firstTry = items.filter(({ outcome }) => outcome === "first");
+  missed.forEach(({ item }) => summary.append(item));
+  if (firstTry.length) {
+    const details = document.createElement("details");
+    details.className = "summary-first";
+    details.open = !missed.length;
+    const toggle = document.createElement("summary");
+    toggle.textContent = `はじめから正解した問題（${firstTry.length}問）`;
+    details.append(toggle);
+    firstTry.forEach(({ item }) => details.append(item));
+    summary.append(details);
+  }
 }
 
 function returnToCourses() {

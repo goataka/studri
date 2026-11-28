@@ -82,7 +82,8 @@ When("まちがいを直しながら10問を終える", async ({ page }) => {
 
 Then("全10問の結果と挑戦記録が保存される", async ({ page }) => {
   await expect(page.locator("#result")).toBeVisible();
-  await expect(page.locator("#score")).toHaveText("10 / 10 問 せいかい");
+  await expect(page.locator("#score")).toContainText("はじめから正解");
+  await expect(page.locator("#score")).toContainText("/ 10 問");
   await expect(page.locator("#answerSummary article")).toHaveCount(10);
   const saved = await page.evaluate(() => JSON.parse(localStorage.getItem("studri-phonics-v1") || "{}"));
   expect(saved.stats[COURSE].attempts).toBe(1);
