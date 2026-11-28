@@ -1,0 +1,67 @@
+# 公開用のブランチ gh-pages を更新する。Pages は gh-pages の中身を公開する
+# - main：テストの環境として /staging/ だけを置き換える
+# - release：本番として /staging/ 以外を置き換える
+# 決まりは specs/environments.md
+name: Deploy
+
+on:
+  push:
+    branches: ["main", "release"]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+# gh-pages への書き込みを1つずつ行う。途中の公開は止めない
+concurrency:
+  group: gh-pages
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    env:
+      STUDRI_ENV: ${{ github.ref_name == 'release' && 'production' || 'staging' }}
+    steps:
+      - name: Check branch
+        if: github.ref_name != 'main' && github.ref_name != 'release'
+        run: |
+          echo "main か release でだけ実行できる：${{ github.ref_name }}"
+          exit 1
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: .node-version
+      - name: Enable pnpm
+        run: corepack enable
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+      - name: Build
+        run: pnpm run build
+      - name: Checkout gh-pages
+        run: |
+          git fetch --depth=1 origin gh-pages && git worktree add site FETCH_HEAD || git worktree add --orphan -b gh-pages site
+      - name: Replace files
+        run: |
+          if [ "$STUDRI_ENV" = production ]; then
+            find site -mindepth 1 -maxdepth 1 ! -name .git ! -name staging -exec rm -rf {} +
+            cp -a dist/. site/
+          else
+            rm -rf site/staging
+            cp -a dist site/staging
+          fi
+          touch site/.nojekyll
+      - name: Push
+        working-directory: site
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          if git diff --cached --quiet; then
+            echo "変更なし"
+            exit 0
+          fi
+          git commit -q -m "deploy: ${STUDRI_ENV} ${GITHUB_SHA::7}"
+          git push origin HEAD:gh-pages
