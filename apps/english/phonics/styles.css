@@ -293,6 +293,8 @@ main {
 
 .courses {
   display: grid;
+  /* 列をコンテナの幅に収め、狭い画面で横にはみ出さないようにする */
+  grid-template-columns: minmax(0, 1fr);
   gap: 22px;
   padding: 4px 0;
 }
@@ -1039,3 +1041,13 @@ main {
 .answer-summary article small { display: block; margin-top: 4px; color: var(--muted); line-height: 1.6; }
 
 .meaning-hint { margin: 6px 0 0; color: #778177; font-size: 0.8rem; font-weight: 500; }
+
+/* 狭い画面では、フォントによって幅が変わっても横にはみ出さないように折り返す */
+@media (max-width: 380px) {
+  .course-begin .course-copy,
+  .course-goal .course-copy,
+  .course-begin small,
+  .course-goal small {
+    white-space: normal;
+  }
+}

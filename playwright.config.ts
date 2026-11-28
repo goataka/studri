@@ -14,9 +14,9 @@ export default {
     headless: true,
   },
   webServer: {
-    command: "tsx tests/e2e/server.ts",
+    command: "pnpm run build && tsx tests/e2e/server.ts",
     url: "http://127.0.0.1:4173/apps/math/division/",
     reuseExistingServer: !process.env.CI,
-    timeout: 10_000,
+    timeout: 120_000,
   },
 };

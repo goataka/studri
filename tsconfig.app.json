@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "target": "ES2022",
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
+    "strict": true,
+    "noEmit": true,
+    "types": ["vite/client"],
+    "skipLibCheck": true
+  },
+  "include": ["apps/shared/**/*.ts", "apps/**/src/**/*.ts"]
+}
