@@ -75,7 +75,7 @@ When("デスクトップ表示に切り替える", async ({ page }) => {
 
 When("復習ノートを表示する", async ({ page }) => {
   await page.evaluate(() => {
-    localStorage.setItem("local:studri-division-v1", JSON.stringify({
+    localStorage.setItem("develop:studri-division-v1", JSON.stringify({
       course: "g3-one-digit-exact",
       stats: {},
       wrong: [{ grade: 3, courseId: "g3-one-digit-exact", problem: "10 ÷ 2 =", answer: "4", correct: "5", explain: "2×5=10" }],
@@ -190,7 +190,7 @@ When("ログ画面と問題画面のパネル配置を確認する", async ({ pa
   page.once("dialog", (dialog) => dialog.accept());
   await page.locator("#quit").click();
   await page.evaluate(() => {
-    localStorage.setItem("local:studri-division-v1", JSON.stringify({
+    localStorage.setItem("develop:studri-division-v1", JSON.stringify({
       course: "g3-one-digit-exact",
       stats: {},
       wrong: [{ grade: 3, courseId: "g3-one-digit-exact", problem: "10 ÷ 2 =", answer: "4", correct: "5", explain: "2×5=10" }],
@@ -466,7 +466,7 @@ Then("新しい挑戦が始まる", async ({ page }) => {
 
 When("学習記録と復習ノートを作って初期化する", async ({ page }) => {
   await page.evaluate(() => {
-    localStorage.setItem("local:studri-division-v1", JSON.stringify({
+    localStorage.setItem("develop:studri-division-v1", JSON.stringify({
       course: "g3-one-digit-exact",
       stats: { "g3-one-digit-exact": { streak: 2, attempts: 2, best: 23 } },
       wrong: [{ grade: 3, courseId: "g3-one-digit-exact", problem: "10 ÷ 2 =", answer: "4", correct: "5", explain: "2×5=10" }],
@@ -672,7 +672,7 @@ Then("9つのコースが指定順に並び問題が範囲内で出る", async (
   }
 
   await page.evaluate(() => {
-    localStorage.setItem("local:studri-division-v1", JSON.stringify({
+    localStorage.setItem("develop:studri-division-v1", JSON.stringify({
       course: "g3-meaning-story",
       stats: { "g3-meaning-story": { streak: 1, attempts: 2, best: 23 } },
       wrong: [],
@@ -695,7 +695,7 @@ Then("9つのコースが指定順に並び問題が範囲内で出る", async (
   await expect(passedCourse.locator(".course-challenge")).toHaveText(["⏱ タイムアタック--", "🔥 連続正解--"]);
 
   await page.evaluate(() => {
-    localStorage.setItem("local:studri-division-v1", JSON.stringify({
+    localStorage.setItem("develop:studri-division-v1", JSON.stringify({
       course: "g3-meaning-story",
       stats: { "g3-meaning-story": { streak: 3, attempts: 4, best: 23 } },
       wrong: [],
@@ -723,9 +723,9 @@ Then("9つのコースが指定順に並び問題が範囲内で出る", async (
   await expect(fullyPassedCourse.locator(".course-challenge:disabled")).toHaveCount(0);
 
   await page.evaluate(() => {
-    const saved = JSON.parse(localStorage.getItem("local:studri-division-v1") || "{}");
+    const saved = JSON.parse(localStorage.getItem("develop:studri-division-v1") || "{}");
     saved.stats["g3-meaning-story"].streak = 2;
-    localStorage.setItem("local:studri-division-v1", JSON.stringify(saved));
+    localStorage.setItem("develop:studri-division-v1", JSON.stringify(saved));
   });
   await page.reload();
   for (const [id, , type] of courses) {
@@ -804,8 +804,8 @@ async function currentAnswer(page: Page) {
 Given("合格済みの状態で画面確認用に算数アプリを開く", async ({ page }) => {
   await page.addInitScript(() => {
     Math.random = () => 0.5;
-    if (!localStorage.getItem("local:studri-division-v1")) {
-      localStorage.setItem("local:studri-division-v1", JSON.stringify({
+    if (!localStorage.getItem("develop:studri-division-v1")) {
+      localStorage.setItem("develop:studri-division-v1", JSON.stringify({
         course: "g3-one-digit-exact",
         stats: { "g3-one-digit-exact": { streak: 3, attempts: 3, best: 60 } },
         wrong: [],

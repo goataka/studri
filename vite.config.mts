@@ -17,8 +17,8 @@ const staticEntries = [
 const outDir = "dist";
 
 // 環境名。学習記録の保存名に付け、環境ごとに記録を分ける。決まりは specs/environments.md
-const envNames = ["local", "staging", "production"];
-const envName = process.env.STUDRI_ENV ?? "local";
+const envNames = ["develop", "staging", "production"];
+const envName = process.env.STUDRI_ENV ?? "develop";
 if (!envNames.includes(envName)) throw new Error(`STUDRI_ENV は ${envNames.join("、")} のどれか：${envName}`);
 
 // Vite でビルドするアプリがないときは、トップページをビルドの入口にする

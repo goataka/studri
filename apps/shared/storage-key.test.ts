@@ -6,8 +6,8 @@ describe("storageKey", () => {
     expect(storageKey("studri.sound", "staging")).toBe("staging:studri.sound");
   });
 
-  it("環境名がないときは local にする", () => {
-    expect(currentEnv()).toBe("local");
-    expect(storageKey("studri.sound")).toBe("local:studri.sound");
+  it("環境名がないときは develop にする", () => {
+    expect(currentEnv()).toBe("develop");
+    expect(storageKey("studri.sound")).toBe("develop:studri.sound");
   });
 });
