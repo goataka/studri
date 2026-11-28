@@ -15,11 +15,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      # 画像の比較の基準と同じく、日本語のフォントとロケールで実行する
+      # 画像の比較の基準は、この CI の環境で撮る。日本語のフォントとロケールをそろえる
       - name: Set up Japanese locale
         run: |
           sudo apt-get update -qq
-          sudo apt-get install -y fonts-noto-cjk fonts-noto-cjk-extra locales
+          sudo apt-get install -y fonts-noto-cjk locales
           sudo locale-gen ja_JP.UTF-8
           {
             echo "LANG=ja_JP.UTF-8"
@@ -37,33 +37,6 @@ jobs:
         run: pnpm exec playwright install --with-deps chromium
       - name: Test
         run: pnpm run test
-      - name: Print actual screenshots
-        if: failure()
-        run: |
-          find test-results -name '*-actual.png' | while read -r file; do
-            echo "::group::$file"
-            echo "BEGIN $file"
-            base64 -w 76 "$file"
-            echo
-            echo "END $file"
-            echo "::endgroup::"
-          done
-      - name: Print overflowing elements
-        if: failure()
-        run: |
-          npx tsx tests/e2e/server.ts &
-          sleep 2
-          node --input-type=module -e '
-            import { chromium } from "@playwright/test";
-            const browser = await chromium.launch();
-            const page = await browser.newPage({ viewport: { width: 320, height: 740 } });
-            await page.goto("http://127.0.0.1:4173/apps/english/phonics/");
-            const rows = await page.evaluate(() => [...document.querySelectorAll("body *")]
-              .filter((el) => el.getBoundingClientRect().right > 320.5)
-              .map((el) => `${el.tagName}.${el.className} right=${el.getBoundingClientRect().right} text=${(el.textContent || "").slice(0, 30)}`));
-            console.log(rows.slice(0, 20).join("\n"));
-            await browser.close();
-          ' || true
       - name: Upload build
         if: always()
         uses: actions/upload-artifact@v4
