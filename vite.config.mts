@@ -1,4 +1,4 @@
-import { cp, readdir } from "node:fs/promises";
+import { cp, readdir, readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { defineConfig, type Plugin } from "vite";
 
@@ -15,6 +15,11 @@ const staticEntries = [
   "apps",
 ];
 const outDir = "dist";
+
+// 環境名。学習記録の保存名に付け、環境ごとに記録を分ける。決まりは specs/environments.md
+const envNames = ["local", "staging", "production"];
+const envName = process.env.STUDRI_ENV ?? "local";
+if (!envNames.includes(envName)) throw new Error(`STUDRI_ENV は ${envNames.join("、")} のどれか：${envName}`);
 
 // Vite でビルドするアプリがないときは、トップページをビルドの入口にする
 const builtPages = builtApps.length > 0 ? builtApps : ["."];
@@ -34,8 +39,20 @@ function copyStaticSite(): Plugin {
       for (const entry of staticEntries) {
         await cp(entry, path.join(outDir, entry), { recursive: true, filter: (source) => !isExcluded(source) });
       }
+      await markEnv(outDir);
     },
   };
+}
+
+// dist の html すべての <html> に data-env を入れる
+async function markEnv(dir: string): Promise<void> {
+  for (const entry of await readdir(dir, { withFileTypes: true, recursive: true })) {
+    if (!entry.isFile() || !entry.name.endsWith(".html")) continue;
+    const file = path.join(entry.parentPath, entry.name);
+    const html = await readFile(file, "utf8");
+    if (!/<html[\s>]/.test(html)) throw new Error(`${file} に <html> がない`);
+    await writeFile(file, html.replace(/<html(?=[\s>])/, `<html data-env="${envName}"`));
+  }
 }
 
 function buildVersion(): string {

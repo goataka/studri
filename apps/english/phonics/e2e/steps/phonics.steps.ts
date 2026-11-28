@@ -7,15 +7,15 @@ const COURSE = "alphabet-1";
 
 Given("フォニックスアプリを開く", async ({ page }) => {
   await page.addInitScript(() => {
-    localStorage.removeItem("studri-phonics-v1");
-    localStorage.removeItem("studri-phonics-v1-sound");
+    localStorage.removeItem("local:studri-phonics-v1");
+    localStorage.removeItem("local:studri-phonics-v1-sound");
   });
   await page.goto("/apps/english/phonics/");
 });
 
 Given("固定された問題順のフォニックスアプリを開く", async ({ page }) => {
   await page.addInitScript(() => {
-    localStorage.removeItem("studri-phonics-v1");
+    localStorage.removeItem("local:studri-phonics-v1");
     Math.random = () => 0;
   });
   await page.goto("/apps/english/phonics/");
@@ -84,7 +84,7 @@ Then("全10問の結果と挑戦記録が保存される", async ({ page }) => {
   await expect(page.locator("#result")).toBeVisible();
   await expect(page.locator("#score")).toHaveText("10 / 10 問 せいかい");
   await expect(page.locator("#answerSummary article")).toHaveCount(10);
-  const saved = await page.evaluate(() => JSON.parse(localStorage.getItem("studri-phonics-v1") || "{}"));
+  const saved = await page.evaluate(() => JSON.parse(localStorage.getItem("local:studri-phonics-v1") || "{}"));
   expect(saved.stats[COURSE].attempts).toBe(1);
   expect(saved.history[0].completed).toBe(true);
   expect(saved.wrong.length).toBeGreaterThan(0);
@@ -129,7 +129,7 @@ When("学習データを確認して初期化する", async ({ page }) => {
 
 Then("学習記録が削除される", async ({ page }) => {
   await expect(page.locator("#reviewPanel")).toBeHidden();
-  const saved = await page.evaluate(() => localStorage.getItem("studri-phonics-v1"));
+  const saved = await page.evaluate(() => localStorage.getItem("local:studri-phonics-v1"));
   expect(saved).toBeNull();
   await expect(page.locator(`#courses [data-course="${COURSE}"]`)).toContainText("ちょうせん 0回");
 });
@@ -141,7 +141,7 @@ When("挑戦を確認して中断する", async ({ page }) => {
 
 Then("中断した挑戦が保存される", async ({ page }) => {
   await expect(page.locator("#home")).toBeVisible();
-  const saved = await page.evaluate(() => JSON.parse(localStorage.getItem("studri-phonics-v1") || "{}"));
+  const saved = await page.evaluate(() => JSON.parse(localStorage.getItem("local:studri-phonics-v1") || "{}"));
   expect(saved.history[0].completed).toBe(false);
   expect(saved.history[0].abandonedAt).toBeGreaterThan(0);
 });
@@ -156,7 +156,7 @@ When("3回のミスなし合格を達成する", async ({ page }) => {
 
 Then("合格後のチャレンジが解放される", async ({ page }) => {
   await expect(page.locator("#result")).toBeVisible();
-  const saved = await page.evaluate(() => JSON.parse(localStorage.getItem("studri-phonics-v1") || "{}"));
+  const saved = await page.evaluate(() => JSON.parse(localStorage.getItem("local:studri-phonics-v1") || "{}"));
   expect(saved.stats[COURSE].streak).toBe(3);
   await expect(page.locator("#timeAttack")).toBeEnabled();
   await expect(page.locator("#chainAttack")).toBeEnabled();
@@ -169,7 +169,7 @@ When("タイムアタックを完了する", async ({ page }) => {
 
 Then("タイムアタックの最高記録が保存される", async ({ page }) => {
   await expect(page.locator("#resultTitle")).toHaveText("⏱ タイムアタック");
-  const saved = await page.evaluate(() => JSON.parse(localStorage.getItem("studri-phonics-v1") || "{}"));
+  const saved = await page.evaluate(() => JSON.parse(localStorage.getItem("local:studri-phonics-v1") || "{}"));
   expect(saved.stats[COURSE].timeBest).toBeGreaterThan(0);
 });
 
@@ -180,7 +180,7 @@ When("連続正解チャレンジを完了する", async ({ page }) => {
 
 Then("連続正解の最高記録が保存される", async ({ page }) => {
   await expect(page.locator("#resultTitle")).toHaveText("🔥 れんぞくせいかいチャレンジ");
-  const saved = await page.evaluate(() => JSON.parse(localStorage.getItem("studri-phonics-v1") || "{}"));
+  const saved = await page.evaluate(() => JSON.parse(localStorage.getItem("local:studri-phonics-v1") || "{}"));
   expect(saved.stats[COURSE].chainBest).toBe(10);
 });
 

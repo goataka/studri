@@ -1,4 +1,6 @@
-const SOUND_KEY = "studri.sound";
+import { storageKey } from "../../../shared/storage-key";
+
+const SOUND_KEY = storageKey("studri.sound");
 
 export function soundEnabled(storage: Storage): boolean {
   try {
