@@ -61,7 +61,7 @@ jobs:
             const rows = await page.evaluate(() => [...document.querySelectorAll("body *")]
               .filter((el) => el.getBoundingClientRect().right > 320.5)
               .map((el) => `${el.tagName}.${el.className} right=${el.getBoundingClientRect().right} text=${(el.textContent || "").slice(0, 30)}`));
-            console.log(document = rows.slice(0, 20).join("\n"));
+            console.log(rows.slice(0, 20).join("\n"));
             await browser.close();
           ' || true
       - name: Upload build
