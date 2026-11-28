@@ -15,7 +15,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      # 画像の比較の基準と同じく、日本語のフォントとロケールで実行する
+      # 画像の比較の基準は、この CI の環境で撮る。日本語のフォントとロケールをそろえる
       - name: Set up Japanese locale
         run: |
           sudo apt-get update -qq
