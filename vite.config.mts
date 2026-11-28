@@ -51,8 +51,19 @@ async function markEnv(dir: string): Promise<void> {
     const file = path.join(entry.parentPath, entry.name);
     const html = await readFile(file, "utf8");
     if (!/<html[\s>]/.test(html)) throw new Error(`${file} に <html> がない`);
-    await writeFile(file, html.replace(/<html(?=[\s>])/, `<html data-env="${envName}"`));
+    await writeFile(file, markStaging(html.replace(/<html(?=[\s>])/, `<html data-env="${envName}"`)));
   }
+}
+
+// テストの環境では、検索に載せず、本番と見分ける帯を出す
+const stagingBanner =
+  '<div style="position:sticky;top:0;z-index:2147483647;padding:4px;background:#b45309;color:#fff;font:bold 14px sans-serif;text-align:center">テストの環境</div>';
+
+function markStaging(html: string): string {
+  if (envName !== "staging") return html;
+  return html
+    .replace("</head>", '<meta name="robots" content="noindex"></head>')
+    .replace(/<body[^>]*>/, (body) => `${body}${stagingBanner}`);
 }
 
 function buildVersion(): string {
