@@ -1030,6 +1030,14 @@ main {
 
 .word-info { margin: 0.4rem 0 0; font-weight: 700; }
 
+.answer-choice.letter-choice { font-size: 1.6rem; font-family: inherit; letter-spacing: 0.02em; }
+
+.feedback-hint,
+.feedback-explanation,
+.sound-examples { margin: 0.5rem 0 0; line-height: 1.6; }
+
+.sound-examples { color: var(--muted); font-size: 0.92rem; }
+
 .answer-summary { display: grid; gap: 8px; margin: 20px 0; text-align: left; }
 
 .answer-summary article { padding: 11px 13px; border: 1px solid var(--line); border-radius: 12px; background: #fff; }
