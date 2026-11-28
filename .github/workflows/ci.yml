@@ -37,6 +37,15 @@ jobs:
         run: pnpm exec playwright install --with-deps chromium
       - name: Test
         run: pnpm run test
+      - name: Print updated screenshots
+        if: failure()
+        run: |
+          pnpm exec playwright test apps/math --update-snapshots || true
+          git diff --name-only -- '*.png' | while read -r file; do
+            echo "BEGIN $file"
+            base64 -w 76 "$file"
+            echo "END $file"
+          done
       - name: Upload build
         if: always()
         uses: actions/upload-artifact@v4
