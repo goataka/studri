@@ -1,9 +1,10 @@
+import { storageKey } from "../../../shared/storage-key";
 import { emptyRecord, type CourseRecord } from "./mastery";
 
 export type Mistake = { word: string; type: "reading" | "writing"; chosen: string; answer: string; date: string };
 export type SaveData = { version: 1; courses: Record<string, CourseRecord>; mistakes: Mistake[] };
 
-const STORAGE_KEY = "studri.japanese.kanji-g3";
+const STORAGE_KEY = storageKey("studri.japanese.kanji-g3");
 const MISTAKE_LIMIT = 50;
 
 export function emptySave(): SaveData {

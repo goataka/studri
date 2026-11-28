@@ -1,7 +1,7 @@
 "use strict";
 
-const STORAGE_KEY = "studri-phonics-v1";
-const SOUND_KEY = `${STORAGE_KEY}-sound`;
+const STORAGE_KEY = studriStorageKey("studri-phonics-v1");
+const SOUND_KEY = studriStorageKey("studri-phonics-v1-sound");
 const QUIZ_LENGTH = 10;
 const PASS_STREAK = 3;
 const MAX_WRONG_ENTRIES = 50;
