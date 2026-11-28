@@ -62,6 +62,7 @@
 - **目標**：第3学年と第4学年の各学年では、学年別漢字配当表の当該学年までに配当されている漢字を読む。当該学年の前の学年までに配当されている漢字を書き、文や文章の中で使う。当該学年に配当されている漢字を漸次書き、文や文章の中で使う
 - **子ども向け**：その学年までに習う漢字を読み、前の学年の漢字を文の中で書き、その学年の漢字も少しずつ書ける
 - **前提**：jp-letters-g12-kanji
+- **コース**：`kanji-g3`。第3学年の字だけを練習する
 - **根拠**
   - 学習指導要領：[(1) 言葉の特徴や使い方に関する事項](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/japanese/grade-3-4.md)：[エ](https://w3id.org/jp-cos/82102C3114000000)
   - 解説：[第2節第３学年及び第４学年の内容 1 〔知識及び技能〕](https://github.com/goataka/courses-of-study/blob/main/docs/elementary/japanese/commentary/03-02-01.md)

@@ -3,7 +3,7 @@ import path from "node:path";
 import { defineConfig, type Plugin } from "vite";
 
 // Vite でビルドするアプリ。ここにないアプリは、静的なファイルとしてそのままコピーする
-const builtApps: string[] = [];
+const builtApps: string[] = ["apps/japanese/kanji-g3"];
 const staticEntries = [
   "index.html",
   "studri.jpeg",

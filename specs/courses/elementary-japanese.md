@@ -38,7 +38,7 @@
 | [jp-letters-g12-kanji](../../curriculum/elementary/japanese/letters.md#jp-letters-g12-kanji漢字第1学年第2学年) 漢字（第1学年・第2学年） | 1年・2年 | ◎ | 選択・入力 | 6 | － |
 | [jp-letters-g12-writing](../../curriculum/elementary/japanese/letters.md#jp-letters-g12-writing書写第1学年第2学年) 書写（第1学年・第2学年） | 1年・2年 | × | 手書き | 5 | － |
 | [jp-letters-g34-notation](../../curriculum/elementary/japanese/letters.md#jp-letters-g34-notation送り仮名句読点ローマ字) 送り仮名・句読点・ローマ字 | 3年・4年 | ◎ | 選択・入力 | 1 | － |
-| [jp-letters-g34-kanji](../../curriculum/elementary/japanese/letters.md#jp-letters-g34-kanji漢字第3学年第4学年) 漢字（第3学年・第4学年） | 3年・4年 | ◎ | 選択・入力 | 4 | － |
+| [jp-letters-g34-kanji](../../curriculum/elementary/japanese/letters.md#jp-letters-g34-kanji漢字第3学年第4学年) 漢字（第3学年・第4学年） | 3年・4年 | ◎ | 選択・入力 | 4 | `kanji-g3` |
 | [jp-letters-g34-radicals](../../curriculum/elementary/japanese/letters.md#jp-letters-g34-radicals漢字の組み立て) 漢字の組み立て | 3年・4年 | ◎ | 選択・入力 | 0 | － |
 | [jp-letters-g34-writing](../../curriculum/elementary/japanese/letters.md#jp-letters-g34-writing書写第3学年第4学年) 書写（第3学年・第4学年） | 3年・4年 | × | 手書き | 4 | － |
 | [jp-letters-g56-usage](../../curriculum/elementary/japanese/letters.md#jp-letters-g56-usage漢字と仮名の使い分け) 漢字と仮名の使い分け | 5年・6年 | ◎ | 選択・入力 | 0 | － |
