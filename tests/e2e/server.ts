@@ -2,12 +2,16 @@ import { createServer, IncomingMessage, ServerResponse } from "node:http";
 import { readFile } from "node:fs/promises";
 import path from "node:path";
 
-const root = path.resolve(__dirname, "../..");
+// ビルドした成果物を配信する。本番と同じものを確かめるため
+const root = path.resolve(__dirname, "../../dist");
 const contentTypes: Record<string, string> = {
   ".css": "text/css; charset=utf-8",
   ".html": "text/html; charset=utf-8",
   ".js": "text/javascript; charset=utf-8",
   ".jpeg": "image/jpeg",
+  ".png": "image/png",
+  ".ico": "image/x-icon",
+  ".svg": "image/svg+xml",
 };
 
 createServer(async (request: IncomingMessage, response: ServerResponse) => {
@@ -25,11 +29,7 @@ createServer(async (request: IncomingMessage, response: ServerResponse) => {
   }
 
   const relativePath = pathname.replace(/^\/+/, "");
-  if (
-    !method ||
-    !["GET", "HEAD"].includes(method) ||
-    !(relativePath === "" || relativePath === "index.html" || relativePath === "studri.jpeg" || relativePath.startsWith("apps/"))
-  ) {
+  if (!method || !["GET", "HEAD"].includes(method)) {
     response.writeHead(404).end("Not found");
     return;
   }

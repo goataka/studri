@@ -1,2 +1,4 @@
 allowBuilds:
   esbuild: true
+# 公開から7日たった版だけを使う。単位は分
+minimumReleaseAge: 10080
