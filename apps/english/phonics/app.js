@@ -111,10 +111,10 @@ const letterExampleWords = {
 };
 const courses = [
   ...alphabetLetterCourses,
-  { id: "short-vowels", title: "短母音とCVC", icon: "🍎", summary: "短い母音の音と、子音・母音・子音のことば" },
+  { id: "short-vowels", title: "みじかい母音", icon: "🍎", summary: "みじかい母音の音と、3文字のことば（cat・dog など）" },
   { id: "consonant-teams", title: "子音の組み合わせ", icon: "🐚", summary: "sh・ch・th・ph・wh などのつづり" },
   { id: "silent-e", title: "サイレントe", icon: "✨", summary: "おわりのeで母音の音がかわることば" },
-  { id: "vowel-teams", title: "母音チーム", icon: "🌈", summary: "ai・ee・oa・oo などの母音の組み合わせ" },
+  { id: "vowel-teams", title: "母音のペア", icon: "🌈", summary: "ai・ee・oa・oo など、母音が2つならぶつづり" },
   ...patternLessons,
   ...trickyWordLessons,
 ];
@@ -127,7 +127,7 @@ const questionBank = {
     { level: 0, prompt: "dog のはじめの音はどれ？", word: "dog", display: "？(ッ)・グ", answer: "/d/", choices: ["/d/", "/b/", "/g/", "/t/"], explanation: "dog は ドゥ の音で始まるよ。" },
     { level: 1, prompt: "bag のはじめの音を表す文字は？", word: "bag", display: "？・ア・グ", answer: "b", choices: ["b", "d", "p", "g"], explanation: "bag は b の音で始まることば。文字 b が ブ を表すよ。" },
     { level: 1, prompt: "kite のはじめの音を表す文字は？", word: "kite", display: "？・アイ・ト", answer: "k", choices: ["k", "h", "t", "g"], explanation: "kite は ク の音で始まるよ。ここでは k がその音を表すよ。" },
-    { level: 2, prompt: "van のはじめの音はどれ？", word: "van", display: "？・ア・ン", answer: "/v/", choices: ["/v/", "/f/", "/w/", "/b/"], explanation: "van は ヴ の音で始まるよ。f の音と区べつしてみよう。" },
+    { level: 2, prompt: "van のはじめの音はどれ？", word: "van", display: "？・ア・ン", answer: "/v/", choices: ["/v/", "/f/", "/w/", "/b/"], explanation: "van は ヴ の音で始まるよ。f の音とくべつしてみよう。" },
     { level: 2, prompt: "zip のはじめの音を表す文字は？", word: "zip", display: "？・イ・プ", answer: "z", choices: ["z", "s", "j", "x"], explanation: "zip は ズ の音で始まるよ。文字 z の音だね。" },
     { level: 3, prompt: "queen のはじめの音の組み合わせは？", word: "queen", display: "？・イー・ン", answer: "qu", choices: ["qu", "kw", "q", "ch"], explanation: "queen のはじめの音は ク・ウ。つづりでは qu がその音を表すよ。" },
     { level: 3, prompt: "box のさいごの音はどれ？", word: "box", display: "ブ・オ・？", answer: "/ks/", choices: ["/ks/", "/s/", "/z/", "/k/"], explanation: "box の x はおわりで クス の音を表すよ。" },
@@ -785,7 +785,7 @@ function renderProblem() {
     ? "とき直し" : `${quiz.index + 1} / ${QUIZ_LENGTH}`;
   getElement("progress").style.width = quiz.mode === "review"
     ? "100%" : `${quiz.index / QUIZ_LENGTH * 100}%`;
-  getElement("questionCategory").textContent = `STEP ${Math.min(4, Math.floor(quiz.index / 3) + 1)} · ${courses.find((course) => course.id === selectedCourse).title}`;
+  getElement("questionCategory").textContent = `ステップ ${Math.min(4, Math.floor(quiz.index / 3) + 1)} · ${courses.find((course) => course.id === selectedCourse).title}`;
   const problem = getElement("problem");
   problem.replaceChildren();
   appendPhonicsText(problem, question.prompt);
@@ -894,7 +894,7 @@ function showFeedback(isCorrect, question, answer) {
   dialog.className = `feedback-dialog ${isCorrect ? "ok" : "no"}`;
   const title = document.createElement("h2");
   title.id = "feedbackTitle";
-  title.textContent = isCorrect ? "せいかい！ 🎉" : "もう一度考えてみよう";
+  title.textContent = isCorrect ? "せいかい！ 🎉" : "おしい！もういちど考えてみよう";
   const message = document.createElement("p");
   if (isCorrect) {
     message.textContent = "いい調子！音と文字のつながりが見えてきたね。";
@@ -903,7 +903,7 @@ function showFeedback(isCorrect, question, answer) {
     appendPhonicsText(message, question.explanation);
   }
   const primary = createFeedbackButton(
-    isCorrect ? "つぎへ ↵" : "もういちど答える",
+    isCorrect ? "つぎへ" : "もういちど答える",
     isCorrect ? advanceQuiz : retryQuestion,
   );
   actions.append(primary);
@@ -916,7 +916,7 @@ function showFeedback(isCorrect, question, answer) {
     appendAnswerText(answer, question.answer);
     answer.append("」");
     content.append(title, answer, createWordInfo(question.word), message);
-    actions.append(createFeedbackButton("次へ", advanceQuiz, "secondary"));
+    actions.append(createFeedbackButton("つぎへ", advanceQuiz, "secondary"));
   }
   dialog.showModal();
   primary.focus();
@@ -928,7 +928,7 @@ function createWordInfo(word) {
   const box = document.createElement("p");
   box.className = "word-info";
   if (!info) return box;
-  box.textContent = `音のくぎり：${info.split} ／ 1語：${info.joined}`;
+  box.textContent = `音のくぎり：${info.split} ／ つなげると：${info.joined}`;
   return box;
 }
 
