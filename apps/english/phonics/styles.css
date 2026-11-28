@@ -293,6 +293,8 @@ main {
 
 .courses {
   display: grid;
+  /* 列をコンテナの幅に収め、狭い画面で横にはみ出さないようにする */
+  grid-template-columns: minmax(0, 1fr);
   gap: 22px;
   padding: 4px 0;
 }

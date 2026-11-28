@@ -37,6 +37,17 @@ jobs:
         run: pnpm exec playwright install --with-deps chromium
       - name: Test
         run: pnpm run test
+      - name: Print actual screenshots
+        if: failure()
+        run: |
+          find test-results -name '*-actual.png' | while read -r file; do
+            echo "::group::$file"
+            echo "BEGIN $file"
+            base64 -w 0 "$file"
+            echo
+            echo "END $file"
+            echo "::endgroup::"
+          done
       - name: Upload build
         if: always()
         uses: actions/upload-artifact@v4
