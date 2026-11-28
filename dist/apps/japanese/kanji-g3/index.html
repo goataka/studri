@@ -1,0 +1,41 @@
+<!doctype html>
+<html data-env="develop" lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#f7f7ef">
+    <meta name="description" content="スタドリの3年生の漢字。200字の読みと書きを10字ずつ練習しよう。">
+    <title>スタドリ - 3年生の漢字編</title>
+    <link rel="icon" href="../../../assets/favicon-x7H6eTIm.ico" sizes="any">
+    <link rel="apple-touch-icon" sizes="180x180" href="../../../assets/apple-touch-icon-Cgvvz07z.png">
+    <script type="module" crossorigin src="../../../assets/apps-japanese-kanji-g3-C3Bucv71.js"></script>
+    <link rel="stylesheet" crossorigin href="../../../assets/apps-japanese-kanji-g3-CGnzZwuG.css">
+  </head>
+  <body>
+    <header class="site-header">
+      <nav aria-label="パンくずリスト">
+        <ol class="breadcrumbs">
+          <li><a href="../../../"><span class="brand-mark" aria-hidden="true">✳</span>スタドリ</a></li>
+          <li><a href="../">📖 国語</a></li>
+          <li><span aria-current="page">3年生の<ruby>漢<rt>かん</rt></ruby>字</span></li>
+        </ol>
+      </nav>
+      <button class="sound-toggle" id="soundToggle" type="button" aria-pressed="true">🔊 おと</button>
+    </header>
+    <main id="app" aria-live="polite"></main>
+    <dialog id="feedback" class="popup" aria-labelledby="feedbackTitle">
+      <p class="popup-title" id="feedbackTitle"></p>
+      <div class="popup-body" id="feedbackBody"></div>
+      <div class="popup-actions" id="feedbackActions"></div>
+    </dialog>
+    <dialog id="confirmReset" class="popup" aria-labelledby="confirmResetTitle">
+      <p class="popup-title" id="confirmResetTitle">ぜんぶの きろくを けします</p>
+      <p class="popup-body">ごうかくや ちょうせんの きろくが なくなります。よいですか？</p>
+      <div class="popup-actions">
+        <button type="button" class="button danger" data-action="reset-confirm">けす</button>
+        <button type="button" class="button" data-action="reset-cancel">やめる</button>
+      </div>
+    </dialog>
+    <footer class="site-footer" id="version"></footer>
+  </body>
+</html>

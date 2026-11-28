@@ -1,0 +1,129 @@
+<!doctype html>
+<html data-env="develop" lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#f7f7ef">
+    <meta name="description" content="スタドリ - 算数・３年生・わり算編。小学3年生のわり算を楽しく学ぼう。">
+    <title>スタドリ - 算数・３年生・わり算編</title>
+    <link rel="icon" href="../../../favicon.ico" sizes="any">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../../favicon-32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../../favicon-16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../../../apple-touch-icon.png">
+    <link rel="stylesheet" href="styles.css">
+    <script src="../../shared/static-storage-key.js" defer></script>
+    <script src="app.js" defer></script>
+  </head>
+  <body>
+    <header class="site-header">
+      <nav aria-label="パンくずリスト">
+        <ol class="breadcrumbs">
+          <li><a href="../../"><span class="brand-mark" aria-hidden="true">✳</span>スタドリ</a></li>
+          <li><a href="../" aria-current="page">🔢 算数</a></li>
+        </ol>
+      </nav>
+      <div class="header-actions">
+        <button class="sound" id="sound" type="button" aria-pressed="true" aria-label="音あり" title="音あり">🔊</button>
+        <button class="reset" id="resetData" type="button" aria-label="学習データを初期化" title="学習データを初期化">🗑️</button>
+      </div>
+    </header>
+
+    <main>
+      <section id="home">
+        <div class="hero">
+          <div class="mascot">
+            <img src="../../../studri.jpeg" alt="スタドリのキャラクター">
+          </div>
+          <div class="hero-copy">
+            <h1>3年生・わり算</h1>
+            <p>九九をつかったわり算や、あまりのある計算に挑戦しよう。<br>一歩ずつ進んでレベルアップ！</p>
+          </div>
+        </div>
+
+        <section class="panel home-panel">
+          <div id="coursesPanel">
+            <div class="courses" id="courses" aria-label="小学3年生のコース一覧"></div>
+          </div>
+          <section id="reviewPanel" class="hidden" aria-labelledby="reviewTitle">
+            <div class="panel-title">
+              <h2 id="reviewTitle"></h2>
+              <button class="review-back" id="reviewBack" type="button">← コース一覧へ</button>
+            </div>
+            <div id="reviewList" class="review-list">
+              <p>まだまちがいはありません。挑戦してみよう！</p>
+            </div>
+          </section>
+        </section>
+      </section>
+
+      <section id="quiz" class="hidden" aria-label="わり算の問題">
+        <div class="panel quiz-panel">
+          <div class="quiz-head panel-title">
+            <button class="back" id="quit" type="button">← コース選択へ</button>
+            <span class="question-label" id="questionNo"></span>
+            <strong class="mode-title hidden" id="modeTitle"></strong>
+            <span class="mode-status hidden" id="modeStatus" aria-live="off"></span>
+          </div>
+          <div class="progress" aria-label="挑戦の進み具合"><span id="progress"></span></div>
+          <div class="quiz-board">
+            <div class="quiz-primary">
+              <div class="quiz-question">
+                <h2 id="problem"></h2>
+              </div>
+              <div class="quiz-response">
+                <p class="work-instruction">答えを入力して「答え合わせ」をしよう</p>
+                <div class="answer">
+                  <input id="answer" inputmode="text" autocomplete="off" aria-label="答え（あまりがある問題は「あまり」も入力）">
+                  <span id="unit" hidden></span>
+                </div>
+                <div class="keypad" id="keypad" aria-label="計算機"></div>
+                <button class="check" id="check" type="button">答え合わせ</button>
+              </div>
+            </div>
+            <div class="quiz-work" aria-label="計算エリア">
+              <div class="canvas-wrap">
+                <div class="canvas-box">
+                  <span class="canvas-label">✍️ 計算エリア（手書き）</span>
+                  <canvas class="draw" id="noteCanvas" aria-label="計算エリア。手書きで計算できます"></canvas>
+                  <button class="clear" type="button" aria-label="計算エリアを消す" title="計算エリアを消す">🗑️</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="result" class="hidden" aria-label="挑戦結果">
+        <div class="panel result">
+          <p class="eyebrow">CHALLENGE COMPLETE</p>
+          <h1 id="resultTitle">おつかれさま！</h1>
+          <div class="score" id="score"></div>
+          <p id="resultMessage"></p>
+          <div class="history-actions">
+            <button class="start" id="again" type="button">もう一度挑戦する</button>
+            <a class="outline" id="homeButton" href="#home">算数ページに戻る</a>
+          </div>
+          <div class="challenge-grid">
+            <div class="challenge">
+              <b><span class="challenge-icon" aria-hidden="true">⏱</span> タイムアタック</b><br>
+              <small>合格ステップ3つで挑戦できるよ</small><br>
+              <button id="timeAttack" type="button">挑戦する</button>
+            </div>
+            <div class="challenge">
+              <b><span class="challenge-icon" aria-hidden="true">🔥</span> 連続正解</b><br>
+              <small>最高記録：<span id="chainBest">0</span>問</small><br>
+              <button id="chainAttack" type="button">挑戦する</button>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <dialog class="feedback-dialog" id="feedback" aria-labelledby="feedbackTitle">
+      <div id="feedbackContent"></div>
+      <div class="feedback-actions" id="feedbackActions"></div>
+    </dialog>
+
+    <footer class="site-footer">Ver. 20261001.234449.373</footer>
+  </body>
+</html>

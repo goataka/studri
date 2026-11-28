@@ -60,7 +60,9 @@
 
 - **基盤**：GitHub Actions
 - **PR の検証**：品質ゲートをすべて実行する。ローカルと同じ `pnpm` のスクリプトを使う
-- **公開**：main への反映でビルドし、`dist/` を GitHub Pages に公開する。続けて本番で E2E の確認を実行する
+- **公開**：`dist/` を gh-pages ブランチの、環境ごとの場所に置く
+  - テストの環境：main への反映のたび
+  - 本番：release への反映のとき。続けて本番で E2E の確認を実行する
 - **監視**：毎日、本番の確認と courses-of-study の変更の確認を実行し、問題を Issue にする
 - **依存関係**：Dependabot で更新する。公開から7日たった版だけを使う
 - **ワークフローの依存**：`.github/workflows/actions.lock` で固定する
