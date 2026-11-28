@@ -885,6 +885,11 @@ function renderProblem() {
     appendAnswerText(previousAnswer, quiz.previousAnswer);
   }
   previousAnswer.classList.toggle("hidden", !quiz.previousAnswer);
+  // 文字をえらぶ問題と、音（カタカナ）をえらぶ問題で案内を変える
+  const letterChoices = question.choices.every((choice) => phonicsLetterSounds[choice]);
+  document.querySelector(".answer-instruction").textContent = letterChoices
+    ? "文字をえらぼう"
+    : "カタカナをヒントに答えをえらぼう";
   renderChoices(question);
   updateModeStatus();
 }
@@ -991,6 +996,7 @@ function renderFeedback(state, question) {
   const titles = { correct: "せいかい！ 🎉", hint: "おしい！もういちど考えてみよう", reveal: "答えをかくにんしよう" };
   title.textContent = titles[state];
   content.append(title);
+  if (speechSupported) content.append(createSpeakButton(question));
   let primary;
   if (state === "hint") {
     const hint = document.createElement("p");
@@ -1216,6 +1222,38 @@ function returnToCourses() {
   renderCourses();
 }
 
+// ブラウザーの読み上げで、英語のことばを聞けるようにする
+const speechSupported = typeof window !== "undefined" && "speechSynthesis" in window
+  && typeof window.SpeechSynthesisUtterance === "function";
+
+function spokenWordOf(question) {
+  return question.word.includes("_") ? question.prompt.split(" ")[0] : question.word;
+}
+
+function speakEnglish(text) {
+  if (!speechSupported || !text) return;
+  try {
+    window.speechSynthesis.cancel();
+    const utterance = new SpeechSynthesisUtterance(text);
+    utterance.lang = "en-US";
+    utterance.rate = 0.8;
+    const voice = window.speechSynthesis.getVoices().find((item) => item.lang?.startsWith("en"));
+    if (voice) utterance.voice = voice;
+    window.speechSynthesis.speak(utterance);
+  } catch {
+    // 読み上げが使えない環境では何もしない
+  }
+}
+
+function createSpeakButton(question) {
+  const button = document.createElement("button");
+  button.type = "button";
+  button.className = "speak speak-small";
+  button.textContent = `🔈 ${spokenWordOf(question)} をきく`;
+  button.addEventListener("click", () => speakEnglish(spokenWordOf(question)));
+  return button;
+}
+
 function playFeedbackTone(isCorrect) {
   if (!soundEnabled) return;
   try {
@@ -1250,6 +1288,9 @@ function registerEvents() {
   });
   getElement("resetData").addEventListener("click", resetLearningData);
   getElement("sound").addEventListener("click", toggleSound);
+  getElement("speakWord").addEventListener("click", () => {
+    if (quiz) speakEnglish(spokenWordOf(quiz.questions[quiz.index]));
+  });
   getElement("again").addEventListener("click", () => startQuiz(selectedCourse));
   getElement("homeButton").addEventListener("click", returnToCourses);
   getElement("timeAttack").addEventListener("click", () => startQuiz(selectedCourse, "time"));
@@ -1281,6 +1322,7 @@ function toggleSound() {
 
 function initializeApplication() {
   registerEvents();
+  getElement("speakWord").classList.toggle("hidden", !speechSupported);
   toggleSoundState();
   renderCourses();
 }
